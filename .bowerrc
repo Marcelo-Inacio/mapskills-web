@@ -1,3 +1,5 @@
 {
-  "directory": "bower_components"
+  "directory": "bower_components",
+  "proxy":"http://msilva30:Embraer190@10.13.2.100:9090",
+  "https-proxy":"http://msilva30:Embraer190@10.13.2.100:9090"
 }

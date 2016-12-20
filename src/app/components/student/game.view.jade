@@ -1,7 +1,7 @@
 audio#over
   source(src='../../../assets/audio/button-40.wav')
   source(src='../../../assets/audio/button-40.mp3')
-#tela(ng-style="{'background-image':'url({{studentCtrl.scene}})'}")
+#tela(ng-style="{'background-image':'url({{studentCtrl.history[1].background}})'}")
   //#infobox.infoclose(ng-mouseover='vm.infoout();')
   //  #left
   //    | Nome:
@@ -15,6 +15,7 @@ audio#over
 
   .textbox
     .whotalks
-    #texto {{studentCtrl.history[1].question.description}}
+    #texto(ng-show="studentCtrl.history[1].question != null") {{studentCtrl.history[1].question.description}} y
+    #texto(ng-hide="studentCtrl.history[1].question != null") {{studentCtrl.history[1].text}} y
   #prosseguir(class='inactive', ng-click='studentCtrl.openOptions();')
   //.info(ng-mouseover='studentCtrl.playhover();studentCtrl.info();', ng-mouseleave='studentCtrl.infoout();') info

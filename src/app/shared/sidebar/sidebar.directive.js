@@ -21,34 +21,32 @@
     return directive;
 
     /** @ngInject */
-    function SidebarController(moment) {
+    function SidebarController(moment, $location) {
       var vm = this;
 
       // "vm.creationDate" is available by directive option "bindToController: true"
       vm.relativeDate = moment(vm.creationDate).fromNow();
-      vm.goPage = _goPage;
-			  	vm.user;
+      vm.user;
 
-			  	vm.ngclass = [{dashboardClass : "active"},
-		  	                  {institutionsClass : ""},
-		  	                  {themesClass : ""},
-		  	                  {skillsClass : ""},
+      vm.ngclass = [{dashboardClass : "active"},
+                    {institutionsClass : ""},
+                    {themesClass : ""},
+                    {skillsClass : ""},
+                    {studentsClass : ""},
+                    {statisticsClass : ""}];
 
-		  	                  {studentsClass : ""},
-		  	                  {statisticsClass : ""}];
+    /**
+     * função para ativação do class dos botões de navegação.
+     */
+     vm.goPage = function(page) {
+       var lastPage = StorageHelper.getItem('page');
+       StorageHelper.setItem('page', page);
+       vm.ngclass[lastPage+"Class"] = "";
+       vm.ngclass[page+"Class"] = "active";
+       $location.path('/'+page);
+     }
 
-			  	/**
-			  	 * função para ativação do class dos botões de navegação.
-			  	 */
-			  	function _goPage (page) {
-  			  		var lastPage = StorageHelper.getItem('page');
-  			  		StorageHelper.setItem('page', page);
-  			  		vm.ngclass[lastPage+"Class"] = "";
-  			  		vm.ngclass[page+"Class"] = "active";
-  			  		document.location.href = '#/' + page;
-			  	}
-
-			  	_goPage("dashbord");
+     vm.goPage("dashbord");
     }
   }
 

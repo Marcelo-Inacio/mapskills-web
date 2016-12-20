@@ -8,7 +8,7 @@
 	/** @ngInject */
 	function LoginController(LoginService) {
 		var vm = this;
-		var urlPath; // = getDefaultUrlPath();
+		//var urlPath = getDefaultUrlPath();
 		var userIsLogged = false;
 
 		vm.userLogin = {username: null, password: null};
@@ -19,7 +19,7 @@
 				alert('invalid');
 				return;
 			}
-			var json = JSON.stringify(login);
+			var json = angular.toJson(login);
 
 			LoginService.login(json);
 
