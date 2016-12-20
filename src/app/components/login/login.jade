@@ -1,0 +1,16 @@
+.row
+  .col-xs-10.col-xs-offset-1.col-sm-8.col-sm-offset-2.col-md-4.col-md-offset-4
+    .login-panel.panel.panel-default
+      .panel-heading __*Login*__
+      .panel-body
+        form(role='form')
+          fieldset
+            .form-group
+              input.form-control(ng-model='loginCtrl.userLogin.username', placeholder='E-mail', name='email', type='email', autofocus='', required='')
+            .form-group
+              input.form-control(ng-model='loginCtrl.userLogin.password', placeholder='Password', name='password', type='password', value='', required='')
+            .checkbox
+              label
+                input(name='remember', type='checkbox', value='Remember Me')
+                | Remember Me
+            input.btn.btn-primary(href='', ng-click='loginCtrl.login(loginCtrl.userLogin);', type='submit', value='Entrar')

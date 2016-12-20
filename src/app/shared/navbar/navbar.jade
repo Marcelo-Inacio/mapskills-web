@@ -1,0 +1,34 @@
+nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#sidebar-collapse')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand(href='#')
+        span CENTRO PAULA SOUZA
+        |  2016
+      ul.user-menu(ng-if='true')
+        span(uib-dropdown='', on-toggle='toggled(open)')
+          a#simple-dropdown(href='', uib-dropdown-toggle='')
+            svg.glyph.stroked.male-user
+              use(xlink:href='#stroked-male-user')
+            | Marcelo Inacio
+            .caret
+          ul.dropdown-menu(uib-dropdown-menu='', aria-labelledby='simple-dropdown')
+            li
+              a(href='')
+                svg.glyph.stroked.male-user
+                  use(xlink:href='#stroked-male-user')
+                | Perfil
+            li
+              a(href='')
+                svg.glyph.stroked.gear
+                  use(xlink:href='#stroked-gear')
+                | Configurações
+            li
+              a(href='')
+                svg.glyph.stroked.cancel
+                  use(xlink:href='#stroked-cancel')
+                | Sair
