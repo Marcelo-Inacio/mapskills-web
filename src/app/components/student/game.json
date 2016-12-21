@@ -2,7 +2,7 @@
   {
     "index" : 1,
     "text" : "cena numero um",
-    "background" : "/src/assets/images/scene1.jpg",
+    "background" : "http://localhost:3000/assets/images/scene1.jpg",
     "question" : null
   },
   {

@@ -14,14 +14,12 @@
 			};
 
 		function _getHistory() {
-			$http.get('./app/components/student/game.json').success(function(response) {
-				console.dir(response);
-    });
-		return;
-				$http.jsonp('app/components/student/game.json?callback=JSON_CALLBACK').then(function(data) {
-					return data;
-				});
-			}
+			var deferred = $q.defer();
+			return $http.get('./app/components/student/game.json').success(function(response) {
+				deferred.resolve(response);
+    	});
+			return deferred.promise;
+		}
 
 			/** realiza uma post ao back end enviando um contexto 'student_question_event'*/
 			function _sendAnswer(answerContext) {

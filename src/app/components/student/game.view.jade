@@ -1,7 +1,7 @@
 audio#over
   source(src='../../../assets/audio/button-40.wav')
   source(src='../../../assets/audio/button-40.mp3')
-#tela(ng-style="{'background-image':'url({{studentCtrl.history[1].background}})'}")
+#tela(ng-style="studentCtrl.myStyle")
   //#infobox.infoclose(ng-mouseover='vm.infoout();')
   //  #left
   //    | Nome:
@@ -10,13 +10,13 @@ audio#over
   //    #ranking  x/40
   //    | 			Recursos:
   //    #recurso  R$ ???,00
-  #options.optionclose(ng-show='studentCtrl.history[1].question != null')
-    #op1.op(ng-repeat="alternative in studentCtrl.history[1].question.alternatives", ng-mouseover='studentCtrl.playhover();', ng-click="studentCtrl.sendAnswer(null, alternative, null);") {{alternative.description}}
+  #options.optionclose(ng-show='studentCtrl.history[studentCtrl.index].question != null')
+    #op1.op(ng-repeat="alternative in studentCtrl.history[studentCtrl.index].question.alternatives", ng-mouseover='studentCtrl.playhover();', ng-click="studentCtrl.sendAnswer(null, alternative, null);") {{alternative.description}}
 
   .textbox
     .whotalks
-    //realizar commit aqui...
-    #texto(ng-show="studentCtrl.history[1].question != null") {{studentCtrl.history[1].question.description}} y
-    #texto(ng-hide="studentCtrl.history[1].question != null") {{studentCtrl.history[1].text}} y
-  #prosseguir(class='inactive', ng-click='studentCtrl.openOptions();')
+
+    #texto(ng-show="studentCtrl.history[studentCtrl.index].question != null") {{studentCtrl.history[studentCtrl.index].question.description}}
+    #texto(ng-hide="studentCtrl.history[studentCtrl.index].question != null") {{studentCtrl.history[studentCtrl.index].text}}
+  #prosseguir(ng-class="studentCtrl.active", ng-click='studentCtrl.nextScene();')
   //.info(ng-mouseover='studentCtrl.playhover();studentCtrl.info();', ng-mouseleave='studentCtrl.infoout();') info
