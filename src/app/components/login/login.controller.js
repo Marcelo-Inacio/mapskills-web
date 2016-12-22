@@ -9,15 +9,14 @@
 	function LoginController(LoginService) {
 		var vm = this;
 		//var urlPath = getDefaultUrlPath();
-		var userIsLogged = false;
 
 		vm.userLogin = {username: null, password: null};
 
 		/** realiza login na aplicação */
 		vm.login = function (login) {
 			if(login.username == null || login.password == null) {
-				alert('invalid');
-				return;
+				alert('invalid login');
+				return 0;
 			}
 			var json = angular.toJson(login);
 

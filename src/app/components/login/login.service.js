@@ -13,7 +13,7 @@
 				validate : _validate,
 				isLogged : _isLogged
 			};
-			var StorageHelper = StorageHelper;
+			var storageHelper = StorageHelper;
 			/** realiza uma chamada ao back end para autenticar o login*/
 			function _login(login) {
 				$log.info(login);
@@ -28,8 +28,8 @@
 			    })
 				.success(function (data, status, headers, config) {
 //		        	var user = data;
-//		        	StorageHelper.setItem('Authorization', headers("Authorization"));
-//		        	StorageHelper.setItem('user', user);
+//		        	storageHelper.setItem('Authorization', headers("Authorization"));
+//		        	storageHelper.setItem('user', user);
 //		        	_redirect(user.profile);
 				})
 				.then(function successCallback(response) {
@@ -44,18 +44,18 @@
 			}
 			/** ao realizar logout limpa todas informações contidas no storage */
 			function _logout() {
-				StorageHelper.removeItem('Authorization');
-				StorageHelper.removeItem('user');
-				StorageHelper.removeItem('page');
+				storageHelper.removeItem('Authorization');
+				storageHelper.removeItem('user');
+				storageHelper.removeItem('page');
 				_validate(null);
 			}
 			/** retorna se ha um usuario logado */
 			function _isLogged() {
-				return StorageHelper.getItem('user') != null;
+				return storageHelper.getItem('user') != null;
 			}
 			/** identifica o usuario logado, para ver as permissoes de acesso */
 			function _validate(profile) {
-				var user = StorageHelper.getItem('user');
+				var user = storageHelper.getItem('user');
 
 				/** se não houver identificação ou se não for o perfil informado redireciona para login */
 				if(profile == null || user.profile === null || profile !== user.profile) {
@@ -74,7 +74,7 @@
 						//$state.go('mentor.dashboard');
 						break;
 					case 'STUDENT':
-						$loginfo("estudante");
+						$log.info("estudante");
 						$state.go('home.game');
 						break;
 					default:

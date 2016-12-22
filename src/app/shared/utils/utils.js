@@ -1,7 +1,7 @@
 /**
  * funcionalidade de auxilio a acesso ao storage do navegador
  */
-var StorageHelper = (function() {
+var StorageHelper = (function($window) {
 
 	var SH = {};
 
@@ -9,7 +9,7 @@ var StorageHelper = (function() {
 		window.localStorage.setItem(chave, angular.toJson(valor));
 	};
 
-	SH.getItem = function(chave, valor) {
+	SH.getItem = function(chave) {
 		return angular.fromJson(window.localStorage.getItem(chave));
 	};
 

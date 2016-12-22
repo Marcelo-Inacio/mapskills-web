@@ -11,12 +11,12 @@ audio#over
   //    | 			Recursos:
   //    #recurso  R$ ???,00
   #options.optionclose(ng-show='studentCtrl.history[studentCtrl.index].question != null')
-    #op1.op(ng-repeat="alternative in studentCtrl.history[studentCtrl.index].question.alternatives", ng-mouseover='studentCtrl.playhover();', ng-click="studentCtrl.sendAnswer(null, alternative, null);") {{alternative.description}}
+    .op(ng-repeat="alternative in studentCtrl.history[studentCtrl.index].question.alternatives", ng-mouseover='studentCtrl.playhover();', ng-click="studentCtrl.sendAnswer(null, alternative, null);")
+     {{alternative.description}}
 
   .textbox
     .whotalks
 
-    #texto(ng-show="studentCtrl.history[studentCtrl.index].question != null") {{studentCtrl.history[studentCtrl.index].question.description}}
-    #texto(ng-hide="studentCtrl.history[studentCtrl.index].question != null") {{studentCtrl.history[studentCtrl.index].text}}
+    #texto {{studentCtrl.history[studentCtrl.index].text}}
   #prosseguir(ng-class="studentCtrl.active", ng-click='studentCtrl.nextScene();')
   //.info(ng-mouseover='studentCtrl.playhover();studentCtrl.info();', ng-mouseleave='studentCtrl.infoout();') info

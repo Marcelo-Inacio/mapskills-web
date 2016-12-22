@@ -25,6 +25,12 @@
         templateUrl: 'app/components/student/game.view.html',
         controller: 'StudentController',
         controllerAs: 'studentCtrl'
+      })
+      .state('home.results', {
+        url: '/results',
+        templateUrl: 'app/components/student/results.view.html',
+        controller: 'StudentResultsController',
+        controllerAs: 'stuResultCtrl'
       });
 
     $urlRouterProvider.otherwise('/game');

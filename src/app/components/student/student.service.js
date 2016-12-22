@@ -3,21 +3,30 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('StudentService', ['$http', '$q', '$log', StudentService]);
+		.factory('StudentService', ['$http', '$q', StudentService]);
 
 		/** @ngInject */
-		function StudentService($http, $q, $log) {
+		function StudentService($http, $q) {
 			return {
 				sendAnswer : _sendAnswer,
 				sendEmail : _sendEmail,
-				getHistory : _getHistory
+				getHistory : _getHistory,
+				getRadarResults : _getRadarResults
 			};
+
+		function _getRadarResults(userId) {
+			var deferred = $q.defer();
+			return $http.get('./app/components/student/studentResult.json').success(function(response) {
+				deferred.resolve(response);
+			});
+			return deferred.promise;
+		}
 
 		function _getHistory() {
 			var deferred = $q.defer();
 			return $http.get('./app/components/student/game.json').success(function(response) {
 				deferred.resolve(response);
-    	});
+			});
 			return deferred.promise;
 		}
 
