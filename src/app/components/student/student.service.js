@@ -3,10 +3,10 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('StudentService', ['$http', '$q', StudentService]);
+		.factory('studentService', ['$http', '$q', studentService]);
 
 		/** @ngInject */
-		function StudentService($http, $q) {
+		function studentService($http, $q) {
 			return {
 				sendAnswer : _sendAnswer,
 				sendEmail : _sendEmail,
@@ -14,7 +14,7 @@
 				getRadarResults : _getRadarResults
 			};
 
-		function _getRadarResults(userId) {
+		function _getRadarResults(/*userId*/) {
 			var deferred = $q.defer();
 			return $http.get('./app/components/student/studentResult.json').success(function(response) {
 				deferred.resolve(response);
@@ -34,7 +34,7 @@
 			function _sendAnswer(answerContext) {
 				$http({
 					method: 'POST',
-					url: /*urlPath +*/ '/send/answer',
+					url: '/send/answer',
 					headers: {'Content-Type': 'application/json'},
 					data: answerContext
 				})

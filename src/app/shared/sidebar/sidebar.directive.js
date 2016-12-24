@@ -21,7 +21,7 @@
     return directive;
 
     /** @ngInject */
-    function SidebarController(moment, $location) {
+    function SidebarController(moment, $location, storageService) {
       var vm = this;
 
       // "vm.creationDate" is available by directive option "bindToController: true"
@@ -39,14 +39,14 @@
      * função para ativação do class dos botões de navegação.
      */
      vm.goPage = function(page) {
-       var lastPage = StorageHelper.getItem('page');
-       StorageHelper.setItem('page', page);
+       var lastPage = storageService.getItem('page');
+       storageService.setItem('page', page);
        vm.ngclass[lastPage+"Class"] = "";
        vm.ngclass[page+"Class"] = "active";
        $location.path('/'+page);
      }
 
-     vm.goPage("dashbord");
+     vm.goPage("home.results");
     }
   }
 

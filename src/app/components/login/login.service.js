@@ -3,17 +3,17 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('LoginService', ['$http', '$q', '$location', '$state', '$log', LoginService]);
+		.factory('loginService', ['$http', '$q', '$location', '$state', '$log', 'storageService', loginService]);
 
 		/** @ngInject */
-		function LoginService($http, $q, $location, $state, $log) {
+		function loginService($http, $q, $location, $state, $log, storageService) {
 			return {
 				login : _login,
 				logout : _logout,
 				validate : _validate,
 				isLogged : _isLogged
 			};
-			var storageHelper = StorageHelper;
+
 			/** realiza uma chamada ao back end para autenticar o login*/
 			function _login(login) {
 				$log.info(login);
@@ -28,8 +28,8 @@
 			    })
 				.success(function (data, status, headers, config) {
 //		        	var user = data;
-//		        	storageHelper.setItem('Authorization', headers("Authorization"));
-//		        	storageHelper.setItem('user', user);
+//		        	storageService.setItem('Authorization', headers("Authorization"));
+//		        	storageService.setItem('user', user);
 //		        	_redirect(user.profile);
 				})
 				.then(function successCallback(response) {
@@ -44,18 +44,18 @@
 			}
 			/** ao realizar logout limpa todas informações contidas no storage */
 			function _logout() {
-				storageHelper.removeItem('Authorization');
-				storageHelper.removeItem('user');
-				storageHelper.removeItem('page');
+				storageService.removeItem('Authorization');
+				storageService.removeItem('user');
+				storageService.removeItem('page');
 				_validate(null);
 			}
 			/** retorna se ha um usuario logado */
 			function _isLogged() {
-				return storageHelper.getItem('user') != null;
+				return storageService.getItem('user') != null;
 			}
 			/** identifica o usuario logado, para ver as permissoes de acesso */
 			function _validate(profile) {
-				var user = storageHelper.getItem('user');
+				var user = storageService.getItem('user');
 
 				/** se não houver identificação ou se não for o perfil informado redireciona para login */
 				if(profile == null || user.profile === null || profile !== user.profile) {

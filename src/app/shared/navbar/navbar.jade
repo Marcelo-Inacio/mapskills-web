@@ -1,20 +1,19 @@
 nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
   .container-fluid
-    .navbar-header
-      button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#sidebar-collapse')
+    .navbar-header().row
+      button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#sidebar-collapse' ng-show="false")
         span.sr-only Toggle navigation
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand(href='#')
-        span CENTRO PAULA SOUZA
-        |  2016
-      ul.user-menu(ng-if='true')
+      a.navbar-brand(href='#').col-xs-9.logo-institution
+        span {{vm.institution}}
+      ul.user-menu(ng-if='true').col-xs-3.user-ico
         span(uib-dropdown='', on-toggle='toggled(open)')
           a#simple-dropdown(href='', uib-dropdown-toggle='')
             svg.glyph.stroked.male-user
               use(xlink:href='#stroked-male-user')
-            | Marcelo Inacio
+            | {{vm.user.name}}
             .caret
           ul.dropdown-menu(uib-dropdown-menu='', aria-labelledby='simple-dropdown')
             li

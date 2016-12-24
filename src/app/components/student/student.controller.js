@@ -6,7 +6,7 @@
 		.controller('StudentController', StudentController);
 
 	/** @ngInject */
-	function StudentController($document, $log, $state, StudentService) {
+	function StudentController($document, $log, $state, studentService) {
 		var vm = this;
 		/** aluno logado na aplicação */
 		var student = {"id":42, "fullname":"alcantra"};
@@ -21,7 +21,7 @@
 		(function() {
 			//vm.student = StorageHelper.getItem('user');
 			/** params: aluno */
-			StudentService.getHistory().then(function(response) {
+			studentService.getHistory().then(function(response) {
 				$log.log(response);
 				vm.history = response.data;
 				vm.myStyle = {'background-image' : "url("+vm.history[vm.index].background+")"};
@@ -33,7 +33,7 @@
 		/** função que envia um resposta do aluno ao back-end */
 		vm.sendAnswer = function(questionId, alternative, skillId) {
 			$log.info(student.id +" "+questionId+" "+alternative.id+" "+alternative.skillValue+" "+skillId);
-			//StudentService.sendAnswer()
+			//studentService.sendAnswer()
 			vm.nextScene();
 		}
 

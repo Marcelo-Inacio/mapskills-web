@@ -21,11 +21,15 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController(moment) {
+    function NavbarController(moment, storageService) {
       var vm = this;
-
+      vm.user;
+      vm.institution = "CENTRO PAULA SOUZA"
       // "vm.creationDate" is available by directive option "bindToController: true"
       vm.relativeDate = moment(vm.creationDate).fromNow();
+      (function() {
+        vm.user = {"name": "Primeiro_Nome"};
+      })();
     }
   }
 

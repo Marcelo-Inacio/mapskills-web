@@ -33,7 +33,7 @@
         controllerAs: 'stuResultCtrl'
       });
 
-    $urlRouterProvider.otherwise('/game');
+    $urlRouterProvider.otherwise('/results');
   }
 
 })();

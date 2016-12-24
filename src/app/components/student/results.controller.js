@@ -6,13 +6,12 @@
 		.controller('StudentResultsController', StudentResultsController);
 
 	/** @ngInject */
-	function StudentResultsController($log, StudentService) {
-		var vm = this;
+	function StudentResultsController($log, studentService, storageService) {
 
 		/** função principal que recupera os resultados do aluno */
 		(function() {
-      var user = StorageHelper.getItem('user');
-			StudentService.getRadarResults(1).then(function(response) {
+      var user = storageService.getItem('user');
+			studentService.getRadarResults(1).then(function(response) {
 				$log.log(response.data);
         radarChartfactory(response.data);
 			});
@@ -28,7 +27,14 @@
         scaleBeginAtZero: false,
         scaleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
         tooltipFontSize: 20,
-        scaleFontSize: 20
+        scaleFontSize: 20,
+				pointLabelFontSize: 20,
+				responsive: true,
+				maintainAspectRatio: false,
+				legend: {
+					display: true,
+					position: "bottom"
+				}
       }
 
       var ctx = document.getElementById("radarChart").getContext("2d");

@@ -6,7 +6,7 @@
 		.controller('LoginController', LoginController);
 
 	/** @ngInject */
-	function LoginController(LoginService) {
+	function LoginController(loginService) {
 		var vm = this;
 		//var urlPath = getDefaultUrlPath();
 
@@ -16,16 +16,16 @@
 		vm.login = function (login) {
 			if(login.username == null || login.password == null) {
 				alert('invalid login');
-				return 0;
+				return;
 			}
 			var json = angular.toJson(login);
 
-			LoginService.login(json);
+			loginService.login(json);
 
 		}
 		/** realiza logout na aplicação, limpando os registros do usuario*/
 		vm.logout = function () {
-			LoginService.logout();
+			loginService.logout();
 		}
 
 	}
