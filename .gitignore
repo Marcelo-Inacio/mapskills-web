@@ -5,6 +5,4 @@ coverage/
 .idea/
 .tmp/
 dist/
-.bowerrc
-/.bowerrc
-.bowerrc/
+*.bowerrc
