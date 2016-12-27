@@ -29,8 +29,8 @@
 			}
 
 			function _clearAll() {
-		   return localStorageService.clearAll();
-		  }
+				return localStorageService.clearAll();
+			}
 
 			function _getToken() {
 				return localStorageService.get('Authorization');

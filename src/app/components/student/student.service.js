@@ -14,7 +14,7 @@
 				getRadarResults : _getRadarResults
 			};
 
-		function _getRadarResults(/*userId*/) {
+		function _getRadarResults(/*studentId*/) {
 			var deferred = $q.defer();
 			return $http.get('./app/components/student/studentResult.json').success(function(response) {
 				deferred.resolve(response);
@@ -22,7 +22,7 @@
 			return deferred.promise;
 		}
 
-		function _getHistory() {
+		function _getHistory(/*studentId*/) {
 			var deferred = $q.defer();
 			return $http.get('./app/components/student/game.json').success(function(response) {
 				deferred.resolve(response);

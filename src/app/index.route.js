@@ -31,9 +31,15 @@
         templateUrl: 'app/components/student/results.view.html',
         controller: 'StudentResultsController',
         controllerAs: 'stuResultCtrl'
+      })
+      .state('home.admin', {
+        url: '/admin',
+        templateUrl: 'app/components/admin/uploadInstitutions.html',
+        controller: 'AdminController',
+        controllerAs: 'adminCtrl'
       });
 
-    $urlRouterProvider.otherwise('/results');
+    $urlRouterProvider.otherwise('/admin');
   }
 
 })();

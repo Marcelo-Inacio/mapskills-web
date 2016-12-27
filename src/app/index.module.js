@@ -3,6 +3,7 @@
 
   angular
     .module('mapskillsWeb', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize',
-      'ngMessages', 'ngAria', 'ui.router', 'ui.bootstrap', 'toastr', 'pascalprecht.translate', 'LocalStorageModule']);
+      'ngMessages', 'ngAria', 'ui.router', 'ui.bootstrap', 'toastr', 'pascalprecht.translate', 'LocalStorageModule',
+      'naif.base64']);
 
 })();

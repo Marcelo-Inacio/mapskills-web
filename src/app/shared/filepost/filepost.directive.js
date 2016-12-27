@@ -9,7 +9,7 @@
   function filePost() {
     var directive = {
       restrict: 'E',
-      templateUrl: 'app/shared/navbar/navbar.html',
+      templateUrl: 'app/shared/filepost/filepost.html',
       scope: {
           fileName: '='
       },
@@ -25,7 +25,7 @@
       var vm = this;
       vm.fileInput;
 
-      vm.fileInput = function(file) {
+      vm.sendFile = function(file) {
         $log.log(file);
       }
     }
