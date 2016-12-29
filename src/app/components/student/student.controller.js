@@ -15,7 +15,7 @@
 		vm.answer = {};
 		vm.index = 0;
 
-		vm.active = "active";
+		vm.active = "activated";
 
 		/** função principal que recupera todas questoes ainda não jogadas pelo aluno */
 		(function() {
@@ -43,7 +43,7 @@
 			/** caso chege ao fim das cenas, deve levar aos resultados */
 			if(sizeScenes <= vm.index + 1) {
 				$log.log('fim do jogo, vai pra resultados');
-				$state.go('home.results');
+				$state.go('student.results');
 				return;
 			}
 			vm.index = vm.index + 1;

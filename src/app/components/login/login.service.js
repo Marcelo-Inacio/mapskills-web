@@ -44,9 +44,7 @@
 			}
 			/** ao realizar logout limpa todas informações contidas no storage */
 			function _logout() {
-				storageService.removeItem('Authorization');
-				storageService.removeItem('user');
-				storageService.removeItem('page');
+				storageService.removeAll();
 				_validate(null);
 			}
 			/** retorna se ha um usuario logado */
@@ -59,8 +57,10 @@
 
 				/** se não houver identificação ou se não for o perfil informado redireciona para login */
 				if(profile == null || user.profile === null || profile !== user.profile) {
-					$state.go("home.login");
+					$state.go("login");
+					return;
 				}
+				return true;
 			}
 			/** função que redireciona o usuário de acordo com perfil recebido como parâmetro */
 			function _redirect(profile) {

@@ -9,34 +9,35 @@
 		function modalService($uibModal) {
 			return {
 				openModal : _openModal,
+				closeModal : _closeModal,
         setResult : _setResult,
         getResult : _getResult
 			};
 
-      var tmpResult;
+			var modalInstance;
+      var tmpContextResult;
 
-      function _openModal(modalTemplate, params) {
-        return $uibModal.open({
+      function _openModal(modalTemplate, controller) {
+        modalInstance = $uibModal.open({
           animation: true,
           ariaLabelledBy: 'modal-title',
           ariaDescribedBy: 'modal-body',
           templateUrl: modalTemplate,
-          controller: 'ModalController',
-          controllerAs: 'modalCtrl',
-          resolve: {
-            params: function() {
-              return params;
-            }
-          }
+          controller: controller
+          //controllerAs: 'modalCtrl'
         });
       }
 
-      function _setResult(result) {
-        tmpResult = result;
+			function _closeModal() {
+				modalInstance.dismiss('cancel');
+			}
+
+      function _setResult(contextResult) {
+        tmpContextResult = contextResult;
       }
 
       function _getResult() {
-        return tmpResult;
+        return tmpContextResult;
       }
 
 		}

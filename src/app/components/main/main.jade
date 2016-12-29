@@ -1,7 +1,7 @@
 article
   header
-    acme-navbar(creation-date="main.creationDate")
+    acme-navbar
   aside
-    acme-sidebar(ng-show='true')
+    acme-sidebar(ng-if="!(main.getPath() === '/game')")
   section
     ui-view

@@ -1,21 +1,21 @@
 #sidebar-collapse.col-sm-3.col-lg-2.sidebar
   ul.nav.menu
-    li(ng-class='vm.ngclass.dashboardClass', ng-click="vm.goPage('dashboard');")
+    li(ng-class='vm.ngClass.dashboardClass', ng-click="vm.goPage('dashboard');")
       a(href='')
         svg.glyph.stroked.dashboard-dial
           use(xlink:href='#stroked-dashboard-dial')
         |  Dashboard
-    li(ng-class='vm.ngclass.institutionsClass', ng-click="vm.goPage('institutions');")
+    li(ng-class='vm.ngClass.institutionsClass', ng-click="vm.goPage('institutions');")
       a(href='')
         svg.glyph.stroked.calendar
           use(xlink:href='#stroked-calendar')
         |  Instituições
-    li(ng-class='vm.ngclass.themesClass', ng-click="vm.goPage('themes');")
+    li(ng-class='vm.ngClass.themesClass', ng-click="vm.goPage('themes');")
       a(href='')
         svg.glyph.stroked.line-graph
           use(xlink:href='#stroked-line-graph')
         |  Temas
-    li(ng-class='vm.ngclass.skillsClass', ng-click="vm.goPage('skills');")
+    li(ng-class='vm.ngClass.skillsClass', ng-click="vm.goPage('skills');")
       a(href='')
         svg.glyph.stroked.table
           use(xlink:href='#stroked-table')
@@ -30,20 +30,20 @@
         span(data-toggle='collapse', href='#sub-item-1')
           svg.glyph.stroked.chevron-down
             use(xlink:href='#stroked-chevron-down')
-        |  Dropdown
+        | Dropdown
       ul#sub-item-1.children.collapse
         li
           a(href='#')
             svg.glyph.stroked.chevron-right
               use(xlink:href='#stroked-chevron-right')
-            |  Sub Item 1
+            | Sub Item 1
         li
           a(href='#')
             svg.glyph.stroked.chevron-right
               use(xlink:href='#stroked-chevron-right')
-            |  Sub Item 2
+            | Sub Item 2
         li
           a(href='#')
             svg.glyph.stroked.chevron-right
               use(xlink:href='#stroked-chevron-right')
-            |  Sub Item 3
+            | Sub Item 3

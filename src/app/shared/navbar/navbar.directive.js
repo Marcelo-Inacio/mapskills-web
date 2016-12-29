@@ -21,15 +21,25 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController(moment, storageService) {
+    function NavbarController(moment, $location, storageService, loginService) {
       var vm = this;
-      vm.user;
-      vm.institution = "CENTRO PAULA SOUZA"
-      // "vm.creationDate" is available by directive option "bindToController: true"
-      vm.relativeDate = moment(vm.creationDate).fromNow();
-      (function() {
-        vm.user = {"name": "Primeiro_Nome"};
-      })();
+
+      vm.institution = "CENTRO PAULA SOUZA";
+
+      init();
+
+      vm.getPath = function() {
+        return $location.path().toLowerCase();
+      }
+      /** recupera o usuario logado */
+      function init() {
+        vm.user = storageService.getItem('user');
+      }
+
+      vm.logout = function() {
+        loginService.logout();
+      }
+
     }
   }
 

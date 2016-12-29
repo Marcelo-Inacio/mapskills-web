@@ -8,38 +8,44 @@
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('home', {
-        //url: '',
-        templateUrl: 'app/components/main/main.html'
-        //controller: 'MainController',
-        //controllerAs: 'main'
-      })
-      .state('home.login', {
+      .state('login', {
         url: '/login',
         templateUrl: 'app/components/login/login.html',
         controller: 'LoginController',
         controllerAs: 'loginCtrl'
       })
-      .state('home.game', {
-        url: '/game',
+      .state('student', {
+        templateUrl: 'app/components/student/student.html'
+      })
+      .state('student.game', {
+        url: '/student/game',
         templateUrl: 'app/components/student/game.view.html',
         controller: 'StudentController',
         controllerAs: 'studentCtrl'
       })
-      .state('home.results', {
-        url: '/results',
+      .state('student.results', {
+        url: '/student/results',
         templateUrl: 'app/components/student/results.view.html',
         controller: 'StudentResultsController',
         controllerAs: 'stuResultCtrl'
       })
-      .state('home.admin', {
-        url: '/admin',
-        templateUrl: 'app/components/admin/uploadInstitutions.html',
-        controller: 'AdminController',
-        controllerAs: 'adminCtrl'
+      .state('admin', {
+        templateUrl: 'app/components/admin/admin.html'
+      })
+      .state('admin.themes', {
+        url: '/admin/themes',
+        templateUrl: 'app/components/admin/game_theme/gameThemes.view.html',
+        controller: 'GameThemeController',
+        controllerAs: 'gthCtrl'
+      })
+      .state('admin.scenes', {
+        url: '/admin/theme/:themeId',
+        templateUrl: 'app/components/admin/game_theme_scenes/scenes.view.html',
+        controller: 'ScenesController',
+        controllerAs: 'scnCtrl'
       });
 
-    $urlRouterProvider.otherwise('/admin');
+    $urlRouterProvider.otherwise('/admin/themes');
   }
 
 })();

@@ -1,7 +1,7 @@
 {
   "labels": ["Visão do futuro", "Resiliência", "Trabalho em equipe", "Comunicação", "Equilibio emocional", "Gestão do tempo"],
   "datasets": [{
-            "label": "My First dataset",
+            "label": "Pontos",
             "backgroundColor": "rgba(179,181,198,0.2)",
             "borderColor": "rgba(179,181,198,1)",
             "pointBackgroundColor": "rgba(179,181,198,1)",

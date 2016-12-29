@@ -3,10 +3,10 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('storageService', ['localStorageService', storageService]);
+		.factory('storageService', storageService);
 
 		/** @ngInject */
-		function storageService(localStorageService) {
+		function storageService() {
 			return {
 				setItem : _set,
 				getItem : _get,
@@ -17,23 +17,24 @@
 			};
 
 			function _set(key, value) {
-				return localStorageService.set(key, value);
+				localStorage.setItem(key, angular.toJson(value));
 			}
 
 			function _get(key) {
-				return localStorageService.get(key);
+				return angular.fromJson(localStorage.getItem(key));
 			}
 
 			function _remove(key) {
-				return localStorageService.remove(key);
+				localStorage.removeItem(key);
 			}
 
 			function _clearAll() {
-				return localStorageService.clearAll();
+				console.log('limpando...');
+				localStorage.clear();
 			}
 
 			function _getToken() {
-				return localStorageService.get('Authorization');
+				return _get('Authorization');
 			}
 
 			function _getDefaultUrlPath() {

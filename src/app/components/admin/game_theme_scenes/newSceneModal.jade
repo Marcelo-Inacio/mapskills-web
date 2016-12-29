@@ -1,0 +1,14 @@
+.section
+  .modal-header
+  .modal-body
+    .form-group.row
+      .col-md-12
+        label Texto:
+        input.form-control(type='text', ng-model="modalCtrl.scene.text")
+    .form-group.row
+      .col-md-12
+        label Imagem:
+        file-post
+  .modal-footer
+    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveTheme(modalCtrl.theme)") salvar
+    button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

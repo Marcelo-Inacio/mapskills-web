@@ -16,6 +16,15 @@
 
     activate();
 
+    function init() {
+      var path = $location.path(), normalized = path.toLowerCase();
+      storageService.setItem('page', path);
+    }
+
+    vm.getPath = function() {
+      return storageService.getItem('page');
+    }
+
     function activate() {
       $timeout(function() {
         toastr.info('Idioma alterado para <b>PORTUGUÊS</b> .');
