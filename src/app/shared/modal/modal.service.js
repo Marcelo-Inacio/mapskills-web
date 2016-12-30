@@ -23,8 +23,8 @@
           ariaLabelledBy: 'modal-title',
           ariaDescribedBy: 'modal-body',
           templateUrl: modalTemplate,
-          controller: controller
-          //controllerAs: 'modalCtrl'
+          controller: controller,
+          controllerAs: 'modalCtrl'
         });
       }
 

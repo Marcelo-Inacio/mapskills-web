@@ -40,12 +40,24 @@
       })
       .state('admin.scenes', {
         url: '/admin/theme/:themeId',
-        templateUrl: 'app/components/admin/game_theme_scenes/scenes.view.html',
+        templateUrl: 'app/components/admin/scenes/scenes.view.html',
         controller: 'ScenesController',
         controllerAs: 'scnCtrl'
+      })
+      .state('admin.skills', {
+        url: '/admin/skills',
+        templateUrl: 'app/components/admin/skill/skills.view.html',
+        controller: 'SkillController',
+        controllerAs: 'skiCtrl'
+      })
+      .state('admin.institutions', {
+        url: '/admin/institutions',
+        templateUrl: 'app/components/admin/institution/institutions.view.html',
+        controller: 'InstitutionController',
+        controllerAs: 'insCtrl'
       });
 
-    $urlRouterProvider.otherwise('/admin/themes');
+    $urlRouterProvider.otherwise('/admin/skills');
   }
 
 })();

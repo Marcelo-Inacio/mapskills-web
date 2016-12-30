@@ -1,0 +1,34 @@
+.section
+  .modal-header
+  .modal-body
+    .form-group.row
+      .col-md-12
+        label Código:
+        input.form-control(type='text', ng-model="modalCtrl.institution.code")
+    .form-group.row
+      .col-md-12
+        label CNPJ:
+        input.form-control(type='text', ng-model="modalCtrl.institution.cnpj")
+    .form-group.row
+      .col-md-12
+        label Razão Social:
+        input.form-control(type='text', ng-model="modalCtrl.institution.company")
+    .form-group.row
+      .col-md-12
+        label Cidade:
+        input.form-control(type='text', ng-model="modalCtrl.institution.city")
+    .form-group.row
+      .col-md-12
+        label Mentor - Nome:
+        input.form-control(type='text', ng-model="modalCtrl.institution.mentor.name")
+    .form-group.row
+      .col-md-12
+        label Mentor - E-mail:
+        input.form-control(type='text', ng-model="modalCtrl.institution.mentor.username")
+    .form-group.row
+      .col-md-12
+        label Mentor - Senha:
+        input.form-control(type='password', ng-model="modalCtrl.institution.mentor.password")
+  .modal-footer
+    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveInstitution(modalCtrl.institution)") salvar
+    button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

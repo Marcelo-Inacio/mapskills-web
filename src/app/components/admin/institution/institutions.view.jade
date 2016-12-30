@@ -1,0 +1,19 @@
+section
+  label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="insCtrl.openEditModal()") novo
+  table.table.table-hover.table-striped
+    thead
+      tr.table-thead
+        th Codigo
+        th CNPJ
+        th Razão Social
+        th Cidade
+        th Ação
+    tbody
+      tr(ng-repeat="institution in insCtrl.allInstitutions track by institution.id")
+        td {{institution.code}}
+        td {{institution.cnpj}}
+        td {{institution.company}}
+        td {{institution.city}}
+        td
+          label#btn-todo.btn.btn-info.btn-xs(ng-click="insCtrl.openDetailsModal(institution)") detalhes
+          label#btn-todo.btn.btn-info.btn-xs(ng-click="insCtrl.openEditModal(institution)") editar

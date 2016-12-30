@@ -21,7 +21,7 @@
     return directive;
 
     /** @ngInject */
-    function SidebarController(moment, $location, storageService) {
+    function SidebarController(moment, $location, $state, storageService) {
       var vm = this;
 
       vm.ngClass = [{dashboardClass : "active"},
@@ -31,7 +31,7 @@
                     {studentsClass : ""},
                     {statisticsClass : ""}
                   ];
-                  
+
     /**
      * função para ativação do class dos botões de navegação.
      */
@@ -40,10 +40,11 @@
        storageService.setItem('page', page);
        vm.ngClass[lastPage+"Class"] = "";
        vm.ngClass[page+"Class"] = "active";
-       $location.path('/'+page);
+       //$location.path('/'+page);
+       $state.go('^.' + page);
      }
 
-     vm.goPage("home.results");
+     //vm.goPage("skills");
     }
   }
 

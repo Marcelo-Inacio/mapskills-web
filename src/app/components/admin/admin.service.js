@@ -10,14 +10,54 @@
 			return {
 				loadAllSkills : _loadAllSkills,
 				loadAllThemes : _loadAllThemes,
-				saveNewTheme : _saveNewTheme,
-				updateThemes : _updateThemes,
+				loadAllInstitutions : _loadAllInstitutions,
+				saveTheme : _saveTheme,
+				saveSkill : _saveSkill,
+				saveScene : _saveScene,
+				saveInstitution : _saveInstitution,
+				updateIndexScenes : _updateIndexScenes,
 				loadScenesByThemeId : _loadScenesByThemeId,
-				deleteQuestion : _deleteQuestion
+				deleteQuestion : _deleteQuestion,
+				deleteScene : _deleteScene,
+
+				getObjectCurrent : _getObjectCurrent,
+				setObjectCurrent : _setObjectCurrent
 			};
+
+			var objectCurrent;
+
+			function _getObjectCurrent() {
+				return objectCurrent;
+			}
+
+			function _setObjectCurrent(object) {
+				objectCurrent = object;
+			}
+
+			function _saveInstitution(institution) {
+				console.log(institution);
+			}
+
+			function _saveScene(scene) {
+				console.log(scene);
+			}
+
+			function _saveSkill(skill) {
+				console.log(skill);
+			}
+			/** método que realiza a reordenação dos index das cenas */
+			function _updateIndexScenes(allScenes) {
+				angular.forEach(allScenes, function(value, key) {
+					value.index = key;
+				  console.log(key + ' : ' + value.index);
+				});
+			}
 			/** excluir uma questão de uma cena */
 			function _deleteQuestion(questionId) {
 				console.log("ID DA QUESTÃO: " + questionId);
+			}
+			function _deleteScene(sceneId) {
+				console.log("ID DA CENA: " + sceneId);
 			}
 			/** traz todas cenas de um determinado tema pelo id*/
 			function _loadScenesByThemeId(themeId) {
@@ -27,13 +67,18 @@
 				});
 				return deferred.promise;
 			}
-			/** atualiza a lista de temas */
-			function _updateThemes(themes) {
-				console.log(themes);
+
+			/** cadastra ou atualiza um tema */
+			function _saveTheme(theme) {
+				console.log(theme);
 			}
-			/** cadastra um novo tema */
-			function _saveNewTheme(newTheme) {
-				console.log(newTheme);
+			/** recupera todos as instituições cadastadas */
+			function _loadAllInstitutions() {
+				var deferred = $q.defer();
+				return $http.get('./app/components/admin/repository/institutions.json').success(function(response) {
+					deferred.resolve(response);
+				});
+				return deferred.promise;
 			}
 			/** recupera todos as competencias cadastadas */
 			function _loadAllSkills() {

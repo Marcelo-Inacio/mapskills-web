@@ -1,8 +1,8 @@
 [
-  {"name" : "Liderança", "code" : 1},
-  {"name" : "Trabalho em Equipe", "code" : 2},
-  {"name" : "Comunicação", "code" : 3},
-  {"name" : "Resiliencia", "code" : 4},
-  {"name" : "Equilibrio", "code" : 5},
-  {"name" : "Gestão de Tempo", "code" : 6}
+  {"id" : 1, "type" : "Liderança"},
+  {"id" : 2, "type" : "Trabalho em Equipe"},
+  {"id" : 3, "type" : "Comunicação"},
+  {"id" : 4, "type" : "Resiliencia"},
+  {"id" : 5, "type" : "Equilibrio"},
+  {"id" : 6, "type" : "Gestão de Tempo"}
 ]

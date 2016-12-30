@@ -1,0 +1,37 @@
+.section
+  .modal-header
+  .modal-body
+    .form-group.row
+      .col-md-5
+        label Código:
+        label {{modalCtrl.institution.code}}
+      .col-md-7
+        label CNPJ:
+        label {{modalCtrl.institution.cnpj}}
+    .form-group.row
+      .col-md-5
+        label Razão Social:
+        label {{modalCtrl.institution.company}}
+      .col-md-7
+        label Cidade:
+        label {{modalCtrl.institution.city}}
+    .form-group.row
+      .col-md-5
+        label Mentor:
+        label {{modalCtrl.institution.mentor.name}}
+      .col-md-7
+        label E-mail:
+        label {{modalCtrl.institution.mentor.username}}
+    table.table.table-striped
+      thead
+        tr.table-thead
+          th Codigo
+          th Curso
+          th Periodo
+      tbody
+        tr(ng-repeat="course in modalCtrl.institution.courses track by course.id")
+          td {{course.code}}
+          td {{course.name}}
+          td {{course.period}}    
+  .modal-footer
+    button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") fechar

@@ -1,0 +1,14 @@
+section
+  label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="skiCtrl.openModal()") novo
+  table.table.table-hover
+    thead
+      tr.table-thead
+        th Id
+        th Descrição
+        th Ação
+    tbody
+      tr(ng-repeat="skill in skiCtrl.allSkills track by skill.id")
+        td {{skill.id}}
+        td {{skill.type}}
+        td
+          label#btn-todo.btn.btn-info.btn-xs(ng-click="skiCtrl.openModal(skill)") editar

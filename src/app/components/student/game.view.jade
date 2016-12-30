@@ -11,7 +11,7 @@ audio#over
   //    | 			Recursos:
   //    #recurso  R$ ???,00
   #options.optionclose(ng-show='studentCtrl.history[studentCtrl.index].question != null')
-    .op(ng-repeat="alternative in studentCtrl.history[studentCtrl.index].question.alternatives", ng-mouseover='studentCtrl.playhover();', ng-click="studentCtrl.sendAnswer(null, alternative, null);")
+    .op(ng-repeat="alternative in studentCtrl.history[studentCtrl.index].question.alternatives track by $index", ng-mouseover='studentCtrl.playhover();', ng-click="studentCtrl.sendAnswer(null, alternative, null);")
      {{alternative.description}}
 
   .textbox

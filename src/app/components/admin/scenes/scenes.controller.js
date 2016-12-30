@@ -8,8 +8,6 @@
 	/** @ngInject */
 	function ScenesController($log, $stateParams, modalService, adminService) {
 		var vm = this;
-		vm.skillsOptions;
-		vm.questionCurrent;
 
 		init();
 		/** faz requisição ao backend de todas as cenas de um tema */
@@ -18,21 +16,24 @@
 				vm.allScenes = response.data;
 			});
 			loadAllSkills();
+			vm.scene = adminService.getObjectCurrent();
+			adminService.setObjectCurrent(null);
 		}
 
-		vm.openSceneModal = function() {
-			modalService.openModal('/app/components/admin/game_theme_scenes/newSceneModal.html', 'ScenesController');
+		vm.openSceneModal = function(scene) {
+			adminService.setObjectCurrent(scene);
+			modalService.openModal('/app/components/admin/scenes/scene.modal.html', 'ScenesController');
 		}
 
-		vm.openQuestionModal = function(questionSelected) {
-			vm.questionCurrent = questionSelected;
-			modalService.openModal('/app/components/admin/game_theme_scenes/questionModal.html', 'ScenesController');
+		vm.openQuestionModal = function(scene) {
+			adminService.setObjectCurrent(scene);
+			modalService.openModal('/app/components/admin/scenes/questionModal.html', 'ScenesController');
 		}
 
 		/** carrega todas competencias cadastadas */
 		function loadAllSkills() {
 			adminService.loadAllSkills().then(function(response) {
-				vm.skillsOptions = response.data;
+				vm.allSkills = response.data;
 			});
 		}
 
@@ -40,11 +41,21 @@
 			modalService.closeModal();
 		}
 
-		vm.saveQuestion = function(params) {
-			$log.log(params);
+		vm.saveScene = function(scene) {
+			adminService.saveScene(scene);
+			vm.closeModal();
 		}
+
+		vm.updateIndexScenes = function(allScenes) {
+			adminService.updateIndexScenes(allScenes);
+		}
+
 		vm.deleteQuestion = function(questionId) {
 			adminService.deleteQuestion(questionId);
+		}
+
+		vm.deleteScene = function(sceneId) {
+			adminService.deleteScene(sceneId);
 		}
 
 	}

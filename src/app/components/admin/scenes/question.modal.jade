@@ -1,0 +1,45 @@
+.section
+  .modal-header
+  .modal-body
+    .form-group.row
+      .col-md-12
+        label Competência
+        select.form-control(ng-model="modalCtrl.scene.question.skillId"
+                            ,ng-options="skill.id as skill.type for skill in modalCtrl.allSkills track by skill.id")
+          option(value='') -- Select an option--
+
+          
+    .form-group.row
+      .col-md-8
+        label Alternativa A:
+        input.form-control(type="text", ng-model="modalCtrl.scene.question.alternatives[0].description")
+      .col-md-4
+        label Peso
+        input.form-control(type='number', ng-model="modalCtrl.scene.question.alternatives[0].skillValue")
+
+    .form-group.row
+      .col-md-8
+        label Alternativa B:
+        input.form-control(type='text', ng-model="modalCtrl.scene.question.alternatives[1].description") 
+      .col-md-4
+        label Peso
+        input.form-control(type='number', ng-model="modalCtrl.scene.question.alternatives[1].skillValue")
+          
+    .form-group.row
+      .col-md-8
+        label Alternativa C:
+        input.form-control(type='text', ng-model="modalCtrl.scene.question.alternatives[2].description") 
+      .col-md-4
+        label Peso
+        input.form-control(type='number', ng-model="modalCtrl.scene.question.alternatives[2].skillValue")
+          
+    .form-group.row
+      .col-md-8
+        label Alternativa D:
+        input.form-control(type='text', ng-model="modalCtrl.scene.question.alternatives[3].description") 
+      .col-md-4
+        label Peso
+        input.form-control(type='number', ng-model="modalCtrl.scene.question.alternatives[3].skillValue")
+  .modal-footer        
+    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveScene(modalCtrl.scene)") salvar
+    button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar
