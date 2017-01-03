@@ -25,9 +25,6 @@
 
       init();
 
-      vm.getPath = function() {
-        return $location.path().toLowerCase();
-      }
       /** recupera o usuario logado */
       function init() {
         var path = $location.path().toLowerCase();

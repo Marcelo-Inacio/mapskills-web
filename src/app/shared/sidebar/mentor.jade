@@ -1,11 +1,11 @@
 #sidebar-collapse.col-sm-3.col-lg-2.sidebar
   ul.nav.menu
-    li(ng-class="vm.ngClass.dashboard", ng-click="vm.isCollapsed = !vm.isCollapsed; vm.changeClass('dashboard')")
+    li(ng-class="sb.ngClass.dashboard", ng-click="sb.isCollapsed = !sb.isCollapsed; sb.changeClass('dashboard')")
       a
         svg.glyph.stroked.dashboard-dial
           use(xlink:href='#stroked-dashboard-dial')
         |  Dashboard
-    div(uib-collapse='vm.isCollapsed')
+    div(uib-collapse='sb.isCollapsed')
       ul.nav.menu
         li
           a.menu-chidren
@@ -15,19 +15,19 @@
           a.menu-chidren
             svg.glyph.stroked.line-graph
             |  Grafico 2
-    li(ng-class="vm.ngClass.students", ng-click="vm.changeClass('students')")
+    li(ng-class="sb.ngClass.students", ng-click="sb.changeClass('students')")
       a
         i.glyph.fa.fa-icon-group
         |  Alunos
-    li(ng-class="vm.ngClass.courses", ng-click="vm.changeClass('courses')")
+    li(ng-class="sb.ngClass.courses", ng-click="sb.changeClass('courses')")
       a(ui-sref="mentor.courses")
         svg.glyph.stroked.line-graph
         |  Cursos
-    li(ng-class="vm.ngClass.theme", ng-click="vm.changeClass('theme')")
+    li(ng-class="sb.ngClass.theme", ng-click="sb.changeClass('theme')")
       a
         svg.glyph.stroked.table
         |  Tema de Jogo
-    li(ng-class="vm.ngClass.progress", ng-click="vm.changeClass('progress')")
+    li(ng-class="sb.ngClass.progress", ng-click="sb.changeClass('progress')")
       a
         svg.glyph.stroked.pencil
         |  Andamento dos alunos
