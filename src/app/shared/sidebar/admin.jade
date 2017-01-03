@@ -1,0 +1,32 @@
+#sidebar-collapse.col-sm-3.col-lg-2.sidebar
+  ul.nav.menu
+    li(ng-click="vm.isCollapsed = !vm.isCollapsed; vm.changeClass('dashboard')", ng-class="vm.ngClass.dashboard")
+      a
+        svg.glyph.stroked.dashboard-dial
+        |  Dashboard
+    div(uib-collapse='vm.isCollapsed')
+      ul.nav.menu
+        li
+          a.menu-chidren
+            svg.glyph.stroked.line-graph
+            |  Grafico 1
+        li
+          a.menu-chidren
+            svg.glyph.stroked.line-graph
+            |  Grafico 2
+    li(ng-class='vm.ngClass.institutions', ng-click="vm.changeClass('institutions')")
+      a
+        svg.glyph.stroked.calendar
+        |  Instituições
+    li(ng-class='vm.ngClass.themes', ng-click="vm.changeClass('themes')")
+      a
+        svg.glyph.stroked.line-graph
+        |  Temas
+    li(ng-class='vm.ngClass.skills', ng-click="vm.changeClass('skills')")
+      a
+        svg.glyph.stroked.table
+        |  Competências
+    li(ng-class='vm.ngClass.functionality')
+      a
+        svg.glyph.stroked.pencil
+        |  Funcionalidade

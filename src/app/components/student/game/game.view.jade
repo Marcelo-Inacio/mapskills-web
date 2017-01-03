@@ -1,0 +1,22 @@
+audio#over
+  source(src='../../../assets/audio/button-40.wav')
+  source(src='../../../assets/audio/button-40.mp3')
+#tela(ng-style="gameCtrl.background")
+  //#infobox.infoclose(ng-mouseover='vm.infoout();')
+  //  #left
+  //    | Nome:
+  //    #nome Você
+  //    | 			Ranking:
+  //    #ranking  x/40
+  //    | 			Recursos:
+  //    #recurso  R$ ???,00
+  #options.option-close(ng-show="gameCtrl.history[gameCtrl.index].question != null")
+    .alternative(ng-repeat="alternative in gameCtrl.history[gameCtrl.index].question.alternatives track by $index", ng-mouseover="gameCtrl.playhover();", ng-click="gameCtrl.sendAnswer(alternative);")
+      {{alternative.description}}
+
+  .textbox
+    .whotalks
+
+    #texto {{gameCtrl.history[gameCtrl.index].text}}
+  #prosseguir(ng-class="gameCtrl.active", ng-click="gameCtrl.nextScene();")
+  //.info(ng-mouseover='gameCtrl.playhover();gameCtrl.info();', ng-mouseleave='gameCtrl.infoout();') info

@@ -19,15 +19,15 @@
       })
       .state('student.game', {
         url: '/student/game',
-        templateUrl: 'app/components/student/game.view.html',
-        controller: 'StudentController',
-        controllerAs: 'studentCtrl'
+        templateUrl: 'app/components/student/game/game.view.html',
+        controller: 'GameController',
+        controllerAs: 'gameCtrl'
       })
-      .state('student.results', {
-        url: '/student/results',
-        templateUrl: 'app/components/student/results.view.html',
+      .state('student.result', {
+        url: '/student/result',
+        templateUrl: 'app/components/student/result/result.view.html',
         controller: 'StudentResultsController',
-        controllerAs: 'stuResultCtrl'
+        controllerAs: 'resultCtrl'
       })
       .state('admin', {
         templateUrl: 'app/components/admin/admin.html'
@@ -55,9 +55,30 @@
         templateUrl: 'app/components/admin/institution/institutions.view.html',
         controller: 'InstitutionController',
         controllerAs: 'insCtrl'
+      })
+      .state('mentor', {
+        templateUrl: 'app/components/mentor/mentor.html'
+      })
+      .state('mentor.dashboard', {
+        url: '/mentor/dashboard',
+        templateUrl: 'app/components/mentor/statisticsStudentByCourse.view.html',
+        controller: 'StatisticsController',
+        controllerAs: 'stcCtrl'
+      })
+      .state('mentor.courses', {
+        url: '/mentor/courses',
+        templateUrl: 'app/components/mentor/courses/courses.view.html',
+        controller: 'CourseController',
+        controllerAs: 'crsCtrl'
+      })
+      .state('mentor.students', {
+        url: '/mentor/students',
+        templateUrl: 'app/components/mentor/students/students.view.html',
+        controller: 'MentorStudentController',
+        controllerAs: 'stuCtrl'
       });
 
-    $urlRouterProvider.otherwise('/admin/skills');
+    $urlRouterProvider.otherwise('/student/game');
   }
 
 })();

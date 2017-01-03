@@ -9,11 +9,13 @@
 	function ScenesController($log, $stateParams, modalService, adminService) {
 		var vm = this;
 
+		vm.info_tooltip = "Arraste as linhas da tabela para reordenar a exibição das cenas do jogo";
+
 		init();
 		/** faz requisição ao backend de todas as cenas de um tema */
 		function init() {
 			adminService.loadScenesByThemeId($stateParams.themeId).then(function(response) {
-				vm.allScenes = response.data;
+				vm.allScenes = response;
 			});
 			loadAllSkills();
 			vm.scene = adminService.getObjectCurrent();
@@ -27,13 +29,13 @@
 
 		vm.openQuestionModal = function(scene) {
 			adminService.setObjectCurrent(scene);
-			modalService.openModal('/app/components/admin/scenes/questionModal.html', 'ScenesController');
+			modalService.openModal('/app/components/admin/scenes/question.modal.html', 'ScenesController');
 		}
 
 		/** carrega todas competencias cadastadas */
 		function loadAllSkills() {
 			adminService.loadAllSkills().then(function(response) {
-				vm.allSkills = response.data;
+				vm.allSkills = response;
 			});
 		}
 

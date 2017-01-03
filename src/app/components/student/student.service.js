@@ -14,17 +14,17 @@
 				getRadarResults : _getRadarResults
 			};
 
-		function _getRadarResults(/*studentId*/) {
+		function _getRadarResults(studentId) {
 			var deferred = $q.defer();
-			return $http.get('./app/components/student/studentResult.json').success(function(response) {
+			$http.get('./app/components/student/repository/result.json').success(function(response) {
 				deferred.resolve(response);
 			});
 			return deferred.promise;
 		}
 
-		function _getHistory(/*studentId*/) {
+		function _getHistory(studentId) {
 			var deferred = $q.defer();
-			return $http.get('./app/components/student/game.json').success(function(response) {
+			$http.get('./app/components/student/repository/game.json').success(function(response) {
 				deferred.resolve(response);
 			});
 			return deferred.promise;
@@ -32,7 +32,8 @@
 
 			/** realiza uma post ao back end enviando um contexto 'student_question_event'*/
 			function _sendAnswer(answerContext) {
-				$http({
+				console.log(answerContext);
+				/*$http({
 					method: 'POST',
 					url: '/send/answer',
 					headers: {'Content-Type': 'application/json'},
@@ -47,7 +48,7 @@
 				function errorCallback() {
 					alert('erro ao enviar resposta');
 					//deferred.reject("no authentication");
-				});
+				});*/
 			}
 			/** realiza o envio de email ao fim do game */
 			function _sendEmail() {

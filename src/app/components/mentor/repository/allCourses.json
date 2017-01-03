@@ -1,0 +1,11 @@
+[
+  {"id" : 1, "code" : "028", "name" : "Análise e Desenvolvimento de Sistemas", "period" : "Matutino", "institutionCode" : "146"},
+  {"id" : 2, "code" : "029", "name" : "Automação e Manufatura Digital", "period" : "Matutino", "institutionCode" : "146"},
+  {"id" : 3, "code" : "030", "name" : "Banco de Dados", "period" : "Noturno", "institutionCode" : "146"},
+  {"id" : 4, "code" : "031", "name" : "Gestão da Produção Industrial", "period" : "Noturno", "institutionCode" : "146"},
+  {"id" : 5, "code" : "032", "name" : "Gestão Empresarial", "period" : "EaD", "institutionCode" : "146"},
+  {"id" : 6, "code" : "033", "name" : "Logística", "period" : "Noturno", "institutionCode" : "146"},
+  {"id" : 7, "code" : "034", "name" : "Logística", "period" : "Matutino", "institutionCode" : "146"},
+  {"id" : 8, "code" : "035", "name" : "Manutenção de Aeronaves", "period" : "Noturno", "institutionCode" : "146"},
+  {"id" : 9, "code" : "036", "name" : "Projetos de Estruturas Aeronáuticas", "period" : "Noturno", "institutionCode" : "146"}
+]

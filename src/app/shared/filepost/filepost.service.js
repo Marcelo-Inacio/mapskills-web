@@ -8,7 +8,7 @@
 		/** @ngInject */
 		function fileService($http, $q) {
 			return {
-				sendXlsxFile : _sendXlsxFile,
+				sendXlsxFile : _sendXlsxFile
 				//sendImageFile : _sendImageFile
 			};
 

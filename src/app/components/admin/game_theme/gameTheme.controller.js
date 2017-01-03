@@ -14,7 +14,8 @@
 
 		function init() {
 			adminService.loadAllThemes().then(function(response) {
-				vm.allThemes = response.data;
+				$log.info(response);
+				vm.allThemes = response;
 			});
 		}
 

@@ -1,0 +1,16 @@
+.section
+  .modal-header
+  .modal-body
+    .form-group.row
+      .col-md-12
+        label Excel:
+        label#btn-todo.btn.btn-primary.btn-xs
+          input(type='file', ng-model='modalCtrl.file', name='file', base-sixty-four-input='', required='', maxsize='5000', accept='.xlsx')
+          i.fa.fa-cloud-upload
+          |   Escolher excel
+    .form-group.row
+      .col-md-12
+        span(ng-bind='modalCtrl.file.filename')
+  .modal-footer
+    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.sendFile(modalCtrl.file)") salvar
+    button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

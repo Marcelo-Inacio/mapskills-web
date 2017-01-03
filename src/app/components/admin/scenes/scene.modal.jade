@@ -12,6 +12,8 @@
           input(type='file', ng-model='modalCtrl.scene.background', name='file', base-sixty-four-input='', required='', maxsize='500', accept='image/*')
           i.fa.fa-cloud-upload
           |   Escolher imagem
+    .form-group.row
+      .col-md-12
         span(ng-bind='modalCtrl.scene.background.filename')
   .modal-footer
     button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveScene(modalCtrl.scene)") salvar

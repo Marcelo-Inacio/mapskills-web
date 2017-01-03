@@ -7,11 +7,12 @@
 
   /** @ngInject */
   function acmeSidebar() {
+
     var directive = {
       restrict: 'E',
-      templateUrl: 'app/shared/sidebar/sidebar.html',
-      scope: {
-          creationDate: '='
+      templateUrl: function(element, attrs) {
+        //return "app/shared/sidebar/sidebar." + attrs.profile + ".html";
+        return "app/shared/sidebar/"+attrs.profile+".html";
       },
       controller: SidebarController,
       controllerAs: 'vm',
@@ -23,28 +24,40 @@
     /** @ngInject */
     function SidebarController(moment, $location, $state, storageService) {
       var vm = this;
+      vm.isCollapsed = true;
+      vm.changeClass = changeClass;
+      vm.ngClass = {dashboard : "",
+                    institutions : "",
+                    themes : "",
+                    skills : "",
+                    students : "",
+                    statistics : ""};
 
-      vm.ngClass = [{dashboardClass : "active"},
-                    {institutionsClass : ""},
-                    {themesClass : ""},
-                    {skillsClass : ""},
-                    {studentsClass : ""},
-                    {statisticsClass : ""}
-                  ];
-
+    init();
     /**
      * função para ativação do class dos botões de navegação.
      */
-     vm.goPage = function(page) {
-       var lastPage = storageService.getItem('page');
+     function changeClass(page) {
+       console.log(page);
+       var lastPage = storageService.getItem('page') || null;
        storageService.setItem('page', page);
-       vm.ngClass[lastPage+"Class"] = "";
-       vm.ngClass[page+"Class"] = "active";
-       //$location.path('/'+page);
-       $state.go('^.' + page);
+       if(lastPage) {
+         vm.ngClass[lastPage] = "null";
+       }
+       vm.ngClass[page] = "active";
+       $state.go("^." + page);
      }
 
-     //vm.goPage("skills");
+     function init() {
+       var url = $location.path();
+       if(url.indexOf("/admin/theme/") !== -1){
+         $state.go("admin.themes");
+         return;
+       }
+       var position = $location.path().lastIndexOf("/");
+       vm.changeClass(url.substring(position + 1));
+     }
+
     }
   }
 

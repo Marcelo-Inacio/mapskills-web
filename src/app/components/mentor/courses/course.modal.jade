@@ -1,0 +1,20 @@
+.section
+  .modal-header
+  .modal-body
+    .form-group.row
+      .col-md-12
+        label Código:
+        input.form-control(type='text', ng-model="modalCtrl.course.code")
+    .form-group.row
+      .col-md-12
+        label Nome:
+        input.form-control(type='text', ng-model="modalCtrl.course.name")
+    .form-group.row
+      .col-md-12
+        label Período:
+        select.form-control(ng-model="modalCtrl.course.period"
+                            ,ng-options="period for period in modalCtrl.allPeriods")
+          option(value='') -- selecione um período --
+  .modal-footer
+    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveCourse(modalCtrl.course)") salvar
+    button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

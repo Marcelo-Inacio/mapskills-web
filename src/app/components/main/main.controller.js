@@ -12,7 +12,7 @@
     vm.awesomeThings = [];
     vm.classAnimation = '';
     vm.creationDate = 1480699708377;
-    vm.showToastr = showToastr;
+/*    vm.showToastr = showToastr;
 
     activate();
 
@@ -42,5 +42,6 @@
       toastr.info('Demo <a href="http://codeseven.github.io/toastr/demo.html" target="_blank"><b>TOASTR</b></a> .');
       vm.classAnimation = 'jello';
     }
+    */
   }
 })();

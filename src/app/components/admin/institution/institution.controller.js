@@ -9,13 +9,14 @@
 	function InstitutionController($log, adminService, modalService) {
 		var vm = this;
 
-    vm.table_class = "success";
+		vm.checkboxPassword = false;
+    vm.showPassword = {"true" : "text", "false" : "password"};
 
     init();
 
     function init() {
 			adminService.loadAllInstitutions().then(function(response) {
-				vm.allInstitutions = response.data;
+				vm.allInstitutions = response;
 			});
       vm.institution = adminService.getObjectCurrent();
 			adminService.setObjectCurrent(null);
@@ -31,8 +32,16 @@
       modalService.openModal('/app/components/admin/institution/edit.modal.html', 'InstitutionController');
 		}
 
+		vm.openFileModal = function() {
+      modalService.openModal('/app/shared/modal/file.modal.html', 'InstitutionController');
+		}
+
     vm.saveInstitution = function(institution) {
       adminService.saveInstitution(institution);
+    }
+
+		vm.sendFile = function(file) {
+      adminService.sendFile(file);
     }
 
 		vm.closeModal = function() {

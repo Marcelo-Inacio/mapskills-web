@@ -1,0 +1,38 @@
+.section
+  .modal-header
+  .modal-body
+    .form-group.row
+      .col-md-5
+        label Nome:
+        label {{modalCtrl.student.name}}
+      .col-md-7
+        label RA:
+        label {{modalCtrl.student.ra}}
+    .form-group.row
+      .col-md-5
+        label Telefone:
+        label {{modalCtrl.student.phone}}
+      .col-md-7
+        label Jogo Concluido:
+        label {{modalCtrl.student.completed}}
+    .form-group.row
+      .col-md-12
+        label E-mail:
+        label {{modalCtrl.student.username}}
+    .form-group.row
+      hr
+      .col-md-12
+        label Curso
+    .form-group.row
+      .col-md-2
+        label Código:
+        label {{modalCtrl.student.course.code}}
+      .col-md-6
+        label Nome:
+        label {{modalCtrl.student.course.name}}
+      .col-md-4
+        label Período:
+        label {{modalCtrl.student.course.period}}
+    
+  .modal-footer
+    button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") fechar

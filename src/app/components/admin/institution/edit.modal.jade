@@ -28,7 +28,9 @@
     .form-group.row
       .col-md-12
         label Mentor - Senha:
-        input.form-control(type='password', ng-model="modalCtrl.institution.mentor.password")
+        md-checkbox.md-primary(md-no-ink='', aria-label='Checkbox No Ink', ng-model='modalCtrl.checkboxPassword')
+          | mostrar senha
+        input.form-control(type='{{modalCtrl.showPassword[modalCtrl.checkboxPassword]}}', ng-model="modalCtrl.institution.mentor.password")
   .modal-footer
     button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveInstitution(modalCtrl.institution)") salvar
     button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

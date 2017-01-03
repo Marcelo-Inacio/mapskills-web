@@ -29,7 +29,6 @@
 			}
 
 			function _clearAll() {
-				console.log('limpando...');
 				localStorage.clear();
 			}
 

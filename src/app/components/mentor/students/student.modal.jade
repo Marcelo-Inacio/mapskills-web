@@ -1,0 +1,22 @@
+.section
+  .modal-header
+  .modal-body
+    .form-group.row
+      .col-md-12
+        label Nome:
+        input.form-control(type='text', ng-model="modalCtrl.student.name")
+    .form-group.row
+      .col-md-12
+        label RA:
+        input.form-control(type='text', ng-model="modalCtrl.student.ra")
+    .form-group.row
+      .col-md-12
+        label Telefone:
+        input.form-control(type='text', ng-model="modalCtrl.student.phone")
+    .form-group.row
+      .col-md-12
+        label E-mail:
+        input.form-control(type='text', ng-model="modalCtrl.student.username")
+  .modal-footer
+    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveStudent(modalCtrl.student)") salvar
+    button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

@@ -3,37 +3,43 @@
 
 	angular
 		.module('mapskillsWeb')
-		.controller('StudentController', StudentController);
+		.controller('GameController', GameController);
 
 	/** @ngInject */
-	function StudentController($document, $log, $state, studentService) {
+	function GameController($document, $log, $state, studentService /*, storageService, loginService*/) {
 		var vm = this;
-		/** aluno logado na aplicação */
-		var student = {"id":42, "fullname":"alcantra"};
+
+		var studentId;
 		var sizeScenes;
 		vm.history;
-		vm.answer = {};
 		vm.index = 0;
-
 		vm.active = "activated";
 
+		init();
 		/** função principal que recupera todas questoes ainda não jogadas pelo aluno */
-		(function() {
-			//vm.student = StorageHelper.getItem('user');
-			/** params: aluno */
-			studentService.getHistory().then(function(response) {
+		function init() {
+			//loginService.validate("STUDENT");
+			//studentId = storageService.getItem('user').id;
+
+			/** params: alunoId */
+			studentService.getHistory(studentId).then(function(response) {
 				$log.log(response);
-				vm.history = response.data;
-				vm.myStyle = {'background-image' : "url("+vm.history[vm.index].background+")"};
+				vm.history = response;
+				vm.background = {"background-image" : "url(" + vm.history[vm.index].background + ")"};
 				sizeScenes = vm.history.length;
 				$log.log(sizeScenes);
 			});
-		})();
+		}
 
 		/** função que envia um resposta do aluno ao back-end */
-		vm.sendAnswer = function(questionId, alternative, skillId) {
-			$log.info(student.id +" "+questionId+" "+alternative.id+" "+alternative.skillValue+" "+skillId);
-			//studentService.sendAnswer()
+		vm.sendAnswer = function(alternative) {
+			var answerContext = {};
+			answerContext.sceneId = vm.history[vm.index].id;
+			answerContext.studentId = studentId;
+			answerContext.skillId = vm.history[vm.index].question.skillId;
+			answerContext.skillValue = alternative.skillValue;
+
+			studentService.sendAnswer(answerContext);
 			vm.nextScene();
 		}
 
@@ -41,13 +47,13 @@
 		vm.nextScene = function() {
 			$log.log(vm.index);
 			/** caso chege ao fim das cenas, deve levar aos resultados */
-			if(sizeScenes <= vm.index + 1) {
+			if((vm.index + 1) == sizeScenes) {
 				$log.log('fim do jogo, vai pra resultados');
-				$state.go('student.results');
+				$state.go('student.result');
 				return;
 			}
 			vm.index = vm.index + 1;
-			vm.myStyle = {'background-image' : "url("+vm.history[vm.index].background+")"};
+			vm.background = {'background-image' : "url(" + vm.history[vm.index].background + ")"};
 			if(vm.history[vm.index].question != null) {
 				vm.active = "inactive";
 				return;

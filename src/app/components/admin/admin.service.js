@@ -15,6 +15,7 @@
 				saveSkill : _saveSkill,
 				saveScene : _saveScene,
 				saveInstitution : _saveInstitution,
+				sendFile : _sendFile,
 				updateIndexScenes : _updateIndexScenes,
 				loadScenesByThemeId : _loadScenesByThemeId,
 				deleteQuestion : _deleteQuestion,
@@ -36,6 +37,10 @@
 
 			function _saveInstitution(institution) {
 				console.log(institution);
+			}
+
+			function _sendFile(file) {
+				console.log(file);
 			}
 
 			function _saveScene(scene) {
@@ -62,7 +67,7 @@
 			/** traz todas cenas de um determinado tema pelo id*/
 			function _loadScenesByThemeId(themeId) {
 				var deferred = $q.defer();
-				return $http.get('./app/components/admin/repository/scenes.json').success(function(response) {
+				$http.get('./app/components/admin/repository/scenes.json').success(function(response) {
 					deferred.resolve(response);
 				});
 				return deferred.promise;
@@ -75,7 +80,7 @@
 			/** recupera todos as instituições cadastadas */
 			function _loadAllInstitutions() {
 				var deferred = $q.defer();
-				return $http.get('./app/components/admin/repository/institutions.json').success(function(response) {
+				$http.get('./app/components/admin/repository/institutions.json').success(function(response) {
 					deferred.resolve(response);
 				});
 				return deferred.promise;
@@ -83,7 +88,7 @@
 			/** recupera todos as competencias cadastadas */
 			function _loadAllSkills() {
 				var deferred = $q.defer();
-				return $http.get('./app/components/admin/repository/skills.json').success(function(response) {
+				$http.get('./app/components/admin/repository/skills.json').success(function(response) {
 					deferred.resolve(response);
 				});
 				return deferred.promise;
@@ -91,7 +96,7 @@
 			/** recupera todos temas cadastrados */
 			function _loadAllThemes() {
 				var deferred = $q.defer();
-				return $http.get('./app/components/admin/repository/themes.json').success(function(response) {
+				$http.get('./app/components/admin/repository/themes.json').success(function(response) {
 					deferred.resolve(response);
 				});
 				return deferred.promise;

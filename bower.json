@@ -1,5 +1,5 @@
 {
-  "name": "mapskillsWeb",
+  "name": "mapskillsweb",
   "version": "0.0.0",
   "dependencies": {
     "angular-animate": "~1.5.3",
@@ -24,7 +24,8 @@
     "chart.js": "^2.4.0",
     "angular-base64-upload": "^0.1.19",
     "angular-material": "^1.1.1",
-    "angular-ui-sortable": "^0.16.1"
+    "angular-ui-sortable": "^0.16.1",
+    "angular-chart.js": "^1.1.1"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.3"

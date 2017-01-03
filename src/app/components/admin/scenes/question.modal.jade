@@ -6,8 +6,7 @@
         label Competência
         select.form-control(ng-model="modalCtrl.scene.question.skillId"
                             ,ng-options="skill.id as skill.type for skill in modalCtrl.allSkills track by skill.id")
-          option(value='') -- Select an option--
-
+          option(value='') -- selecione uma competência --
           
     .form-group.row
       .col-md-8

@@ -1,0 +1,38 @@
+[
+  {"id" : 1, "name" : "Caetano Silveira", "ra" : "1460281423050", "phone" : "1289003400", "completed" :false,
+   "course" : {"code" : "028", "name" : "Análise e Desenvolvimento de Sistemas", "period" : "Matutino"},
+   "username" : "caetano.silveira@fatec.sp.gov.br", "password" : "Mudar@123"
+  },
+  {"id" : 2, "name" : "Adriano Tavares", "ra" : "1460291423051", "phone" : "1289003401", "completed" :false,
+   "course" : {"code" : "029", "name" : "Automação e Manufatura Digital", "period" : "Matutino"},
+   "username" : "adriano.tavares@fatec.sp.gov.br", "password" : "Mudar@123"
+  },
+  {"id" : 3, "name" : "Fatima Soares", "ra" : "1460301423052", "phone" : "1289003411", "completed" :false,
+   "course" : {"code" : "030", "name" : "Banco de Dados", "period" : "Noturno"},
+   "username" : "fatima.soares@fatec.sp.gov.br", "password" : "Mudar@123"
+  },
+  {"id" : 4, "name" : "Paula Dias", "ra" : "1460311423053", "phone" : "1289003412", "completed" :false,
+   "course" : {"code" : "031", "name" : "Gestão da Produção Industrial", "period" : "Noturno"},
+   "username" : "paula.dias@fatec.sp.gov.br", "password" : "Mudar@123"
+  },
+  {"id" : 5, "name" : "Raul Mello", "ra" : "1460321423054", "phone" : "1289003415", "completed" :false,
+   "course" : {"code" : "032", "name" : "Gestão Empresarial", "period" : "EaD"},
+   "username" : "raul.mello@fatec.sp.gov.br", "password" : "Mudar@123"
+  },
+  {"id" : 6, "name" : "Raul Mello", "ra" : "1460331423055", "phone" : "1289003416", "completed" :false,
+   "course" : {"code" : "033", "name" : "Logística", "period" : "Noturno", "institutionCode" : "146"},
+   "username" : "raul.mello@fatec.sp.gov.br", "password" : "Mudar@123"
+  },
+  {"id" : 7, "name" : "Jessica Taveres", "ra" : "1460341423056", "phone" : "1289005417", "completed" :false,
+   "course" : {"code" : "034", "name" : "Logística", "period" : "Matutino", "institutionCode" : "146"},
+   "username" : "jessica.taveres@fatec.sp.gov.br", "password" : "Mudar@123"
+  },
+  {"id" : 8, "name" : "Tamires Valentina", "ra" : "1460351423057", "phone" : "1289007717", "completed" :false,
+   "course" : {"code" : "035", "name" : "Manutenção de Aeronaves", "period" : "Noturno", "institutionCode" : "146"},
+   "username" : "tamires.valentina@fatec.sp.gov.br", "password" : "Mudar@123"
+  },
+  {"id" : 9, "name" : "Daiane Flores", "ra" : "1460351423058", "phone" : "1289004717", "completed" :false,
+   "course" : {"code" : "036", "name" : "Projetos de Estruturas Aeronáuticas", "period" : "Noturno", "institutionCode" : "146"},
+   "username" : "daiane.flores@fatec.sp.gov.br", "password" : "Mudar@123"
+  }
+]

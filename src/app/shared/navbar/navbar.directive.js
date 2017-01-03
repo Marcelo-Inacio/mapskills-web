@@ -10,9 +10,6 @@
     var directive = {
       restrict: 'E',
       templateUrl: 'app/shared/navbar/navbar.html',
-      scope: {
-          creationDate: '='
-      },
       controller: NavbarController,
       controllerAs: 'vm',
       bindToController: true
@@ -23,8 +20,8 @@
     /** @ngInject */
     function NavbarController(moment, $location, storageService, loginService) {
       var vm = this;
-
-      vm.institution = "CENTRO PAULA SOUZA";
+      vm.show_menu;
+      vm.label_cps = "CENTRO PAULA SOUZA";
 
       init();
 
@@ -33,6 +30,10 @@
       }
       /** recupera o usuario logado */
       function init() {
+        var path = $location.path().toLowerCase();
+        console.log(path);
+        vm.show_menu = ((path == "/login") || (path == "/student/result") || (path == "/student/game"));
+        console.log(vm.show_menu);
         vm.user = storageService.getItem('user');
       }
 

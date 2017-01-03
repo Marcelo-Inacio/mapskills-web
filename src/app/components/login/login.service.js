@@ -57,6 +57,7 @@
 
 				/** se não houver identificação ou se não for o perfil informado redireciona para login */
 				if(profile == null || user.profile === null || profile !== user.profile) {
+					storageService.removeAll();
 					$state.go("login");
 					return;
 				}
@@ -74,11 +75,10 @@
 						//$state.go('mentor.dashboard');
 						break;
 					case 'STUDENT':
-						$log.info("estudante");
-						$state.go('home.game');
+						$state.go('student.game');
 						break;
 					default:
-						$state.go('home.login');
+						$state.go('login');
 						break;
 				}
 			}

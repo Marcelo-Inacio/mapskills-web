@@ -1,34 +1,36 @@
 nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
   .container-fluid
     .navbar-header().row
-      button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#sidebar-collapse' ng-show="false")
-        span.sr-only Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a
-        .logo-institution.navbar-brand(href='#')
-          span {{vm.institution}}
-      ul.user-menu(ng-if="vm.getPath() !== '/login'").user-ico
-        span(uib-dropdown='', on-toggle='toggled(open)')
-          a#simple-dropdown(href='', uib-dropdown-toggle='')
-            svg.glyph.stroked.male-user
-              use(xlink:href='#stroked-male-user')
-            | {{vm.user.name}}
-            .caret
-          ul.dropdown-menu.menu-options(uib-dropdown-menu='', aria-labelledby='simple-dropdown')
-            li
-              a(href='')
-                svg.glyph.stroked.male-user
-                  use(xlink:href='#stroked-male-user')
-                | Perfil
-            li
-              a(href='')
-                svg.glyph.stroked.gear
-                  use(xlink:href='#stroked-gear')
-                | Configurações
-            li
-              a(href='', ng-click="vm.logout()")
-                svg.glyph.stroked.cancel
-                  use(xlink:href='#stroked-cancel')
-                | Sair
+      .col-xs-6(ng-if="!vm.show_menu")
+        button.navbar-toggle.collapsed(type='button')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+      .col-xs-12
+        a
+          .logo-institution.navbar-brand
+            span(ng-bind="vm.label_cps")
+        ul.user-menu.user-ico()
+          span(uib-dropdown='', on-toggle='toggled(open)')
+            a#simple-dropdown(href='', uib-dropdown-toggle='')
+              svg.glyph.stroked.male-user
+                use(xlink:href='#stroked-male-user')
+              | {{vm.user.name}}
+              .caret
+            ul.dropdown-menu.menu-options(uib-dropdown-menu='', aria-labelledby='simple-dropdown')
+              li
+                a(href='')
+                  svg.glyph.stroked.male-user
+                    use(xlink:href='#stroked-male-user')
+                  | Perfil
+              li
+                a(href='')
+                  svg.glyph.stroked.gear
+                    use(xlink:href='#stroked-gear')
+                  | Configurações
+              li
+                a(href='', ng-click="vm.logout()")
+                  svg.glyph.stroked.cancel
+                    use(xlink:href='#stroked-cancel')
+                  | Sair

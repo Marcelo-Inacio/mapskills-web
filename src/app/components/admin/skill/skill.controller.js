@@ -13,7 +13,7 @@
 
     function init() {
 			adminService.loadAllSkills().then(function(response) {
-				vm.allSkills = response.data;
+				vm.allSkills = response;
 			});
       vm.skill = adminService.getObjectCurrent();
 			adminService.setObjectCurrent(null);
