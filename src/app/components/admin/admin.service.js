@@ -3,10 +3,10 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('adminService', ['$http', '$q', adminService]);
+		.factory('adminService', ['$log', '$http', '$q', adminService]);
 
 		/** @ngInject */
-		function adminService($http, $q) {
+		function adminService($log, $http, $q) {
 			return {
 				loadAllSkills : _loadAllSkills,
 				loadAllThemes : _loadAllThemes,
@@ -36,33 +36,33 @@
 			}
 
 			function _saveInstitution(institution) {
-				console.log(institution);
+				$log.log(institution);
 			}
 
 			function _sendFile(file) {
-				console.log(file);
+				$log.log(file);
 			}
 
 			function _saveScene(scene) {
-				console.log(scene);
+				$log.log(scene);
 			}
 
 			function _saveSkill(skill) {
-				console.log(skill);
+				$log.log(skill);
 			}
 			/** método que realiza a reordenação dos index das cenas */
 			function _updateIndexScenes(allScenes) {
 				angular.forEach(allScenes, function(value, key) {
 					value.index = key;
-				  console.log(key + ' : ' + value.index);
+					$log.log(key + ' : ' + value.index);
 				});
 			}
 			/** excluir uma questão de uma cena */
 			function _deleteQuestion(questionId) {
-				console.log("ID DA QUESTÃO: " + questionId);
+				$log.log("ID DA QUESTÃO: " + questionId);
 			}
 			function _deleteScene(sceneId) {
-				console.log("ID DA CENA: " + sceneId);
+				$log.log("ID DA CENA: " + sceneId);
 			}
 			/** traz todas cenas de um determinado tema pelo id*/
 			function _loadScenesByThemeId(themeId) {
@@ -75,7 +75,7 @@
 
 			/** cadastra ou atualiza um tema */
 			function _saveTheme(theme) {
-				console.log(theme);
+				$log.log(theme);
 			}
 			/** recupera todos as instituições cadastadas */
 			function _loadAllInstitutions() {

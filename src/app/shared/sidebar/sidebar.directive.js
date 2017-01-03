@@ -15,7 +15,7 @@
         return "app/shared/sidebar/"+attrs.profile+".html";
       },
       controller: SidebarController,
-      controllerAs: 'vm',
+      controllerAs: 'sb',
       bindToController: true
     };
 
@@ -38,7 +38,6 @@
      * função para ativação do class dos botões de navegação.
      */
      function changeClass(page) {
-       console.log(page);
        var lastPage = storageService.getItem('page') || null;
        storageService.setItem('page', page);
        if(lastPage) {

@@ -31,16 +31,13 @@
       /** recupera o usuario logado */
       function init() {
         var path = $location.path().toLowerCase();
-        console.log(path);
         vm.show_menu = ((path == "/login") || (path == "/student/result") || (path == "/student/game"));
-        console.log(vm.show_menu);
         vm.user = storageService.getItem('user');
       }
 
       vm.logout = function() {
         loginService.logout();
       }
-
     }
   }
 

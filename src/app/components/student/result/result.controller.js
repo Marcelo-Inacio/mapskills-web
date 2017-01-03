@@ -6,12 +6,12 @@
 		.controller('StudentResultsController', StudentResultsController);
 
 	/** @ngInject */
-	function StudentResultsController($log, studentService, storageService) {
+	function StudentResultsController($log, studentService/*, storageService*/) {
 
 		init();
 		/** função principal que recupera os resultados do aluno */
 		function init() {
-      var user = storageService.getItem("user");
+      //var user = storageService.getItem("user");
 			studentService.getRadarResults(1).then(function(response) {
 				$log.log(response);
         radarChartfactory(response);
@@ -20,17 +20,17 @@
 
     function radarChartfactory(chartData) {
       var radarData = {
-			  "labels": chartData.labels,
-			  "datasets": [{
-			            "label": "Pontos",
-			            "backgroundColor": "rgba(0,0,255,0.3)",
-			            "borderColor": "rgba(179,181,198,1)",
-			            "pointBackgroundColor": "rgba(0, 255, 0, 0.3)",
-			            "pointBorderColor": "#fff",
-			            "pointHoverBackgroundColor": "#fff",
-			            "pointHoverBorderColor": "rgba(179,181,198,1)",
-			            "data": chartData.datasets
-			        }]
+				"labels": chartData.labels,
+				"datasets": [{
+					"label": "Pontos",
+					"backgroundColor": "rgba(0,0,255,0.3)",
+					"borderColor": "rgba(179,181,198,1)",
+					"pointBackgroundColor": "rgba(0, 255, 0, 0.3)",
+					"pointBorderColor": "#fff",
+					"pointHoverBackgroundColor": "#fff",
+					"pointHoverBorderColor": "rgba(179,181,198,1)",
+					"data": chartData.datasets
+				}]
 			};
 
       var options = {
@@ -52,10 +52,10 @@
 
       var ctx = document.getElementById("radarChart").getContext("2d");
 
-      var myRadarChart = new Chart(ctx, {
-          type: 'radar',
-          data: radarData,
-          options: options
+      new Chart(ctx, {
+				type: 'radar',
+				data: radarData,
+				options: options
       });
     }
 
