@@ -2,32 +2,31 @@
   ul.nav.menu
     li(ng-class="sb.ngClass.dashboard", ng-click="sb.isCollapsed = !sb.isCollapsed; sb.changeClass('dashboard')")
       a
-        svg.glyph.stroked.dashboard-dial
-          use(xlink:href='#stroked-dashboard-dial')
+        i.fa.fa-tachometer.ico-sidebar
         |  Dashboard
     div(uib-collapse='sb.isCollapsed')
       ul.nav.menu
         li
           a.menu-chidren
-            svg.glyph.stroked.line-graph
-            |  Alunos X Curso
+            i.fa.fa-line-chart.ico-sidebar
+            | Alunos X Curso
         li
           a.menu-chidren
-            svg.glyph.stroked.line-graph
-            |  Grafico 2
+            i.fa.fa-pie-chart.ico-sidebar
+            | Grafico 2
     li(ng-class="sb.ngClass.students", ng-click="sb.changeClass('students')")
       a
-        i.glyph.fa.fa-icon-group
+        i.fa.fa-users.ico-sidebar
         |  Alunos
     li(ng-class="sb.ngClass.courses", ng-click="sb.changeClass('courses')")
       a(ui-sref="mentor.courses")
-        svg.glyph.stroked.line-graph
+        i.fa.fa-graduation-cap.ico-sidebar
         |  Cursos
     li(ng-class="sb.ngClass.theme", ng-click="sb.changeClass('theme')")
       a
-        svg.glyph.stroked.table
+        i.fa.fa-paint-brush.ico-sidebar
         |  Tema de Jogo
     li(ng-class="sb.ngClass.progress", ng-click="sb.changeClass('progress')")
       a
-        svg.glyph.stroked.pencil
+        i.fa.fa-history.ico-sidebar
         |  Andamento dos alunos

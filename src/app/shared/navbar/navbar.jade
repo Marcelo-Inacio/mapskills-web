@@ -14,23 +14,19 @@ nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
         ul.user-menu.user-ico()
           span(uib-dropdown='', on-toggle='toggled(open)')
             a#simple-dropdown(href='', uib-dropdown-toggle='')
-              svg.glyph.stroked.male-user
-                use(xlink:href='#stroked-male-user')
+              i.fa.fa-user-circle-o.ico-sidebar
               | {{vm.user.name}}
               .caret
             ul.dropdown-menu.menu-options(uib-dropdown-menu='', aria-labelledby='simple-dropdown')
               li
                 a(href="")
-                  svg.glyph.stroked.male-user
-                    use(xlink:href='#stroked-male-user')
+                  i.fa.fa-user-o.ico-sidebar
                   | Perfil
               li
                 a(href="")
-                  svg.glyph.stroked.gear
-                    use(xlink:href='#stroked-gear')
+                  i.fa.fa-cogs.ico-sidebar
                   | Configurações
               li
                 a(href="", ng-click="vm.logout()")
-                  svg.glyph.stroked.cancel
-                    use(xlink:href='#stroked-cancel')
+                  i.fa.fa-sign-out.ico-sidebar
                   | Sair

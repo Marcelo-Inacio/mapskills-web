@@ -1,15 +1,19 @@
 section
   .row.aligner
     .col-md-4.aligner-item
-      input.form-control(type='text', ng-model="stuCtrl.filter.name", placeholder="Nome para filtro"
+      input.form-control(type='text', ng-model="stuCtrl.filter.name", placeholder="Nome do aluno"
                         ,ng-model-options="{updateOn: 'default blur', debounce:{default: 500, blur: 0}}")
     .col-md-3.aligner-item
       select.form-control(ng-model="stuCtrl.filter.course"
                           ,ng-options="course.name for course in stuCtrl.allCourses track by course.id")
         option(value='') -- selecione um curso --
     .col-md-5
-      label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="stuCtrl.openStudentModal()") novo
-      label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="stuCtrl.openFileModal()") novo em lote
+      label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="stuCtrl.openStudentModal()")
+        i.fa.fa-user-plus.ico-sidebar 
+        | novo
+      label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="stuCtrl.openFileModal()")
+        i.fa.fa-plus.ico-sidebar
+        | novo em lote
   table.table.table-hover.table-striped
     thead
       tr.table-thead

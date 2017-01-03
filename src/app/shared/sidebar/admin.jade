@@ -1,32 +1,32 @@
 #sidebar-collapse.col-sm-3.col-lg-2.sidebar
   ul.nav.menu
-    li(ng-click="sb.isCollapsed = !sb.isCollapsed; sb.changeClass('dashboard')", ng-class="sb.ngClass.dashboard")
+    li(ng-click="sbCtrl.isCollapsed = !sbCtrl.isCollapsed; sbCtrl.changeClass('dashboard')", ng-class="sbCtrl.ngClass.dashboard")
       a
-        svg.glyph.stroked.dashboard-dial
+        i.fa.fa-tachometer.ico-sidebar
         |  Dashboard
-    div(uib-collapse='sb.isCollapsed')
+    div(uib-collapse='sbCtrl.isCollapsed')
       ul.nav.menu
         li
           a.menu-chidren
-            svg.glyph.stroked.line-graph
+            i.fa.fa-area-chart.ico-sidebar
             |  Grafico 1
         li
           a.menu-chidren
-            svg.glyph.stroked.line-graph
+            i.fa.fa-bar-chart.ico-sidebar
             |  Grafico 2
-    li(ng-class='sb.ngClass.institutions', ng-click="sb.changeClass('institutions')")
+    li(ng-class='sbCtrl.ngClass.institutions', ng-click="sbCtrl.changeClass('institutions')")
       a
-        svg.glyph.stroked.calendar
+        i.fa.fa-university.ico-sidebar
         |  Instituições
-    li(ng-class='sb.ngClass.themes', ng-click="sb.changeClass('themes')")
+    li(ng-class='sbCtrl.ngClass.themes', ng-click="sbCtrl.changeClass('themes')")
       a
-        svg.glyph.stroked.line-graph
+        i.fa.fa-eyedropper.ico-sidebar
         |  Temas
-    li(ng-class='sb.ngClass.skills', ng-click="sb.changeClass('skills')")
+    li(ng-class='sbCtrl.ngClass.skills', ng-click="sbCtrl.changeClass('skills')")
       a
-        svg.glyph.stroked.table
+        i.fa.fa-shield.ico-sidebar
         |  Competências
-    li(ng-class='sb.ngClass.functionality')
+    li(ng-class='sbCtrl.ngClass.functionality')
       a
-        svg.glyph.stroked.pencil
+        i.fa.fa-ellipsis-h.ico-sidebar
         |  Funcionalidade

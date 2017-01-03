@@ -15,7 +15,7 @@
         return "app/shared/sidebar/"+attrs.profile+".html";
       },
       controller: SidebarController,
-      controllerAs: 'sb',
+      controllerAs: 'sbCtrl',
       bindToController: true
     };
 
