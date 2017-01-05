@@ -15,7 +15,7 @@
    "course" : {"code" : "031", "name" : "Gestão da Produção Industrial", "period" : "Noturno"},
    "username" : "paula.dias@fatec.sp.gov.br", "password" : "Mudar@123"
   },
-  {"id" : 5, "name" : "Raul Mello", "ra" : "1460321423054", "phone" : "1289003415", "completed" :false,
+  {"id" : 5, "name" : "Raul Leon", "ra" : "1460321423054", "phone" : "1289003415", "completed" :true,
    "course" : {"code" : "032", "name" : "Gestão Empresarial", "period" : "EaD"},
    "username" : "raul.mello@fatec.sp.gov.br", "password" : "Mudar@123"
   },

@@ -14,7 +14,7 @@
         label {{modalCtrl.student.phone}}
       .col-md-7
         label Jogo Concluido:
-        label {{modalCtrl.student.completed}}
+        label {{modalCtrl.student.completed ? "sim" : "não"}}
     .form-group.row
       .col-md-12
         label E-mail:
@@ -33,6 +33,6 @@
       .col-md-4
         label Período:
         label {{modalCtrl.student.course.period}}
-    
+
   .modal-footer
     button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") fechar

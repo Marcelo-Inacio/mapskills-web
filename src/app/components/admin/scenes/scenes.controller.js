@@ -8,13 +8,15 @@
 	/** @ngInject */
 	function ScenesController($log, $stateParams, modalService, adminService) {
 		var vm = this;
+		var themeId;
 
 		vm.info_tooltip = "Arraste as linhas da tabela para reordenar a exibição das cenas do jogo";
 
 		init();
 		/** faz requisição ao backend de todas as cenas de um tema */
 		function init() {
-			adminService.loadScenesByThemeId($stateParams.themeId).then(function(response) {
+			themeId = $stateParams.themeId;
+			adminService.loadScenesByThemeId(themeId).then(function(response) {
 				vm.allScenes = response;
 			});
 			loadAllSkills();
@@ -44,6 +46,7 @@
 		}
 
 		vm.saveScene = function(scene) {
+			scene.gameThemeId = themeId;
 			adminService.saveScene(scene);
 			vm.closeModal();
 		}

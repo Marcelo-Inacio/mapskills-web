@@ -1,10 +1,10 @@
 #sidebar-collapse.col-sm-3.col-lg-2.sidebar
   ul.nav.menu
-    li(ng-class="sb.ngClass.dashboard", ng-click="sb.isCollapsed = !sb.isCollapsed; sb.changeClass('dashboard')")
+    li(ng-class="sbCtrl.ngClass.dashboard", ng-click="sbCtrl.isCollapsed = !sbCtrl.isCollapsed; sbCtrl.changeClass('dashboard')")
       a
         i.fa.fa-tachometer.ico-sidebar
         |  Dashboard
-    div(uib-collapse='sb.isCollapsed')
+    div(uib-collapse='sbCtrl.isCollapsed')
       ul.nav.menu
         li
           a.menu-chidren
@@ -14,19 +14,19 @@
           a.menu-chidren
             i.fa.fa-pie-chart.ico-sidebar
             | Grafico 2
-    li(ng-class="sb.ngClass.students", ng-click="sb.changeClass('students')")
+    li(ng-class="sbCtrl.ngClass.students", ng-click="sbCtrl.changeClass('students')")
       a
         i.fa.fa-users.ico-sidebar
         |  Alunos
-    li(ng-class="sb.ngClass.courses", ng-click="sb.changeClass('courses')")
+    li(ng-class="sbCtrl.ngClass.courses", ng-click="sbCtrl.changeClass('courses')")
       a(ui-sref="mentor.courses")
         i.fa.fa-graduation-cap.ico-sidebar
         |  Cursos
-    li(ng-class="sb.ngClass.theme", ng-click="sb.changeClass('theme')")
+    li(ng-class="sbCtrl.ngClass.theme", ng-click="sbCtrl.changeClass('theme')")
       a
         i.fa.fa-paint-brush.ico-sidebar
         |  Tema de Jogo
-    li(ng-class="sb.ngClass.progress", ng-click="sb.changeClass('progress')")
+    li(ng-class="sbCtrl.ngClass.progress", ng-click="sbCtrl.changeClass('progress')")
       a
         i.fa.fa-history.ico-sidebar
         |  Andamento dos alunos

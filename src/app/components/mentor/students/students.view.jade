@@ -9,7 +9,7 @@ section
         option(value='') -- selecione um curso --
     .col-md-5
       label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="stuCtrl.openStudentModal()")
-        i.fa.fa-user-plus.ico-sidebar 
+        i.fa.fa-user-plus.ico-sidebar
         | novo
       label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="stuCtrl.openFileModal()")
         i.fa.fa-plus.ico-sidebar
@@ -27,7 +27,10 @@ section
         td {{::student.name}}
         td {{::student.ra}}
         td {{::student.phone}}
-        td {{::student.completed}}
+        td(ng-if="student.completed")
+          i.fa.fa-check-circle
+        td(ng-if="!student.completed")
+          i.fa.fa-minus-circle
         td
           label#btn-todo.btn.btn-info.btn-xs(ng-click="stuCtrl.openDetailsModal(student)") detalhes
           label#btn-todo.btn.btn-info.btn-xs(ng-click="stuCtrl.openStudentModal(student)") editar
