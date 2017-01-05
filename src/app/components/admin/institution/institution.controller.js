@@ -42,6 +42,7 @@
 
 		vm.sendFile = function(file) {
       adminService.sendFile(file);
+			vm.closeModal();
     }
 
 		vm.closeModal = function() {

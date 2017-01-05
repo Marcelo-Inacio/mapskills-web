@@ -8,7 +8,6 @@
 	/** @ngInject */
 	function GameThemeController($log, adminService, modalService) {
 		var vm = this;
-		vm.newTheme = {"description" : "aqui eh umm novo tema"};
 
 		init();
 
@@ -25,6 +24,7 @@
 
 		vm.saveTheme = function(theme) {
 			adminService.saveTheme(theme);
+			vm.closeModal();
 		}
 
 		vm.closeModal = function() {
