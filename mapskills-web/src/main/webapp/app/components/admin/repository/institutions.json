@@ -1,6 +1,0 @@
-[
-  {"id" : 1, "code" : "111", "cnpj" : "32538186000123", "company" : "Fatec - X", "city" : "São Paulo"},
-  {"id" : 2, "code" : "222", "cnpj" : "14945259000110", "company" : "Fatec - Y", "city" : "São José"},
-  {"id" : 3, "code" : "333", "cnpj" : "15834395000103", "company" : "Fatec - Z", "city" : "Bauru"},
-  {"id" : 4, "code" : "444", "cnpj" : "77401590000199", "company" : "Fatec - A", "city" : "Campinas"}
-]

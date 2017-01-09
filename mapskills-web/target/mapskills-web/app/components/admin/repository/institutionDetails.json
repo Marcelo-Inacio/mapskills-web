@@ -1,8 +1,0 @@
-{"id" : 1, "code" : "111", "cnpj" : "32538186000123", "company" : "Fatec - X", "city" : "São Paulo",
-"courses" : [
-  {"id" : 1, "code" : "121", "name" : "Manutenção de aeronaves", "period" : "Matutino"},
-  {"id" : 2, "code" : "122", "name" : "Banco de dados", "period" : "Vespertino"},
-  {"id" : 3, "code" : "123", "name" : "Logistica", "period" : "Noturno"}
-  ],
-"mentor" : {"name" : "Adalberto Farias", "username" : "adalberto.farias@cps.sp.gov.br", "password" : "mudar@123"}
-}
