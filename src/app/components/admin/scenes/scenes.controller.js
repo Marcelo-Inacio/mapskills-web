@@ -47,7 +47,8 @@
 
 		vm.saveScene = function(scene) {
 			scene.gameThemeId = themeId;
-			adminService.saveScene(scene);
+			adminService.saveScene(scene).then(function(data) {
+			});
 			vm.closeModal();
 		}
 

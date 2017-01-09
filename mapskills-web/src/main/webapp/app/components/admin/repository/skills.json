@@ -1,0 +1,8 @@
+[
+  {"id" : 1, "type" : "Liderança"},
+  {"id" : 2, "type" : "Trabalho em Equipe"},
+  {"id" : 3, "type" : "Comunicação"},
+  {"id" : 4, "type" : "Resiliencia"},
+  {"id" : 5, "type" : "Equilibrio"},
+  {"id" : 6, "type" : "Gestão de Tempo"}
+]

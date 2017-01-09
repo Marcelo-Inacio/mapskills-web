@@ -78,7 +78,7 @@
         controllerAs: 'stuCtrl'
       });
 
-    $urlRouterProvider.otherwise('/student/game');
+    $urlRouterProvider.otherwise('/login');
   }
 
 })();

@@ -26,6 +26,7 @@
 
     vm.saveSkill = function(skill) {
       adminService.saveSkill(skill);
+			vm.closeModal();
     }
 
 		vm.closeModal = function() {

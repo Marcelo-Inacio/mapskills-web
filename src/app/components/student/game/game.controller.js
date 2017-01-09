@@ -25,7 +25,7 @@
 			studentService.getHistory(studentId).then(function(response) {
 				$log.log(response);
 				vm.history = response;
-				vm.background = {"background-image" : "url(" + vm.history[vm.index].background + ")"};
+				vm.background = {"background-image" : "url(" + vm.history[vm.index].background.filename +")"};
 				sizeScenes = vm.history.length;
 				$log.log(sizeScenes);
 			});

@@ -1,20 +1,19 @@
-section
-  article.container
-    .col-lg-12
-      .panel.panel-default
-        .panel-heading Resultado
-        .panel-body.panel-radar
-          .col-lg-6
-            canvas(chart-labels="false")#radarChart
-          .col-lg-6(ng-repeat="i in [1,2,3,4,5,6]")
-            | Competencia {{i}} Descrição: 
-        .panel-footer
-          br
-          | Este é um trabalho acadêmico desenvolvido pelo Centro Paula Souza em fase de validação
-          br
-          | Os resultados não substituem o trabalho de um profissional especializado na área
-          br
-          | O objetivo do resultado é proporcionar uma reflexão sobre as competências comportamentais avaliadas
-          br
-          br
-          h3  Tabela de resultados 
+article.container
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading Resultado
+      .panel-body.panel-radar
+        .col-lg-6
+          canvas(chart-labels="false")#radarChart
+        .col-lg-6(ng-repeat="i in [1,2,3,4,5,6]")
+          | Competencia {{i}} Descrição: 
+      .panel-footer
+        br
+        | Este é um trabalho acadêmico desenvolvido pelo Centro Paula Souza em fase de validação
+        br
+        | Os resultados não substituem o trabalho de um profissional especializado na área
+        br
+        | O objetivo do resultado é proporcionar uma reflexão sobre as competências comportamentais avaliadas
+        br
+        br
+        h3  Tabela de resultados 

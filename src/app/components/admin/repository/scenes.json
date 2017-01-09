@@ -3,6 +3,7 @@
     "id" : 1,
     "index" : 1,
     "text" : "cena numero de intro",
+    "gameThemeId": 1,
     "background" : {"filename" : "/assets/images/scene1.jpg"},
     "question" : null
   },
@@ -10,6 +11,7 @@
     "id" : 2,
     "index" : 2,
     "text" : "cena com a pergunta",
+    "gameThemeId": 1,
     "background" : {"filename" : "/assets/images/scene1.jpg"},
     "question" : {
       "id" : 1,
@@ -26,6 +28,7 @@
     "id" : 3,
     "index" : 3,
     "text" : "cena de conclusão",
+    "gameThemeId": 1,
     "background" : {"filename" : "/assets/images/scene1.jpg"},
     "question" : null
   },
@@ -33,6 +36,7 @@
     "id" : 4,
     "index" : 4,
     "text" : "cena numero de intro 2",
+    "gameThemeId": 1,
     "background" : {"filename" : "/assets/images/scene1.jpg"},
     "question" : null
   },
@@ -40,6 +44,7 @@
     "id" : 5,
     "index" : 5,
     "text" : "cena com a pergunta 2",
+    "gameThemeId": 1,
     "background" : {"filename" : "/assets/images/scene1.jpg"},
     "question" : {
       "id" : 2,
@@ -56,6 +61,7 @@
     "id" : 6,
     "index" : 6,
     "text" : "cena de conclusão 2",
+    "gameThemeId": 1,
     "background" : {"filename" : "/assets/images/scene1.jpg"},
     "question" : null
   }

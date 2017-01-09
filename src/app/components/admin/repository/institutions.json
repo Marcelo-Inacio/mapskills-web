@@ -1,34 +1,6 @@
 [
-  {"id" : 1, "code" : "111", "cnpj" : "32538186000123", "company" : "Fatec - X", "city" : "São Paulo",
-  "courses" : [
-    {"id" : 1, "code" : "121", "name" : "Manutenção de aeronaves", "period" : "Matutino"},
-    {"id" : 2, "code" : "122", "name" : "Banco de dados", "period" : "Vespertino"},
-    {"id" : 3, "code" : "123", "name" : "Logistica", "period" : "Noturno"}
-    ],
-  "mentor" : {"name" : "Adalberto Farias", "username" : "adalberto.farias@cps.sp.gov.br", "password" : "mudar@123"}
-  },
-  {"id" : 2, "code" : "222", "cnpj" : "14945259000110", "company" : "Fatec - Y", "city" : "São José",
-  "courses" : [
-    {"id" : 4, "code" : "221", "name" : "Quimica", "period" : "Matutino"},
-    {"id" : 5, "code" : "222", "name" : "Elétrica", "period" : "Vespertino"},
-    {"id" : 6, "code" : "223", "name" : "Eletronica", "period" : "Noturno"}
-    ],
-  "mentor" : {"name" : "Vanessa Soares", "username" : "vanessa.soares@cps.sp.gov.br", "password" : "mudar@123"}
-  },
-  {"id" : 3, "code" : "333", "cnpj" : "15834395000103", "company" : "Fatec - Z", "city" : "Bauru",
-  "courses" : [
-    {"id" : 7, "code" : "321", "name" : "Urbanismo", "period" : "Matutino"},
-    {"id" : 8, "code" : "322", "name" : "Ciências Politicas", "period" : "Vespertino"},
-    {"id" : 9, "code" : "323", "name" : "Mecânica", "period" : "Noturno"}
-    ],
-  "mentor" : {"name" : "Vinicius Gomes", "username" : "vinicius.gomes@cps.sp.gov.br", "password" : "mudar@123"}
-  },
-  {"id" : 4, "code" : "444", "cnpj" : "77401590000199", "company" : "Fatec - A", "city" : "Campinas",
-  "courses" : [
-    {"id" : 10, "code" : "421", "name" : "Edificações", "period" : "Matutino"},
-    {"id" : 11, "code" : "422", "name" : "Tecnologo Civil", "period" : "Vespertino"},
-    {"id" : 12, "code" : "423", "name" : "Mecatrônica", "period" : "Noturno"}
-    ],
-  "mentor" : {"name" : "Helio de Souza", "username" : "helio.souza@cps.sp.gov.br", "password" : "mudar@123"}
-  }
+  {"id" : 1, "code" : "111", "cnpj" : "32538186000123", "company" : "Fatec - X", "city" : "São Paulo"},
+  {"id" : 2, "code" : "222", "cnpj" : "14945259000110", "company" : "Fatec - Y", "city" : "São José"},
+  {"id" : 3, "code" : "333", "cnpj" : "15834395000103", "company" : "Fatec - Z", "city" : "Bauru"},
+  {"id" : 4, "code" : "444", "cnpj" : "77401590000199", "company" : "Fatec - A", "city" : "Campinas"}
 ]

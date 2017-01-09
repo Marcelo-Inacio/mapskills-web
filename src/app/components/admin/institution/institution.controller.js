@@ -19,11 +19,14 @@
 				vm.allInstitutions = response;
 			});
       vm.institution = adminService.getObjectCurrent();
+			console.log(vm.institution);
 			adminService.setObjectCurrent(null);
     }
 
 		vm.openDetailsModal = function(institution) {
-      adminService.setObjectCurrent(institution);
+			adminService.getInstitutionDetails(institution.id).then(function(response) {
+				adminService.setObjectCurrent(response.data);
+			});
       modalService.openModal('/app/components/admin/institution/details.modal.html', 'InstitutionController');
 		}
 
@@ -38,6 +41,7 @@
 
     vm.saveInstitution = function(institution) {
       adminService.saveInstitution(institution);
+			vm.closeModal();
     }
 
 		vm.sendFile = function(file) {
