@@ -122,7 +122,7 @@
 			/** traz todas cenas de um determinado tema pelo id*/
 			function _loadScenesByThemeId(themeId) {
 				var deferred = $q.defer();
-				$http.get("./app/components/admin/repository/scenes.json").success(function(response) {
+				$http.get("http://localhost:8080/mapskills/rest/game/theme/".concat(themeId)).success(function(response) {
 					deferred.resolve(response);
 				});
 				return deferred.promise;
