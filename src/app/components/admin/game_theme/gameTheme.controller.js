@@ -9,14 +9,13 @@
 	function GameThemeController($log, adminService, modalService) {
 		var vm = this;
 
-		init();
-
-		function init() {
+		var init = function() {
 			adminService.loadAllThemes().then(function(response) {
-				$log.info(response);
 				vm.allThemes = response;
 			});
 		}
+
+		init();
 
 		vm.openModal = function() {
       modalService.openModal('/app/components/admin/game_theme/gameTheme.modal.html', 'GameThemeController');

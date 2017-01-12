@@ -9,13 +9,11 @@ section
     thead
       tr.table-thead
         th Texto
-        th imagem
         th Questão
         th Ação
     tbody(ui-sortable ng-model="scnCtrl.allScenes")
       tr(ng-repeat="scene in scnCtrl.allScenes track by $index")
         td {{scene.text}}
-        td {{scene.background.substring(15)}}
         td 
           label#btn-todo.btn.btn-primary.btn-xs(ng-show="!scene.question", ng-click="scnCtrl.openQuestionModal(scene)") adiconar
           label#btn-todo.btn.btn-info.btn-xs(ng-show="scene.question", ng-click="scnCtrl.openQuestionModal(scene)") editar

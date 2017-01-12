@@ -21,11 +21,17 @@
 				deleteQuestion : _deleteQuestion,
 				deleteScene : _deleteScene,
 				getInstitutionDetails : _getInstitutionDetails,
-
+				/** auxiliares */
 				getObjectCurrent : _getObjectCurrent,
-				setObjectCurrent : _setObjectCurrent
+				setObjectCurrent : _setObjectCurrent,
+				getSkillById : _getSkillById
 			};
 
+			function getFullRestApi(uri) {
+				return "http://localhost:8080/mapskills/rest".concat(uri);
+			}
+			var allSkillsCached = null;
+			var sceneCached = null;
 			var objectCurrent;
 
 			function _getObjectCurrent() {
@@ -34,6 +40,16 @@
 
 			function _setObjectCurrent(object) {
 				objectCurrent = object;
+			}
+/** auxilia para recuperar objeto skill, para exibir no editar da question*/
+			function _getSkillById(id) {
+				var size = allSkillsCached.length;
+				for(var i = 0; i < size; i++) {
+					if(allSkillsCached[i].id == id) {
+						return allSkillsCached[i];
+					}
+				}
+				return null;
 			}
 
 			function _getInstitutionDetails(id) {
@@ -45,7 +61,7 @@
 				var jsonData = JSON.stringify(institution);
 				var deferred = $q.defer();
         $http({
-            method: "POST", url: "http://localhost:8080/mapskills/rest/institution",
+            method: "POST", url: getFullRestApi("/institution"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          success(function (status) {
@@ -59,7 +75,7 @@
 				var jsonData = JSON.stringify(file);
 				var deferred = $q.defer();
         $http({
-            method: "POST", url: "http://localhost:8080/mapskills/rest/upload/institutions",
+            method: "POST", url: getFullRestApi("/upload/institutions"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          success(function (status) {
@@ -69,10 +85,11 @@
 			}
 
 			function _saveScene(scene) {
+				console.log(scene);
 				var jsonData = JSON.stringify(scene);
 				var deferred = $q.defer();
         $http({
-            method: "POST", url: "http://localhost:8080/mapskills/rest/game/scene",
+            method: "POST", url: getFullRestApi("/game/scene"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          success(function (status) {
@@ -86,7 +103,7 @@
 				var jsonData = JSON.stringify(skill);
 				var deferred = $q.defer();
         $http({
-            method: "POST", url: "http://localhost:8080/mapskills/rest/skill",
+            method: "POST", url: getFullRestApi("/skill"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          success(function (status) {
@@ -104,7 +121,7 @@
 				var jsonData = JSON.stringify(allScenes);
 				var deferred = $q.defer();
         $http({
-            method: "PUT", url: "http://localhost:8080/mapskills/rest/game/scenes",
+            method: "PUT", url: getFullRestApi("/game/scenes"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          success(function (status) {
@@ -119,12 +136,19 @@
 			function _deleteScene(sceneId) {
 				$log.log("ID DA CENA: " + sceneId);
 			}
-			/** traz todas cenas de um determinado tema pelo id*/
+			/** traz todas cenas de um determinado tema pelo id e simula um cache
+			para em caso de reload não sofra com requisição ao server */
 			function _loadScenesByThemeId(themeId) {
 				var deferred = $q.defer();
-				$http.get("http://localhost:8080/mapskills/rest/game/theme/".concat(themeId)).success(function(response) {
-					deferred.resolve(response);
-				});
+				if(sceneCached != null) {
+					deferred.resolve(sceneCached);
+				} else {
+					var uri = getFullRestApi("/game/theme/");
+					$http.get(uri.concat(themeId)).then(function(response) {
+						sceneCached = response.data;
+						deferred.resolve(response.data);
+					});
+				}
 				return deferred.promise;
 			}
 
@@ -134,7 +158,7 @@
 				var jsonData = JSON.stringify(theme);
 				var deferred = $q.defer();
         $http({
-            method: "POST", url: "http://localhost:8080/mapskills/rest/game/theme",
+            method: "POST", url: getFullRestApi("/game/theme"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          success(function (status) {
@@ -150,18 +174,25 @@
 				});
 				return deferred.promise;
 			}
-			/** recupera todos as competencias cadastadas */
+			/** recupera todos as competencias cadastadas e simula um cache */
 			function _loadAllSkills() {
 				var deferred = $q.defer();
-				$http.get("./app/components/admin/repository/skills.json").success(function(response) {
-					deferred.resolve(response);
-				});
+				if(allSkillsCached != null) {
+					deferred.resolve(allSkillsCached);
+				} else {
+					var uri = getFullRestApi("/skills");
+					$http.get(uri).then(function(response) {
+						allSkillsCached = response.data;
+						deferred.resolve(response.data);
+					});
+				}
 				return deferred.promise;
 			}
 			/** recupera todos temas cadastrados */
 			function _loadAllThemes() {
 				var deferred = $q.defer();
-				$http.get("./app/components/admin/repository/themes.json").success(function(response) {
+				var uri = getFullRestApi("/game/themes");
+				$http.get(uri).success(function(response) {
 					deferred.resolve(response);
 				});
 				return deferred.promise;

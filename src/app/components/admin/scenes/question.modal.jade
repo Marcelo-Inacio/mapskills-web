@@ -4,7 +4,7 @@
     .form-group.row
       .col-md-12
         label Competência
-        select.form-control(ng-model="modalCtrl.scene.question.skillId"
+        select.form-control(ng-model="modalCtrl.skillSelected"
                             ,ng-options="skill.id as skill.type for skill in modalCtrl.allSkills track by skill.id")
           option(value='') -- selecione uma competência --
           
@@ -40,5 +40,5 @@
         label Peso
         input.form-control(type='number', ng-model="modalCtrl.scene.question.alternatives[3].skillValue")
   .modal-footer        
-    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveScene(modalCtrl.scene)") salvar
+    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveScene(modalCtrl.scene, modalCtrl.skillSelected)") salvar
     button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

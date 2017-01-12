@@ -9,6 +9,9 @@
 	function ScenesController($log, $stateParams, modalService, adminService) {
 		var vm = this;
 		var themeId;
+		vm.allScenes = null;
+		vm.allSkills = null;
+		vm.skillSelected = null;
 
 		vm.info_tooltip = "Arraste as linhas da tabela para reordenar a exibição das cenas do jogo";
 
@@ -16,11 +19,15 @@
 		/** faz requisição ao backend de todas as cenas de um tema */
 		function init() {
 			themeId = $stateParams.themeId;
-			adminService.loadScenesByThemeId(themeId).then(function(response) {
-				vm.allScenes = response;
-			});
+			loadScenesByThemeId(themeId);
 			loadAllSkills();
 			vm.scene = adminService.getObjectCurrent();
+			if(vm.scene != null) {
+				if(vm.scene.question === null) return;
+				$log.log("CENA É DIFERENTE DE NULO");
+				var id = vm.scene.question.skillId;
+				vm.skillSelected = adminService.getSkillById(id);
+			}
 			adminService.setObjectCurrent(null);
 		}
 
@@ -33,22 +40,31 @@
 			adminService.setObjectCurrent(scene);
 			modalService.openModal('/app/components/admin/scenes/question.modal.html', 'ScenesController');
 		}
+		/** carrega todas cenas de um tema */
+		function loadScenesByThemeId(themeId) {
+			adminService.loadScenesByThemeId(themeId).then(function(data) {
+				vm.allScenes = data;
+			});
+		}
 
 		/** carrega todas competencias cadastadas */
 		function loadAllSkills() {
-			adminService.loadAllSkills().then(function(response) {
-				vm.allSkills = response;
+			adminService.loadAllSkills().then(function(data) {
+				vm.allSkills =  data;
 			});
 		}
 
 		vm.closeModal = function() {
 			modalService.closeModal();
 		}
-
-		vm.saveScene = function(scene) {
+/** NOVA CENA -> SALVAR (POST), ADD QUESTAO OU EDITAR -> UPDATE (PUT)*/
+		vm.saveScene = function(scene, skillId) {
+			if(skillId !== null) scene.question.skillId = skillId;
+			if(scene.question == null) scene.question = null;
 			scene.gameThemeId = themeId;
 			adminService.saveScene(scene).then(function(data) {
 			});
+			loadScenesByThemeId(themeId);
 			vm.closeModal();
 		}
 

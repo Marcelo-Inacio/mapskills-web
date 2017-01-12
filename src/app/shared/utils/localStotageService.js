@@ -11,9 +11,7 @@
 				setItem : _set,
 				getItem : _get,
 				removeItem : _remove,
-				removeAll : _clearAll,
-				getPath : _getDefaultUrlPath,
-				getToken : _getToken
+				removeAll : _clearAll
 			};
 
 			function _set(key, value) {
@@ -30,14 +28,6 @@
 
 			function _clearAll() {
 				localStorage.clear();
-			}
-
-			function _getToken() {
-				return _get('Authorization');
-			}
-
-			function _getDefaultUrlPath() {
-				return "http://localhost:8080/mapskills";
 			}
 
 		}

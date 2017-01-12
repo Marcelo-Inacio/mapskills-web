@@ -16,5 +16,5 @@
       .col-md-12
         span(ng-bind='modalCtrl.scene.background.filename')
   .modal-footer
-    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveScene(modalCtrl.scene)") salvar
+    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveScene(modalCtrl.scene, null)") salvar
     button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar
