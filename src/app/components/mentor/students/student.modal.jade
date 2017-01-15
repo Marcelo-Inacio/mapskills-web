@@ -17,6 +17,10 @@
       .col-md-12
         label E-mail:
         input.form-control(type='text', ng-model="modalCtrl.student.username")
+    .form-group.row
+      .col-md-12
+        label Senha:
+        input.form-control(type='text', ng-model="modalCtrl.student.password")
   .modal-footer
     button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveStudent(modalCtrl.student)") salvar
     button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

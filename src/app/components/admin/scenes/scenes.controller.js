@@ -59,13 +59,16 @@
 		}
 /** NOVA CENA -> SALVAR (POST), ADD QUESTAO OU EDITAR -> UPDATE (PUT)*/
 		vm.saveScene = function(scene, skillId) {
-			if(skillId !== null) scene.question.skillId = skillId;
-			if(scene.question == null) scene.question = null;
+			if(scene.question == null) {
+				scene.question = null;
+			}	else if(skillId !== null) {
+				scene.question.skillId = skillId;
+			}
 			scene.gameThemeId = themeId;
-			adminService.saveScene(scene).then(function(data) {
+			adminService.saveScene(scene, "POST").then(function(status) {
+				loadScenesByThemeId(themeId);
+				vm.closeModal();
 			});
-			loadScenesByThemeId(themeId);
-			vm.closeModal();
 		}
 
 		vm.updateIndexScenes = function(allScenes) {

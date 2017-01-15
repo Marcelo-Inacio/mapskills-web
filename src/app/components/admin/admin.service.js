@@ -17,6 +17,7 @@
 				saveInstitution : _saveInstitution,
 				sendFile : _sendFile,
 				updateIndexScenes : _updateIndexScenes,
+				updateThemes : _updateThemes,
 				loadScenesByThemeId : _loadScenesByThemeId,
 				deleteQuestion : _deleteQuestion,
 				deleteScene : _deleteScene,
@@ -32,7 +33,8 @@
 			}
 			var allSkillsCached = null;
 			var sceneCached = null;
-			var objectCurrent;
+			var allInstitutionsCached = null;
+			var objectCurrent = null;
 
 			function _getObjectCurrent() {
 				return objectCurrent;
@@ -52,20 +54,25 @@
 				return null;
 			}
 
-			function _getInstitutionDetails(id) {
-				return $http.get("./app/components/admin/repository/institutionDetails.json");
+			function _getInstitutionDetails(institutionId) {
+				var deferred = $q.defer();
+				var uri = getFullRestApi("/institution/").concat(institutionId);
+				$http.get(uri).then(function(response) {
+					objectCurrent = response.data;
+					deferred.resolve(response.data);
+				});
+				return deferred.promise;
 			}
 
 			function _saveInstitution(institution) {
-				$log.log(institution);
 				var jsonData = JSON.stringify(institution);
 				var deferred = $q.defer();
         $http({
             method: "POST", url: getFullRestApi("/institution"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
-         success(function (status) {
-             deferred.resolve(status);
+         then(function (response) {
+             deferred.resolve(response.status);
          });
         return deferred.promise;
 			}
@@ -78,22 +85,22 @@
             method: "POST", url: getFullRestApi("/upload/institutions"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
-         success(function (status) {
-             deferred.resolve(status);
+         then(function(response) {
+             deferred.resolve(response.status);
          });
         return deferred.promise;
 			}
 
-			function _saveScene(scene) {
-				console.log(scene);
+			function _saveScene(scene, method) {
+				$log.log(scene);
 				var jsonData = JSON.stringify(scene);
 				var deferred = $q.defer();
         $http({
-            method: "POST", url: getFullRestApi("/game/scene"),
+            method: method, url: getFullRestApi("/game/scene"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
-         success(function (status) {
-             deferred.resolve(status);
+         then(function (response) {
+             deferred.resolve(response.status);
          });
         return deferred.promise;
 			}
@@ -152,7 +159,7 @@
 				return deferred.promise;
 			}
 
-			/** cadastra ou atualiza um tema */
+			/** cadastra um tema */
 			function _saveTheme(theme) {
 				$log.log(theme);
 				var jsonData = JSON.stringify(theme);
@@ -166,12 +173,30 @@
          });
         return deferred.promise;
 			}
+			function _updateThemes(themes) {
+				var jsonData = JSON.stringify(themes);
+				var deferred = $q.defer();
+        $http({
+            method: "PUT", url: getFullRestApi("/game/themes"),
+            data: jsonData,	headers: {"Content-Type": "application/json"}
+        }).
+         then(function (response) {
+           deferred.resolve(response.status);
+         });
+        return deferred.promise;
+			}
 			/** recupera todos as instituições cadastadas */
 			function _loadAllInstitutions() {
 				var deferred = $q.defer();
-				$http.get("./app/components/admin/repository/institutions.json").success(function(response) {
-					deferred.resolve(response);
-				});
+				if(allInstitutionsCached != null) {
+					deferred.resolve(allInstitutionsCached);
+				} else {
+					var uri = getFullRestApi("/institutions");
+					$http.get(uri).then(function(response) {
+						allInstitutionsCached = response.data;
+						deferred.resolve(response.data);
+					});
+				}
 				return deferred.promise;
 			}
 			/** recupera todos as competencias cadastadas e simula um cache */

@@ -6,19 +6,27 @@
 		.controller('CourseController', CourseController);
 
 	/** @ngInject */
-	function CourseController($log, mentorService, modalService, storageService) {
+	function CourseController($log, toastr, mentorService, modalService, storageService) {
 		var vm = this;
-		vm.allPeriods = ["Matutino", "Vespertino", "Noturno", "EaD"];
+		vm.periodSelected = null;
+		vm.allPeriods = ["MATUTINO", "VESPERTINO", "NOTURNO", "EaD"];
 
     init();
 
     function init() {
-			mentorService.loadAllCourses().then(function(response) {
-				vm.allCourses = response.data;
-			});
-      vm.course = mentorService.getObjectCurrent();
-			mentorService.setObjectCurrent(null);
+			loadAllCourses();
+			if(mentorService.getObjectCurrent()) {
+				vm.course = mentorService.getObjectCurrent();
+				vm.periodSelected = vm.course.period;
+				mentorService.setObjectCurrent(null);
+			}
     }
+
+		function loadAllCourses() {
+			mentorService.loadAllCourses().then(function(response) {
+				vm.allCourses = response;
+			});
+		}
 
     vm.openCourseModal = function(course) {
       mentorService.setObjectCurrent(course);
@@ -26,8 +34,16 @@
 		}
 
     vm.saveCourse = function(course) {
-			course.institutionCode = storageService.getItem('user').profile;
-      mentorService.saveCourse(course);
+			course.institutionCode = 146;//storageService.getItem('user').institutionCode;
+      mentorService.saveCourse(course).then(function(status) {
+				if(status == 200) {
+					loadAllCourses();
+					toastr.success('Salvo com sucesso', 'Feito!');
+				} else {
+					toastr.error('Erro ao tentar salvar.', 'Falha!');
+				}
+				vm.closeModal();
+			});
     }
 
 		vm.closeModal = function() {

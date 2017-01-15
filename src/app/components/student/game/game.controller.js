@@ -20,8 +20,12 @@
 		function init() {
 			//loginService.validate("STUDENT");
 			//studentId = storageService.getItem('user').id;
-
+			getHistoryByStudentId(3);
 			/** params: alunoId */
+
+		}
+
+		function getHistoryByStudentId(studentId) {
 			studentService.getHistory(studentId).then(function(response) {
 				$log.log(response);
 				vm.history = response;

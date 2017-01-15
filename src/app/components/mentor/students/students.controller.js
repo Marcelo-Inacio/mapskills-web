@@ -6,8 +6,9 @@
 		.controller('MentorStudentController', MentorStudentController);
 
 	/** @ngInject */
-	function MentorStudentController($log, mentorService, modalService) {
+	function MentorStudentController($log, toastr, mentorService, modalService) {
 		var vm = this;
+		vm.allStudents = null;
 
     init();
 
@@ -20,13 +21,13 @@
 
 		function loadAllStudents() {
 			mentorService.loadAllStudents().then(function(response) {
-				vm.allStudents = response.data;
+				vm.allStudents = response;
 			});
 		}
 
 		function loadAllCourses() {
 			mentorService.loadAllCourses().then(function(response) {
-				vm.allCourses = response.data;
+				vm.allCourses = response;
 			});
 		}
 
@@ -45,13 +46,27 @@
 		}
 
     vm.saveStudent = function(student) {
-      mentorService.saveStudent(student);
-			vm.closeModal();
+      mentorService.saveStudent(student).then(function(status) {
+				if(status == 200) {
+					loadAllStudents();
+					toastr.success('Salvo com sucesso', 'Feito!');
+				} else {
+					toastr.error('Erro ao tentar salvar.', 'Falha!');
+				}
+				vm.closeModal();
+			});
     }
 
 		vm.sendFile = function(file) {
-      mentorService.sendFile(file);
-			vm.closeModal();
+      mentorService.sendFile(file).then(function(status) {
+				if(status == 200) {
+					loadAllStudents();
+					toastr.success('Salvo com sucesso', 'Feito!');
+				} else {
+					toastr.error('Erro ao tentar salvar.', 'Falha!');
+				}
+				vm.closeModal();
+			});
     }
 
 		vm.closeModal = function() {

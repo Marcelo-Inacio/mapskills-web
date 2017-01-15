@@ -4,33 +4,33 @@
     .form-group.row
       .col-md-12
         label Código:
-        input.form-control(type='text', ng-model="modalCtrl.institution.code")
+        input.form-control(type='text', ng-model="modalCtrl.institutionDetails.code")
     .form-group.row
       .col-md-12
         label CNPJ:
-        input.form-control(type='text', ng-model="modalCtrl.institution.cnpj")
+        input.form-control(type='text', ng-model="modalCtrl.institutionDetails.cnpj")
     .form-group.row
       .col-md-12
         label Razão Social:
-        input.form-control(type='text', ng-model="modalCtrl.institution.company")
+        input.form-control(type='text', ng-model="modalCtrl.institutionDetails.company")
     .form-group.row
       .col-md-12
         label Cidade:
-        input.form-control(type='text', ng-model="modalCtrl.institution.city")
+        input.form-control(type='text', ng-model="modalCtrl.institutionDetails.city")
     .form-group.row
       .col-md-12
         label Mentor - Nome:
-        input.form-control(type='text', ng-model="modalCtrl.institution.mentor.name")
+        input.form-control(type='text', ng-model="modalCtrl.institutionDetails.mentor.name")
     .form-group.row
       .col-md-12
         label Mentor - E-mail:
-        input.form-control(type='text', ng-model="modalCtrl.institution.mentor.username")
+        input.form-control(type='text', ng-model="modalCtrl.institutionDetails.mentor.username")
     .form-group.row
       .col-md-12
         label Mentor - Senha:
         md-checkbox.md-primary(md-no-ink='', aria-label='Checkbox No Ink', ng-model='modalCtrl.checkboxPassword')
           | mostrar senha
-        input.form-control(type='{{modalCtrl.showPassword[modalCtrl.checkboxPassword]}}', ng-model="modalCtrl.institution.mentor.password")
+        input.form-control(type='{{modalCtrl.showPassword[modalCtrl.checkboxPassword]}}', ng-model="modalCtrl.institutionDetails.mentor.password")
   .modal-footer
-    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveInstitution(modalCtrl.institution)") salvar
+    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveInstitution(modalCtrl.institutionDetails)") salvar
     button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

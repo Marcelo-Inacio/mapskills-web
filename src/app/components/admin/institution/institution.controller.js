@@ -6,33 +6,40 @@
 		.controller('InstitutionController', InstitutionController);
 
 	/** @ngInject */
-	function InstitutionController($log, adminService, modalService) {
+	function InstitutionController($log, toastr, adminService, modalService) {
 		var vm = this;
-
+		vm.institutionDetails = null;
 		vm.checkboxPassword = false;
     vm.showPassword = {"true" : "text", "false" : "password"};
 
     init();
 
     function init() {
-			adminService.loadAllInstitutions().then(function(response) {
-				vm.allInstitutions = response;
-			});
-      vm.institution = adminService.getObjectCurrent();
-			console.log(vm.institution);
+			loadAllInstitutions();
+      vm.institutionDetails = adminService.getObjectCurrent();
 			adminService.setObjectCurrent(null);
     }
 
-		vm.openDetailsModal = function(institution) {
-			adminService.getInstitutionDetails(institution.id).then(function(response) {
-				adminService.setObjectCurrent(response.data);
+		function loadAllInstitutions() {
+			adminService.loadAllInstitutions().then(function(response) {
+				vm.allInstitutions = response;
 			});
-      modalService.openModal('/app/components/admin/institution/details.modal.html', 'InstitutionController');
+		}
+
+		vm.openDetailsModal = function(institution) {
+			adminService.getInstitutionDetails(institution.id).then(function() {
+				modalService.openModal('/app/components/admin/institution/details.modal.html', 'InstitutionController');
+			});
 		}
 
     vm.openEditModal = function(institution) {
-      adminService.setObjectCurrent(institution);
-      modalService.openModal('/app/components/admin/institution/edit.modal.html', 'InstitutionController');
+			if(institution != null) {
+	      adminService.getInstitutionDetails(institution.id).then(function() {
+					modalService.openModal('/app/components/admin/institution/edit.modal.html', 'InstitutionController');
+				});
+			} else {
+				modalService.openModal('/app/components/admin/institution/edit.modal.html', 'InstitutionController');
+			}
 		}
 
 		vm.openFileModal = function() {
@@ -40,13 +47,21 @@
 		}
 
     vm.saveInstitution = function(institution) {
-      adminService.saveInstitution(institution);
-			vm.closeModal();
+      adminService.saveInstitution(institution).then(function(status) {
+				if(status == 200) {
+					loadAllInstitutions();
+					toastr.success('Salvo com sucesso', 'Feito!');
+				} else {
+					toastr.error('Erro ao tentar salvar.', 'Falha!');
+				}
+				vm.closeModal();
+			});
     }
 
 		vm.sendFile = function(file) {
-      adminService.sendFile(file);
-			vm.closeModal();
+      adminService.sendFile(file).then(function(status) {
+				vm.closeModal();
+			});
     }
 
 		vm.closeModal = function() {
