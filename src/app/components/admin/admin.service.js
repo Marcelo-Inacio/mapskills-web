@@ -31,8 +31,9 @@
 			function getFullRestApi(uri) {
 				return "http://localhost:8080/mapskills/rest".concat(uri);
 			}
+			
 			var allSkillsCached = null;
-			var sceneCached = null;
+			var allScenesCached = null;
 			var allInstitutionsCached = null;
 			var objectCurrent = null;
 
@@ -65,7 +66,7 @@
 			}
 
 			function _saveInstitution(institution) {
-				var jsonData = JSON.stringify(institution);
+				var jsonData = angular.toJson(institution);
 				var deferred = $q.defer();
         $http({
             method: "POST", url: getFullRestApi("/institution"),
@@ -79,7 +80,7 @@
 
 			function _sendFile(file) {
 				$log.log(file);
-				var jsonData = JSON.stringify(file);
+				var jsonData = angular.toJson(file);
 				var deferred = $q.defer();
         $http({
             method: "POST", url: getFullRestApi("/upload/institutions"),
@@ -93,8 +94,8 @@
 
 			function _saveScene(scene, method) {
 				$log.log(scene);
-				var jsonData = JSON.stringify(scene);
 				var deferred = $q.defer();
+				var jsonData = angular.toJson(scene);
         $http({
             method: method, url: getFullRestApi("/game/scene"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
@@ -107,14 +108,14 @@
 
 			function _saveSkill(skill) {
 				$log.log(skill);
-				var jsonData = JSON.stringify(skill);
+				var jsonData = angular.toJson(skill);
 				var deferred = $q.defer();
         $http({
             method: "POST", url: getFullRestApi("/skill"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
-         success(function (status) {
-             deferred.resolve(status);
+         then(function (response) {
+             deferred.resolve(response.status);
          });
         return deferred.promise;
 			}
@@ -125,14 +126,14 @@
 					$log.log(key + " : " + value.index);
 				});
 				$log.log(allScenes);
-				var jsonData = JSON.stringify(allScenes);
+				var jsonData = angular.toJson(allScenes);
 				var deferred = $q.defer();
         $http({
             method: "PUT", url: getFullRestApi("/game/scenes"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
-         success(function (status) {
-             deferred.resolve(status);
+         then(function (response) {
+             deferred.resolve(response.status);
          });
         return deferred.promise;
 			}
@@ -147,34 +148,41 @@
 			para em caso de reload não sofra com requisição ao server */
 			function _loadScenesByThemeId(themeId) {
 				var deferred = $q.defer();
-				if(sceneCached != null) {
-					deferred.resolve(sceneCached);
+				if(sceneCachedVerify(themeId)) {
+					deferred.resolve(allScenesCached);
 				} else {
 					var uri = getFullRestApi("/game/theme/");
 					$http.get(uri.concat(themeId)).then(function(response) {
-						sceneCached = response.data;
+						if(response.data.length != 0) allScenesCached = response.data;
 						deferred.resolve(response.data);
 					});
 				}
 				return deferred.promise;
 			}
 
+			function sceneCachedVerify(themeId) {
+				if(allScenesCached != null) {
+					if (allScenesCached[0].gameThemeId == themeId) return true;
+				}
+				return false;
+			}
+
 			/** cadastra um tema */
 			function _saveTheme(theme) {
 				$log.log(theme);
-				var jsonData = JSON.stringify(theme);
+				var jsonData = angular.toJson(theme);
 				var deferred = $q.defer();
         $http({
             method: "POST", url: getFullRestApi("/game/theme"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
-         success(function (status) {
-             deferred.resolve(status);
+         then(function (response) {
+             deferred.resolve(response.status);
          });
         return deferred.promise;
 			}
 			function _updateThemes(themes) {
-				var jsonData = JSON.stringify(themes);
+				var jsonData = angular.toJson(themes);
 				var deferred = $q.defer();
         $http({
             method: "PUT", url: getFullRestApi("/game/themes"),
@@ -186,9 +194,9 @@
         return deferred.promise;
 			}
 			/** recupera todos as instituições cadastadas */
-			function _loadAllInstitutions() {
+			function _loadAllInstitutions(loadFromServer) {
 				var deferred = $q.defer();
-				if(allInstitutionsCached != null) {
+				if(allInstitutionsCached != null && !loadFromServer) {
 					deferred.resolve(allInstitutionsCached);
 				} else {
 					var uri = getFullRestApi("/institutions");
@@ -200,11 +208,13 @@
 				return deferred.promise;
 			}
 			/** recupera todos as competencias cadastadas e simula um cache */
-			function _loadAllSkills() {
+			function _loadAllSkills(loadFromServer) {
 				var deferred = $q.defer();
-				if(allSkillsCached != null) {
+				if(allSkillsCached != null && !loadFromServer) {
 					deferred.resolve(allSkillsCached);
+					$log.log("== SKILL CACHED ==");
 				} else {
+					$log.log("== SKILL FORCE ==");
 					var uri = getFullRestApi("/skills");
 					$http.get(uri).then(function(response) {
 						allSkillsCached = response.data;
@@ -217,8 +227,8 @@
 			function _loadAllThemes() {
 				var deferred = $q.defer();
 				var uri = getFullRestApi("/game/themes");
-				$http.get(uri).success(function(response) {
-					deferred.resolve(response);
+				$http.get(uri).then(function(response) {
+					deferred.resolve(response.data);
 				});
 				return deferred.promise;
 			}

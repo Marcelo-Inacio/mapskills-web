@@ -1,16 +1,17 @@
 section
   .row.aligner
-    .col-md-4.aligner-item
+    .col-xs-6.col-md-4.aligner-item
       input.form-control(type='text', ng-model="stuCtrl.filter.name", placeholder="Nome do aluno"
                         ,ng-model-options="{updateOn: 'default blur', debounce:{default: 500, blur: 0}}")
-    .col-md-3.aligner-item
+    .col-xs-6.col-md-4.aligner-item
       select.form-control(ng-model="stuCtrl.filter.course"
                           ,ng-options="course.name for course in stuCtrl.allCourses track by course.id")
         option(value='') -- selecione um curso --
-    .col-md-5
+    .col-xs-6.col-md-2.aligner-item
       label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="stuCtrl.openStudentModal()")
         i.fa.fa-user-plus.ico-sidebar
         | novo
+    .col-xs-6.col-md-2.aligner-item
       label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="stuCtrl.openFileModal()")
         i.fa.fa-file-excel-o.ico-sidebar
         | importar excel

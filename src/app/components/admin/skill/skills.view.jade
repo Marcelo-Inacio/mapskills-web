@@ -8,7 +8,7 @@ section
         th Ação
     tbody
       tr(ng-repeat="skill in skiCtrl.allSkills track by skill.id")
-        td {{skill.id}}
+        td {{::skill.id}}
         td {{skill.type}}
         td
           label#btn-todo.btn.btn-info.btn-xs(ng-click="skiCtrl.openModal(skill)") editar

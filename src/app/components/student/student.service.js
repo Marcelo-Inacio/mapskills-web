@@ -3,16 +3,20 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('studentService', ['$http', '$q', studentService]);
+		.factory('studentService', ['$log', '$http', '$q', studentService]);
 
 		/** @ngInject */
-		function studentService($http, $q) {
+		function studentService($log, $http, $q) {
 			return {
 				sendAnswer : _sendAnswer,
 				sendEmail : _sendEmail,
 				getHistory : _getHistory,
 				getRadarResults : _getRadarResults
 			};
+/** retorna url default do server  */
+		function getFullRestApi(uri) {
+			return "http://localhost:8080/mapskills/rest".concat(uri);
+		}
 
 		function _getRadarResults(studentId) {
 			var deferred = $q.defer();
@@ -24,7 +28,8 @@
 
 		function _getHistory(studentId) {
 			var deferred = $q.defer();
-			$http.get('./app/components/student/repository/game.json').success(function(response) {
+			var uri = getFullRestApi("/game/").concat(studentId);
+			$http.get(uri).success(function(response) {
 				deferred.resolve(response);
 			});
 			return deferred.promise;
@@ -32,23 +37,16 @@
 
 			/** realiza uma post ao back end enviando um contexto 'student_question_event'*/
 			function _sendAnswer(answerContext) {
-				console.log(answerContext);
-				/*$http({
-					method: 'POST',
-					url: '/send/answer',
+				$log.log(answerContext);
+				var deferred = $q.defer();
+				$http({
+					method: 'POST',	url: getFullRestApi("/game/answer"),
 					headers: {'Content-Type': 'application/json'},
 					data: answerContext
-				})
-				.success(function () {
-				})
-				.then(function successCallback(response) {
-					//deferred.resolve(response.data);
-					//console.log(response.data);
-				},
-				function errorCallback() {
-					alert('erro ao enviar resposta');
-					//deferred.reject("no authentication");
-				});*/
+				}).then(function success(response) {
+					deferred.resolve(response.status);
+				});
+				return deferred.promise;
 			}
 			/** realiza o envio de email ao fim do game */
 			function _sendEmail() {

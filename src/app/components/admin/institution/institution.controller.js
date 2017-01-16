@@ -6,7 +6,7 @@
 		.controller('InstitutionController', InstitutionController);
 
 	/** @ngInject */
-	function InstitutionController($log, toastr, adminService, modalService) {
+	function InstitutionController($log, toastrService, adminService, modalService) {
 		var vm = this;
 		vm.institutionDetails = null;
 		vm.checkboxPassword = false;
@@ -15,13 +15,13 @@
     init();
 
     function init() {
-			loadAllInstitutions();
+			loadAllInstitutions(false);
       vm.institutionDetails = adminService.getObjectCurrent();
 			adminService.setObjectCurrent(null);
     }
 
-		function loadAllInstitutions() {
-			adminService.loadAllInstitutions().then(function(response) {
+		function loadAllInstitutions(loadFromServer) {
+			adminService.loadAllInstitutions(loadFromServer).then(function(response) {
 				vm.allInstitutions = response;
 			});
 		}
@@ -49,11 +49,9 @@
     vm.saveInstitution = function(institution) {
       adminService.saveInstitution(institution).then(function(status) {
 				if(status == 200) {
-					loadAllInstitutions();
-					toastr.success('Salvo com sucesso', 'Feito!');
-				} else {
-					toastr.error('Erro ao tentar salvar.', 'Falha!');
+					loadAllInstitutions(true);
 				}
+				toastrService.showToastr(status);
 				vm.closeModal();
 			});
     }

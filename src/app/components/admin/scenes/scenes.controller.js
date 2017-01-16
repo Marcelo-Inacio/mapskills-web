@@ -6,7 +6,7 @@
 		.controller('ScenesController', ScenesController);
 
 	/** @ngInject */
-	function ScenesController($log, $stateParams, modalService, adminService) {
+	function ScenesController($log, $stateParams, toastrService, modalService, adminService) {
 		var vm = this;
 		var themeId;
 		vm.allScenes = null;
@@ -20,15 +20,19 @@
 		function init() {
 			themeId = $stateParams.themeId;
 			loadScenesByThemeId(themeId);
-			loadAllSkills();
+			loadAllSkills(false);
 			vm.scene = adminService.getObjectCurrent();
+			sceneVerify();
+			adminService.setObjectCurrent(null);
+		}
+
+		function sceneVerify() {
 			if(vm.scene != null) {
 				if(vm.scene.question === null) return;
 				$log.log("CENA É DIFERENTE DE NULO");
 				var id = vm.scene.question.skillId;
 				vm.skillSelected = adminService.getSkillById(id);
 			}
-			adminService.setObjectCurrent(null);
 		}
 
 		vm.openSceneModal = function(scene) {
@@ -48,8 +52,8 @@
 		}
 
 		/** carrega todas competencias cadastadas */
-		function loadAllSkills() {
-			adminService.loadAllSkills().then(function(data) {
+		function loadAllSkills(loadFromServer) {
+			adminService.loadAllSkills(loadFromServer).then(function(data) {
 				vm.allSkills =  data;
 			});
 		}

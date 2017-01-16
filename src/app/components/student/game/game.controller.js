@@ -6,10 +6,9 @@
 		.controller('GameController', GameController);
 
 	/** @ngInject */
-	function GameController($document, $log, $state, studentService /*, storageService, loginService*/) {
+	function GameController($document, $log, $state, studentService, storageService, loginService) {
 		var vm = this;
-
-		var studentId;
+		var student;
 		var sizeScenes;
 		vm.history;
 		vm.index = 0;
@@ -18,16 +17,14 @@
 		init();
 		/** função principal que recupera todas questoes ainda não jogadas pelo aluno */
 		function init() {
-			//loginService.validate("STUDENT");
-			//studentId = storageService.getItem('user').id;
-			getHistoryByStudentId(3);
+			//loginService.validateProfile("STUDENT");
+			student = storageService.getItem('user');
+			getHistoryByStudentId(student.id);
 			/** params: alunoId */
-
 		}
 
 		function getHistoryByStudentId(studentId) {
 			studentService.getHistory(studentId).then(function(response) {
-				$log.log(response);
 				vm.history = response;
 				vm.background = {"background-image" : "url(" + vm.history[vm.index].background.filename +")"};
 				sizeScenes = vm.history.length;
@@ -38,13 +35,15 @@
 		/** função que envia um resposta do aluno ao back-end */
 		vm.sendAnswer = function(alternative) {
 			var answerContext = {};
+			answerContext.sceneIndex = vm.history[vm.index].index;
 			answerContext.sceneId = vm.history[vm.index].id;
-			answerContext.studentId = studentId;
+			answerContext.studentId = student.id;
 			answerContext.skillId = vm.history[vm.index].question.skillId;
 			answerContext.skillValue = alternative.skillValue;
 
-			studentService.sendAnswer(answerContext);
-			vm.nextScene();
+			studentService.sendAnswer(answerContext).then(function(status) {
+				if(status == 200) vm.nextScene();
+			});
 		}
 
 		/** função que realiza a mudança de cena na tela */
@@ -57,7 +56,7 @@
 				return;
 			}
 			vm.index = vm.index + 1;
-			vm.background = {'background-image' : "url(" + vm.history[vm.index].background + ")"};
+			vm.background = {'background-image' : "url(" + vm.history[vm.index].background.filename + ")"};
 			if(vm.history[vm.index].question != null) {
 				vm.active = "inactive";
 				return;

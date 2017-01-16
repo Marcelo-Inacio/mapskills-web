@@ -32,6 +32,12 @@
       .state('admin', {
         templateUrl: 'app/components/admin/admin.html'
       })
+      .state('admin.dashboard', {
+        url: '/admin/dashboard',
+        templateUrl: 'app/components/admin/dashboard/dashboard.view.html',
+        controller: 'AdminDashboardController',
+        controllerAs: 'admCtrl'
+      })
       .state('admin.themes', {
         url: '/admin/themes',
         templateUrl: 'app/components/admin/game_theme/gameThemes.view.html',
@@ -76,6 +82,12 @@
         templateUrl: 'app/components/mentor/students/students.view.html',
         controller: 'MentorStudentController',
         controllerAs: 'stuCtrl'
+      })
+      .state('mentor.themes', {
+        url: '/mentor/themes',
+        templateUrl: 'app/components/mentor/theme/theme.view.html',
+        controller: 'MentorThemeController',
+        controllerAs: 'theCtrl'
       });
 
     $urlRouterProvider.otherwise('/login');

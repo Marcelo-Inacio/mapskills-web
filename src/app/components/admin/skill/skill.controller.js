@@ -6,18 +6,22 @@
 		.controller('SkillController', SkillController);
 
 	/** @ngInject */
-	function SkillController($log, adminService, modalService) {
+	function SkillController($log, toastrService, adminService, modalService) {
 		var vm = this;
 
     init();
 
     function init() {
-			adminService.loadAllSkills().then(function(response) {
-				vm.allSkills = response;
-			});
+			loadAllSkills(false);
       vm.skill = adminService.getObjectCurrent();
 			adminService.setObjectCurrent(null);
     }
+
+		function loadAllSkills(loadFromServer) {
+			adminService.loadAllSkills(loadFromServer).then(function(response) {
+				vm.allSkills = response;
+			});
+		}
 
 		vm.openModal = function(skill) {
       adminService.setObjectCurrent(skill);
@@ -25,8 +29,13 @@
 		}
 
     vm.saveSkill = function(skill) {
-      adminService.saveSkill(skill);
-			vm.closeModal();
+      adminService.saveSkill(skill).then(function(status) {
+				if(status == 200) {
+					loadAllSkills(true);
+				}
+				toastrService.showToastr(status);
+				vm.closeModal();
+			});
     }
 
 		vm.closeModal = function() {

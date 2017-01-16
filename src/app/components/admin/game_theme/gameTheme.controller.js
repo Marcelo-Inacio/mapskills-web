@@ -6,7 +6,7 @@
 		.controller('GameThemeController', GameThemeController);
 
 	/** @ngInject */
-	function GameThemeController($log, toastr, adminService, modalService) {
+	function GameThemeController($log, toastrService, adminService, modalService) {
 		var vm = this;
 
 		var init = function() {
@@ -21,17 +21,21 @@
 			});
 		}
 
+		vm.saveTheme = function(theme) {
+			adminService.saveTheme(theme).then(function(status) {
+				loadAllThemes();
+				toastrService.showToastr(status);
+				vm.closeModal();
+			})
+		}
+
 		vm.openModal = function() {
       modalService.openModal('/app/components/admin/game_theme/gameTheme.modal.html', 'GameThemeController');
 		}
 
 		vm.updateThemes = function(themes) {
 			adminService.updateThemes(themes).then(function(status) {
-				if(status == 200) {
-					toastr.success('Atualização feita com sucesso', 'Feito!');
-				} else {
-					toastr.error('Erro ao tentar atualizar.', 'Falha!');
-				}
+				toastrService.showToastr(status);
 			})
 		}
 
