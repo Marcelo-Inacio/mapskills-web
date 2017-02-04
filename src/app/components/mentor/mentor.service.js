@@ -3,10 +3,10 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('mentorService', ['$log', '$http', '$q', mentorService]);
+		.factory('mentorService', ['$log', '$http', '$q', 'loginService', mentorService]);
 
 		/** @ngInject */
-		function mentorService($log, $http, $q) {
+		function mentorService($log, $http, $q, loginService) {
 			return {
 				loadAllThemesEnabled : _loadAllThemesEnabled,
         loadAllResultsStudentsByCourse : _loadAllResultsStudentsByCourse,
@@ -29,7 +29,7 @@
 			var objectCurrent;
 
 			function getFullRestApi(uri) {
-				return "http://localhost:8080/mapskills/rest".concat(uri);
+				return "http://localhost:8585/mapskills/institution".concat(uri);
 			}
 
 			function _getObjectCurrent() {
@@ -58,8 +58,8 @@
 				if(allStudentsCached != null && !loadFromServer) {
 					deferred.resolve(allStudentsCached);
 				} else {
-					var institutionCode = 146;//storageService.getItem('user').institutionCode;
-					var uri = getFullRestApi("/institution/").concat(institutionCode).concat("/students");
+					var institutionCode = loginService.getUserLogged().institutionCode;
+					var uri = getFullRestApi("/").concat(institutionCode).concat("/students");
 					$http.get(uri).then(function(response) {
 						allStudentsCached = response.data;
 						deferred.resolve(response.data);
@@ -73,8 +73,8 @@
 				if(allCoursesCached != null && !loadFromServer) {
 					deferred.resolve(allCoursesCached);
 				} else {
-					var institutionCode = 146;//storageService.getItem('user').institutionCode;
-					var uri = getFullRestApi("/institution/").concat(institutionCode).concat("/courses");
+					var institutionCode = loginService.getUserLogged().institutionCode;
+					var uri = getFullRestApi("/").concat(institutionCode).concat("/courses");
 					$log.info(uri);
 					$http.get(uri).then(function(response) {
 						allCoursesCached = response.data;
@@ -95,7 +95,7 @@
 
 			function _loadThemeCurrent(institutionCode) {
 				var deferred = $q.defer();
-				var uri = getFullRestApi("/institution/").concat(institutionCode).concat("/theme/current");
+				var uri = getFullRestApi("/").concat(institutionCode).concat("/theme/current");
 				$log.log(uri);
 				$http.get(uri).then(function(response) {
 					deferred.resolve(response.data);
@@ -149,7 +149,7 @@
 
 			function _updateThemeIdCurrent(institutionCode, themeId) {
 				var deferred = $q.defer();
-				var uri = getFullRestApi("/institution/").concat(institutionCode).concat("/theme/").concat(themeId);
+				var uri = getFullRestApi("/").concat(institutionCode).concat("/theme/").concat(themeId);
 				$log.log(uri);
 				$http.put(uri).then(function (response) {
            deferred.resolve(response.status);

@@ -15,7 +15,7 @@
 			};
 /** retorna url default do server  */
 		function getFullRestApi(uri) {
-			return "http://localhost:8080/mapskills/rest".concat(uri);
+			return "http://localhost:8585/mapskills/student".concat(uri);
 		}
 
 		function _getRadarResults(studentId) {
@@ -30,6 +30,7 @@
 			var deferred = $q.defer();
 			var uri = getFullRestApi("/game/").concat(studentId);
 			$http.get(uri).success(function(response) {
+				$log.log(response);
 				deferred.resolve(response);
 			});
 			return deferred.promise;

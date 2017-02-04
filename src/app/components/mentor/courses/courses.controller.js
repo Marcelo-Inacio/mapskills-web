@@ -6,7 +6,7 @@
 		.controller('CourseController', CourseController);
 
 	/** @ngInject */
-	function CourseController($log, toastrService, mentorService, modalService, storageService) {
+	function CourseController($log, toastrService, mentorService, modalService, loginService) {
 		var vm = this;
 		vm.periodSelected = null;
 		vm.allPeriods = ["MATUTINO", "VESPERTINO", "NOTURNO", "EaD"];
@@ -34,7 +34,7 @@
 		}
 
     vm.saveCourse = function(course) {
-			course.institutionCode = 146;//storageService.getItem('user').institutionCode;
+			course.institutionCode = loginService.getUserLogged().institutionCode;
       mentorService.saveCourse(course).then(function(status) {
 				if(status == 200) {
 					loadAllCourses(true);

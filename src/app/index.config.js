@@ -6,9 +6,12 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig, moment, $translateProvider) {
+  function config($logProvider, toastrConfig, moment, $translateProvider, $httpProvider) {
     // Enable log
     $logProvider.debugEnabled(true);
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    $httpProvider.interceptors.push('HttpInterceptor');
 
     // Set options third-party lib
     toastrConfig.allowHtml = true;

@@ -6,7 +6,7 @@
 		.controller('MentorThemeController', MentorThemeController);
 
 	/** @ngInject */
-	function MentorThemeController($log, toastrService, mentorService, storageService) {
+	function MentorThemeController($log, toastrService, mentorService, loginService) {
 		var vm = this;
 		var themeIdCurrent;
 		vm.themeCurrent;
@@ -35,7 +35,7 @@ o que está habilitado para o instituição */
 		}
 
 		function loadThemeCurrent() {
-			var institutionCode = 146;//storageService.getItem('user').institutionCode;
+			var institutionCode = loginService.getUserLogged().institutionCode;
 			mentorService.loadThemeCurrent(institutionCode).then(function(response) {
 				themeIdCurrent = response;
 				loadAllThemes();
@@ -43,7 +43,7 @@ o que está habilitado para o instituição */
 		}
 
 		vm.updateThemeIdCurrent = function() {
-			var institutionCode = 146;//storageService.getItem('user').institutionCode;
+			var institutionCode = loginService.getUserLogged().institutionCode;
 			mentorService.updateThemeIdCurrent(institutionCode, themeIdCurrent).then(function(status) {
 				toastrService.showToastr(status);
 			});

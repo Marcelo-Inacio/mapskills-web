@@ -18,7 +18,7 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController(moment, $location, storageService, loginService) {
+    function NavbarController(moment, $location, loginService) {
       var vm = this;
       vm.show_menu;
       vm.label_cps = "CENTRO PAULA SOUZA";
@@ -29,7 +29,7 @@
       function init() {
         var path = $location.path().toLowerCase();
         vm.show_menu = ((path == "/login") || (path == "/student/result") || (path == "/student/game"));
-        vm.user = storageService.getItem('user');
+        vm.user = loginService.getUserLogged();
       }
 
       vm.logout = function() {

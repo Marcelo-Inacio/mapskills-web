@@ -6,13 +6,13 @@
 		.controller('StudentResultsController', StudentResultsController);
 
 	/** @ngInject */
-	function StudentResultsController($log, studentService/*, storageService*/) {
+	function StudentResultsController($log, studentService, loginService) {
 
 		init();
 		/** função principal que recupera os resultados do aluno */
 		function init() {
-      //var user = storageService.getItem("user");
-			studentService.getRadarResults(1).then(function(response) {
+      var user = loginService.getUserLogged();
+			studentService.getRadarResults(user.id).then(function(response) {
 				$log.log(response);
         radarChartfactory(response);
 			});

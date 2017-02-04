@@ -29,9 +29,9 @@
 			};
 
 			function getFullRestApi(uri) {
-				return "http://localhost:8080/mapskills/rest".concat(uri);
+				return "http://localhost:8585/mapskills/admin".concat(uri);
 			}
-			
+
 			var allSkillsCached = null;
 			var allScenesCached = null;
 			var allInstitutionsCached = null;
