@@ -7,7 +7,7 @@
 
 	/** @ngInject */
 	function StudentResultsController($log, studentService, loginService) {
-
+		var vm = this;
 		init();
 		/** função principal que recupera os resultados do aluno */
 		function init() {
@@ -15,6 +15,7 @@
 			studentService.getRadarResults(user.id).then(function(response) {
 				$log.log(response);
         radarChartfactory(response);
+				vm.skills = response.skills;
 			});
 		}
 

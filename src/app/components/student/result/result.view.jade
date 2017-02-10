@@ -5,8 +5,9 @@ article.container
       .panel-body.panel-radar
         .col-lg-6
           canvas(chart-labels="false")#radarChart
-        .col-lg-6(ng-repeat="i in [1,2,3,4,5,6]")
-          | Competencia {{i}} Descrição: 
+        .col-lg-6(ng-repeat="skill in resultCtrl.skills")
+          label Competência : {{::skill.name}}
+          p Descrição : {{::skill.description}} 
       .panel-footer
         br
         | Este é um trabalho acadêmico desenvolvido pelo Centro Paula Souza em fase de validação

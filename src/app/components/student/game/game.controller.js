@@ -6,7 +6,7 @@
 		.controller('GameController', GameController);
 
 	/** @ngInject */
-	function GameController($document, $log, $state, studentService, storageService, loginService) {
+	function GameController($document, $log, $state, studentService, Session, loginService) {
 		var vm = this;
 		var student;
 		var sizeScenes;
@@ -18,7 +18,7 @@
 		/** função principal que recupera todas questoes ainda não jogadas pelo aluno */
 		function init() {
 			//loginService.validateProfile("STUDENT");
-			student = storageService.getItem('user');
+			student = Session.refreshUserSession();
 			getHistoryByStudentId(student.id);
 			/** params: alunoId */
 		}

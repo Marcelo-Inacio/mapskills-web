@@ -20,7 +20,8 @@
 
 		function _getRadarResults(studentId) {
 			var deferred = $q.defer();
-			$http.get('./app/components/student/repository/result.json').success(function(response) {
+			var uri = getFullRestApi("/game/result/").concat(studentId);
+			$http.get(uri).success(function(response) {
 				deferred.resolve(response);
 			});
 			return deferred.promise;
