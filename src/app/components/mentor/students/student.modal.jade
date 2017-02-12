@@ -20,7 +20,7 @@
     .form-group.row
       .col-md-12
         label Senha:
-        input.form-control(type='text', ng-model="modalCtrl.student.password")
+        input.form-control(type='password', ng-model="modalCtrl.student.password", placeholder="nova senha")
   .modal-footer
     button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveStudent(modalCtrl.student)") salvar
     button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

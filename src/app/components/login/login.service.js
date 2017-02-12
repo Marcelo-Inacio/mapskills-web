@@ -10,6 +10,7 @@
 			return {
 				login : _login,
 				logout : _logout,
+				updatePassword : _updatePassword,
 				setUserContext : _setUserContext,
 				validateProfile : _validateProfile,
 				isLogged : _isLogged,
@@ -52,6 +53,22 @@
 				}, function error(response) {
 						$log.info(response.status);
 				});
+			}
+
+			function _updatePassword(loginUsername, newPassword) {
+				var deferred = $q.defer();
+		    $http({
+		        method: 'POST', url: getFullRestApi("/user/change/password"),
+		        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+		        params: {username: loginUsername, newPassword: newPassword}
+		    }).then(function success(response) {
+						$log.info("== THEN SUCCESS ==");
+						deferred.resolve(response.status);
+				}, function error(response) {
+						$log.info(response.status);
+						deferred.resolve(response.status);
+				});
+				return deferred.promise;
 			}
 /** ao realizar logout limpa todas informações contidas no storage */
 			function _logout() {

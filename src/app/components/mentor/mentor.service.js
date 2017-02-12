@@ -8,9 +8,6 @@
 		/** @ngInject */
 		function mentorService($log, $http, $q, loginService) {
 			return {
-				loadAllThemesEnabled : _loadAllThemesEnabled,
-        loadAllResultsStudentsByCourse : _loadAllResultsStudentsByCourse,
-
 				loadAllStudents : _loadAllStudents,
 				loadAllCourses : _loadAllCourses,
 				loadAllThemesActivated : _loadAllThemesActivated,
@@ -39,19 +36,6 @@
 			function _setObjectCurrent(object) {
 				objectCurrent = object;
 			}
-
-      function _loadAllStudentsByCourse() {
-        return $http.get('./app/components/mentor/repository/studentsByCourse.json');
-      }
-
-			/** recupera todos os temas ativados */
-			function _loadAllThemesEnabled() {
-				return $http.get('./app/components/admin/repository/themes.json');
-			}
-
-			function _loadAllResultsStudentsByCourse() {
-        return $http.get('./app/components/mentor/repository/resultsStudentsByCourse.json');
-      }
 
 			function _loadAllStudents(loadFromServer) {
 				var deferred = $q.defer();
@@ -104,6 +88,7 @@
 			}
 
 			function _saveStudent(student) {
+				$log.log(student);
 				var deferred = $q.defer();
 				var jsonData = angular.toJson(student);
 				var uri = getFullRestApi("/student");
@@ -111,10 +96,12 @@
         $http({
             method: "POST", url: uri,
             data: jsonData,	headers: {"Content-Type": "application/json"}
-        }).
-         then(function (response) {
+        })
+				.then(function success(response) {
            deferred.resolve(response.status);
-         });
+         }, function error(response) {
+					 deferred.resolve(response.status);
+				 })
         return deferred.promise;
 			}
 

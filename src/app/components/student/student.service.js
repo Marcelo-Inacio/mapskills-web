@@ -11,6 +11,7 @@
 				sendAnswer : _sendAnswer,
 				sendEmail : _sendEmail,
 				getHistory : _getHistory,
+				getStudentDetails : _getStudentDetails,
 				getRadarResults : _getRadarResults
 			};
 /** retorna url default do server  */
@@ -21,6 +22,15 @@
 		function _getRadarResults(studentId) {
 			var deferred = $q.defer();
 			var uri = getFullRestApi("/game/result/").concat(studentId);
+			$http.get(uri).success(function(response) {
+				deferred.resolve(response);
+			});
+			return deferred.promise;
+		}
+
+		function _getStudentDetails(studentRA) {
+			var deferred = $q.defer();
+			var uri = getFullRestApi("/details/").concat(studentRA);
 			$http.get(uri).success(function(response) {
 				deferred.resolve(response);
 			});

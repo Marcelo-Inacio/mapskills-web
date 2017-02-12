@@ -1,6 +1,0 @@
-[
-  {"id":1, "description":"pizzaria", "active":true},
-  {"id":2, "description":"farmacia", "active":true},
-  {"id":3, "description":"empresa de musica", "active":true},
-  {"id":4, "description":"mercado", "active":true}
-]

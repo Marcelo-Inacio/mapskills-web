@@ -11,7 +11,7 @@ section
         th Ação
     tbody
       tr(ng-repeat="institution in insCtrl.allInstitutions track by institution.id")
-        td {{institution.code}}
+        td(style="text-align: center") {{institution.code}}
         td {{institution.cnpj}}
         td {{institution.company}}
         td {{institution.city}}

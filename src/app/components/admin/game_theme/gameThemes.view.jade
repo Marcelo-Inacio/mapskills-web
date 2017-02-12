@@ -4,12 +4,12 @@ section
     thead
       tr.table-thead
         th Id
-        th Descrição
+        th Nome
         th Cenas
         th Ativo
     tbody
       tr(ng-repeat="theme in gthCtrl.allThemes track by theme.id")
-        td {{theme.id}}
+        td(style="text-align: center") {{theme.id}}
         td {{theme.description}}
         td
           label#btn-todo.btn.btn-info.btn-xs(ui-sref="admin.scenes({themeId: theme.id})") editar

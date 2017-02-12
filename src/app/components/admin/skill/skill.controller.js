@@ -30,7 +30,7 @@
 
     vm.saveSkill = function(skill) {
       adminService.saveSkill(skill).then(function(status) {
-				if(status == 200) {
+				if(status === 200) {
 					loadAllSkills(true);
 				}
 				toastrService.showToastr(status);

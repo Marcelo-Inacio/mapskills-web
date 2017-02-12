@@ -13,14 +13,14 @@
     init();
 
     function init() {
-			loadAllStudents();
+			loadAllStudents(true);
 			loadAllCourses();
       vm.student = mentorService.getObjectCurrent();
 			mentorService.setObjectCurrent(null);
     }
 
-		function loadAllStudents() {
-			mentorService.loadAllStudents().then(function(response) {
+		function loadAllStudents(loadFromServer) {
+			mentorService.loadAllStudents(loadFromServer).then(function(response) {
 				vm.allStudents = response;
 			});
 		}
@@ -59,7 +59,7 @@
 /** verifica o status da requisição para o retorno
 dos funções saveStudent e sendFile */
 		function postVerify(status) {
-			if(status == 200) {
+			if(status === 200) {
 				loadAllStudents(true);
 			}
 			toastrService.showToastr(status);

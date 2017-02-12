@@ -1,3 +1,14 @@
 section
   label
     h4 WELL-COME
+  .row
+    .col-lg-3.col-md-3.col-sm-12.col-lg-offset-2
+      .panel.panel-default
+        .panel-heading Fatecs
+        .panel-body.panel-radar
+          canvas#pie.chart.chart-pie(chart-data='admDashCtrl.data', chart-labels='admDashCtrl.labels', chart-options='admDashCtrl.options')
+    .col-lg-3.col-md-3.col-sm-12.col-lg-offset-1
+      .panel.panel-default
+        .panel-heading Etecs
+        .panel-body.panel-radar
+          canvas#pie.chart.chart-pie(chart-data='admDashCtrl.data', chart-labels='admDashCtrl.labels', chart-options='admDashCtrl.options')

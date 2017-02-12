@@ -6,14 +6,14 @@
         |  Dashboard
     div(uib-collapse='sbCtrl.isCollapsed')
       ul.nav.menu
-        li
+        li(ng-click="sbCtrl.goPage('fatec')")
           a.menu-chidren
             i.fa.fa-area-chart.ico-sidebar
-            |  Grafico 1
-        li
+            |  Fatecs
+        li(ng-click="sbCtrl.goPage('etec')")
           a.menu-chidren
             i.fa.fa-bar-chart.ico-sidebar
-            |  Grafico 2
+            |  Etecs
     li(ng-class='sbCtrl.ngClass.institutions', ng-click="sbCtrl.changeClass('institutions')")
       a
         i.fa.fa-university.ico-sidebar

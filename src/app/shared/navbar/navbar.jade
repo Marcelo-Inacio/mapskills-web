@@ -25,13 +25,9 @@ nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
               .caret
             ul.dropdown-menu.menu-options(uib-dropdown-menu='', aria-labelledby='simple-dropdown')
               li
-                a(href="")
+                a(href="", ng-click="vm.details()")
                   i.fa.fa-user-o.ico-sidebar
                   | Perfil
-              li
-                a(href="")
-                  i.fa.fa-cogs.ico-sidebar
-                  | Configurações
               li
                 a(href="", ng-click="vm.logout()")
                   i.fa.fa-sign-out.ico-sidebar

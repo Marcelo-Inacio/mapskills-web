@@ -1,0 +1,5 @@
+.col-xs-6.col-md-3(ng-repeat="obj in mentorDashCtrl.array")
+  .panel.panel-default
+    .panel-heading {{obj.curso}}
+    .panel-body.panel-radar
+      canvas#doughnut.chart.chart-doughnut(chart-data="obj.values", chart-labels="mentorDashCtrl.labels")
