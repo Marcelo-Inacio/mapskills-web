@@ -10,7 +10,7 @@ section.main-login
               .form-group
                 input.form-control(ng-model='loginCtrl.userLogin.username', placeholder='E-mail', name='email', type='email', autofocus='', required='')
               .form-group
-                input.form-control(ng-model='loginCtrl.userLogin.password', placeholder='Password', name='password', type='password', value='', required='')
+                input.form-control(ng-model='loginCtrl.userLogin.password', placeholder='Password', name='password', type='password', value='', required='' ng-enter="loginCtrl.login(loginCtrl.userLogin)")
               .checkbox
                 label
                   input(name='remember', type='checkbox', value='Remember Me')

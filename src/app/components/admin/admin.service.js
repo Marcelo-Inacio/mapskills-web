@@ -3,10 +3,10 @@
 
 	angular
 		.module("mapskillsWeb")
-		.factory("adminService", ["$log", "$http", "$q", adminService]);
+		.factory("adminService", ["$log", "$http", "$q", "HelperService", "loginService", adminService]);
 
 		/** @ngInject */
-		function adminService($log, $http, $q) {
+		function adminService($log, $http, $q, HelperService, loginService) {
 			return {
 				loadAllSkills : _loadAllSkills,
 				loadAllThemes : _loadAllThemes,
@@ -25,11 +25,13 @@
 				/** auxiliares */
 				getObjectCurrent : _getObjectCurrent,
 				setObjectCurrent : _setObjectCurrent,
-				getSkillById : _getSkillById
+				getSkillById : _getSkillById,
+				validateProfile : _validateProfile
 			};
 
 			function getFullRestApi(uri) {
-				return "http://localhost:8585/mapskills/admin".concat(uri);
+				var url = "admin/".concat(uri);
+				return HelperService.getFullRestApi(url);
 			}
 
 			var allSkillsCached = null;
@@ -57,7 +59,7 @@
 
 			function _getInstitutionDetails(institutionId) {
 				var deferred = $q.defer();
-				var uri = getFullRestApi("/institution/").concat(institutionId);
+				var uri = getFullRestApi("institution/").concat(institutionId);
 				$http.get(uri).then(function(response) {
 					objectCurrent = response.data;
 					deferred.resolve(response.data);
@@ -69,7 +71,7 @@
 				var jsonData = angular.toJson(institution);
 				var deferred = $q.defer();
         $http({
-            method: "POST", url: getFullRestApi("/institution"),
+            method: "POST", url: getFullRestApi("institution"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function (response) {
@@ -79,11 +81,10 @@
 			}
 
 			function _sendFile(file) {
-				$log.log(file);
 				var jsonData = angular.toJson(file);
 				var deferred = $q.defer();
         $http({
-            method: "POST", url: getFullRestApi("/upload/institutions"),
+            method: "POST", url: getFullRestApi("upload/institutions"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function(response) {
@@ -97,7 +98,7 @@
 				var deferred = $q.defer();
 				var jsonData = angular.toJson(scene);
         $http({
-            method: method, url: getFullRestApi("/game/scene"),
+            method: method, url: getFullRestApi("game/scene"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function (response) {
@@ -111,7 +112,7 @@
 				var jsonData = angular.toJson(skill);
 				var deferred = $q.defer();
         $http({
-            method: "POST", url: getFullRestApi("/skill"),
+            method: "POST", url: getFullRestApi("skill"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function (response) {
@@ -125,11 +126,10 @@
 					value.index = key;
 					$log.log(key + " : " + value.index);
 				});
-				$log.log(allScenes);
 				var jsonData = angular.toJson(allScenes);
 				var deferred = $q.defer();
         $http({
-            method: "PUT", url: getFullRestApi("/game/scenes"),
+            method: "PUT", url: getFullRestApi("game/scenes"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function (response) {
@@ -138,20 +138,37 @@
         return deferred.promise;
 			}
 			/** excluir uma questão de uma cena */
-			function _deleteQuestion(questionId) {
-				$log.log("ID DA QUESTÃO: " + questionId);
+			function _deleteQuestion(sceneId) {
+				var deferred = $q.defer();
+        $http({
+            method: "DELETE",
+						url: getFullRestApi("scene/question/".concat(sceneId))
+        })
+				.then(function (response) {
+             deferred.resolve(response.status);
+         });
+				 return deferred.promise;
 			}
+/* função que chama requisição para remoção de uma questão de uma cena */
 			function _deleteScene(sceneId) {
-				$log.log("ID DA CENA: " + sceneId);
+				var deferred = $q.defer();
+        $http({
+            method: "DELETE",
+						url: getFullRestApi("scene/".concat(sceneId))
+        })
+				.then(function (response) {
+             deferred.resolve(response.status);
+         });
+				 return deferred.promise;
 			}
 			/** traz todas cenas de um determinado tema pelo id e simula um cache
 			para em caso de reload não sofra com requisição ao server */
-			function _loadScenesByThemeId(themeId) {
+			function _loadScenesByThemeId(themeId, fromServer) {
 				var deferred = $q.defer();
-				if(sceneCachedVerify(themeId)) {
+				if(sceneCachedVerify(themeId) && !fromServer) {
 					deferred.resolve(allScenesCached);
 				} else {
-					var uri = getFullRestApi("/game/theme/");
+					var uri = getFullRestApi("game/theme/");
 					$http.get(uri.concat(themeId)).then(function(response) {
 						if(response.data.length != 0) allScenesCached = response.data;
 						deferred.resolve(response.data);
@@ -173,7 +190,7 @@
 				var jsonData = angular.toJson(theme);
 				var deferred = $q.defer();
         $http({
-            method: "POST", url: getFullRestApi("/game/theme"),
+            method: "POST", url: getFullRestApi("game/theme"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function (response) {
@@ -185,7 +202,7 @@
 				var jsonData = angular.toJson(themes);
 				var deferred = $q.defer();
         $http({
-            method: "PUT", url: getFullRestApi("/game/themes"),
+            method: "PUT", url: getFullRestApi("game/themes"),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function (response) {
@@ -199,7 +216,7 @@
 				if(allInstitutionsCached != null && !loadFromServer) {
 					deferred.resolve(allInstitutionsCached);
 				} else {
-					var uri = getFullRestApi("/institutions");
+					var uri = getFullRestApi("institutions");
 					$http.get(uri).then(function(response) {
 						allInstitutionsCached = response.data;
 						deferred.resolve(response.data);
@@ -215,7 +232,7 @@
 					$log.log("== SKILL CACHED ==");
 				} else {
 					$log.log("== SKILL FORCE ==");
-					var uri = getFullRestApi("/skills");
+					var uri = getFullRestApi("skills");
 					$http.get(uri).then(function(response) {
 						allSkillsCached = response.data;
 						deferred.resolve(response.data);
@@ -226,11 +243,15 @@
 			/** recupera todos temas cadastrados */
 			function _loadAllThemes() {
 				var deferred = $q.defer();
-				var uri = getFullRestApi("/game/themes");
+				var uri = getFullRestApi("game/themes");
 				$http.get(uri).then(function(response) {
 					deferred.resolve(response.data);
 				});
 				return deferred.promise;
+			}
+
+			function _validateProfile() {
+				loginService.validateProfile("ADMINISTRATOR");
 			}
 		}
 })();

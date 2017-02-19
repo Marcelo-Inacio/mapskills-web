@@ -12,12 +12,12 @@ section
         th Questão
         th Ação
     tbody(ui-sortable ng-model="scnCtrl.allScenes")
-      tr(ng-repeat="scene in scnCtrl.allScenes track by $index")
+      tr(ng-repeat="scene in scnCtrl.allScenes track by scene.id")
         td {{scene.text}}
         td 
           label#btn-todo.btn.btn-primary.btn-xs(ng-show="!scene.question", ng-click="scnCtrl.openQuestionModal(scene)") adiconar
           label#btn-todo.btn.btn-info.btn-xs(ng-show="scene.question", ng-click="scnCtrl.openQuestionModal(scene)") editar
-          label#btn-todo.btn.btn-info.btn-xs(ng-show="scene.question", ng-click="scnCtrl.deleteQuestion(scene.question.id)") excluir
+          label#btn-todo.btn.btn-info.btn-xs(ng-show="scene.question", ng-click="scnCtrl.deleteQuestion(scene.id)") excluir
         td
           button#btn-todo.btn.btn-info.btn-xs(ng-click="scnCtrl.openSceneModal(scene)") editar
           button#btn-todo.btn.btn-default.btn-xs(ng-click="scnCtrl.deleteScene(scene.id)") excluir

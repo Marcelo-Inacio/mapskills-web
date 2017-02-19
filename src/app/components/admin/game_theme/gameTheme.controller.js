@@ -10,6 +10,7 @@
 		var vm = this;
 
 		var init = function() {
+			adminService.validateProfile();
 			loadAllThemes();
 		}
 

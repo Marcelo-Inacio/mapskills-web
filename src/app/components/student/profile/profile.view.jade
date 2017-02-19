@@ -1,51 +1,56 @@
 article.container
   .row
     .col-lg-12
-      .panel.panel-default
+      .panel.panel-primary
         .panel-heading Meus Dados
         .panel-body.panel-radar
           .row.aligner
             .col-md-4
-              label Nome : {{profileCtrl.user.student.name}}
+              label Nome : {{studentProfileCtrl.user.student.name}}
             .col-md-4
-              label RA : {{profileCtrl.user.student.ra}}
+              label RA : {{studentProfileCtrl.user.student.ra}}
             .col-md-4
-              label Telefone : {{profileCtrl.user.student.phone}}
+              label Telefone : {{studentProfileCtrl.user.student.phone}}
           .row.aligner
             .col-md-4
-              label E-mail : {{profileCtrl.user.student.username}}
+              label E-mail : {{studentProfileCtrl.user.student.username}}
             .col-md-4
               .row.aligner(style="justify-content: flex-start")
                 .col-md-3
                   label Senha:
                 .col-md-6
-                  input.form-control(type='password', ng-model="profileCtrl.user.student.password", placeholder="nova senha")
+                  input.form-control(type='password', ng-model="studentProfileCtrl.user.student.password", placeholder="nova senha")
             .col-md-4
-              label#btn-todo.btn.btn-info.btn-xs(ng-click="profileCtrl.updatePassword(profileCtrl.user.student)") salvar
+              label#btn-todo.btn.btn-info.btn-xs(ng-click="studentProfileCtrl.updatePassword(studentProfileCtrl.user.student)") salvar
   .row
     .col-lg-12
-      .panel.panel-default
+      .panel.panel-primary
         .panel-heading Meu Curso
         .panel-body.panel-radar
           .row.aligner
             .col-md-4
-              label Código : {{profileCtrl.user.course.code}}
+              label Código : {{studentProfileCtrl.user.course.code}}
             .col-md-4
-              label Nome: {{profileCtrl.user.course.name}}
+              label Nome: {{studentProfileCtrl.user.course.name}}
             .col-md-4
-              label Período: {{profileCtrl.user.course.period}}
+              label Período: {{studentProfileCtrl.user.course.period}}
             
   .row
     .col-lg-12
-      .panel.panel-default
+      .panel.panel-primary
         .panel-heading Minha Instituição
         .panel-body.panel-radar
           .row.aligner
             .col-md-3
-              label Código : {{profileCtrl.user.institution.code}}
+              label Código : {{studentProfileCtrl.user.institution.code}}
             .col-md-3
-              label Razão Social : {{profileCtrl.user.institution.company}}
+              label Razão Social : {{studentProfileCtrl.user.institution.company}}
             .col-md-3
-              label CNPJ : {{profileCtrl.user.institution.cnpj}}
+              label CNPJ : {{studentProfileCtrl.user.institution.cnpj}}
             .col-md-3
-              label Cidade : {{profileCtrl.user.institution.city}}
+              label Cidade : {{studentProfileCtrl.user.institution.city}}
+  
+  .row
+    label#btn-todo.btn.btn-primary.btn-md.botton-new(ui-sref="^.game")
+      i.fa.fa-gamepad.ico-sidebar
+      | Jogo

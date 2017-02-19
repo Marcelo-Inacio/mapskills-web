@@ -15,6 +15,7 @@
     init();
 
     function init() {
+			adminService.validateProfile();
 			loadAllInstitutions(false);
       vm.institutionDetails = adminService.getObjectCurrent();
 			adminService.setObjectCurrent(null);

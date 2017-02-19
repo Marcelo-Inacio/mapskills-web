@@ -18,7 +18,7 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController(moment, $location, $state, loginService) {
+    function NavbarController($location, $state, loginService) {
       var vm = this;
       vm.show_menu;
       vm.label_cps = "CENTRO PAULA SOUZA";

@@ -12,6 +12,7 @@
     init();
 
     function init() {
+			adminService.validateProfile();
 			loadAllSkills(false);
       vm.skill = adminService.getObjectCurrent();
 			adminService.setObjectCurrent(null);

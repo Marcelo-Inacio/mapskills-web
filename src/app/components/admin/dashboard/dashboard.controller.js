@@ -6,10 +6,16 @@
 		.controller('AdminDashboardController', AdminDashboardController);
 
 	/** @ngInject */
-	function AdminDashboardController(toastr, loginService) {
+	function AdminDashboardController(toastr, adminService) {
 		var vm = this;
-		vm.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-  	vm.data = [300, 500, 100];
+
+		init();
+
+		function init() {
+			adminService.validateProfile();
+		}
+		vm.labels = ["Finalizados", "Não Finalizados"];
+  	vm.data = [300, 100];
 	}
 
 })();

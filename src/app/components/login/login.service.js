@@ -3,10 +3,10 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('loginService', ['$http', '$q', '$location', '$state', '$log', 'Session', loginService]);
+		.factory('loginService', ['$http', '$q', '$location', '$state', '$log', 'Session', 'HelperService', loginService]);
 
 		/** @ngInject */
-		function loginService($http, $q, $location, $state, $log, Session) {
+		function loginService($http, $q, $location, $state, $log, Session, HelperService) {
 			return {
 				login : _login,
 				logout : _logout,
@@ -14,23 +14,19 @@
 				setUserContext : _setUserContext,
 				validateProfile : _validateProfile,
 				isLogged : _isLogged,
-				getUserLogged : _getUserLogged
+				getUserLogged : _getUserLogged,
+				getUserDetails : _getUserDetails
 			};
 
-			function getFullRestApi(uri) {
-				return "http://localhost:8585/mapskills".concat(uri);
-			}
 			/** realiza uma chamada ao back end para autenticar o login*/
 			function _login(loginObj) {
 				var deferred = $q.defer();
 		    $http({
-		        method: 'POST', url: getFullRestApi("/login"),
+		        method: 'POST', url: HelperService.getFullRestApi("login"),
 		        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 		        params: {username: loginObj.username, password: loginObj.password}
 		    }).then(function success(response) {
-						$log.info("== THEN SUCCESS ==");
 						var token = response.headers("Authorization");
-						$log.info(token);
 						Session.createToken(token);
 						deferred.resolve(response);
 				}, function error(response){
@@ -42,7 +38,7 @@
 
 			function _setUserContext(loginUsername) {
 		    $http({
-		        method: 'POST', url: getFullRestApi("/user/details"),
+		        method: 'POST', url: HelperService.getFullRestApi("/user/details"),
 		        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 		        params: {username: loginUsername}
 		    }).then(function success(response) {
@@ -55,10 +51,18 @@
 				});
 			}
 
+			function _getUserDetails(uri) {
+				var deferred = $q.defer();
+				$http.get(HelperService.getFullRestApi(uri)).success(function(response) {
+					deferred.resolve(response);
+				});
+				return deferred.promise;
+			}
+
 			function _updatePassword(loginUsername, newPassword) {
 				var deferred = $q.defer();
 		    $http({
-		        method: 'POST', url: getFullRestApi("/user/change/password"),
+		        method: 'POST', url: HelperService.getFullRestApi("/user/change/password"),
 		        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 		        params: {username: loginUsername, newPassword: newPassword}
 		    }).then(function success(response) {

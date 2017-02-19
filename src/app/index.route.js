@@ -33,7 +33,11 @@
         url: '/student/profile',
         templateUrl: 'app/components/student/profile/profile.view.html',
         controller: 'StudentProfileController',
-        controllerAs: 'profileCtrl'
+        controllerAs: 'studentProfileCtrl'
+      })
+      .state('student.noGame', {
+        url: '/student/no_game',
+        templateUrl: 'app/components/student/game/no_game.view.html'
       })
       .state('admin', {
         templateUrl: 'app/components/admin/admin.html'
@@ -43,6 +47,12 @@
         templateUrl: 'app/components/admin/dashboard/dashboard.view.html',
         controller: 'AdminDashboardController',
         controllerAs: 'admDashCtrl'
+      })
+      .state('admin.profile', {
+        url: '/admin/profile',
+        templateUrl: 'app/components/admin/profile/profile.view.html',
+        controller: 'AdminProfileController',
+        controllerAs: 'adminProfileCtrl'
       })
       .state('admin.fatec', {
         url: '/admin/dashboard/fatec',
@@ -88,6 +98,12 @@
         templateUrl: 'app/components/mentor/dashboard/dashboard.view.html',
         controller: 'MentorDashboardController',
         controllerAs: 'mentorDashCtrl'
+      })
+      .state('mentor.profile', {
+        url: '/mentor/profile',
+        templateUrl: 'app/components/mentor/profile/profile.view.html',
+        controller: 'MentorProfileController',
+        controllerAs: 'mentorProfileCtrl'
       })
       .state('mentor.courses', {
         url: '/mentor/courses',

@@ -3,10 +3,10 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('mentorService', ['$log', '$http', '$q', 'loginService', mentorService]);
+		.factory('mentorService', ['$log', '$http', '$q', 'loginService', 'HelperService', mentorService]);
 
 		/** @ngInject */
-		function mentorService($log, $http, $q, loginService) {
+		function mentorService($log, $http, $q, loginService, HelperService) {
 			return {
 				loadAllStudents : _loadAllStudents,
 				loadAllCourses : _loadAllCourses,
@@ -26,7 +26,7 @@
 			var objectCurrent;
 
 			function getFullRestApi(uri) {
-				return "http://localhost:8585/mapskills/institution".concat(uri);
+				return HelperService.getFullRestApi("/institution".concat(uri));
 			}
 
 			function _getObjectCurrent() {

@@ -3,18 +3,18 @@
 
 	angular
 		.module('mapskillsWeb')
-		.controller('StudentProfileController', StudentProfileController);
+		.controller('AdminProfileController', AdminProfileController);
 
 	/** @ngInject */
-	function StudentProfileController($log, studentService, toastrService, loginService) {
+	function AdminProfileController($log, studentService, toastrService, loginService) {
 		var vm = this;
 		init();
 
 		function init() {
+			adminService.validateProfile();
       var user = loginService.getUserLogged();
-      loginService.validateProfile("STUDENT");
-			var uri = "student/details/".concat(user.ra);
-			loginService.getUserDetails(uri).then(function(response) {
+			adminService.getAdminDetails(user.id).then(function(response) {
+				$log.log(response);
         vm.user = response;
 			});
 		}

@@ -17,18 +17,16 @@
 		init();
 		/** função principal que recupera todas questoes ainda não jogadas pelo aluno */
 		function init() {
-			//loginService.validateProfile("STUDENT");
+			loginService.validateProfile("STUDENT");
 			student = Session.refreshUserSession();
 			getHistoryByStudentId(student.id);
-			/** params: alunoId */
 		}
 
 		function getHistoryByStudentId(studentId) {
 			studentService.getHistory(studentId).then(function(response) {
 				vm.history = response;
-				vm.background = {"background-image" : "url(" + vm.history[vm.index].background.filename +")"};
 				sizeScenes = vm.history.length;
-				$log.log(sizeScenes);
+				verifyGameIsActived();
 			});
 		}
 
@@ -74,6 +72,16 @@
 			$log.info('fora');
 			var opic = document.getElementById("infobox");
 			opic.className="infoclose";
+		}
+
+		var verifyGameIsActived = function () {
+			if(student.isCompleted) {
+				$state.go("^.result");
+			} else if (sizeScenes === 0) {
+				$state.go("^.noGame");
+			} else {
+				vm.background = {"background-image" : "url(" + vm.history[vm.index].background.filename +")"};
+			}
 		}
 
 	}
