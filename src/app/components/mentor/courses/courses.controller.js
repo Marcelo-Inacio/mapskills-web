@@ -14,6 +14,7 @@
     init();
 
     function init() {
+			mentorService.validateProfile();
 			loadAllCourses(false);
 			if(mentorService.getObjectCurrent()) {
 				vm.course = mentorService.getObjectCurrent();

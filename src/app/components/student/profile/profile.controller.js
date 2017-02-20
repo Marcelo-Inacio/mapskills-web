@@ -11,9 +11,9 @@
 		init();
 
 		function init() {
+			studentService.validateProfile();
       var user = loginService.getUserLogged();
-      loginService.validateProfile("STUDENT");
-			var uri = "student/details/".concat(user.ra);
+			var uri = "/student/details/".concat(user.ra);
 			loginService.getUserDetails(uri).then(function(response) {
         vm.user = response;
 			});

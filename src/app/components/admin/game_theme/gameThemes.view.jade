@@ -9,8 +9,8 @@ section
         th Ativo
     tbody
       tr(ng-repeat="theme in gthCtrl.allThemes track by theme.id")
-        td(style="text-align: center") {{theme.id}}
-        td {{theme.description}}
+        td(style="text-align: center") {{::theme.id}}
+        td {{::theme.description}}
         td
           label#btn-todo.btn.btn-info.btn-xs(ui-sref="admin.scenes({themeId: theme.id})") editar
         td

@@ -30,7 +30,7 @@
           return $q.reject(request);
         },
         response: function (response) {
-          console.log("** RESPONSE INTERCEPTOR **");
+          console.log("* * RESPONSE INTERCEPTOR * *");
           if ((--numLoadings) === 0) {
             $rootScope.$broadcast("loader_hide");
           }
@@ -40,6 +40,7 @@
           return response || $q.when(response);
         },
         responseError: function (response) {
+          console.error(response);
           if (!(--numLoadings)) {
             $rootScope.$broadcast("loader_hide");
           }

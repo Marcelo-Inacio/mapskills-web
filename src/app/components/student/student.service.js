@@ -3,19 +3,24 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('studentService', ['$log', '$http', '$q', 'HelperService', studentService]);
+		.factory('studentService', ['$log', '$http', '$q', 'HelperService', 'loginService', studentService]);
 
 		/** @ngInject */
-		function studentService($log, $http, $q, HelperService) {
+		function studentService($log, $http, $q, HelperService, loginService) {
 			return {
 				sendAnswer : _sendAnswer,
 				sendEmail : _sendEmail,
 				getHistory : _getHistory,
-				getRadarResults : _getRadarResults
+				getRadarResults : _getRadarResults,
+				validateProfile : _validateProfile
 			};
 /** retorna url default do server  */
 		function getFullRestApi(uri) {
 			return HelperService.getFullRestApi("/student").concat(uri);
+		}
+
+		function _validateProfile() {
+			loginService.validateProfile("STUDENT");
 		}
 
 		function _getRadarResults(studentId) {
@@ -31,7 +36,6 @@
 			var deferred = $q.defer();
 			var uri = getFullRestApi("/game/").concat(studentId);
 			$http.get(uri).success(function(response) {
-				$log.log(response);
 				deferred.resolve(response);
 			});
 			return deferred.promise;

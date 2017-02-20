@@ -22,15 +22,21 @@
 			function _login(loginObj) {
 				var deferred = $q.defer();
 		    $http({
-		        method: 'POST', url: HelperService.getFullRestApi("login"),
+		        method: 'POST', url: HelperService.getFullRestApi("/login"),
 		        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 		        params: {username: loginObj.username, password: loginObj.password}
-		    }).then(function success(response) {
+		    })
+				.success(function(status) {
+					$log.log("sucesso" + status);
+				})
+				.error(function(status) {
+					$log.log("error "+ status);
+				})
+				.then(function success(response) {
 						var token = response.headers("Authorization");
 						Session.createToken(token);
 						deferred.resolve(response);
 				}, function error(response){
-						$log.info(response);
 						deferred.resolve(response);
 				});
 				return deferred.promise;

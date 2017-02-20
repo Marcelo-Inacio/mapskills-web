@@ -6,7 +6,7 @@
 		.controller('LoginController', LoginController);
 
 	/** @ngInject */
-	function LoginController(toastr, loginService) {
+	function LoginController(toastr, toastrService, cfpLoadingBar, loginService) {
 		var vm = this;
 		vm.userLogin = {username: null, password: null};
 
@@ -17,15 +17,15 @@
 				return;
 			}
 			loginService.login(loginObj).then(function(response) {
-				if(response.status != 200) {
-					messageError();
+				if(response.status !== 200) {
+					cfpLoadingBar.complete();
+					toastrService.showToastr(response.status);
 				}
 				return response;
 			}).then(function(response) {
-				if(response.status != 200) {
+				if(response.status !== 200) {
 					return;
 				}
-				console.log("** SEGUNDO THEN DA CONTROLLER **");
 				loginService.setUserContext(loginObj.username);
 			});
 		}

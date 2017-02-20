@@ -12,6 +12,7 @@
 		vm.themeCurrent;
 
 		var init = function() {
+			mentorService.validateProfile();
 			loadThemeCurrent();
 		}
 

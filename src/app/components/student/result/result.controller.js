@@ -11,6 +11,7 @@
 		init();
 		/** função principal que recupera os resultados do aluno */
 		function init() {
+			studentService.validateProfile();
       var user = loginService.getUserLogged();
 			studentService.getRadarResults(user.id).then(function(response) {
 				$log.log(response);

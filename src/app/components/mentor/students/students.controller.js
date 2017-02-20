@@ -13,6 +13,7 @@
     init();
 
     function init() {
+			mentorService.validateProfile();
 			loadAllStudents(true);
 			loadAllCourses();
       vm.student = mentorService.getObjectCurrent();
@@ -46,6 +47,10 @@
 		}
 
     vm.saveStudent = function(student) {
+			if(!validateStudent(student)) {
+				toastrService.showToastr(400);
+				return;
+			}
       mentorService.saveStudent(student).then(function(status) {
 				postVerify(status);
 			});
@@ -59,11 +64,21 @@
 /** verifica o status da requisição para o retorno
 dos funções saveStudent e sendFile */
 		function postVerify(status) {
-			if(status === 200) {
+			if(status == 200) {
+				$log.log('status '+ status);
 				loadAllStudents(true);
+				vm.closeModal();
 			}
 			toastrService.showToastr(status);
-			vm.closeModal();
+		}
+
+		function validateStudent(student) {
+			if(student === undefined || student === null || student.name === undefined || student.ra === undefined || student.username === undefined) {
+				return false;
+			}
+			if(student.name && student.ra.length === 13 && student.phone && student.username) {
+				return true;
+			}
 		}
 
 		vm.closeModal = function() {

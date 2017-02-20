@@ -16,6 +16,7 @@
 				saveCourse : _saveCourse,
 				sendFile : _sendFile,
 				updateThemeIdCurrent : _updateThemeIdCurrent,
+				validateProfile : _validateProfile,
 
 				getObjectCurrent : _getObjectCurrent,
 				setObjectCurrent : _setObjectCurrent
@@ -35,6 +36,10 @@
 
 			function _setObjectCurrent(object) {
 				objectCurrent = object;
+			}
+
+			function _validateProfile() {
+				loginService.validateProfile("MENTOR");
 			}
 
 			function _loadAllStudents(loadFromServer) {

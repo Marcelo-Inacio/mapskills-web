@@ -18,6 +18,7 @@
 			adminService.validateProfile();
 			loadAllInstitutions(false);
       vm.institutionDetails = adminService.getObjectCurrent();
+			console.log(vm.institutionDetails);
 			adminService.setObjectCurrent(null);
     }
 

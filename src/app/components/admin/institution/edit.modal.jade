@@ -17,20 +17,21 @@
       .col-md-12
         label Cidade:
         input.form-control(type='text', ng-model="modalCtrl.institutionDetails.city")
-    .form-group.row
-      .col-md-12
-        label Mentor - Nome:
-        input.form-control(type='text', ng-model="modalCtrl.institutionDetails.mentor.name")
-    .form-group.row
-      .col-md-12
-        label Mentor - E-mail:
-        input.form-control(type='text', ng-model="modalCtrl.institutionDetails.mentor.username")
-    .form-group.row
-      .col-md-12
-        label Mentor - Senha:
-        md-checkbox.md-primary(md-no-ink='', aria-label='Checkbox No Ink', ng-model='modalCtrl.checkboxPassword')
-          | mostrar senha
-        input.form-control(type='{{modalCtrl.showPassword[modalCtrl.checkboxPassword]}}', ng-model="modalCtrl.institutionDetails.mentor.password")
+    .form-group(ng-repeat="mentor in modalCtrl.institutionDetails.mentors track by mentor.id")
+      .row
+        .col-md-12
+          label Mentor - Nome:
+          input.form-control(type='text', ng-model="mentor.name")
+      .row
+        .col-md-12
+          label Mentor - E-mail:
+          input.form-control(type='text', ng-model="mentor.username")
+      .row
+        .col-md-12
+          label Mentor - Senha:
+          md-checkbox.md-primary(md-no-ink='', aria-label='Checkbox No Ink', ng-model='modalCtrl.checkboxPassword')
+            | mostrar senha
+          input.form-control(type='{{modalCtrl.showPassword[modalCtrl.checkboxPassword]}}', ng-model="mentor.password", placeholder="senha")
   .modal-footer
     button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveInstitution(modalCtrl.institutionDetails)") salvar
     button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

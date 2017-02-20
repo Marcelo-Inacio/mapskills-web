@@ -6,14 +6,14 @@
 		.controller('MentorProfileController', MentorProfileController);
 
 	/** @ngInject */
-	function MentorProfileController($log, studentService, toastrService, loginService) {
+	function MentorProfileController($log, mentorService, studentService, toastrService, loginService) {
 		var vm = this;
 		init();
 
 		function init() {
+			mentorService.validateProfile();
       var user = loginService.getUserLogged();
-      loginService.validateProfile("MENTOR");
-			mentorService.getMentorDetails(user.id).then(function(response) {
+			loginService.getUserDetails("/institution/mentor/details/".concat(user.id)).then(function(response) {
 				$log.log(response);
         vm.user = response;
 			});

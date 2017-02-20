@@ -15,13 +15,13 @@
       .col-md-7
         label Cidade:
         label {{modalCtrl.institutionDetails.city}}
-    .form-group.row
+    .form-group.row(ng-repeat="mentor in modalCtrl.institutionDetails.mentors track by mentor.id")
       .col-md-5
         label Mentor:
-        label {{modalCtrl.institutionDetails.mentor.name}}
+        label {{mentor.name}}
       .col-md-7
         label E-mail:
-        label {{modalCtrl.institutionDetails.mentor.username}}
+        label {{mentor.username}}
     table.table.table-striped
       thead
         tr.table-thead

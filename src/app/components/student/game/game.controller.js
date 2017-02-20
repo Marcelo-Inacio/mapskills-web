@@ -17,7 +17,7 @@
 		init();
 		/** função principal que recupera todas questoes ainda não jogadas pelo aluno */
 		function init() {
-			loginService.validateProfile("STUDENT");
+			studentService.validateProfile();
 			student = Session.refreshUserSession();
 			getHistoryByStudentId(student.id);
 		}

@@ -100,6 +100,10 @@
 			});
 		}
 
+		function verifyQuestion() {
+
+		}
+
 	}
 
 })();
