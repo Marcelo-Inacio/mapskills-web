@@ -10,5 +10,6 @@
           i.fa.fa-cloud-upload
           |   Escolher excel
   .modal-footer
+    button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.downloadTemplate()", style="float: left") baixar modelo
     button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.sendFile(modalCtrl.file)") salvar
     button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

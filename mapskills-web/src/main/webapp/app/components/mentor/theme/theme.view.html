@@ -1,0 +1,27 @@
+
+<section>
+  <table class="table table-hover table-top">
+    <thead>
+      <tr class="table-thead">
+        <th>Código</th>
+        <th>Descrição</th>
+        <th>Ativo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="theme in theCtrl.allThemes track by theme.id" ng-show="!theCtrl.allThemes.length == 0">
+        <td>{{::theme.id}}</td>
+        <td>{{::theme.description}}</td>
+        <td>
+          <md-switch ng-model="theme.active" ng-click="theCtrl.setThemeCurrent(theme)" aria-label="Atualizar" class="md-primary botton-switch"></md-switch>
+        </td>
+      </tr>
+      <tr ng-show="theCtrl.allThemes.length == 0">
+        <td>NENHUM TEMA ATIVO</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <label id="btn-todo" ng-click="theCtrl.updateThemeIdCurrent()" class="btn btn-primary btn-md botton-new">salvar alterações</label>
+</section>

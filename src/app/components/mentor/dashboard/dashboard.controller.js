@@ -18,8 +18,10 @@
     }
 
 		vm.labels = ["Finalizados", "Não Finalizados"];
-		vm.array = [{"curso":"banco de dados","values":[5, 35]},
-								{"curso":"logistica","values":[39, 1]}]
+		vm.array = [{"curso":"Tecnologia em Banco de Dados","values":[5, 35]},
+								{"curso":"Tecnologia em Logistica","values":[39, 1]},
+								{"curso":"Tecnologia em Manutenção de Aeronaves","values":[5, 35]},
+								{"curso":"Tecnologia em Analise e Desenvolvimente de Sistemas","values":[39, 1]}]
 
 	}
 

@@ -31,7 +31,7 @@
 
     vm.openCourseModal = function(course) {
       mentorService.setObjectCurrent(course);
-      modalService.openModal('/app/components/mentor/courses/course.modal.html', 'CourseController');
+      modalService.openModal('app/components/mentor/courses/course.modal.html', 'CourseController');
 		}
 
     vm.saveCourse = function(course) {

@@ -57,5 +57,6 @@
 			/** realiza o envio de email ao fim do game */
 			function _sendEmail() {
 			}
+
 		}
 })();

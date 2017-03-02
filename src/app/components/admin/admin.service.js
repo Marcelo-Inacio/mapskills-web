@@ -140,14 +140,14 @@
 			/** excluir uma questão de uma cena */
 			function _deleteQuestion(sceneId) {
 				var deferred = $q.defer();
-        $http({
-            method: "DELETE",
+				$http({
+					method: "DELETE",
 						url: getFullRestApi("/scene/question/".concat(sceneId))
-        })
+					})
 				.then(function (response) {
-             deferred.resolve(response.status);
-         });
-				 return deferred.promise;
+					deferred.resolve(response.status);
+				});
+				return deferred.promise;
 			}
 /* função que chama requisição para remoção de uma questão de uma cena */
 			function _deleteScene(sceneId) {
@@ -198,7 +198,7 @@
          });
         return deferred.promise;
 			}
-			
+
 			function _updateThemes(themes) {
 				var jsonData = angular.toJson(themes);
 				var deferred = $q.defer();

@@ -51,6 +51,9 @@ article.container
               label Cidade : {{studentProfileCtrl.user.institution.city}}
   
   .row
+    label#btn-todo.btn.btn-primary.btn-md.botton-new(ui-sref="^.result", ng-if="studentProfileCtrl.user.student.completed")
+      i.fa.fa-gamepad.ico-sidebar
+      | Meu Resultado
     label#btn-todo.btn.btn-primary.btn-md.botton-new(ui-sref="^.game")
       i.fa.fa-gamepad.ico-sidebar
       | Jogo

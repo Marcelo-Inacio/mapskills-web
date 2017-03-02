@@ -4,23 +4,23 @@
     .row
       .col-md-12
         label Nome:
-        input.form-control(type='text', ng-model="modalCtrl.student.name")
+        input.form-control(type="text", ng-model="modalCtrl.student.name")
     .form-group.row
       .col-md-12
         label RA:
-        input.form-control(type='text', ng-model="modalCtrl.student.ra")
+        input.form-control(type="text", ng-model="modalCtrl.student.ra", maxlength="13")
     .form-group.row
       .col-md-12
         label Telefone:
-        input.form-control(type='text', ng-model="modalCtrl.student.phone")
+        input.form-control(type="text", ng-model="modalCtrl.student.phone", maxlength="11")
     .form-group.row
       .col-md-12
         label E-mail:
-        input.form-control(type='email', ng-model="modalCtrl.student.username")
-    .form-group.row
+        input.form-control(type="email", ng-model="modalCtrl.student.username")
+    .form-group.row(ng-show="modalCtrl.student.password != null")
       .col-md-12
         label Senha:
-        input.form-control(type='password', ng-model="modalCtrl.student.password", placeholder="nova senha")
+        input.form-control(type="password", ng-model="modalCtrl.student.password", placeholder="nova senha")
   .modal-footer
-    input#btn-todo.btn.btn-primary.btn-md(type="submit", ng-click="modalCtrl.saveStudent(modalCtrl.student)") salvar
+    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveStudent(modalCtrl.student)") salvar
     button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

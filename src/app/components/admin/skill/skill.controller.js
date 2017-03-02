@@ -26,7 +26,7 @@
 
 		vm.openModal = function(skill) {
       adminService.setObjectCurrent(skill);
-      modalService.openModal('/app/components/admin/skill/skill.modal.html', 'SkillController');
+      modalService.openModal('app/components/admin/skill/skill.modal.html', 'SkillController');
 		}
 
     vm.saveSkill = function(skill) {

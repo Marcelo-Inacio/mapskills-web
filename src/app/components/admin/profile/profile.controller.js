@@ -6,14 +6,14 @@
 		.controller('AdminProfileController', AdminProfileController);
 
 	/** @ngInject */
-	function AdminProfileController($log, studentService, toastrService, loginService) {
+	function AdminProfileController($log, studentService, toastrService, adminService, loginService) {
 		var vm = this;
-		init();
+		//init();
 
 		function init() {
 			adminService.validateProfile();
       var user = loginService.getUserLogged();
-			adminService.getAdminDetails(user.id).then(function(response) {
+			loginService.getUserDetails("/admin/details/".concat(user.id)).then(function(response) {
 				$log.log(response);
         vm.user = response;
 			});

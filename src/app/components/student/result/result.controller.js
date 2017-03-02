@@ -54,7 +54,7 @@
 
       var ctx = document.getElementById("radarChart").getContext("2d");
 
-      new Chart(ctx, {
+      var chart = new Chart(ctx, {
 				type: 'radar',
 				data: radarData,
 				options: options

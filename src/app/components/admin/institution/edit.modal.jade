@@ -15,6 +15,13 @@
         input.form-control(type='text', ng-model="modalCtrl.institutionDetails.company")
     .form-group.row
       .col-md-12
+        label Nível:
+        select.form-control(ng-model="modalCtrl.institutionDetails.level"
+                            ,ng-options="level for level in modalCtrl.allLevels")
+          option(value='') -- selecione um nível --
+          
+    .form-group.row
+      .col-md-12
         label Cidade:
         input.form-control(type='text', ng-model="modalCtrl.institutionDetails.city")
     .form-group(ng-repeat="mentor in modalCtrl.institutionDetails.mentors track by mentor.id")

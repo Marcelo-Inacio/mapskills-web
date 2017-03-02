@@ -21,17 +21,17 @@
 			/** realiza uma chamada ao back end para autenticar o login*/
 			function _login(loginObj) {
 				var deferred = $q.defer();
-		    $http({
-		        method: 'POST', url: HelperService.getFullRestApi("/login"),
-		        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-		        params: {username: loginObj.username, password: loginObj.password}
-		    })
+				$http({
+					method: 'POST', url: HelperService.getFullRestApi("/login"),
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+					params: {username: loginObj.username, password: loginObj.password}
+				})
 				.success(function(status) {
 					$log.log("sucesso" + status);
 				})
 				.error(function(status) {
-					$log.log("error "+ status);
-				})
+						$log.log("error "+ status);
+					})
 				.then(function success(response) {
 						var token = response.headers("Authorization");
 						Session.createToken(token);
@@ -44,14 +44,15 @@
 
 			function _setUserContext(loginUsername) {
 		    $http({
-		        method: 'POST', url: HelperService.getFullRestApi("/user/details"),
-		        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-		        params: {username: loginUsername}
-		    }).then(function success(response) {
-						$log.info("== THEN SUCCESS ==");
-						var userDetails = response.data;
-						Session.createUser(userDetails);
-						_redirect(userDetails.profile);
+					method: 'POST', url: HelperService.getFullRestApi("/user/details"),
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+					params: {username: loginUsername}
+				})
+				.then(function success(response) {
+					$log.info("== THEN SUCCESS ==");
+					var userDetails = response.data;
+					Session.createUser(userDetails);
+					_redirect(userDetails.profile);
 				}, function error(response) {
 						$log.info(response.status);
 				});
@@ -67,11 +68,12 @@
 
 			function _updatePassword(loginUsername, newPassword) {
 				var deferred = $q.defer();
-		    $http({
-		        method: 'POST', url: HelperService.getFullRestApi("/user/change/password"),
-		        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-		        params: {username: loginUsername, newPassword: newPassword}
-		    }).then(function success(response) {
+				$http({
+					method: 'POST', url: HelperService.getFullRestApi("/user/change/password"),
+					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+					params: {username: loginUsername, newPassword: newPassword}
+				})
+				.then(function success(response) {
 						$log.info("== THEN SUCCESS ==");
 						deferred.resolve(response.status);
 				}, function error(response) {

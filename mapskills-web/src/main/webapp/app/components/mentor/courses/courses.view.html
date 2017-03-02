@@ -1,0 +1,24 @@
+
+<section>
+  <label id="btn-todo" ng-click="crsCtrl.openCourseModal()" class="btn btn-success btn-md botton-new">novo</label>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr class="table-thead">
+        <th>Codigo</th>
+        <th>Nome</th>
+        <th>Período</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="course in crsCtrl.allCourses track by course.id">
+        <td>{{course.code}}</td>
+        <td>{{course.name}}</td>
+        <td>{{course.period}}</td>
+        <td>
+          <label id="btn-todo" ng-click="crsCtrl.openCourseModal(course)" class="btn btn-info btn-xs">editar</label>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

@@ -6,7 +6,7 @@
 		.controller('GameController', GameController);
 
 	/** @ngInject */
-	function GameController($document, $log, $state, studentService, Session, loginService) {
+	function GameController($log, $state, studentService, Session) {
 		var vm = this;
 		var student;
 		var sizeScenes;
@@ -40,7 +40,9 @@
 			answerContext.skillValue = alternative.skillValue;
 
 			studentService.sendAnswer(answerContext).then(function(status) {
-				if(status == 200) vm.nextScene();
+				if(status == 200) {
+					vm.nextScene();
+				}
 			});
 		}
 
@@ -75,7 +77,7 @@
 		}
 
 		var verifyGameIsActived = function () {
-			if(student.isCompleted) {
+			if(student.isCompleted === true) {
 				$state.go("^.result");
 			} else if (sizeScenes === 0) {
 				$state.go("^.noGame");

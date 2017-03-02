@@ -38,12 +38,12 @@
 
 		vm.openSceneModal = function(scene) {
 			adminService.setObjectCurrent(scene);
-			modalService.openModal('/app/components/admin/scenes/scene.modal.html', 'ScenesController');
+			modalService.openModal('app/components/admin/scenes/scene.modal.html', 'ScenesController');
 		}
 
 		vm.openQuestionModal = function(scene) {
 			adminService.setObjectCurrent(scene);
-			modalService.openModal('/app/components/admin/scenes/question.modal.html', 'ScenesController');
+			modalService.openModal('app/components/admin/scenes/question.modal.html', 'ScenesController');
 		}
 		/** carrega todas cenas de um tema */
 		function loadScenesByThemeId(themeId, fromServer) {
@@ -74,6 +74,7 @@
 			}
 			scene.gameThemeId = themeId;
 			adminService.saveScene(scene, "POST").then(function(status) {
+				$log.log(status);
 				toastrService.showToastr(status);
 				loadScenesByThemeId(themeId, true);
 				vm.closeModal();

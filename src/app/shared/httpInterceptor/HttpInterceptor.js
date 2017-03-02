@@ -6,7 +6,7 @@
     .factory('HttpInterceptor', HttpInterceptor);
 
     /** @ngInject */
-    function HttpInterceptor($rootScope, $q, Session, HTTP_STATUS, AUTH_EVENTS) {
+    function HttpInterceptor($log, $rootScope, $q, Session, HTTP_STATUS, AUTH_EVENTS) {
       var numLoadings = 0;
       return {
         request: function (config) {
@@ -30,17 +30,17 @@
           return $q.reject(request);
         },
         response: function (response) {
-          console.log("* * RESPONSE INTERCEPTOR * *");
+          $log.log("* * RESPONSE INTERCEPTOR * *");
           if ((--numLoadings) === 0) {
             $rootScope.$broadcast("loader_hide");
           }
           if (response.status === 401 || response.status === 403) {
-              return $q.reject(response);
+            return $q.reject(response);
           }
           return response || $q.when(response);
         },
         responseError: function (response) {
-          console.error(response);
+          $log.error(response);
           if (!(--numLoadings)) {
             $rootScope.$broadcast("loader_hide");
           }

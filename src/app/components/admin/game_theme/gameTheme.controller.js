@@ -31,7 +31,7 @@
 		}
 
 		vm.openModal = function() {
-      modalService.openModal('/app/components/admin/game_theme/gameTheme.modal.html', 'GameThemeController');
+      modalService.openModal('app/components/admin/game_theme/gameTheme.modal.html', 'GameThemeController');
 		}
 
 		vm.updateThemes = function(themes) {

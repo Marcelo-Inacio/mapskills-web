@@ -106,7 +106,7 @@
            deferred.resolve(response.status);
          }, function error(response) {
 					 deferred.resolve(response.status);
-				 })
+				 });
         return deferred.promise;
 			}
 

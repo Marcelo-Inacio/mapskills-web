@@ -1,0 +1,16 @@
+
+<div class="section">
+  <div class="modal-header"></div>
+  <div class="modal-body">
+    <div class="form-group row">
+      <div class="col-md-12">
+        <label>Nome:</label>
+        <input type="text" ng-model="modalCtrl.theme.name" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button id="btn-todo" ng-click="modalCtrl.saveTheme(modalCtrl.theme)" class="btn btn-primary btn-md">salvar</button>
+    <button id="btn-todo" ng-click="modalCtrl.closeModal()" class="btn btn-default btn-md">cancelar</button>
+  </div>
+</div>

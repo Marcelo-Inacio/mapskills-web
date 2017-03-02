@@ -1,0 +1,22 @@
+
+<section>
+  <label id="btn-todo" ng-click="skiCtrl.openModal()" class="btn btn-success btn-md botton-new">novo</label>
+  <table class="table table-hover">
+    <thead>
+      <tr class="table-thead">
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="skill in skiCtrl.allSkills track by skill.id">
+        <td>{{::skill.id}}</td>
+        <td>{{::skill.type}}</td>
+        <td>
+          <label id="btn-todo" ng-click="skiCtrl.openModal(skill)" class="btn btn-info btn-xs">editar</label>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

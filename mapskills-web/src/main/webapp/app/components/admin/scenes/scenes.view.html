@@ -1,0 +1,33 @@
+
+<section>
+  <div class="row aligner">
+    <div class="col-md-1 aligner-item"><i uib-tooltip="{{scnCtrl.info_tooltip}}" tooltip-placement="bottom-right" class="fa fa-info-circle ico-large"></i></div>
+    <div class="col-md-11">
+      <label id="btn-todo" ng-click="scnCtrl.openSceneModal()" class="btn btn-success btn-md botton-new">novo</label>
+      <label id="btn-todo" ng-click="scnCtrl.updateIndexScenes(scnCtrl.allScenes)" class="btn btn-success btn-md botton-new">salvar alterações</label>
+    </div>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr class="table-thead">
+        <th class="txt-thead">Texto</th>
+        <th>Questão</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody ui-sortable ng-model="scnCtrl.allScenes">
+      <tr ng-repeat="scene in scnCtrl.allScenes track by scene.id">
+        <td>{{scene.text}}</td>
+        <td> 
+          <label id="btn-todo" ng-show="!scene.question" ng-click="scnCtrl.openQuestionModal(scene)" class="btn btn-primary btn-xs">adiconar</label>
+          <label id="btn-todo" ng-show="scene.question" ng-click="scnCtrl.openQuestionModal(scene)" class="btn btn-info btn-xs">editar</label>
+          <label id="btn-todo" ng-show="scene.question" ng-click="scnCtrl.deleteQuestion(scene.id)" class="btn btn-info btn-xs">excluir</label>
+        </td>
+        <td>
+          <button id="btn-todo" ng-click="scnCtrl.openSceneModal(scene)" class="btn btn-info btn-xs">editar</button>
+          <button id="btn-todo" ng-click="scnCtrl.deleteScene(scene.id)" class="btn btn-default btn-xs">excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

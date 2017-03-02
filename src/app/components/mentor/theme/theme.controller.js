@@ -52,7 +52,7 @@ o que está habilitado para o instituição */
 
 /** manipula os switchs para que fique somente um ATIVO
 ou todos DESATIVADOS  */
-		vm.setThemeCurrent = function(theme, index) {
+		vm.setThemeCurrent = function(theme) {
 			if(themeIdCurrent == theme.id) {
 				themeIdCurrent = 0;
 			}
