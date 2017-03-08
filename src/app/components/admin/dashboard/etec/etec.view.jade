@@ -1,1 +1,18 @@
-h3 visualizar todas as Etecs
+section
+  .row
+    .col-lg-8.col-md-8.col-sm-12
+      .panel.panel-default
+        .panel-heading Etecs
+        .panel-body.panel-radar
+          canvas#base.chart-horizontal-bar(chart-data='etecCtrl.data', chart-labels='etecCtrl.labels', chart-series="etecCtrl.series")
+    .col-lg-4.col-md-4.col-sm-12
+      .panel.panel-default
+        .panel-heading Legenda
+        .panel-body.panel-radar
+          h5 146 - Etec São José dos Campos
+          h5 147 - Etec São Paulo
+          h5 148 - Etec Pindamonhangaba
+          h5 149 - Etec Jacareí
+          h5 150 - Etec Ouro Preto
+          h5 151 - Etec Campinas
+          h5 152 - Etec Guaulhos

@@ -4,14 +4,19 @@ article.container
       .panel-heading Resultado
       .panel-body.panel-radar
         .col-lg-6
-          canvas(chart-labels="false")#radarChart
-        .col-lg-6(ng-repeat="skill in resultCtrl.skills")
-          label Competência : {{::skill.name}}
-          p Descrição : {{::skill.description}} 
+          <!-- canvas(chart-labels="false")#radarChart -->
+          canvas#radar.chart.chart-radar(chart-data='resultCtrl.data', chart-options='resultCtrl.options', chart-labels='resultCtrl.labels', chart-colors="resultCtrl.colors", chart-dataset-override="resultCtrl.datasetOverride")
+        .col-lg-6
+          .col-lg-4
+            label Competência
+            p(ng-repeat="skill in resultCtrl.skills")
+              {{::skill.name}}
+          .col-lg-8
+            label Descrição
+            p(ng-repeat="skill in resultCtrl.skills")
+              {{::skill.description}} 
       .panel-footer
         br
         h5 Este é um trabalho acadêmico desenvolvido pelo Centro Paula Souza em fase de validação
-        br
         h5 Os resultados não substituem o trabalho de um profissional especializado na área
-        br
         h5 O objetivo do resultado é proporcionar uma reflexão sobre as competências comportamentais avaliadas

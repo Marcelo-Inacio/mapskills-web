@@ -1,1 +1,13 @@
-h3 visualizar todas as Fatecs
+section
+  .row
+    .col-lg-8.col-md-8.col-sm-12
+      .panel.panel-default
+        .panel-heading Fatecs
+        .panel-body.panel-radar
+          canvas#base.chart-horizontal-bar(chart-data='fatecCtrl.data', chart-labels='fatecCtrl.codes', chart-series="fatecCtrl.series", chart-options="fatecCtrl.options")
+    .col-lg-4.col-md-4.col-sm-12
+      .panel.panel-default
+        .panel-heading Legenda
+        .panel-body.panel-radar
+          h5(ng-repeat="fatec in fatecCtrl.fatecs")
+            {{fatec.code}} - {{fatec.company}}

@@ -6,7 +6,7 @@ section
     .col-xs-6.col-md-4.aligner-item
       select.form-control(ng-model="stuCtrl.filter.course"
                           ,ng-options="course.name for course in stuCtrl.allCourses track by course.id")
-        option(value='') -- selecione um curso --
+        option(value='') -- Selecione um curso --
     .col-xs-6.col-md-2.aligner-item
       label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="stuCtrl.openStudentModal()")
         i.fa.fa-user-plus.ico-sidebar
@@ -21,17 +21,17 @@ section
         th Nome
         th RA
         th Curso
-        th Jogo concluido
+        th Concluído
         th Ação
     tbody
       tr(ng-repeat="student in stuCtrl.allStudents | filter:{name :stuCtrl.filter.name} | filter:{course:{name:stuCtrl.filter.course.name}} track by student.id")
         td {{student.name}}
         td {{student.ra}}
-        td {{student.course.name}}
+        td {{student.course.name.replace('Tecnologia em', ' ')}}
         td(ng-if="student.completed", style="text-align: center")
           i.fa.fa-check-circle
         td(ng-if="!student.completed", style="text-align: center")
           i.fa.fa-minus-circle
         td
-          label#btn-todo.btn.btn-info.btn-xs(ng-click="stuCtrl.openDetailsModal(student)") detalhes
+          label#btn-todo.btn.btn-info.btn-xs(ng-click="stuCtrl.openDetailsModal(student)", ) detalhes
           label#btn-todo.btn.btn-info.btn-xs(ng-click="stuCtrl.openStudentModal(student)") editar

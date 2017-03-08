@@ -7,6 +7,25 @@
 
 		/** @ngInject */
 		function adminService($log, $http, $q, HelperService, loginService) {
+			var _dashboard = {
+				level : function(level) {
+					var deferred = $q.defer();
+					var uri = getFullRestApi("/dashboard/").concat(level);
+					$http.get(uri).then(function(response) {
+						deferred.resolve(response.data);
+					});
+					return deferred.promise;
+				},
+				global : function() {
+					var deferred = $q.defer();
+					var uri = getFullRestApi("/dashboard/global");
+					$http.get(uri).then(function(response) {
+						deferred.resolve(response.data);
+					});
+					return deferred.promise;
+				}
+			};
+
 			return {
 				loadAllSkills : _loadAllSkills,
 				loadAllThemes : _loadAllThemes,
@@ -22,6 +41,7 @@
 				deleteQuestion : _deleteQuestion,
 				deleteScene : _deleteScene,
 				getInstitutionDetails : _getInstitutionDetails,
+				dashboard : _dashboard,
 				/** auxiliares */
 				getObjectCurrent : _getObjectCurrent,
 				setObjectCurrent : _setObjectCurrent,

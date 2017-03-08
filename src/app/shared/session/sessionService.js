@@ -20,7 +20,7 @@
       sessionObj.user = userInfo;
       $cookies.put(application.authentication.mapskillsCookieKey, angular.toJson(sessionObj));
       this.user = userInfo;
-      $rootScope.$broadcast('user:updated',this.user);
+      $rootScope.$broadcast('user:updated', this.user);
     }
 
     var destroy = function() {

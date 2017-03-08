@@ -38,7 +38,7 @@
     .constant('malarkey', malarkey)
     .constant('moment', moment)
     .constant('application', application)
-    .constant('HTTP_STATUS',HTTP_STATUS)
-    .constant('AUTH_EVENTS',AUTH_EVENTS);
+    .constant('HTTP_STATUS' ,HTTP_STATUS)
+    .constant('AUTH_EVENTS', AUTH_EVENTS);
 
 })();

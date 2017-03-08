@@ -15,8 +15,8 @@
 			adminService.validateProfile();
 		}
 		vm.labels = ["Finalizados", "Não Finalizados"];
-		vm.array = [{"level":"Fatec","values":[2510, 620]},
-								{"level":"Etec","values":[5900, 1100]}]
+		vm.array = [{"level":"Fatec","values":[80, 20]},
+								{"level":"Etec","values":[57, 43]}]
 	}
 
 })();
