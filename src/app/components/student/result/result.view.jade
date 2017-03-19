@@ -1,20 +1,22 @@
-article.container
+.container
   .col-lg-12
     .panel.panel-default
-      .panel-heading Resultado
+      .panel-heading Relatório
       .panel-body.panel-radar
         .col-lg-6
           <!-- canvas(chart-labels="false")#radarChart -->
           canvas#radar.chart.chart-radar(chart-data='resultCtrl.data', chart-options='resultCtrl.options', chart-labels='resultCtrl.labels', chart-colors="resultCtrl.colors", chart-dataset-override="resultCtrl.datasetOverride")
         .col-lg-6
-          .col-lg-4
-            label Competência
-            p(ng-repeat="skill in resultCtrl.skills")
-              {{::skill.name}}
-          .col-lg-8
-            label Descrição
-            p(ng-repeat="skill in resultCtrl.skills")
-              {{::skill.description}} 
+          .row
+            .col-lg-4
+              label Competência
+            .col-lg-8
+              label Descrição
+          .row(ng-repeat="skill in resultCtrl.skills").border-report
+            .col-lg-4
+              p {{::skill.name}}
+            .col-lg-8
+              p {{::skill.description}}
       .panel-footer
         br
         h5 Este é um trabalho acadêmico desenvolvido pelo Centro Paula Souza em fase de validação

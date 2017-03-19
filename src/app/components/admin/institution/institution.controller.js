@@ -6,7 +6,7 @@
 		.controller('InstitutionController', InstitutionController);
 
 	/** @ngInject */
-	function InstitutionController($log, toastrService, adminService, modalService) {
+	function InstitutionController($log, toastrService, adminService, modalService, downloadService) {
 		var vm = this;
 		vm.institutionDetails = null;
 		vm.checkboxPassword = false;
@@ -67,6 +67,10 @@
 
 		vm.closeModal = function() {
 			modalService.closeModal();
+		}
+
+		vm.downloadTemplate = function() {
+			downloadService.template("institution.xlsx");
 		}
 
 	}

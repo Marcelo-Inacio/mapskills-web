@@ -19,9 +19,9 @@ article.container
                 .col-md-3
                   label Senha:
                 .col-md-6
-                  input.form-control(type='password', ng-model="studentProfileCtrl.user.student.password", placeholder="nova senha")
+                  input.form-control(type='password', ng-model="studentProfileCtrl.user.student.password", placeholder="nova senha", autofocus)
             .col-md-4
-              label#btn-todo.btn.btn-info.btn-xs(ng-click="studentProfileCtrl.updatePassword(studentProfileCtrl.user.student)") salvar
+              label#btn-todo.btn.btn-info.btn-md(ng-click="studentProfileCtrl.updatePassword(studentProfileCtrl.user.student)") salvar
   .row
     .col-lg-12
       .panel.panel-primary

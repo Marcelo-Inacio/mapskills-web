@@ -1,0 +1,36 @@
+section
+  .row.aligner.border-bottom
+    .col-lg-5.col-xs-6.col-md-4.aligner-item
+      //-TODO fazer filtro de input - bootstrap chosen
+      select.form-control(ng-if="reportCtrl.isAdmin"
+                        , ng-model="reportCtrl.institutionSelected"
+                        , ng-change="reportCtrl.getInstitutionCourses(reportCtrl.institutionSelected.id)"
+                        , ng-options="institution.company for institution in reportCtrl.institutions track by institution.id")
+        option(value='') --- Todos ---
+      
+      select.form-control(ng-if="!reportCtrl.isAdmin")
+        option(value="") {{reportCtrl.institutionSelected.company}}
+
+      select.form-control(ng-model="reportCtrl.courseSelected", ng-disabled="!reportCtrl.institutionSelected"
+                          , ng-options="course.name for course in reportCtrl.institutionSelected.courses track by course.code")
+        option(value='') --- Todos ---      
+      
+    .col-lg-4.col-md-2.col-xs-6.aligner-item
+      input.form-control(type="text", ng-model="reportCtrl.filter.startDate", maxlength="6", minlength="6", placeholder="ano/semestre inicial")
+      input.form-control(type="text", ng-model="reportCtrl.filter.endDate", maxlength="6", minlength="6", placeholder="ano/semestre final")
+        
+    .col-lg-3.col-md-2.col-xs-6.aligner-item
+      label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="reportCtrl.search()", ng-disabled="false")
+        i.fa.fa-search.ico-sidebar
+        | buscar
+      label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="reportCtrl.download()", ng-disabled="false")
+        i.fa.fa-file-excel-o.ico-sidebar
+        | download
+  .row.aligner(style="overflow-x: auto; padding: 15px")
+    table.table.table-hover.table-striped
+      thead
+        tr.table-thead
+          th.th-scroll(ng-repeat="head in reportCtrl.report.head") {{::head}}
+      tbody
+        tr(ng-repeat="data in reportCtrl.report.datas track by $index")
+          td.td-scroll.filterable-cell(ng-repeat="cell in data track by $index") {{::cell}}

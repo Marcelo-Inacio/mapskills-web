@@ -6,9 +6,12 @@
 		.controller('MentorStudentController', MentorStudentController);
 
 	/** @ngInject */
-	function MentorStudentController($log, toastrService, mentorService, modalService) {
+	function MentorStudentController($log, toastrService, mentorService, modalService, downloadService) {
 		var vm = this;
 		vm.allStudents = null;
+		vm.headerTable = [{label: "Nome", model: "name"}, {label: "RA", model: "ra"},
+											{label: "Curso", model: "course"}, {label: "Concluído", model: "completed"},
+											{label: "Ação", model: "action"}];
 
     init();
 
@@ -48,7 +51,7 @@
 		}
 
 		vm.downloadTemplate = function() {
-			
+			downloadService.template("student.xlsx");
 		}
 
     vm.saveStudent = function(student) {
@@ -84,6 +87,12 @@ dos funções saveStudent e sendFile */
 			if(student.name && student.ra.length === 13 && student.phone && student.username) {
 				return true;
 			}
+		}
+
+		vm.orderBy = function(field) {
+			$log.log(field);
+			vm.orderList = field.model;
+			vm.orderDirection = !vm.orderDirection;
 		}
 
 		vm.closeModal = function() {

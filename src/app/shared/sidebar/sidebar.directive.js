@@ -29,7 +29,7 @@
       vm.goPage = goPage;
       vm.ngClass = {dashboard : "", institutions : "",
                     themes : "", skills : "",
-                    students : "", statistics : ""};
+                    students : "", report : ""};
 
     init();
     /**

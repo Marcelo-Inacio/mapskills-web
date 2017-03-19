@@ -48,6 +48,12 @@
         controller: 'AdminDashboardController',
         controllerAs: 'admDashCtrl'
       })
+      .state('admin.report', {
+        url: '/admin/report',
+        templateUrl: 'app/shared/report/report.view.html',
+        controller: 'ReportController',
+        controllerAs: 'reportCtrl'
+      })
       .state('admin.profile', {
         url: '/admin/profile',
         templateUrl: 'app/components/admin/profile/profile.view.html',
@@ -98,6 +104,12 @@
         templateUrl: 'app/components/mentor/dashboard/dashboard.view.html',
         controller: 'MentorDashboardController',
         controllerAs: 'mentorDashCtrl'
+      })
+      .state('mentor.report', {
+        url: '/mentor/report',
+        templateUrl: 'app/shared/report/report.view.html',
+        controller: 'ReportController',
+        controllerAs: 'reportCtrl'
       })
       .state('mentor.profile', {
         url: '/mentor/profile',
