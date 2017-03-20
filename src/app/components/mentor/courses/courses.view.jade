@@ -3,14 +3,11 @@ section
   table.table.table-hover.table-striped
     thead
       tr.table-thead
-        th Codigo
-        th Nome
-        th Período
-        th Ação
+        th(ng-repeat="head in crsCtrl.tableHead track by $index") {{head}}
     tbody
-      tr(ng-repeat="course in crsCtrl.allCourses track by course.id")
-        td {{course.code}}
-        td {{course.name}}
-        td {{course.period}}
+      tr(ng-repeat="course in crsCtrl.allCourses track by $index")
+        td {{::course.code}}
+        td {{::course.name}}
+        td {{::course.period}}
         td
           label#btn-todo.btn.btn-info.btn-xs(ng-click="crsCtrl.openCourseModal(course)") editar

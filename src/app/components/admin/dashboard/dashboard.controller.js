@@ -8,15 +8,16 @@
 	/** @ngInject */
 	function AdminDashboardController(toastr, adminService) {
 		var vm = this;
-
+		vm.labels = ["Finalizados", "Não Finalizados"];
+		vm.array = [];
 		init();
 
 		function init() {
 			adminService.validateProfile();
+			adminService.dashboard.global().then(function(response) {
+				vm.array = angular.copy(response);
+			});
 		}
-		vm.labels = ["Finalizados", "Não Finalizados"];
-		vm.array = [{"level":"Fatec","values":[80, 20]},
-								{"level":"Etec","values":[57, 43]}]
 	}
 
 })();

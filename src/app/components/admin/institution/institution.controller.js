@@ -11,7 +11,8 @@
 		vm.institutionDetails = null;
 		vm.checkboxPassword = false;
     vm.showPassword = {"true" : "text", "false" : "password"};
-		vm.allLevels = ["TÉCNICO", "SUPERIOR"];
+		vm.allLevels = ["TECHNICAL", "SUPERIOR"];
+		vm.tableHead = ["Código", "CNPJ", "Razão", "Cidade", "Ação"];
 
     init();
 

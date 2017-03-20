@@ -40,8 +40,6 @@
           return response || $q.when(response);
         },
         responseError: function (response) {
-          $log.error("..HTTP_INTERCEPTOR responseError..");
-          $log.error(response);
           if (!(--numLoadings)) {
             $rootScope.$broadcast("loader_hide");
           }

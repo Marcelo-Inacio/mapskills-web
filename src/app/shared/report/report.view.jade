@@ -13,7 +13,7 @@ section
 
       select.form-control(ng-model="reportCtrl.courseSelected", ng-disabled="!reportCtrl.institutionSelected"
                           , ng-options="course.name for course in reportCtrl.institutionSelected.courses track by course.code")
-        option(value='') --- Todos ---      
+        option(value='') --- Todos ---
       
     .col-lg-4.col-md-2.col-xs-6.aligner-item
       input.form-control(type="text", ng-model="reportCtrl.filter.startDate", maxlength="6", minlength="6", placeholder="ano/semestre inicial")

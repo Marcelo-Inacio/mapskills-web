@@ -26,17 +26,11 @@
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 					params: {username: loginObj.username, password: loginObj.password}
 				})
-				.success(function(status) {
-					$log.log("sucesso" + status);
-				})
-				.error(function(status) {
-						$log.log("error "+ status);
-					})
 				.then(function success(response) {
 						var token = response.headers("Authorization");
 						Session.createToken(token);
 						deferred.resolve(response);
-				}, function error(response){
+				}, function error(response) {
 						deferred.resolve(response);
 				});
 				return deferred.promise;

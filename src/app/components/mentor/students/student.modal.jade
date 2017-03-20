@@ -1,14 +1,26 @@
 .section.form-group
   .modal-header
   .modal-body
-    .row
-      .col-md-12
-        label Nome:
-        input.form-control(type="text", ng-model="modalCtrl.student.name")
     .form-group.row
+        .col-md-12
+          label Nome:
+          input.form-control(type="text", ng-model="modalCtrl.student.name")
+    .form-group.row(ng-if="!modalCtrl.isTechnical")
       .col-md-12
         label RA:
-        input.form-control(type="text", ng-model="modalCtrl.student.ra", maxlength="13")
+        input.form-control(type="text", ng-model="modalCtrl.student.ra", minlength="13", maxlength="13")
+    .form-group.row(ng-if="modalCtrl.isTechnical")
+      .col-md-12
+        label RM:
+        input.form-control(type="text", ng-model="modalCtrl.student.ra", minlength="5", maxlength="5")
+    .form-group.row(ng-if="modalCtrl.isTechnical")
+      .col-md-12
+        label Curso:
+        //-select.form-control(ng-model="modalCtrl.student.ra")
+        select.form-control(ng-model="modalCtrl.courseSelected"
+                            , ng-change=""
+                            , ng-options="course.name for course in modalCtrl.allCourses track by course.code")
+          option(value='') --- Selecione um curso ---
     .form-group.row
       .col-md-12
         label Telefone:

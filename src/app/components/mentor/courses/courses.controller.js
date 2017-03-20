@@ -9,7 +9,9 @@
 	function CourseController($log, toastrService, mentorService, modalService, loginService) {
 		var vm = this;
 		vm.periodSelected = null;
+		vm.allCourses = [];
 		vm.allPeriods = ["MATUTINO", "VESPERTINO", "NOTURNO", "EaD"];
+		vm.tableHead = ["Codigo", "Nome", "Período", "Ação"];
 
     init();
 
@@ -25,7 +27,7 @@
 
 		function loadAllCourses(loadFromServer) {
 			mentorService.loadAllCourses(loadFromServer).then(function(response) {
-				vm.allCourses = response;
+				vm.allCourses = angular.copy(response);
 			});
 		}
 
@@ -37,7 +39,7 @@
     vm.saveCourse = function(course) {
 			course.institutionCode = loginService.getUserLogged().institutionCode;
       mentorService.saveCourse(course).then(function(status) {
-				if(status == 200) {
+				if(status === 200) {
 					loadAllCourses(true);
 				}
 				toastrService.showToastr(status);

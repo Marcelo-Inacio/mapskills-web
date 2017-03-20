@@ -6,7 +6,7 @@
 		.controller('ReportController', ReportController);
 
 	/** @ngInject */
-	function ReportController($log, adminService, Session, reportService, toastr) {
+	function ReportController($log, adminService, Session, HelperService, reportService, toastr) {
 		var vm = this;
     vm.isAdmin = true; //DONE recuperar perfil do usuário
     vm.filter = {level: null, institutionCode: null, courseCode: null, startDate: null, endDate: null};
@@ -55,19 +55,15 @@
 		}
     // preenche o filtro para realização da pesquisa ou download do csv
     var fillFilter = function() {
-      vm.filter["level"] = isUndefinedOrNull(vm.institutionSelected) ? null : angular.copy(vm.institutionSelected.level);
-      vm.filter["institutionCode"] = isUndefinedOrNull(vm.institutionSelected) ? null : angular.copy(vm.institutionSelected.code);
-      vm.filter["courseCode"] = isUndefinedOrNull(vm.courseSelected) ? null : angular.copy(vm.courseSelected.code);
+      vm.filter["level"] = HelperService.isUndefinedOrNull(vm.institutionSelected) ? null : angular.copy(vm.institutionSelected.level);
+      vm.filter["institutionCode"] = HelperService.isUndefinedOrNull(vm.institutionSelected) ? null : angular.copy(vm.institutionSelected.code);
+      vm.filter["courseCode"] = HelperService.isUndefinedOrNull(vm.courseSelected) ? null : angular.copy(vm.courseSelected.code);
 			vm.filter["startDate"] = vm.filter.startDate === "" ? null : angular.copy(vm.filter.startDate);
 			vm.filter["endDate"] = vm.filter.endDate === "" ? null : angular.copy(vm.filter.endDate);
     }
 
 		var verifyIsAdmin = function(user) {
 			return user.profile === "ADMINISTRATOR";
-		}
-
-		var isUndefinedOrNull = function(arg) {
-			return angular.isUndefined(arg) || arg === null;
 		}
 
 		init();

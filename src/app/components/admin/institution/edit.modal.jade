@@ -4,11 +4,11 @@
     .form-group.row
       .col-md-12
         label Código:
-        input.form-control(type='text', ng-model="modalCtrl.institutionDetails.code")
+        input.form-control(type='text', ng-model="modalCtrl.institutionDetails.code", maxlength="3")
     .form-group.row
       .col-md-12
         label CNPJ:
-        input.form-control(type='text', ng-model="modalCtrl.institutionDetails.cnpj")
+        input.form-control(type='text', ng-model="modalCtrl.institutionDetails.cnpj", maxlength="14")
     .form-group.row
       .col-md-12
         label Razão Social:

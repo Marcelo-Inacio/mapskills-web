@@ -6,9 +6,10 @@
 		.controller('MentorStudentController', MentorStudentController);
 
 	/** @ngInject */
-	function MentorStudentController($log, toastrService, mentorService, modalService, downloadService) {
+	function MentorStudentController($log, toastrService, mentorService, modalService, downloadService, Session, HelperService) {
 		var vm = this;
 		vm.allStudents = null;
+		vm.isTechnical;
 		vm.headerTable = [{label: "Nome", model: "name"}, {label: "RA", model: "ra"},
 											{label: "Curso", model: "course"}, {label: "Concluído", model: "completed"},
 											{label: "Ação", model: "action"}];
@@ -17,6 +18,7 @@
 
     function init() {
 			mentorService.validateProfile();
+			vm.isTechnical = Session.refreshUserSession().institutionLevel === "TECHNICAL";
 			loadAllStudents(true);
 			loadAllCourses();
       vm.student = mentorService.getObjectCurrent();
@@ -55,14 +57,19 @@
 		}
 
     vm.saveStudent = function(student) {
-			if(!validateStudent(student)) {
+			if(vm.isTechnical && !HelperService.isUndefinedOrNull(student)) {
+				student.ra = angular.copy(formatterRA(student));
+			}
+			if(validateStudent(student)) {
 				toastrService.showToastr(400);
+				student.ra = "";
 				return;
 			}
       mentorService.saveStudent(student).then(function(status) {
 				postVerify(status);
 				loadAllStudents(true);
 			});
+
     }
 
 		vm.sendFile = function(file) {
@@ -73,20 +80,26 @@
 /** verifica o status da requisição para o retorno
 dos funções saveStudent e sendFile */
 		function postVerify(status) {
-			if(status == 200) {
-				$log.log('status '+ status);
+			if(status === 200) {
 				vm.closeModal();
 			}
 			toastrService.showToastr(status);
 		}
 
 		function validateStudent(student) {
-			if(angular.isUndefined(student) || student === null || angular.isUndefined(student.name) || angular.isUndefined(student.ra) || angular.isUndefined(student.username)) {
-				return false;
+			return (HelperService.isUndefinedOrNull(student) || HelperService.isUndefinedOrNull(student.name) ||
+				HelperService.isUndefinedOrNull(student.ra) || HelperService.isUndefinedOrNull(student.username) ||
+				HelperService.isUndefinedOrNull(student.phone) || student.ra.length < 13);
+		}
+//função responsavel por preparar o RA caso seja um aluno da ETEC
+		function formatterRA(student) {
+			if(HelperService.isUndefinedOrNull(student) || HelperService.isUndefinedOrNull(vm.courseSelected)) {
+				return "";
 			}
-			if(student.name && student.ra.length === 13 && student.phone && student.username) {
-				return true;
-			}
+			var year = new Date().getFullYear().toString().substring(2);
+			var semester = new Date().getMonth() < 6 ? 1 : 2;
+			var raFormatted = vm.courseSelected.institutionCode + vm.courseSelected.code + year + semester + student.ra;
+			return raFormatted;
 		}
 
 		vm.orderBy = function(field) {
