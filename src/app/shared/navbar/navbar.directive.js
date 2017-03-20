@@ -18,7 +18,7 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController(moment, $location, storageService, loginService) {
+    function NavbarController($location, $state, loginService) {
       var vm = this;
       vm.show_menu;
       vm.label_cps = "CENTRO PAULA SOUZA";
@@ -27,9 +27,14 @@
 
       /** recupera o usuario logado */
       function init() {
+        var widthBrowser = $(window).width();
         var path = $location.path().toLowerCase();
-        vm.show_menu = ((path == "/login") || (path == "/student/result") || (path == "/student/game"));
-        vm.user = storageService.getItem('user');
+        vm.show_menu = (((path === "/login") || (path === "/student/result") || (path === "/student/game")) && widthBrowser < 768);
+        vm.user = loginService.getUserLogged();
+      }
+
+      vm.details = function() {
+        $state.go("^.profile");
       }
 
       vm.logout = function() {

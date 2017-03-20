@@ -6,7 +6,7 @@
 		.controller('GameController', GameController);
 
 	/** @ngInject */
-	function GameController($document, $log, $state, studentService, storageService, loginService) {
+	function GameController($log, $state, studentService, Session) {
 		var vm = this;
 		var student;
 		var sizeScenes;
@@ -17,18 +17,16 @@
 		init();
 		/** função principal que recupera todas questoes ainda não jogadas pelo aluno */
 		function init() {
-			//loginService.validateProfile("STUDENT");
-			student = storageService.getItem('user');
+			studentService.validateProfile();
+			student = Session.refreshUserSession();
 			getHistoryByStudentId(student.id);
-			/** params: alunoId */
 		}
 
 		function getHistoryByStudentId(studentId) {
 			studentService.getHistory(studentId).then(function(response) {
 				vm.history = response;
-				vm.background = {"background-image" : "url(" + vm.history[vm.index].background.filename +")"};
 				sizeScenes = vm.history.length;
-				$log.log(sizeScenes);
+				verifyGameIsActived();
 			});
 		}
 
@@ -42,7 +40,9 @@
 			answerContext.skillValue = alternative.skillValue;
 
 			studentService.sendAnswer(answerContext).then(function(status) {
-				if(status == 200) vm.nextScene();
+				if(status == 200) {
+					vm.nextScene();
+				}
 			});
 		}
 
@@ -74,6 +74,16 @@
 			$log.info('fora');
 			var opic = document.getElementById("infobox");
 			opic.className="infoclose";
+		}
+
+		var verifyGameIsActived = function () {
+			if(student.isCompleted === true) {
+				$state.go("^.result");
+			} else if (sizeScenes === 0) {
+				$state.go("^.noGame");
+			} else {
+				vm.background = {"background-image" : "url(" + vm.history[vm.index].background.filename +")"};
+			}
 		}
 
 	}

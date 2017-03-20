@@ -6,17 +6,21 @@
 		.controller('InstitutionController', InstitutionController);
 
 	/** @ngInject */
-	function InstitutionController($log, toastrService, adminService, modalService) {
+	function InstitutionController($log, toastrService, adminService, modalService, downloadService) {
 		var vm = this;
 		vm.institutionDetails = null;
 		vm.checkboxPassword = false;
     vm.showPassword = {"true" : "text", "false" : "password"};
+		vm.allLevels = ["TECHNICAL", "SUPERIOR"];
+		vm.tableHead = ["Código", "CNPJ", "Razão", "Cidade", "Ação"];
 
     init();
 
     function init() {
+			adminService.validateProfile();
 			loadAllInstitutions(false);
       vm.institutionDetails = adminService.getObjectCurrent();
+			$log.log(vm.institutionDetails);
 			adminService.setObjectCurrent(null);
     }
 
@@ -28,22 +32,22 @@
 
 		vm.openDetailsModal = function(institution) {
 			adminService.getInstitutionDetails(institution.id).then(function() {
-				modalService.openModal('/app/components/admin/institution/details.modal.html', 'InstitutionController');
+				modalService.openModal('app/components/admin/institution/details.modal.html', 'InstitutionController');
 			});
 		}
 
     vm.openEditModal = function(institution) {
 			if(institution != null) {
-	      adminService.getInstitutionDetails(institution.id).then(function() {
-					modalService.openModal('/app/components/admin/institution/edit.modal.html', 'InstitutionController');
+				adminService.getInstitutionDetails(institution.id).then(function() {
+					modalService.openModal('app/components/admin/institution/edit.modal.html', 'InstitutionController');
 				});
 			} else {
-				modalService.openModal('/app/components/admin/institution/edit.modal.html', 'InstitutionController');
+				modalService.openModal('app/components/admin/institution/edit.modal.html', 'InstitutionController');
 			}
 		}
 
 		vm.openFileModal = function() {
-      modalService.openModal('/app/shared/modal/file.modal.html', 'InstitutionController');
+      modalService.openModal('app/shared/modal/file.modal.html', 'InstitutionController');
 		}
 
     vm.saveInstitution = function(institution) {
@@ -57,13 +61,17 @@
     }
 
 		vm.sendFile = function(file) {
-      adminService.sendFile(file).then(function(status) {
+      adminService.sendFile(file).then(function() {
 				vm.closeModal();
 			});
     }
 
 		vm.closeModal = function() {
 			modalService.closeModal();
+		}
+
+		vm.downloadTemplate = function() {
+			downloadService.template("institution.xlsx");
 		}
 
 	}

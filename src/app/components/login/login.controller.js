@@ -6,22 +6,27 @@
 		.controller('LoginController', LoginController);
 
 	/** @ngInject */
-	function LoginController(toastr, loginService) {
+	function LoginController(toastr, toastrService, cfpLoadingBar, loginService) {
 		var vm = this;
-		//var urlPath = getDefaultUrlPath();
-
 		vm.userLogin = {username: null, password: null};
 
 		/** realiza login na aplicação */
-		vm.login = function (login) {
-			if(login.username == null || login.password == null) {
+		vm.login = function (loginObj) {
+			if(loginObj.username == null || loginObj.password == null) {
 				messageError();
 				return;
 			}
-			var jsonData = angular.toJson(login);
-			loginService.login(jsonData).then(function(response) {
-				if(response.status != 200) messageError();
-				else loginService.setUserContext(response.data, "_#tok$n#_");
+			loginService.login(loginObj).then(function(response) {
+				if(response.status !== 200) {
+					cfpLoadingBar.complete();
+					toastrService.showToastr(response.status);
+				}
+				return response;
+			}).then(function(response) {
+				if(response.status !== 200) {
+					return;
+				}
+				loginService.setUserContext(loginObj.username);
 			});
 		}
 		/** realiza logout na aplicação, limpando os registros do usuario*/

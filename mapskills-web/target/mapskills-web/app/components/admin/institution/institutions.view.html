@@ -1,0 +1,28 @@
+
+<section>
+  <label id="btn-todo" ng-click="insCtrl.openEditModal(null)" class="btn btn-success btn-md botton-new">novo</label>
+  <label id="btn-todo" ng-click="insCtrl.openFileModal()" class="btn btn-success btn-md botton-new"><i class="fa fa-file-excel-o ico-sidebar"></i>importar excel</label>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr class="table-thead">
+        <th>Codigo</th>
+        <th>CNPJ</th>
+        <th>Razão Social</th>
+        <th>Cidade</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="institution in insCtrl.allInstitutions track by institution.id">
+        <td style="text-align: center">{{institution.code}}</td>
+        <td>{{institution.cnpj}}</td>
+        <td>{{institution.company}}</td>
+        <td>{{institution.city}}</td>
+        <td>
+          <label id="btn-todo" ng-click="insCtrl.openDetailsModal(institution)" class="btn btn-info btn-xs">detalhes</label>
+          <label id="btn-todo" ng-click="insCtrl.openEditModal(institution)" class="btn btn-info btn-xs">editar</label>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

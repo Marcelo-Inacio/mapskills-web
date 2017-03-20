@@ -6,12 +6,13 @@
 		.controller('MentorThemeController', MentorThemeController);
 
 	/** @ngInject */
-	function MentorThemeController($log, toastrService, mentorService, storageService) {
+	function MentorThemeController($log, toastrService, mentorService, loginService) {
 		var vm = this;
 		var themeIdCurrent;
 		vm.themeCurrent;
 
 		var init = function() {
+			mentorService.validateProfile();
 			loadThemeCurrent();
 		}
 
@@ -35,7 +36,7 @@ o que está habilitado para o instituição */
 		}
 
 		function loadThemeCurrent() {
-			var institutionCode = 146;//storageService.getItem('user').institutionCode;
+			var institutionCode = loginService.getUserLogged().institutionCode;
 			mentorService.loadThemeCurrent(institutionCode).then(function(response) {
 				themeIdCurrent = response;
 				loadAllThemes();
@@ -43,7 +44,7 @@ o que está habilitado para o instituição */
 		}
 
 		vm.updateThemeIdCurrent = function() {
-			var institutionCode = 146;//storageService.getItem('user').institutionCode;
+			var institutionCode = loginService.getUserLogged().institutionCode;
 			mentorService.updateThemeIdCurrent(institutionCode, themeIdCurrent).then(function(status) {
 				toastrService.showToastr(status);
 			});
@@ -51,7 +52,7 @@ o que está habilitado para o instituição */
 
 /** manipula os switchs para que fique somente um ATIVO
 ou todos DESATIVADOS  */
-		vm.setThemeCurrent = function(theme, index) {
+		vm.setThemeCurrent = function(theme) {
 			if(themeIdCurrent == theme.id) {
 				themeIdCurrent = 0;
 			}

@@ -8,7 +8,7 @@
     .form-group.row
       .col-md-12
         label Descrição:
-        input.form-control(type='text', ng-model="modalCtrl.skill.description")
+        textarea(rows='5', cols='50', placeholder='Descreva aqui...', ng-model="modalCtrl.skill.description")
   .modal-footer
     button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveSkill(modalCtrl.skill)") salvar
     button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

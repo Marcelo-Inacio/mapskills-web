@@ -3,14 +3,11 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('mentorService', ['$log', '$http', '$q', mentorService]);
+		.factory('mentorService', ['$log', '$http', '$q', 'loginService', 'HelperService', mentorService]);
 
 		/** @ngInject */
-		function mentorService($log, $http, $q) {
+		function mentorService($log, $http, $q, loginService, HelperService) {
 			return {
-				loadAllThemesEnabled : _loadAllThemesEnabled,
-        loadAllResultsStudentsByCourse : _loadAllResultsStudentsByCourse,
-
 				loadAllStudents : _loadAllStudents,
 				loadAllCourses : _loadAllCourses,
 				loadAllThemesActivated : _loadAllThemesActivated,
@@ -19,6 +16,7 @@
 				saveCourse : _saveCourse,
 				sendFile : _sendFile,
 				updateThemeIdCurrent : _updateThemeIdCurrent,
+				validateProfile : _validateProfile,
 
 				getObjectCurrent : _getObjectCurrent,
 				setObjectCurrent : _setObjectCurrent
@@ -29,7 +27,7 @@
 			var objectCurrent;
 
 			function getFullRestApi(uri) {
-				return "http://localhost:8080/mapskills/rest".concat(uri);
+				return HelperService.getFullRestApi("/institution".concat(uri));
 			}
 
 			function _getObjectCurrent() {
@@ -40,26 +38,17 @@
 				objectCurrent = object;
 			}
 
-      function _loadAllStudentsByCourse() {
-        return $http.get('./app/components/mentor/repository/studentsByCourse.json');
-      }
-
-			/** recupera todos os temas ativados */
-			function _loadAllThemesEnabled() {
-				return $http.get('./app/components/admin/repository/themes.json');
+			function _validateProfile() {
+				loginService.validateProfile("MENTOR");
 			}
-
-			function _loadAllResultsStudentsByCourse() {
-        return $http.get('./app/components/mentor/repository/resultsStudentsByCourse.json');
-      }
 
 			function _loadAllStudents(loadFromServer) {
 				var deferred = $q.defer();
 				if(allStudentsCached != null && !loadFromServer) {
 					deferred.resolve(allStudentsCached);
 				} else {
-					var institutionCode = 146;//storageService.getItem('user').institutionCode;
-					var uri = getFullRestApi("/institution/").concat(institutionCode).concat("/students");
+					var institutionCode = loginService.getUserLogged().institutionCode;
+					var uri = getFullRestApi("/").concat(institutionCode).concat("/students");
 					$http.get(uri).then(function(response) {
 						allStudentsCached = response.data;
 						deferred.resolve(response.data);
@@ -73,8 +62,8 @@
 				if(allCoursesCached != null && !loadFromServer) {
 					deferred.resolve(allCoursesCached);
 				} else {
-					var institutionCode = 146;//storageService.getItem('user').institutionCode;
-					var uri = getFullRestApi("/institution/").concat(institutionCode).concat("/courses");
+					var institutionCode = loginService.getUserLogged().institutionCode;
+					var uri = getFullRestApi("/").concat(institutionCode).concat("/courses");
 					$log.info(uri);
 					$http.get(uri).then(function(response) {
 						allCoursesCached = response.data;
@@ -95,7 +84,7 @@
 
 			function _loadThemeCurrent(institutionCode) {
 				var deferred = $q.defer();
-				var uri = getFullRestApi("/institution/").concat(institutionCode).concat("/theme/current");
+				var uri = getFullRestApi("/").concat(institutionCode).concat("/theme/current");
 				$log.log(uri);
 				$http.get(uri).then(function(response) {
 					deferred.resolve(response.data);
@@ -104,6 +93,7 @@
 			}
 
 			function _saveStudent(student) {
+				$log.log(student);
 				var deferred = $q.defer();
 				var jsonData = angular.toJson(student);
 				var uri = getFullRestApi("/student");
@@ -111,10 +101,12 @@
         $http({
             method: "POST", url: uri,
             data: jsonData,	headers: {"Content-Type": "application/json"}
-        }).
-         then(function (response) {
+        })
+				.then(function success(response) {
            deferred.resolve(response.status);
-         });
+         }, function error(response) {
+					 deferred.resolve(response.status);
+				 });
         return deferred.promise;
 			}
 
@@ -149,7 +141,7 @@
 
 			function _updateThemeIdCurrent(institutionCode, themeId) {
 				var deferred = $q.defer();
-				var uri = getFullRestApi("/institution/").concat(institutionCode).concat("/theme/").concat(themeId);
+				var uri = getFullRestApi("/").concat(institutionCode).concat("/theme/").concat(themeId);
 				$log.log(uri);
 				$http.put(uri).then(function (response) {
            deferred.resolve(response.status);

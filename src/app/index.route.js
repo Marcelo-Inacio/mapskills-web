@@ -29,6 +29,16 @@
         controller: 'StudentResultsController',
         controllerAs: 'resultCtrl'
       })
+      .state('student.profile', {
+        url: '/student/profile',
+        templateUrl: 'app/components/student/profile/profile.view.html',
+        controller: 'StudentProfileController',
+        controllerAs: 'studentProfileCtrl'
+      })
+      .state('student.noGame', {
+        url: '/student/no_game',
+        templateUrl: 'app/components/student/game/no_game.view.html'
+      })
       .state('admin', {
         templateUrl: 'app/components/admin/admin.html'
       })
@@ -36,7 +46,31 @@
         url: '/admin/dashboard',
         templateUrl: 'app/components/admin/dashboard/dashboard.view.html',
         controller: 'AdminDashboardController',
-        controllerAs: 'admCtrl'
+        controllerAs: 'admDashCtrl'
+      })
+      .state('admin.report', {
+        url: '/admin/report',
+        templateUrl: 'app/shared/report/report.view.html',
+        controller: 'ReportController',
+        controllerAs: 'reportCtrl'
+      })
+      .state('admin.profile', {
+        url: '/admin/profile',
+        templateUrl: 'app/components/admin/profile/profile.view.html',
+        controller: 'AdminProfileController',
+        controllerAs: 'adminProfileCtrl'
+      })
+      .state('admin.fatec', {
+        url: '/admin/dashboard/fatec',
+        templateUrl: 'app/components/admin/dashboard/fatec/fatec.view.html',
+        controller: 'AdminFatecController',
+        controllerAs: 'fatecCtrl'
+      })
+      .state('admin.etec', {
+        url: '/admin/dashboard/etec',
+        templateUrl: 'app/components/admin/dashboard/etec/etec.view.html',
+        controller: 'AdminEtecController',
+        controllerAs: 'etecCtrl'
       })
       .state('admin.themes', {
         url: '/admin/themes',
@@ -67,9 +101,21 @@
       })
       .state('mentor.dashboard', {
         url: '/mentor/dashboard',
-        templateUrl: 'app/components/mentor/statisticsStudentByCourse.view.html',
-        controller: 'StatisticsController',
-        controllerAs: 'stcCtrl'
+        templateUrl: 'app/components/mentor/dashboard/dashboard.view.html',
+        controller: 'MentorDashboardController',
+        controllerAs: 'mentorDashCtrl'
+      })
+      .state('mentor.report', {
+        url: '/mentor/report',
+        templateUrl: 'app/shared/report/report.view.html',
+        controller: 'ReportController',
+        controllerAs: 'reportCtrl'
+      })
+      .state('mentor.profile', {
+        url: '/mentor/profile',
+        templateUrl: 'app/components/mentor/profile/profile.view.html',
+        controller: 'MentorProfileController',
+        controllerAs: 'mentorProfileCtrl'
       })
       .state('mentor.courses', {
         url: '/mentor/courses',

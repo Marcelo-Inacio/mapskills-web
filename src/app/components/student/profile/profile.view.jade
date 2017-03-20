@@ -1,0 +1,59 @@
+article.container
+  .row
+    .col-lg-12
+      .panel.panel-primary
+        .panel-heading Meus Dados
+        .panel-body.panel-radar
+          .row.aligner
+            .col-md-4
+              label Nome : {{studentProfileCtrl.user.student.name}}
+            .col-md-4
+              label RA : {{studentProfileCtrl.user.student.ra}}
+            .col-md-4
+              label Telefone : {{studentProfileCtrl.user.student.phone}}
+          .row.aligner
+            .col-md-4
+              label E-mail : {{studentProfileCtrl.user.student.username}}
+            .col-md-4
+              .row.aligner(style="justify-content: flex-start")
+                .col-md-3
+                  label Senha:
+                .col-md-6
+                  input.form-control(type='password', ng-model="studentProfileCtrl.user.student.password", placeholder="nova senha", autofocus)
+            .col-md-4
+              label#btn-todo.btn.btn-info.btn-md(ng-click="studentProfileCtrl.updatePassword(studentProfileCtrl.user.student)") salvar
+  .row
+    .col-lg-12
+      .panel.panel-primary
+        .panel-heading Meu Curso
+        .panel-body.panel-radar
+          .row.aligner
+            .col-md-4
+              label Código : {{studentProfileCtrl.user.course.code}}
+            .col-md-4
+              label Nome: {{studentProfileCtrl.user.course.name}}
+            .col-md-4
+              label Período: {{studentProfileCtrl.user.course.period}}
+            
+  .row
+    .col-lg-12
+      .panel.panel-primary
+        .panel-heading Minha Instituição
+        .panel-body.panel-radar
+          .row.aligner
+            .col-md-3
+              label Código : {{studentProfileCtrl.user.institution.code}}
+            .col-md-3
+              label Razão Social : {{studentProfileCtrl.user.institution.company}}
+            .col-md-3
+              label CNPJ : {{studentProfileCtrl.user.institution.cnpj}}
+            .col-md-3
+              label Cidade : {{studentProfileCtrl.user.institution.city}}
+  
+  .row
+    label#btn-todo.btn.btn-primary.btn-md.botton-new(ui-sref="^.result", ng-if="studentProfileCtrl.user.student.completed")
+      i.fa.fa-gamepad.ico-sidebar
+      | Meu Resultado
+    label#btn-todo.btn.btn-primary.btn-md.botton-new(ui-sref="^.game")
+      i.fa.fa-gamepad.ico-sidebar
+      | Jogo

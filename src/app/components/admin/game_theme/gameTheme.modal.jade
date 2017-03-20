@@ -3,8 +3,8 @@
   .modal-body
     .form-group.row
       .col-md-12
-        label Descrição:
-        input.form-control(type='text', ng-model="modalCtrl.theme.description")
+        label Nome:
+        input.form-control(type='text', ng-model="modalCtrl.theme.name")
   .modal-footer
     button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveTheme(modalCtrl.theme)") salvar
     button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

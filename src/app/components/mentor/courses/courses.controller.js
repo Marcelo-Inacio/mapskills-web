@@ -6,14 +6,17 @@
 		.controller('CourseController', CourseController);
 
 	/** @ngInject */
-	function CourseController($log, toastrService, mentorService, modalService, storageService) {
+	function CourseController($log, toastrService, mentorService, modalService, loginService) {
 		var vm = this;
 		vm.periodSelected = null;
+		vm.allCourses = [];
 		vm.allPeriods = ["MATUTINO", "VESPERTINO", "NOTURNO", "EaD"];
+		vm.tableHead = ["Codigo", "Nome", "Período", "Ação"];
 
     init();
 
     function init() {
+			mentorService.validateProfile();
 			loadAllCourses(false);
 			if(mentorService.getObjectCurrent()) {
 				vm.course = mentorService.getObjectCurrent();
@@ -24,19 +27,19 @@
 
 		function loadAllCourses(loadFromServer) {
 			mentorService.loadAllCourses(loadFromServer).then(function(response) {
-				vm.allCourses = response;
+				vm.allCourses = angular.copy(response);
 			});
 		}
 
     vm.openCourseModal = function(course) {
       mentorService.setObjectCurrent(course);
-      modalService.openModal('/app/components/mentor/courses/course.modal.html', 'CourseController');
+      modalService.openModal('app/components/mentor/courses/course.modal.html', 'CourseController');
 		}
 
     vm.saveCourse = function(course) {
-			course.institutionCode = 146;//storageService.getItem('user').institutionCode;
+			course.institutionCode = loginService.getUserLogged().institutionCode;
       mentorService.saveCourse(course).then(function(status) {
-				if(status == 200) {
+				if(status === 200) {
 					loadAllCourses(true);
 				}
 				toastrService.showToastr(status);

@@ -12,14 +12,16 @@
 		vm.allScenes = null;
 		vm.allSkills = null;
 		vm.skillSelected = null;
+		vm.scene = {"question":null};
 
 		vm.info_tooltip = "Arraste as linhas da tabela para reordenar a exibição das cenas do jogo";
 
 		init();
 		/** faz requisição ao backend de todas as cenas de um tema */
 		function init() {
+			adminService.validateProfile();
 			themeId = $stateParams.themeId;
-			loadScenesByThemeId(themeId);
+			loadScenesByThemeId(themeId, false);
 			loadAllSkills(false);
 			vm.scene = adminService.getObjectCurrent();
 			sceneVerify();
@@ -29,7 +31,6 @@
 		function sceneVerify() {
 			if(vm.scene != null) {
 				if(vm.scene.question === null) return;
-				$log.log("CENA É DIFERENTE DE NULO");
 				var id = vm.scene.question.skillId;
 				vm.skillSelected = adminService.getSkillById(id);
 			}
@@ -37,16 +38,16 @@
 
 		vm.openSceneModal = function(scene) {
 			adminService.setObjectCurrent(scene);
-			modalService.openModal('/app/components/admin/scenes/scene.modal.html', 'ScenesController');
+			modalService.openModal('app/components/admin/scenes/scene.modal.html', 'ScenesController');
 		}
 
 		vm.openQuestionModal = function(scene) {
 			adminService.setObjectCurrent(scene);
-			modalService.openModal('/app/components/admin/scenes/question.modal.html', 'ScenesController');
+			modalService.openModal('app/components/admin/scenes/question.modal.html', 'ScenesController');
 		}
 		/** carrega todas cenas de um tema */
-		function loadScenesByThemeId(themeId) {
-			adminService.loadScenesByThemeId(themeId).then(function(data) {
+		function loadScenesByThemeId(themeId, fromServer) {
+			adminService.loadScenesByThemeId(themeId, fromServer).then(function(data) {
 				vm.allScenes = data;
 			});
 		}
@@ -63,28 +64,45 @@
 		}
 /** NOVA CENA -> SALVAR (POST), ADD QUESTAO OU EDITAR -> UPDATE (PUT)*/
 		vm.saveScene = function(scene, skillId) {
-			if(scene.question == null) {
-				scene.question = null;
-			}	else if(skillId !== null) {
+			if(scene.question) {
+				$log.log(scene.question);
+				if(skillId === null) {
+					toastrService.showToastr(400);
+					return;
+				}
 				scene.question.skillId = skillId;
 			}
 			scene.gameThemeId = themeId;
 			adminService.saveScene(scene, "POST").then(function(status) {
-				loadScenesByThemeId(themeId);
+				$log.log(status);
+				toastrService.showToastr(status);
+				loadScenesByThemeId(themeId, true);
 				vm.closeModal();
 			});
 		}
 
 		vm.updateIndexScenes = function(allScenes) {
-			adminService.updateIndexScenes(allScenes);
+			adminService.updateIndexScenes(allScenes).then(function(status) {
+				toastrService.showToastr(status);
+			});
 		}
 
-		vm.deleteQuestion = function(questionId) {
-			adminService.deleteQuestion(questionId);
+		vm.deleteQuestion = function(sceneId) {
+			adminService.deleteQuestion(sceneId).then(function(status) {
+				loadScenesByThemeId(themeId, true);
+				toastrService.showToastr(status);
+			});
 		}
 
 		vm.deleteScene = function(sceneId) {
-			adminService.deleteScene(sceneId);
+			adminService.deleteScene(sceneId).then(function(status) {
+				loadScenesByThemeId(themeId, true);
+				toastrService.showToastr(status);
+			});
+		}
+
+		function verifyQuestion() {
+
 		}
 
 	}

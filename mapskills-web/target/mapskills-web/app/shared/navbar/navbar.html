@@ -1,0 +1,25 @@
+
+<nav role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header row">
+      <div ng-if="!vm.show_menu" class="col-xs-2 col-md-1">
+        <button type="button" class="navbar-toggle collapsed">
+          <ul><span uib-dropdown="" on-toggle="toggled(open)"><a id="simple-dropdown" href="" uib-dropdown-toggle=""><i class="fa fa-bars ico-sidebar"></i></a>
+              <ul uib-dropdown-menu="" aria-labelledby="simple-dropdown">
+                <li><a href=""><i class="fa fa-user-o ico-sidebar"></i>Competencias</a></li>
+              </ul></span></ul>
+        </button>
+      </div>
+      <div class="col-xs-5 col-md-7"><a>
+          <div class="logo-institution navbar-brand"><span ng-bind="vm.label_cps"></span></div></a></div>
+      <div class="col-xs-5 col-md-4">
+        <ul class="user-menu user-ico"><span uib-dropdown="" on-toggle="toggled(open)"><a id="simple-dropdown" href="" uib-dropdown-toggle=""><i class="fa fa-user-circle-o ico-sidebar"></i>{{vm.user.name}}
+              <div class="caret"></div></a>
+            <ul uib-dropdown-menu="" aria-labelledby="simple-dropdown" class="dropdown-menu menu-options">
+              <li><a href="" ng-click="vm.details()"><i class="fa fa-user-o ico-sidebar"></i>Perfil</a></li>
+              <li><a href="" ng-click="vm.logout()"><i class="fa fa-sign-out ico-sidebar"></i>Sair</a></li>
+            </ul></span></ul>
+      </div>
+    </div>
+  </div>
+</nav>

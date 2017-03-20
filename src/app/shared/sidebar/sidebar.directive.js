@@ -26,12 +26,10 @@
       var vm = this;
       vm.isCollapsed = true;
       vm.changeClass = changeClass;
-      vm.ngClass = {dashboard : "",
-                    institutions : "",
-                    themes : "",
-                    skills : "",
-                    students : "",
-                    statistics : ""};
+      vm.goPage = goPage;
+      vm.ngClass = {dashboard : "", institutions : "",
+                    themes : "", skills : "",
+                    students : "", report : ""};
 
     init();
     /**
@@ -44,6 +42,10 @@
          vm.ngClass[lastPage] = "null";
        }
        vm.ngClass[page] = "active";
+       goPage(page);
+     }
+
+     function goPage(page) {
        $state.go("^." + page);
      }
 

@@ -1,26 +1,38 @@
-.section
+.section.form-group
   .modal-header
   .modal-body
     .form-group.row
-      .col-md-12
-        label Nome:
-        input.form-control(type='text', ng-model="modalCtrl.student.name")
-    .form-group.row
+        .col-md-12
+          label Nome:
+          input.form-control(type="text", ng-model="modalCtrl.student.name")
+    .form-group.row(ng-if="!modalCtrl.isTechnical")
       .col-md-12
         label RA:
-        input.form-control(type='text', ng-model="modalCtrl.student.ra")
+        input.form-control(type="text", ng-model="modalCtrl.student.ra", minlength="13", maxlength="13")
+    .form-group.row(ng-if="modalCtrl.isTechnical")
+      .col-md-12
+        label RM:
+        input.form-control(type="text", ng-model="modalCtrl.student.ra", minlength="5", maxlength="5")
+    .form-group.row(ng-if="modalCtrl.isTechnical")
+      .col-md-12
+        label Curso:
+        //-select.form-control(ng-model="modalCtrl.student.ra")
+        select.form-control(ng-model="modalCtrl.courseSelected"
+                            , ng-change=""
+                            , ng-options="course.name for course in modalCtrl.allCourses track by course.code")
+          option(value='') --- Selecione um curso ---
     .form-group.row
       .col-md-12
         label Telefone:
-        input.form-control(type='text', ng-model="modalCtrl.student.phone")
+        input.form-control(type="text", ng-model="modalCtrl.student.phone", maxlength="11")
     .form-group.row
       .col-md-12
         label E-mail:
-        input.form-control(type='text', ng-model="modalCtrl.student.username")
-    .form-group.row
+        input.form-control(type="email", ng-model="modalCtrl.student.username")
+    .form-group.row(ng-show="modalCtrl.student.password != null")
       .col-md-12
         label Senha:
-        input.form-control(type='text', ng-model="modalCtrl.student.password")
+        input.form-control(type="password", ng-model="modalCtrl.student.password", placeholder="nova senha")
   .modal-footer
     button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveStudent(modalCtrl.student)") salvar
     button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

@@ -1,0 +1,13 @@
+section
+  .row
+    .col-lg-8.col-md-8.col-sm-12
+      .panel.panel-default
+        .panel-heading Etecs
+        .panel-body.panel-radar
+          canvas#base.chart-horizontal-bar(chart-data='etecCtrl.data', chart-labels='etecCtrl.codes', chart-series="etecCtrl.series", chart-options="etecCtrl.options")
+    .col-lg-4.col-md-4.col-sm-12
+      .panel.panel-default
+        .panel-heading Legenda
+        .panel-body.panel-radar
+          h5(ng-repeat="etec in etecCtrl.etecs")
+            {{etec.code}} - {{etec.company}}

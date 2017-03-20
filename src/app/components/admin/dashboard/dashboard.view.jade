@@ -1,3 +1,12 @@
 section
-  label
-    h4 WELL-COME
+  .row
+    .col-lg-3.col-md-3.col-sm-6.col-xs-6.col-lg-offset-2
+      .panel.panel-default
+        .panel-heading {{admDashCtrl.array[0].level}}
+        .panel-body.panel-radar
+          canvas#pie.chart.chart-pie(chart-data='admDashCtrl.array[0].values', chart-labels='admDashCtrl.labels', chart-options='admDashCtrl.options')
+    .col-lg-3.col-md-3.col-sm-6.col-xs-6.col-lg-offset-1
+      .panel.panel-default
+        .panel-heading {{admDashCtrl.array[1].level}}
+        .panel-body.panel-radar
+          canvas#pie.chart.chart-pie(chart-data='admDashCtrl.array[1].values', chart-labels='admDashCtrl.labels', chart-options='admDashCtrl.options')

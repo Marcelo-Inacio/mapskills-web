@@ -3,24 +3,30 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('studentService', ['$log', '$http', '$q', studentService]);
+		.factory('studentService', ['$log', '$http', '$q', 'HelperService', 'loginService', studentService]);
 
 		/** @ngInject */
-		function studentService($log, $http, $q) {
+		function studentService($log, $http, $q, HelperService, loginService) {
 			return {
 				sendAnswer : _sendAnswer,
 				sendEmail : _sendEmail,
 				getHistory : _getHistory,
-				getRadarResults : _getRadarResults
+				getRadarResults : _getRadarResults,
+				validateProfile : _validateProfile
 			};
 /** retorna url default do server  */
 		function getFullRestApi(uri) {
-			return "http://localhost:8080/mapskills/rest".concat(uri);
+			return HelperService.getFullRestApi("/student").concat(uri);
+		}
+
+		function _validateProfile() {
+			loginService.validateProfile("STUDENT");
 		}
 
 		function _getRadarResults(studentId) {
 			var deferred = $q.defer();
-			$http.get('./app/components/student/repository/result.json').success(function(response) {
+			var uri = getFullRestApi("/game/result/").concat(studentId);
+			$http.get(uri).success(function(response) {
 				deferred.resolve(response);
 			});
 			return deferred.promise;
@@ -51,5 +57,6 @@
 			/** realiza o envio de email ao fim do game */
 			function _sendEmail() {
 			}
+
 		}
 })();

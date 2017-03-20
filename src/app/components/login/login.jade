@@ -10,11 +10,8 @@ section.main-login
               .form-group
                 input.form-control(ng-model='loginCtrl.userLogin.username', placeholder='E-mail', name='email', type='email', autofocus='', required='')
               .form-group
-                input.form-control(ng-model='loginCtrl.userLogin.password', placeholder='Password', name='password', type='password', value='', required='')
-              .checkbox
-                label
-                  input(name='remember', type='checkbox', value='Remember Me')
-                  | Remember Me
+                input.form-control(ng-model='loginCtrl.userLogin.password', placeholder='Password', name='password', type='password', value='', required='' ng-enter="loginCtrl.login(loginCtrl.userLogin)")
+              
               label#btn-todo.btn.btn-primary(ng-click="loginCtrl.login(loginCtrl.userLogin)")
                 i.fa.fa-sign-in.ico-sidebar
                 | Entrar

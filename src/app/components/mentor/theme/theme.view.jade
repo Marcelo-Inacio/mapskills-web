@@ -10,8 +10,10 @@ section
         td {{::theme.id}}
         td {{::theme.description}}
         td
-          md-switch.md-secondary.botton-switch(ng-model='theme.active', ng-click="theCtrl.setThemeCurrent(theme, $index)",
+          md-switch.md-primary.botton-switch(ng-model='theme.active', ng-click="theCtrl.setThemeCurrent(theme)",
             aria-label="Atualizar")
       tr(ng-show="theCtrl.allThemes.length == 0")
         td NENHUM TEMA ATIVO
+        td
+        td
   label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="theCtrl.updateThemeIdCurrent()") salvar alterações

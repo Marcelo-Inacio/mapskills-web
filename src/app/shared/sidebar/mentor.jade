@@ -1,19 +1,9 @@
 #sidebar-collapse.col-sm-3.col-lg-2.sidebar
   ul.nav.menu
-    li(ng-class="sbCtrl.ngClass.dashboard", ng-click="sbCtrl.isCollapsed = !sbCtrl.isCollapsed; sbCtrl.changeClass('dashboard')")
+    li(ng-class="sbCtrl.ngClass.dashboard", ng-click="sbCtrl.changeClass('dashboard')")
       a
         i.fa.fa-tachometer.ico-sidebar
         |  Dashboard
-    div(uib-collapse='sbCtrl.isCollapsed')
-      ul.nav.menu
-        li
-          a.menu-chidren
-            i.fa.fa-line-chart.ico-sidebar
-            | Alunos X Curso
-        li
-          a.menu-chidren
-            i.fa.fa-pie-chart.ico-sidebar
-            | Grafico 2
     li(ng-class="sbCtrl.ngClass.students", ng-click="sbCtrl.changeClass('students')")
       a
         i.fa.fa-users.ico-sidebar
@@ -26,7 +16,7 @@
       a
         i.fa.fa-paint-brush.ico-sidebar
         |  Tema do Jogo
-    li(ng-class="sbCtrl.ngClass.progress", ng-click="sbCtrl.changeClass('progress')")
+    li(ng-class="sbCtrl.ngClass.report", ng-click="sbCtrl.changeClass('report')")
       a
         i.fa.fa-history.ico-sidebar
-        |  Andamento dos alunos
+        |  Relatório
