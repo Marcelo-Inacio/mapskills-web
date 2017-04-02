@@ -6,7 +6,7 @@
 		.controller('ReportController', ReportController);
 
 	/** @ngInject */
-	function ReportController($log, adminService, Session, HelperService, reportService, toastr) {
+	function ReportController($log, adminService, Session, HelperService, reportService) {
 		var vm = this;
     vm.isAdmin = true; //DONE recuperar perfil do usuário
     vm.filter = {level: null, institutionCode: null, courseCode: null, startDate: null, endDate: null};
@@ -27,7 +27,7 @@
 			} else {
 				vm.getInstitutionCourses(userLogged.institutionId);
 			}
-		};
+		}
 
     vm.download = function() {
       //chama do serviço de downloadService passando o filter

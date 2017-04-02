@@ -3,7 +3,7 @@
 
 	angular
 		.module("mapskillsWeb")
-		.factory("adminService", ["$log", "$http", "$q", "HelperService", "loginService", adminService]);
+		.factory("adminService", adminService);
 
 		/** @ngInject */
 		function adminService($log, $http, $q, HelperService, loginService) {
@@ -95,7 +95,7 @@
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function (response) {
-             deferred.resolve(response.status);
+             deferred.resolve(response);
          });
         return deferred.promise;
 			}
@@ -177,9 +177,9 @@
 						url: getFullRestApi("/scene/".concat(sceneId))
         })
 				.then(function (response) {
-             deferred.resolve(response.status);
-         });
-				 return deferred.promise;
+					deferred.resolve(response.status);
+				});
+				return deferred.promise;
 			}
 			/** traz todas cenas de um determinado tema pelo id e simula um cache
 			para em caso de reload não sofra com requisição ao server */

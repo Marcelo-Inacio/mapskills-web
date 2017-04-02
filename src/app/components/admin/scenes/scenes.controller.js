@@ -100,11 +100,6 @@
 				toastrService.showToastr(status);
 			});
 		}
-
-		function verifyQuestion() {
-
-		}
-
 	}
 
 })();

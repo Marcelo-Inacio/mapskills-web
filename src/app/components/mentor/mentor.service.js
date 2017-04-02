@@ -3,7 +3,7 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('mentorService', ['$log', '$http', '$q', 'loginService', 'HelperService', mentorService]);
+		.factory('mentorService', mentorService);
 
 		/** @ngInject */
 		function mentorService($log, $http, $q, loginService, HelperService) {
@@ -105,9 +105,9 @@
 				.then(function success(response) {
            deferred.resolve(response.status);
          }, function error(response) {
-					 deferred.resolve(response.status);
-				 });
-        return deferred.promise;
+					deferred.resolve(response.status);
+				});
+				return deferred.promise;
 			}
 
 			function _saveCourse(course) {
@@ -119,7 +119,7 @@
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function (response) {
-           deferred.resolve(response.status);
+           deferred.resolve(response);
          });
         return deferred.promise;
 			}

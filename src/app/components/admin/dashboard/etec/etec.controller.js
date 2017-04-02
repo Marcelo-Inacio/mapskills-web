@@ -12,7 +12,7 @@
 		vm.codes = [];
     vm.data = [];
 		vm.etecs = [];
-		vm.options = {scales: { xAxes: [{ stacked: true,}], yAxes: [{ stacked: true }]}};
+		vm.options = {scales: { xAxes: [{ stacked: true}], yAxes: [{ stacked: true }]}};
 		init();
 
 		function init() {
@@ -20,7 +20,7 @@
 			adminService.dashboard.level("TECHNICAL").then(function(response) {
 				vm.data = angular.copy(response.data);
 				vm.etecs = angular.copy(response.institutions);
-				angular.forEach(vm.etecs, function(value, key) {
+				angular.forEach(vm.etecs, function(value) {
 					vm.codes.push(value.code);
 				});
 			});

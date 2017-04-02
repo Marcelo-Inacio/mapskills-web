@@ -6,7 +6,7 @@
 		.controller('InstitutionController', InstitutionController);
 
 	/** @ngInject */
-	function InstitutionController($log, toastrService, adminService, modalService, downloadService) {
+	function InstitutionController($log, toastrService, adminService, modalService, downloadService, HelperService) {
 		var vm = this;
 		vm.institutionDetails = null;
 		vm.checkboxPassword = false;
@@ -20,7 +20,6 @@
 			adminService.validateProfile();
 			loadAllInstitutions(false);
       vm.institutionDetails = adminService.getObjectCurrent();
-			$log.log(vm.institutionDetails);
 			adminService.setObjectCurrent(null);
     }
 
@@ -37,11 +36,13 @@
 		}
 
     vm.openEditModal = function(institution) {
-			if(institution != null) {
+			if(institution !== null) {
 				adminService.getInstitutionDetails(institution.id).then(function() {
 					modalService.openModal('app/components/admin/institution/edit.modal.html', 'InstitutionController');
 				});
 			} else {
+				institution = {"mentors": [{"id": null, "name": null, "username": null}]};
+				adminService.setObjectCurrent(institution);
 				modalService.openModal('app/components/admin/institution/edit.modal.html', 'InstitutionController');
 			}
 		}
@@ -51,11 +52,16 @@
 		}
 
     vm.saveInstitution = function(institution) {
-      adminService.saveInstitution(institution).then(function(status) {
-				if(status == 200) {
+			if(validateInstitution(institution)) {
+				toastrService.showToastr(400);
+				return;
+			}
+      adminService.saveInstitution(institution).then(function(response) {
+				if(response.status == 200) {
+					vm.allInstitutions.push(response.data);
 					loadAllInstitutions(true);
 				}
-				toastrService.showToastr(status);
+				toastrService.showToastr(response.status);
 				vm.closeModal();
 			});
     }
@@ -72,6 +78,14 @@
 
 		vm.downloadTemplate = function() {
 			downloadService.template("institution.xlsx");
+		}
+
+		function validateInstitution(institution) {
+			return (HelperService.isUndefinedOrNull(institution) || HelperService.isUndefinedOrNull(institution.code) ||
+							HelperService.isUndefinedOrNull(institution.cnpj) || HelperService.isUndefinedOrNull(institution.company) ||
+							HelperService.isUndefinedOrNull(institution.level) || HelperService.isUndefinedOrNull(institution.city) ||
+							HelperService.isUndefinedOrNull(institution.mentors) || HelperService.isUndefinedOrNull(institution.mentors[0].name) ||
+							HelperService.isUndefinedOrNull(institution.mentors[0].username));
 		}
 
 	}

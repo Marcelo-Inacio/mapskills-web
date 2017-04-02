@@ -1,10 +1,11 @@
 audio#over
   source(src="assets/audio/button-40.wav")
-  //source(src="assets/audio/button-40.mp3")
+  source(src="assets/audio/button-40.mp3")
 #tela(ng-style="gameCtrl.background")
 
   #options.option-close(ng-show="gameCtrl.history[gameCtrl.index].question != null")
-    .alternative(ng-repeat="alternative in gameCtrl.history[gameCtrl.index].question.alternatives track by $index", ng-click="gameCtrl.sendAnswer(alternative);", ng-mouseover="gameCtrl.playhover()")
+    .alternative(ng-repeat="alternative in gameCtrl.history[gameCtrl.index].question.alternatives track by $index",
+                 ng-click="gameCtrl.sendAnswer(alternative)", ng-mouseover="gameCtrl.playhover()")
       span(ng-bind="alternative.description")
   .textbox
     .whotalks
