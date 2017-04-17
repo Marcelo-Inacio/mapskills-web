@@ -66,11 +66,9 @@
 				return;
 			}
       mentorService.saveStudent(student).then(function(response) {
-				vm.allStudents.push(response.data);
 				postVerify(response.status);
 				loadAllStudents(true);
 			});
-
     }
 
 		vm.sendFile = function(file) {
