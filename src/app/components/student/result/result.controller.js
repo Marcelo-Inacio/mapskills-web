@@ -15,7 +15,7 @@
       var user = loginService.getUserLogged();
 			studentService.getRadarResults(user.id).then(function(response) {
 				vm.labels = response.labels;
-			  vm.data = response.datasets;
+				vm.data = response.datasets;
 				vm.skills = response.skills;
 			});
 		}

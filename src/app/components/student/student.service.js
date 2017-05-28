@@ -3,7 +3,7 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('studentService', ['$log', '$http', '$q', 'HelperService', 'loginService', studentService]);
+		.factory('studentService', studentService);
 
 		/** @ngInject */
 		function studentService($log, $http, $q, HelperService, loginService) {

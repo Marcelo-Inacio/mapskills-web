@@ -25,15 +25,15 @@
         label Cidade:
         input.form-control(type='text', ng-model="modalCtrl.institutionDetails.city")
     .form-group(ng-repeat="mentor in modalCtrl.institutionDetails.mentors track by mentor.id")
-      .row
+      .form-group.row
         .col-md-12
           label Mentor - Nome:
           input.form-control(type='text', ng-model="mentor.name")
-      .row
+      .form-group.row
         .col-md-12
           label Mentor - E-mail:
           input.form-control(type='text', ng-model="mentor.username")
-      .row
+      .form-group.row
         .col-md-12
           label Mentor - Senha:
           md-checkbox.md-primary(md-no-ink='', aria-label='Checkbox No Ink', ng-model='modalCtrl.checkboxPassword')

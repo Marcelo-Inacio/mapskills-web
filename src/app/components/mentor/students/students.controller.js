@@ -65,16 +65,16 @@
 				student.ra = "";
 				return;
 			}
-      mentorService.saveStudent(student).then(function(status) {
-				postVerify(status);
+      mentorService.saveStudent(student).then(function(response) {
+				postVerify(response.status);
 				loadAllStudents(true);
 			});
-
     }
 
 		vm.sendFile = function(file) {
-      mentorService.sendFile(file).then(function(status) {
-				postVerify(status);
+      mentorService.sendFile(file).then(function(response) {
+				vm.allStudents = response.data;
+				postVerify(response.status);
 			});
     }
 /** verifica o status da requisição para o retorno

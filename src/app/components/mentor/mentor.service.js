@@ -3,7 +3,7 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('mentorService', ['$log', '$http', '$q', 'loginService', 'HelperService', mentorService]);
+		.factory('mentorService', mentorService);
 
 		/** @ngInject */
 		function mentorService($log, $http, $q, loginService, HelperService) {
@@ -93,21 +93,25 @@
 			}
 
 			function _saveStudent(student) {
-				$log.log(student);
 				var deferred = $q.defer();
+				var context;
+				if(student.id) {
+					context = {uri : getFullRestApi("/student/"+student.id), method : "PUT"};
+				} else {
+					context = {uri : getFullRestApi("/student"), method : "POST"};
+				}
+				$log.info(context);
 				var jsonData = angular.toJson(student);
-				var uri = getFullRestApi("/student");
-				$log.info(uri);
         $http({
-            method: "POST", url: uri,
+            method: context.method, url: context.uri,
             data: jsonData,	headers: {"Content-Type": "application/json"}
         })
 				.then(function success(response) {
-           deferred.resolve(response.status);
+					deferred.resolve(response);
          }, function error(response) {
-					 deferred.resolve(response.status);
-				 });
-        return deferred.promise;
+					deferred.resolve(response);
+				});
+				return deferred.promise;
 			}
 
 			function _saveCourse(course) {
@@ -119,7 +123,7 @@
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function (response) {
-           deferred.resolve(response.status);
+           deferred.resolve(response);
          });
         return deferred.promise;
 			}

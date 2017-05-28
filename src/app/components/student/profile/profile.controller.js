@@ -19,6 +19,12 @@
 			});
 		}
 
+		vm.setFocus = function(_event) {
+			$log.log(_event);
+			_event.currentTarget.classList.add("md-input-focused");
+			$log.log(_event);
+		}
+
     vm.updatePassword = function(user) {
       loginService.updatePassword(user.username, user.password).then(function(status) {
         $log.log(status);

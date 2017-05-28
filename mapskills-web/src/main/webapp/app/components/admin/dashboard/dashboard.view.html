@@ -1,19 +1,19 @@
 
 <section>
   <div class="row">
-    <div class="col-lg-3 col-md-3 col-sm-12 col-lg-offset-2">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-lg-offset-2">
       <div class="panel panel-default">
-        <div class="panel-heading">Fatecs</div>
+        <div class="panel-heading">{{admDashCtrl.array[0].level}}</div>
         <div class="panel-body panel-radar">
-          <canvas id="pie" chart-data="admDashCtrl.data" chart-labels="admDashCtrl.labels" chart-options="admDashCtrl.options" class="chart chart-pie"></canvas>
+          <canvas id="pie" chart-data="admDashCtrl.array[0].values" chart-labels="admDashCtrl.labels" chart-options="admDashCtrl.options" class="chart chart-pie"></canvas>
         </div>
       </div>
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-12 col-lg-offset-1">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-lg-offset-1">
       <div class="panel panel-default">
-        <div class="panel-heading">Etecs</div>
+        <div class="panel-heading">{{admDashCtrl.array[1].level}}</div>
         <div class="panel-body panel-radar">
-          <canvas id="pie" chart-data="admDashCtrl.data" chart-labels="admDashCtrl.labels" chart-options="admDashCtrl.options" class="chart chart-pie"></canvas>
+          <canvas id="pie" chart-data="admDashCtrl.array[1].values" chart-labels="admDashCtrl.labels" chart-options="admDashCtrl.options" class="chart chart-pie"></canvas>
         </div>
       </div>
     </div>

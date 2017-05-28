@@ -3,7 +3,7 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('loginService', ['$http', '$q', '$location', '$state', '$log', 'Session', 'HelperService', loginService]);
+		.factory('loginService', loginService);
 
 		/** @ngInject */
 		function loginService($http, $q, $location, $state, $log, Session, HelperService) {
@@ -37,7 +37,7 @@
 			}
 
 			function _setUserContext(loginUsername) {
-		    $http({
+				$http({
 					method: 'POST', url: HelperService.getFullRestApi("/user/details"),
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 					params: {username: loginUsername}

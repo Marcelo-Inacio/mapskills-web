@@ -3,7 +3,7 @@
 
 	angular
 		.module('mapskillsWeb')
-		.factory('toastrService', ['toastr', toastrService]);
+		.factory('toastrService', toastrService);
 
 		/** @ngInject */
 		function toastrService(toastr) {

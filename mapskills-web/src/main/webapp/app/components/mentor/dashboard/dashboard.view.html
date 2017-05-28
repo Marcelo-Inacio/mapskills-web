@@ -1,9 +1,25 @@
 
-<div ng-repeat="obj in mentorDashCtrl.array" class="col-xs-6 col-md-2">
-  <div class="panel panel-default">
-    <div class="panel-heading">{{obj.curso}}</div>
-    <div class="panel-body panel-radar">
-      <canvas id="doughnut" chart-data="obj.values" chart-labels="mentorDashCtrl.labels" class="chart chart-doughnut"></canvas>
+<section>
+  <div class="row">
+    <div class="col-lg-8">
+      <div ng-repeat="obj in mentorDashCtrl.array" class="col-lg-3 col-md-2 col-xs-6">
+        <div class="panel panel-default">
+          <div class="panel-body panel-radar">
+            <canvas id="doughnut" chart-data="obj.values" chart-labels="mentorDashCtrl.labels" class="chart chart-doughnut"></canvas>
+          </div>
+          <div style="text-align: center" class="panel-footer">{{obj.curso}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">Legenda</div>
+        <div class="panel-body panel-radar">
+          <h5 ng-repeat="course in mentorDashCtrl.courses">
+            <p>{{course.code}} - {{course.name}}</p>
+          </h5>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>

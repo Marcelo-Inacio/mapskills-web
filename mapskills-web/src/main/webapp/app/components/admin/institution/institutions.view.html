@@ -5,11 +5,7 @@
   <table class="table table-hover table-striped">
     <thead>
       <tr class="table-thead">
-        <th>Codigo</th>
-        <th>CNPJ</th>
-        <th>Razão Social</th>
-        <th>Cidade</th>
-        <th>Ação</th>
+        <th ng-repeat="head in insCtrl.tableHead">{{head}}</th>
       </tr>
     </thead>
     <tbody>

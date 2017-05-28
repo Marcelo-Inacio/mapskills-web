@@ -38,11 +38,12 @@
 
     vm.saveCourse = function(course) {
 			course.institutionCode = loginService.getUserLogged().institutionCode;
-      mentorService.saveCourse(course).then(function(status) {
-				if(status === 200) {
+      mentorService.saveCourse(course).then(function(response) {
+				if(response.status === 201) {
+					vm.allCourses.push(response.data);
 					loadAllCourses(true);
 				}
-				toastrService.showToastr(status);
+				toastrService.showToastr(response.status);
 				vm.closeModal();
 			});
     }

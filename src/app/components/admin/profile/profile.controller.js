@@ -8,6 +8,7 @@
 	/** @ngInject */
 	function AdminProfileController($log, studentService, toastrService, adminService, loginService) {
 		var vm = this;
+
 		//init();
 
 		function init() {
