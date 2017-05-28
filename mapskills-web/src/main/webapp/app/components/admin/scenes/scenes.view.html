@@ -19,13 +19,13 @@
       <tr ng-repeat="scene in scnCtrl.allScenes track by scene.id">
         <td>{{scene.text}}</td>
         <td> 
-          <label id="btn-todo" ng-show="!scene.question" ng-click="scnCtrl.openQuestionModal(scene)" class="btn btn-primary btn-xs">adiconar</label>
+          <label id="btn-todo" ng-show="!scene.question" ng-click="scnCtrl.openQuestionModal(scene)" class="btn btn-success btn-xs">adiconar</label>
           <label id="btn-todo" ng-show="scene.question" ng-click="scnCtrl.openQuestionModal(scene)" class="btn btn-info btn-xs">editar</label>
-          <label id="btn-todo" ng-show="scene.question" ng-click="scnCtrl.deleteQuestion(scene.id)" class="btn btn-info btn-xs">excluir</label>
+          <label id="btn-todo" ng-show="scene.question" ng-click="scnCtrl.deleteQuestion(scene.id)" class="btn btn-danger btn-xs">excluir</label>
         </td>
         <td>
           <button id="btn-todo" ng-click="scnCtrl.openSceneModal(scene)" class="btn btn-info btn-xs">editar</button>
-          <button id="btn-todo" ng-click="scnCtrl.deleteScene(scene.id)" class="btn btn-default btn-xs">excluir</button>
+          <button id="btn-todo" ng-click="scnCtrl.deleteScene(scene.id)" class="btn btn-danger btn-xs">excluir</button>
         </td>
       </tr>
     </tbody>

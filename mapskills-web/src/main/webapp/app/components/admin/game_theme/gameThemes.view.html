@@ -13,7 +13,7 @@
     <tbody>
       <tr ng-repeat="theme in gthCtrl.allThemes track by theme.id">
         <td style="text-align: center">{{::theme.id}}</td>
-        <td>{{::theme.description}}</td>
+        <td>{{::theme.name}}</td>
         <td>
           <label id="btn-todo" ui-sref="admin.scenes({themeId: theme.id})" class="btn btn-info btn-xs">editar</label>
         </td>
