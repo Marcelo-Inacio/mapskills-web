@@ -41,6 +41,7 @@
       $log.log("search");
       fillFilter();
 			reportService.search(vm.filter).then(function(response) {
+				vm.report = [];
 				vm.report = angular.copy(response);
 			});
     }

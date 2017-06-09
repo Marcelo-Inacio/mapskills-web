@@ -18,7 +18,9 @@
 				getUserDetails : _getUserDetails
 			};
 
-			/** realiza uma chamada ao back end para autenticar o login*/
+			/** Função que realiza uma chamada ao serviço back-end de login
+			para autenticação do usuário, em caso de sucesso é retornado
+			o Token JWT no header do response. */
 			function _login(loginObj) {
 				var deferred = $q.defer();
 				$http({

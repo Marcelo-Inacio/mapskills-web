@@ -18,7 +18,7 @@ section
   table.table.table-hover.table-striped
     thead
       tr.table-thead
-        th(ng-repeat="header in stuCtrl.headerTable") {{header.label}}
+        th(ng-repeat="header in stuCtrl.headerTable") {{::header.label}}
           i(ng-hide="header.model === 'action'", style="margin-left: 20px", ng-click="stuCtrl.orderBy(header)").fa.fa-arrows-v
     tbody
       tr(ng-repeat="student in stuCtrl.allStudents | filter:{name :stuCtrl.filter.name} | filter:{course:{name:stuCtrl.filter.course.name}} | orderBy:stuCtrl.orderList : stuCtrl.orderDirection  track by student.id")

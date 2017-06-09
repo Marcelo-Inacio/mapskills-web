@@ -138,7 +138,7 @@
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function (response) {
-           deferred.resolve(response.status);
+           deferred.resolve(response);
          });
         return deferred.promise;
 			}
