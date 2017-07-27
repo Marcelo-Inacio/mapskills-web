@@ -6,13 +6,13 @@
 		.controller('ScenesController', ScenesController);
 
 	/** @ngInject */
-	function ScenesController($log, $stateParams, toastrService, modalService, adminService) {
+	function ScenesController($log, $stateParams, toastrService, modalService, adminService, HelperService) {
 		var vm = this;
 		var themeId;
 		vm.allScenes = null;
 		vm.allSkills = null;
 		vm.skillSelected = null;
-		vm.scene = {"question":null};
+		vm.scene = {"question":{"alternatives":[]}};
 
 		vm.info_tooltip = "Arraste as linhas da tabela para reordenar a exibição das cenas do jogo";
 
@@ -42,8 +42,15 @@
 		}
 
 		vm.openQuestionModal = function(scene) {
+			prepareScene(scene);
 			adminService.setObjectCurrent(scene);
 			modalService.openModal('app/components/admin/scenes/question.modal.html', 'ScenesController');
+		}
+
+		function prepareScene(scene) {
+			if(HelperService.isUndefinedOrNull(scene.question)) {
+				scene.question = {"alternatives": new Array(4)};
+			}
 		}
 		/** carrega todas cenas de um tema */
 		function loadScenesByThemeId(themeId, fromServer) {
@@ -64,13 +71,17 @@
 		}
 /** NOVA CENA -> SALVAR (POST), ADD QUESTAO OU EDITAR -> UPDATE (PUT)*/
 		vm.saveScene = function(scene, skillId) {
-			if(scene.question) {
+			if(HelperService.isUndefinedOrNull(skillId)) {
+				toastrService.showToastr(400);
+				return;
+			}
+			if(!HelperService.isUndefinedOrNull(scene.question)) {
 				$log.log(scene.question);
-				if(skillId === null) {
-					toastrService.showToastr(400);
-					return;
+				if(angular.isObject(skillId)) {
+					scene.question.skillId = skillId.id;
+				} else {
+					scene.question.skillId = skillId;
 				}
-				scene.question.skillId = skillId;
 			}
 			scene.gameThemeId = themeId;
 			adminService.saveScene(scene, "POST").then(function(status) {

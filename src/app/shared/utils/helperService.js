@@ -8,7 +8,7 @@
 		/** @ngInject */
 		function HelperService() {
 			this.getFullRestApi = function(uri) {
-				return "http://104.41.62.221:8080/mapskills".concat(uri);
+				return "http://191.232.161.50:8080/mapskills".concat(uri);
         //return "http://172.16.55.2:8585/mapskills".concat(uri);
       }
 

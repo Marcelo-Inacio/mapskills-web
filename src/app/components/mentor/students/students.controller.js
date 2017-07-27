@@ -19,15 +19,17 @@
     function init() {
 			mentorService.validateProfile();
 			vm.isTechnical = Session.refreshUserSession().institutionLevel === "TECHNICAL";
-			loadAllStudents(true);
-			loadAllCourses();
+			if(!mentorService.getObjectCurrent()) {
+				loadAllStudents(true);
+				loadAllCourses();
+			}
       vm.student = mentorService.getObjectCurrent();
-			$log.log(vm.student);
 			mentorService.setObjectCurrent(null);
     }
 
 		function loadAllStudents(loadFromServer) {
 			mentorService.loadAllStudents(loadFromServer).then(function(response) {
+				vm.allStudents = [];
 				vm.allStudents = response;
 			});
 		}
@@ -80,10 +82,8 @@
 /** verifica o status da requisição para o retorno
 dos funções saveStudent e sendFile */
 		function postVerify(status) {
-			if(status === 200) {
-				vm.closeModal();
-			}
 			toastrService.showToastr(status);
+			vm.closeModal();
 		}
 
 		function validateStudent(student) {

@@ -33,4 +33,4 @@ section
           th.th-scroll(ng-repeat="head in reportCtrl.report.head") {{::head}}
       tbody
         tr(ng-repeat="data in reportCtrl.report.datas track by $index")
-          td.td-scroll.filterable-cell(ng-repeat="cell in data track by $index") {{::cell}}
+          td.td-scroll.filterable-cell(ng-repeat="cell in data track by $index") {{cell}}
