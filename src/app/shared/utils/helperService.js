@@ -14,7 +14,7 @@
 
 			function _getFullRestApi(uri) {
 				return "http://localhost:8585/mapskills".concat(uri);
-        //return "http://172.16.55.2:8585/mapskills".concat(uri);
+        //return "http://191.232.161.50:8080/mapskills".concat(uri);
       }
 
 			function _isUndefinedOrNull(arg) {

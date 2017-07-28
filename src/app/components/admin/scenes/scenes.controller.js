@@ -71,12 +71,12 @@
 		}
 /** NOVA CENA -> SALVAR (POST), ADD QUESTAO OU EDITAR -> UPDATE (PUT)*/
 		vm.saveScene = function(scene, skillId) {
-			if(HelperService.isUndefinedOrNull(skillId)) {
-				toastrService.showToastr(400);
-				return;
-			}
 			if(!HelperService.isUndefinedOrNull(scene.question)) {
 				$log.log(scene.question);
+				if(HelperService.isUndefinedOrNull(skillId)) {
+					toastrService.showToastr(400);
+					return;
+				}
 				if(angular.isObject(skillId)) {
 					scene.question.skillId = skillId.id;
 				} else {
