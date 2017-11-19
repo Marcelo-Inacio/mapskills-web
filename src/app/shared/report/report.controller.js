@@ -8,9 +8,8 @@
 	/** @ngInject */
 	function ReportController($log, adminService, Session, HelperService, reportService) {
 		var vm = this;
-    vm.isAdmin = true; //DONE recuperar perfil do usuário
+    vm.isAdmin = true;
     vm.filter = {level: null, institutionCode: null, courseCode: null, startDate: null, endDate: null};
-    //DONE recuperar todas instituições com seus cursos caso ADMIN ou somente a do usuário caso MENTOR
     vm.institutions = [];
     vm.institutionSelected;
     vm.courseSelected;
@@ -25,7 +24,7 @@
 					angular.copy(response, vm.institutions);
 				});
 			} else {
-				vm.getInstitutionCourses(userLogged.institutionId);
+				vm.getInstitutionCourses(userLogged.institution.id);
 			}
 		}
 
@@ -38,8 +37,8 @@
 //faz uma busca na base de dados, e como criterio utiliza o filtro
 //configurado.
     vm.search = function() {
-      $log.log("search");
       fillFilter();
+			$log.log(vm.filter);
 			reportService.search(vm.filter).then(function(response) {
 				vm.report = [];
 				vm.report = angular.copy(response);
@@ -59,12 +58,24 @@
       vm.filter["level"] = HelperService.isUndefinedOrNull(vm.institutionSelected) ? null : angular.copy(vm.institutionSelected.level);
       vm.filter["institutionCode"] = HelperService.isUndefinedOrNull(vm.institutionSelected) ? null : angular.copy(vm.institutionSelected.code);
       vm.filter["courseCode"] = HelperService.isUndefinedOrNull(vm.courseSelected) ? null : angular.copy(vm.courseSelected.code);
-			vm.filter["startDate"] = vm.filter.startDate === "" ? null : angular.copy(vm.filter.startDate);
-			vm.filter["endDate"] = vm.filter.endDate === "" ? null : angular.copy(vm.filter.endDate);
+			vm.filter["startYear"] = vm.filter.startDate === "" ? null : getYear(vm.filter.startDate);
+			vm.filter["endYear"] = vm.filter.startDate === "" ? null : getYear(vm.filter.endDate);
+			vm.filter["startSemester"] = vm.filter.endDate === "" ? null : getSemester(vm.filter.startDate);
+			vm.filter["endSemester"] = vm.filter.endDate === "" ? null : getSemester(vm.filter.endDate);
+			vm.filter["page"] = 0;
+			vm.filter["size"] = 50;
     }
 
 		var verifyIsAdmin = function(user) {
 			return user.profile === "ADMINISTRATOR";
+		}
+
+		var getYear = function(filterDate) {
+			return HelperService.isUndefinedOrNull(filterDate) ? "" : filterDate.split("/")[0];
+		}
+
+		var getSemester = function(filterDate) {
+			return HelperService.isUndefinedOrNull(filterDate) ? "" : filterDate.split("/")[1];
 		}
 
 		init();

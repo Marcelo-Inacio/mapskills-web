@@ -21,14 +21,15 @@ section
         th(ng-repeat="header in stuCtrl.headerTable") {{::header.label}}
           i(ng-hide="header.model === 'action'", style="margin-left: 20px", ng-click="stuCtrl.orderBy(header)").fa.fa-arrows-v
     tbody
-      tr(ng-repeat="student in stuCtrl.allStudents | filter:{name :stuCtrl.filter.name} | filter:{course:{name:stuCtrl.filter.course.name}} | orderBy:stuCtrl.orderList : stuCtrl.orderDirection  track by student.id")
-        td {{student.name}}
-        td {{student.ra}}
-        td {{student.course.name.replace('Tecnologia em', '')}}
-        td.check-ok(ng-if="student.completed")
-          i.fa.fa-check-circle
-        td.check-not-ok(ng-if="!student.completed")
-          i.fa.fa-minus-circle
-        td
-          label#btn-todo.btn.btn-info.btn-xs(ng-click="stuCtrl.openDetailsModal(student)", ) detalhes
-          label#btn-todo.btn.btn-info.btn-xs(ng-click="stuCtrl.openStudentModal(student)") editar
+      div(infinite-scroll='stuCtrl.loadMore()', infinite-scroll-distance='2')
+        tr(ng-repeat="student in stuCtrl.allStudents | filter:{name :stuCtrl.filter.name} | filter:{course:{name:stuCtrl.filter.course.name}} | orderBy:stuCtrl.orderList : stuCtrl.orderDirection  track by student.id")
+          td {{student.name}}
+          td {{student.ra}}
+          td {{student.course.name.replace('Tecnologia em', '')}}
+          td.check-ok(ng-if="student.completed")
+            i.fa.fa-check-circle
+          td.check-not-ok(ng-if="!student.completed")
+            i.fa.fa-minus-circle
+          td
+            label#btn-todo.btn.btn-info.btn-xs(ng-click="stuCtrl.openDetailsModal(student)", ) detalhes
+            label#btn-todo.btn.btn-info.btn-xs(ng-click="stuCtrl.openStudentModal(student)") editar

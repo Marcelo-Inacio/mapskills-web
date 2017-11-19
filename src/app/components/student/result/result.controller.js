@@ -8,6 +8,7 @@
 	/** @ngInject */
 	function StudentResultsController($log, studentService, loginService) {
 		var vm = this;
+		vm.data = [[0, 0, 0, 0, 0, 0], [16, 16, 16, 16, 16, 16]];
 		init();
 		/** função principal que recupera os resultados do aluno */
 		function init() {
@@ -15,7 +16,7 @@
       var user = loginService.getUserLogged();
 			studentService.getRadarResults(user.id).then(function(response) {
 				vm.labels = response.labels;
-				vm.data = response.datasets;
+				vm.data.push(response.datasets);
 				vm.skills = response.skills;
 			});
 		}

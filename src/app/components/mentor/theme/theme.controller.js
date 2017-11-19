@@ -13,20 +13,10 @@
 
 		var init = function() {
 			mentorService.validateProfile();
-			loadThemeCurrent();
+			themeIdCurrent = loginService.getUserLogged().institution.gameThemeId;
+			loadAllThemes();
 		}
 
-		init();
-/** coloca todos temas vindo do server como false, somente colocando como true
-o que está habilitado para o instituição */
-		function disableOthersThemes() {
-			$log.log("função: disableOthersThemes, ID TEMA ATUAL => "+themeIdCurrent);
-			var sizeArray = vm.allThemes.length;
-			for(var i = 0; i < sizeArray; i++) {
-				if(vm.allThemes[i].id == themeIdCurrent) vm.allThemes[i].active = true;
-				else vm.allThemes[i].active = false;
-			}
-		}
 /** carrega todos temas disponiveis que estão habilitados pelo administrador 	*/
 		function loadAllThemes() {
 			mentorService.loadAllThemesActivated().then(function(response) {
@@ -35,12 +25,15 @@ o que está habilitado para o instituição */
 			});
 		}
 
-		function loadThemeCurrent() {
-			var institutionCode = loginService.getUserLogged().institutionCode;
-			mentorService.loadThemeCurrent(institutionCode).then(function(response) {
-				themeIdCurrent = response;
-				loadAllThemes();
-			});
+/** coloca todos temas vindo do server como false, somente colocando como true
+o que está habilitado para o instituição */
+		function disableOthersThemes() {
+			$log.log("função: disableOthersThemes, ID TEMA ATUAL => "+themeIdCurrent);
+			var sizeArray = vm.allThemes.length;
+			for (var i = 0; i < sizeArray; i++) {
+				if (vm.allThemes[i].id == themeIdCurrent) vm.allThemes[i].active = true;
+				else vm.allThemes[i].active = false;
+			}
 		}
 
 		vm.updateThemeIdCurrent = function() {
@@ -63,6 +56,8 @@ ou todos DESATIVADOS  */
 				themeIdCurrent = theme.id;
 			}
 		}
+
+		init();
 
 	}
 })();

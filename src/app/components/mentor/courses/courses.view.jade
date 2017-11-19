@@ -8,6 +8,6 @@ section
       tr(ng-repeat="course in crsCtrl.allCourses track by $index")
         td {{::course.code}}
         td {{::course.name}}
-        td {{::course.period}}
+        td {{::course.period | translate}}
         td
           label#btn-todo.btn.btn-info.btn-xs(ng-click="crsCtrl.openCourseModal(course)") editar

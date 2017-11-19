@@ -7,12 +7,13 @@
 
 	/** @ngInject */
 	function MentorStudentController($log, toastrService, mentorService, modalService, downloadService, Session, HelperService) {
+
 		var vm = this;
 		vm.allStudents = null;
 		vm.isTechnical;
-		vm.headerTable = [{label: "Nome", model: "name"}, {label: "RA", model: "ra"},
-											{label: "Curso", model: "course"}, {label: "Concluído", model: "completed"},
-											{label: "Ação", model: "action"}];
+		vm.headerTable = [{label: "Nome", model: "name"},
+			{label: "RA", model: "ra"}, {label: "Curso", model: "course"},
+			{label: "Concluído", model: "completed"}, {label: "Ação", model: "action"}];
 
     init();
 
@@ -29,7 +30,6 @@
 
 		function loadAllStudents(loadFromServer) {
 			mentorService.loadAllStudents(loadFromServer).then(function(response) {
-				vm.allStudents = [];
 				vm.allStudents = response;
 			});
 		}
@@ -97,7 +97,7 @@ dos funções saveStudent e sendFile */
 				return "";
 			}
 			var year = new Date().getFullYear().toString().substring(2);
-			var semester = new Date().getMonth() < 6 ? 1 : 2;
+			var semester = new Date().getMonth() < 7 ? 1 : 2;
 			var raFormatted = vm.courseSelected.institutionCode + vm.courseSelected.code + year + semester + student.ra;
 			return raFormatted;
 		}
@@ -110,6 +110,10 @@ dos funções saveStudent e sendFile */
 
 		vm.closeModal = function() {
 			modalService.closeModal();
+		}
+
+		vm.loadMore = function() {
+			loadAllStudents(true);
 		}
 
 	}

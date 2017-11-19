@@ -13,7 +13,7 @@
       .col-md-12
         label Período:
         select.form-control(ng-model="modalCtrl.course.period"
-                            ,ng-options="period for period in modalCtrl.allPeriods")
+                            ,ng-options="period for period in modalCtrl.allPeriods | translate")
           option(value='') -- selecione um período --
   .modal-footer
     button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveCourse(modalCtrl.course)") salvar

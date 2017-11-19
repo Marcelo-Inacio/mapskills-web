@@ -10,7 +10,7 @@
 		var vm = this;
 		vm.periodSelected = null;
 		vm.allCourses = [];
-		vm.allPeriods = ["MATUTINO", "VESPERTINO", "NOTURNO", "EaD"];
+		vm.allPeriods = ["MORNING", "AFTERNOON", "NIGHTLY", "EAD"];
 		vm.tableHead = ["Codigo", "Nome", "Período", "Ação"];
 
     init();

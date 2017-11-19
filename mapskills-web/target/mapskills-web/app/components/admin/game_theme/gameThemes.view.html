@@ -1,0 +1,27 @@
+
+<section>
+  <label id="btn-todo" ng-click="gthCtrl.openModal()" class="btn btn-success btn-md botton-new">novo</label>
+  <table class="table table-hover">
+    <thead>
+      <tr class="table-thead">
+        <th>Id</th>
+        <th>Nome</th>
+        <th>Cenas</th>
+        <th>Ativo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="theme in gthCtrl.allThemes track by theme.id">
+        <td style="text-align: center">{{::theme.id}}</td>
+        <td>{{::theme.name}}</td>
+        <td>
+          <label id="btn-todo" ui-sref="admin.scenes({themeId: theme.id})" class="btn btn-info btn-xs">editar</label>
+        </td>
+        <td>
+          <md-switch ng-model="theme.active" aria-label="Atualizar" class="md-primary botton-switch"></md-switch>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <label id="btn-todo" ng-click="gthCtrl.updateThemes(gthCtrl.allThemes)" class="btn btn-primary btn-md botton-new">salvar alterações</label>
+</section>

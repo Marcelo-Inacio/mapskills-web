@@ -1,0 +1,21 @@
+
+<section>
+  <div class="row">
+    <div class="col-lg-8 col-md-8 col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">Etecs</div>
+        <div class="panel-body panel-radar">
+          <canvas id="base" chart-data="etecCtrl.data" chart-labels="etecCtrl.codes" chart-series="etecCtrl.series" chart-options="etecCtrl.options" class="chart-horizontal-bar"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">Legenda</div>
+        <div class="panel-body panel-radar">
+          <h5 ng-repeat="etec in etecCtrl.etecs">{{etec.code}} - {{etec.company}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

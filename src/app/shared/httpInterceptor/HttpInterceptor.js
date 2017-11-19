@@ -30,7 +30,6 @@
           return $q.reject(request);
         },
         response: function (response) {
-          $log.log("* * RESPONSE INTERCEPTOR * *");
           if ((--numLoadings) === 0) {
             $rootScope.$broadcast("loader_hide");
           }
@@ -40,6 +39,9 @@
           return response || $q.when(response);
         },
         responseError: function (response) {
+          $log.info("DESCRIÇÃO DO PROBLEMA \n "
+                      + "status : " + response.status + "\n "
+                      + "message : " + response.data.message);
           if (!(--numLoadings)) {
             $rootScope.$broadcast("loader_hide");
           }

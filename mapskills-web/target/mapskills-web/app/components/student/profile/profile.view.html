@@ -1,0 +1,78 @@
+
+<div class="container">
+  <div class="row">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Meus Dados</div>
+      <div class="panel-body panel-radar">
+        <div class="row aligner">
+          <div class="col-md-4">
+            <label>Nome : {{studentProfileCtrl.user.student.name}}</label>
+          </div>
+          <div class="col-md-4">
+            <label>RA : {{studentProfileCtrl.user.student.ra}}</label>
+          </div>
+          <div class="col-md-4">
+            <label>Telefone : {{studentProfileCtrl.user.student.phone}}</label>
+          </div>
+        </div>
+        <div class="row aligner">
+          <div class="col-md-4">
+            <label>E-mail : {{studentProfileCtrl.user.student.username}}</label>
+          </div>
+          <div class="col-md-4">
+            <div style="justify-content: flex-start" class="row aligner">
+              <label style="margin-right: 10px;">Senha:</label>
+              <input type="password" ng-model="studentProfileCtrl.user.student.password" placeholder="nova senha" autofocus class="form-control">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label id="btn-todo" ng-click="studentProfileCtrl.updatePassword(studentProfileCtrl.user.student)" class="btn btn-info btn-md">salvar</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Meu Curso</div>
+      <div class="panel-body panel-radar">
+        <div class="row aligner">
+          <div class="col-md-4">
+            <label>Código : {{studentProfileCtrl.user.course.code}}</label>
+          </div>
+          <div class="col-md-4">
+            <label>Nome: {{studentProfileCtrl.user.course.name}}</label>
+          </div>
+          <div class="col-md-4">
+            <label>Período: {{studentProfileCtrl.user.course.period}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Minha Instituição</div>
+      <div class="panel-body panel-radar">
+        <div class="row aligner">
+          <div class="col-md-3">
+            <label>Código : {{studentProfileCtrl.user.institution.code}}</label>
+          </div>
+          <div class="col-md-3">
+            <label>Razão Social : {{studentProfileCtrl.user.institution.company}}</label>
+          </div>
+          <div class="col-md-3">
+            <label>CNPJ : {{studentProfileCtrl.user.institution.cnpj}}</label>
+          </div>
+          <div class="col-md-3">
+            <label>Cidade : {{studentProfileCtrl.user.institution.city}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <label id="btn-todo" ui-sref="^.result" ng-if="studentProfileCtrl.user.student.completed" class="btn btn-primary btn-md botton-new"><i class="fa fa-gamepad ico-sidebar"></i>Meu Resultado</label>
+    <label id="btn-todo" ui-sref="^.game" class="btn btn-primary btn-md botton-new"><i class="fa fa-gamepad ico-sidebar"></i>Jogo</label>
+  </div>
+</div>

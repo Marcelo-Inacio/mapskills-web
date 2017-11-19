@@ -6,12 +6,16 @@
 		.factory('mentorService', mentorService);
 
 		/** @ngInject */
-		function mentorService($log, $http, $q, loginService, HelperService) {
+		function mentorService($log, $http, $q, loginService, HelperService, API_SERVER) {
+			var page = {nextPage: 0, size: 20, totalPages: 0, numberCurrentPage: 0, isLast: false};
+			var allCoursesCached = null;
+			var allStudentsCached = null;
+			var objectCurrent;
+
 			return {
 				loadAllStudents : _loadAllStudents,
 				loadAllCourses : _loadAllCourses,
 				loadAllThemesActivated : _loadAllThemesActivated,
-				loadThemeCurrent : _loadThemeCurrent,
 				saveStudent : _saveStudent,
 				saveCourse : _saveCourse,
 				sendFile : _sendFile,
@@ -21,10 +25,6 @@
 				getObjectCurrent : _getObjectCurrent,
 				setObjectCurrent : _setObjectCurrent
 			};
-
-			var allCoursesCached = null;
-			var allStudentsCached = null;
-			var objectCurrent;
 
 			function getFullRestApi(uri) {
 				return HelperService.getFullRestApi("/institution".concat(uri));
@@ -44,14 +44,16 @@
 
 			function _loadAllStudents(loadFromServer) {
 				var deferred = $q.defer();
-				if(allStudentsCached != null && !loadFromServer) {
+				if (allStudentsCached != null && !loadFromServer) {
 					deferred.resolve(allStudentsCached);
 				} else {
-					var institutionCode = loginService.getUserLogged().institutionCode;
-					var uri = getFullRestApi("/").concat(institutionCode).concat("/students");
-					$http.get(uri).then(function(response) {
-						allStudentsCached = response.data;
-						deferred.resolve(response.data);
+					var user = loginService.getUserLogged();
+					//getFullRestApi("/").concat(institutionCode).concat("/students");
+					var uri = API_SERVER.INSTITUTION.STUDENTS.replace("{code}", user.institution.code);
+					$http.get(uri, {params: {page: page.nextPage}}).then(function(response) {
+						page.nextPage = response.data.numberCurrentPage + 1;
+						allStudentsCached = response.data.content;
+						deferred.resolve(response.data.content);
 					});
 				}
 				return deferred.promise;
@@ -62,8 +64,8 @@
 				if(allCoursesCached != null && !loadFromServer) {
 					deferred.resolve(allCoursesCached);
 				} else {
-					var institutionCode = loginService.getUserLogged().institutionCode;
-					var uri = getFullRestApi("/").concat(institutionCode).concat("/courses");
+					var user = loginService.getUserLogged();
+					var uri = API_SERVER.INSTITUTION.COURSES.replace("{code}", user.institution.code);
 					$log.info(uri);
 					$http.get(uri).then(function(response) {
 						allCoursesCached = response.data;
@@ -75,18 +77,8 @@
 
 			function _loadAllThemesActivated() {
 				var deferred = $q.defer();
-				var uri = getFullRestApi("/themes");
-				$http.get(uri).then(function(response) {
-					deferred.resolve(response.data);
-				});
-				return deferred.promise;
-			}
-
-			function _loadThemeCurrent(institutionCode) {
-				var deferred = $q.defer();
-				var uri = getFullRestApi("/").concat(institutionCode).concat("/theme/current");
-				$log.log(uri);
-				$http.get(uri).then(function(response) {
+				var uri = HelperService.getFullRestApi("/game/themes");
+				$http.get(uri, {params:{"onlyActives": true}}).then(function(response) {
 					deferred.resolve(response.data);
 				});
 				return deferred.promise;

@@ -6,7 +6,7 @@
 		.factory("adminService", adminService);
 
 		/** @ngInject */
-		function adminService($log, $http, $q, HelperService, loginService) {
+		function adminService($log, $http, $q, HelperService, loginService, API_SERVER) {
 			var _dashboard = {
 				level : function(level) {
 					var deferred = $q.defer();
@@ -25,6 +25,11 @@
 					return deferred.promise;
 				}
 			};
+
+			var allSkillsCached = null;
+			var allScenesCached = null;
+			var allInstitutionsCached = null;
+			var objectCurrent = null;
 
 			return {
 				loadAllSkills : _loadAllSkills,
@@ -54,11 +59,6 @@
 				return HelperService.getFullRestApi(url);
 			}
 
-			var allSkillsCached = null;
-			var allScenesCached = null;
-			var allInstitutionsCached = null;
-			var objectCurrent = null;
-
 			function _getObjectCurrent() {
 				return objectCurrent;
 			}
@@ -79,7 +79,7 @@
 
 			function _getInstitutionDetails(institutionId) {
 				var deferred = $q.defer();
-				var uri = getFullRestApi("/institution/").concat(institutionId);
+				var uri = API_SERVER.INSTITUTION.INSTITUTION.replace("{id}", institutionId);
 				$http.get(uri).then(function(response) {
 					objectCurrent = response.data;
 					deferred.resolve(response.data);

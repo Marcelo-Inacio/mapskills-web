@@ -31,14 +31,35 @@
     notAuthenticated: 'authnotauthenticated',
     notAuthorized: 'authnotauthorized',
     insufficientPrivileges: 'authinsufficientPrivileges'
-  }
+  };
+
+  var HOST = {
+    SERVER: 'http://localhost:8081/',
+    REPORT: 'http://localhost:8083/'
+  };
+
+
+  var API_SERVER = {
+    HOST: HOST.SERVER,
+    LOGIN: HOST.SERVER + 'login',
+    INSTITUTION: {
+      STUDENTS: HOST.SERVER + 'institution/{code}/students',
+      COURSES: HOST.SERVER + 'institution/{code}/courses',
+      INSTITUTION: HOST.SERVER + "institution/{id}"
+    },
+    REPORT: {
+      SHOW: HOST.REPORT + 'report/student',
+      DOWNLOAD: HOST.REPORT + 'report/download'
+    }
+  };
 
   angular
     .module('mapskillsWeb')
     .constant('malarkey', malarkey)
     .constant('moment', moment)
     .constant('application', application)
-    .constant('HTTP_STATUS' ,HTTP_STATUS)
-    .constant('AUTH_EVENTS', AUTH_EVENTS);
+    .constant('HTTP_STATUS', HTTP_STATUS)
+    .constant('AUTH_EVENTS', AUTH_EVENTS)
+    .constant('API_SERVER', API_SERVER);
 
 })();

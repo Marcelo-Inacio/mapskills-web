@@ -6,7 +6,7 @@
 		.factory('loginService', loginService);
 
 		/** @ngInject */
-		function loginService($http, $q, $location, $state, $log, Session, HelperService) {
+		function loginService($http, $q, $location, $state, $log, Session, HelperService, API_SERVER) {
 			return {
 				login : _login,
 				logout : _logout,
@@ -24,7 +24,7 @@
 			function _login(loginObj) {
 				var deferred = $q.defer();
 				$http({
-					method: 'POST', url: HelperService.getFullRestApi("/login"),
+					method: 'POST', url: API_SERVER.LOGIN,
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 					params: {username: loginObj.username, password: loginObj.password}
 				})
@@ -38,11 +38,11 @@
 				return deferred.promise;
 			}
 
-			function _setUserContext(loginUsername) {
+			function _setUserContext(username) {
 				$http({
-					method: 'POST', url: HelperService.getFullRestApi("/user/details"),
+					method: 'GET', url: API_SERVER.HOST + "user",
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-					params: {username: loginUsername}
+					params: {username: username}
 				})
 				.then(function success(response) {
 					$log.info("== THEN SUCCESS ==");

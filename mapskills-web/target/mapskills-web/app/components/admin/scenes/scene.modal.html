@@ -1,0 +1,27 @@
+
+<div class="section">
+  <div class="modal-header"></div>
+  <div class="modal-body">
+    <div class="form-group row">
+      <div class="col-md-12">
+        <label>Texto:</label>
+        <textarea rows="5" cols="50" placeholder="Descreva aqui..." ng-model="modalCtrl.scene.text"></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <label>Imagem:</label>
+        <label id="btn-todo" class="btn btn-primary btn-xs">
+          <input type="file" ng-model="modalCtrl.scene.background" name="file" base-sixty-four-input="" required="" maxsize="500" accept="image/*"><i class="fa fa-cloud-upload"></i>  Escolher imagem
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12"><span ng-bind="modalCtrl.scene.background.filename"></span></div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button id="btn-todo" ng-click="modalCtrl.saveScene(modalCtrl.scene, modalCtrl.scene.question.skillId)" class="btn btn-primary btn-md">salvar</button>
+    <button id="btn-todo" ng-click="modalCtrl.closeModal()" class="btn btn-default btn-md">cancelar</button>
+  </div>
+</div>
