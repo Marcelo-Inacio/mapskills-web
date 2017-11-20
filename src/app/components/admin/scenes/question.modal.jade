@@ -5,7 +5,7 @@
       .col-md-12
         label Competência
         select.form-control(ng-model="modalCtrl.skillSelected"
-                            ,ng-options="skill.id as skill.type for skill in modalCtrl.allSkills track by skill.id")
+                            ,ng-options="skill.id as skill.name for skill in modalCtrl.allSkills track by skill.id")
           option(value='') -- selecione uma competência --
           
     .form-group.row

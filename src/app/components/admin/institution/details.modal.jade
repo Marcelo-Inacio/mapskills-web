@@ -32,6 +32,6 @@
         tr(ng-repeat="course in modalCtrl.institutionDetails.courses track by course.id")
           td {{course.code}}
           td {{course.name}}
-          td {{course.period}}    
+          td {{course.period | translate}}    
   .modal-footer
     button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") fechar

@@ -4,5 +4,7 @@
   "BUTTON_NOTIFY": "Notificar",
   "MORNING": "Manhã",
   "NIGHTLY": "Noturno",
-  "AFTERNOON": "Vespertino"
+  "AFTERNOON": "Vespertino",
+  "SUPERIOR": "Superior",
+  "TECHNICAL": "Técnico"
 }

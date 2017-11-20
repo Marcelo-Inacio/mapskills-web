@@ -1,16 +1,16 @@
 section
   .row
     .col-lg-3.col-md-3.col-sm-6.col-xs-6.col-lg-offset-2
-      .panel.panel-default(ng-if="admDashCtrl.hasResult.Etecs")
-        .panel-heading {{admDashCtrl.array[0].level}}
+      .panel.panel-default(ng-if="admDashCtrl.hasResult.etecs")
+        .panel-heading Etecs
         .panel-body.panel-radar
-          canvas#pie.chart.chart-pie(chart-data='admDashCtrl.array[0].values', chart-labels='admDashCtrl.labels', chart-options='admDashCtrl.options')
-      .panel.panel-default(ng-if="!admDashCtrl.hasResult.Etecs")
+          canvas#pie.chart.chart-pie(chart-data='admDashCtrl.indicator.etecs.values', chart-labels='admDashCtrl.labels', chart-options='admDashCtrl.options')
+      .panel.panel-default(ng-if="!admDashCtrl.hasResult.etecs")
         .panel-heading(style="text-align: center") Nenhum resultado
     .col-lg-3.col-md-3.col-sm-6.col-xs-6.col-lg-offset-1
-      .panel.panel-default(ng-if="admDashCtrl.hasResult.Fatecs")
-        .panel-heading {{admDashCtrl.array[1].level}}
+      .panel.panel-default(ng-if="admDashCtrl.hasResult.fatecs")
+        .panel-heading Fatecs
         .panel-body.panel-radar
-          canvas#pie.chart.chart-pie(chart-data='admDashCtrl.array[1].values', chart-labels='admDashCtrl.labels', chart-options='admDashCtrl.options')
-      .panel.panel-default(ng-if="!admDashCtrl.hasResult.Fatecs")
+          canvas#pie.chart.chart-pie(chart-data='admDashCtrl.indicator.fatecs.values', chart-labels='admDashCtrl.labels', chart-options='admDashCtrl.options')
+      .panel.panel-default(ng-if="!admDashCtrl.hasResult.fatecs")
         .panel-heading(style="text-align: center") Nenhum resultado

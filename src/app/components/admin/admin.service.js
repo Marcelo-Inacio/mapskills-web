@@ -10,15 +10,19 @@
 			var _dashboard = {
 				level : function(level) {
 					var deferred = $q.defer();
-					var uri = getFullRestApi("/dashboard/").concat(level);
-					$http.get(uri).then(function(response) {
+					var uri = API_SERVER.REPORT.LOCAL;
+					$http.get(uri, {
+						params: {
+							institutionLevel: level
+						}
+					}).then(function(response) {
 						deferred.resolve(response.data);
 					});
 					return deferred.promise;
 				},
 				global : function() {
 					var deferred = $q.defer();
-					var uri = getFullRestApi("/dashboard/global");
+					var uri = API_SERVER.REPORT.GLOBAL;
 					$http.get(uri).then(function(response) {
 						deferred.resolve(response.data);
 					});
@@ -188,8 +192,8 @@
 				if(sceneCachedVerify(themeId) && !fromServer) {
 					deferred.resolve(allScenesCached);
 				} else {
-					var uri = getFullRestApi("/game/theme/");
-					$http.get(uri.concat(themeId)).then(function(response) {
+					var uri = API_SERVER.THEME.BY_ID.replace("{id}", themeId);
+					$http.get(uri).then(function(response) {
 						if(response.data.length != 0) allScenesCached = response.data;
 						deferred.resolve(response.data);
 					});
@@ -237,7 +241,7 @@
 				if(allInstitutionsCached != null && !loadFromServer) {
 					deferred.resolve(allInstitutionsCached);
 				} else {
-					var uri = getFullRestApi("/institutions");
+					var uri = API_SERVER.INSTITUTION.ALL;
 					$http.get(uri).then(function(response) {
 						allInstitutionsCached = response.data;
 						deferred.resolve(response.data);
@@ -252,8 +256,8 @@
 					deferred.resolve(allSkillsCached);
 					$log.log("== SKILL CACHED ==");
 				} else {
-					$log.log("== SKILL FORCE ==");
-					var uri = getFullRestApi("/skills");
+					$log.log("== SKILL FROM SERVER ==");
+					var uri = API_SERVER.SKILL.ALL;
 					$http.get(uri).then(function(response) {
 						allSkillsCached = response.data;
 						deferred.resolve(response.data);
@@ -264,7 +268,7 @@
 			/** recupera todos temas cadastrados */
 			function _loadAllThemes() {
 				var deferred = $q.defer();
-				var uri = getFullRestApi("/game/themes");
+				var uri = API_SERVER.THEME.ALL;
 				$http.get(uri).then(function(response) {
 					deferred.resolve(response.data);
 				});

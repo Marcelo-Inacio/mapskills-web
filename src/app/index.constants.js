@@ -45,11 +45,21 @@
     INSTITUTION: {
       STUDENTS: HOST.SERVER + 'institution/{code}/students',
       COURSES: HOST.SERVER + 'institution/{code}/courses',
-      INSTITUTION: HOST.SERVER + "institution/{id}"
+      INSTITUTION: HOST.SERVER + 'institution/{id}',
+      ALL: HOST.SERVER + 'institutions'
+    },
+    THEME: {
+      ALL: HOST.SERVER + 'game/themes',
+      BY_ID: HOST.SERVER + 'game/theme/{id}'
+    },
+    SKILL: {
+      ALL: HOST.SERVER + 'skills'
     },
     REPORT: {
       SHOW: HOST.REPORT + 'report/student',
-      DOWNLOAD: HOST.REPORT + 'report/download'
+      DOWNLOAD: HOST.REPORT + 'report/download',
+      GLOBAL: HOST.REPORT + 'report/institution-level',
+      LOCAL: HOST.REPORT + 'report/institution'
     }
   };
 

@@ -27,15 +27,16 @@
 				vm.getInstitutionCourses(userLogged.institution.id);
 			}
 		}
-
+		/*
+		* Chama do serviço de download com condicionais do filtro.
+		*/
     vm.download = function() {
-      //chama do serviço de downloadService passando o filter
-      //ver projeto CHE como exemplo
       fillFilter();
 			reportService.download(vm.filter);
     }
-//faz uma busca na base de dados, e como criterio utiliza o filtro
-//configurado.
+	/*
+	* Realiza chamada para busca do relatório.
+	*/
     vm.search = function() {
       fillFilter();
 			$log.log(vm.filter);
