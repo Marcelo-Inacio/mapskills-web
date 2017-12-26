@@ -14,19 +14,18 @@
 				setUserContext : _setUserContext,
 				validateProfile : _validateProfile,
 				isLogged : _isLogged,
-				getUserLogged : _getUserLogged,
-				getUserDetails : _getUserDetails
+				getUserLogged : _getUserLogged
 			};
 
 			/** Função que realiza uma chamada ao serviço back-end de login
 			para autenticação do usuário, em caso de sucesso é retornado
 			o Token JWT no header do response. */
-			function _login(loginObj) {
+			function _login(login) {
 				var deferred = $q.defer();
 				$http({
 					method: 'POST', url: API_SERVER.LOGIN,
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-					params: {username: loginObj.username, password: loginObj.password}
+					params: {username: login.username, password: login.password}
 				})
 				.then(function success(response) {
 						var token = response.headers("Authorization");
@@ -40,7 +39,7 @@
 
 			function _setUserContext(username) {
 				$http({
-					method: 'GET', url: API_SERVER.HOST + "user",
+					method: 'GET', url: API_SERVER.USER,
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 					params: {username: username}
 				})
@@ -54,18 +53,10 @@
 				});
 			}
 
-			function _getUserDetails(uri) {
-				var deferred = $q.defer();
-				$http.get(HelperService.getFullRestApi(uri)).success(function(response) {
-					deferred.resolve(response);
-				});
-				return deferred.promise;
-			}
-
 			function _updatePassword(loginUsername, newPassword) {
 				var deferred = $q.defer();
 				$http({
-					method: 'POST', url: HelperService.getFullRestApi("/user/change/password"),
+					method: 'PUT', url: API_SERVER.USER,
 					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 					params: {username: loginUsername, newPassword: newPassword}
 				})
@@ -90,10 +81,9 @@
 			function _validateProfile(profile) {
 				var user = Session.refreshUserSession();
 /** resolve um chain de verificação */
-				if(user == null) toLogin();
-				if(profile == null) toLogin();
-				if(profile !== user.profile) toLogin();
-				return true;
+				if(user == null || profile == null || profile !== user.profile) {
+					toLogin();
+				}
 			}
 /** limpa storage e redireciona para login */
 			function toLogin() {

@@ -43,24 +43,46 @@
     HOST: HOST.SERVER,
     LOGIN: HOST.SERVER + 'login',
     INSTITUTION: {
-      STUDENTS: HOST.SERVER + 'institution/{code}/students',
+      STUDENTS: HOST.SERVER + 'institution/students',
       COURSES: HOST.SERVER + 'institution/{code}/courses',
-      INSTITUTION: HOST.SERVER + 'institution/{id}',
-      ALL: HOST.SERVER + 'institutions'
+      BY_ID: HOST.SERVER + 'institution/{id}',
+      ALL: HOST.SERVER + 'institutions',
+      UPDATE: HOST.SERVER + 'institution/{id}',
+      UPDATE_THEME: HOST.SERVER + 'institution/{code}/theme',
+      SAVE: HOST.SERVER + 'institution',
+      UPLOAD: HOST.SERVER + 'institution/upload',
+      COURSE: HOST.SERVER + 'institution/course'
     },
     THEME: {
       ALL: HOST.SERVER + 'game/themes',
-      BY_ID: HOST.SERVER + 'game/theme/{id}'
+      BY_ID: HOST.SERVER + 'game/theme/{id}',
+      UPDATE: HOST.SERVER + 'game/theme/{id}',
+      SAVE: HOST.SERVER + 'game/theme',
+      UPDATE_STATUS: HOST.SERVER + 'game/{id}',
+      UPDATE_SCENES: HOST.SERVER + 'game/{themeId}/scenes',
+      DELETE_QUESTION: HOST.SERVER + 'game/{themeId}/scene/{sceneId}/question',
+      DELETE_SCENE: HOST.SERVER + 'game/{themeId}/scene/{sceneId}'
     },
     SKILL: {
-      ALL: HOST.SERVER + 'skills'
+      ALL: HOST.SERVER + 'skills',
+      SAVE: HOST.SERVER + 'skill',
+      UPDATE: HOST.SERVER + 'skill/{id}'
     },
     REPORT: {
       SHOW: HOST.REPORT + 'report/student',
       DOWNLOAD: HOST.REPORT + 'report/download',
       GLOBAL: HOST.REPORT + 'report/institution-level',
       LOCAL: HOST.REPORT + 'report/institution'
-    }
+    },
+    STUDENT: {
+      SCENE: HOST.SERVER + 'student/{id}/scene',
+      ANSWER: HOST.SERVER + 'student/game/answer',
+      RESULT: HOST.REPORT + 'report/student/{studentId}',
+      UPLOAD: HOST.REPORT + 'students',
+      POST: HOST.REPORT + 'student',
+      PUT: HOST.REPORT + 'student/{id}',
+    },
+    USER: HOST.SERVER + 'user'
   };
 
   angular

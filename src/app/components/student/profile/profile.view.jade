@@ -5,20 +5,20 @@
       .panel-body.panel-radar
         .row.aligner
           .col-md-4
-            label Nome : {{studentProfileCtrl.user.student.name}}
+            label Nome : {{studentProfileCtrl.user.name}}
           .col-md-4
-            label RA : {{studentProfileCtrl.user.student.ra}}
+            label RA : {{studentProfileCtrl.user.ra}}
           .col-md-4
-            label Telefone : {{studentProfileCtrl.user.student.phone}}
+            label Telefone : {{studentProfileCtrl.user.phone}}
         .row.aligner
           .col-md-4
-            label E-mail : {{studentProfileCtrl.user.student.username}}
+            label E-mail : {{studentProfileCtrl.user.username}}
           .col-md-4
             .row.aligner(style="justify-content: flex-start")
-              label(style="margin-right: 10px;") Senha:
-              input.form-control(type='password', ng-model="studentProfileCtrl.user.student.password", placeholder="nova senha", autofocus)
+              label(style = "margin-right: 10px") Senha:
+              input.form-control#password(type='password', ng-model="studentProfileCtrl.user.password", placeholder="nova senha")
           .col-md-4
-            label#btn-todo.btn.btn-info.btn-md(ng-click="studentProfileCtrl.updatePassword(studentProfileCtrl.user.student)") salvar
+            label#btn-todo.btn.btn-info.btn-md(ng-click="studentProfileCtrl.updatePassword(studentProfileCtrl.user)") salvar
   .row
     .panel.panel-primary
       .panel-heading Meu Curso
@@ -29,7 +29,7 @@
           .col-md-4
             label Nome: {{studentProfileCtrl.user.course.name}}
           .col-md-4
-            label Período: {{studentProfileCtrl.user.course.period}}
+            label Período: {{studentProfileCtrl.user.course.period | translate}}
             
   .row
       .panel.panel-primary
@@ -46,7 +46,7 @@
               label Cidade : {{studentProfileCtrl.user.institution.city}}
   
   .row
-    label#btn-todo.btn.btn-primary.btn-md.botton-new(ui-sref="^.result", ng-if="studentProfileCtrl.user.student.completed")
+    label#btn-todo.btn.btn-primary.btn-md.botton-new(ui-sref="^.result", ng-if="studentProfileCtrl.user.completed")
       i.fa.fa-gamepad.ico-sidebar
       | Meu Resultado
     label#btn-todo.btn.btn-primary.btn-md.botton-new(ui-sref="^.game")

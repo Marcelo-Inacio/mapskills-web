@@ -17,7 +17,7 @@
       .col-md-12
         label Nível:
         select.form-control(ng-model="modalCtrl.institutionDetails.level"
-                            ,ng-options="level for level in modalCtrl.allLevels | translate")
+                            ,ng-options="level  | translate for level in modalCtrl.allLevels")
           option(value='') -- selecione um nível --
           
     .form-group.row

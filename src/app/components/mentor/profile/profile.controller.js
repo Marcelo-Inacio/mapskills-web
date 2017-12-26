@@ -12,11 +12,7 @@
 
 		function init() {
 			mentorService.validateProfile();
-      var user = loginService.getUserLogged();
-			loginService.getUserDetails("/institution/mentor/details/".concat(user.id)).then(function(response) {
-				$log.log(response);
-        vm.user = response;
-			});
+      vm.user = loginService.getUserLogged();
 		}
 
     vm.updatePassword = function(user) {

@@ -45,7 +45,7 @@
 				saveInstitution : _saveInstitution,
 				sendFile : _sendFile,
 				updateIndexScenes : _updateIndexScenes,
-				updateThemes : _updateThemes,
+				updateThemeStatus : _updateThemeStatus,
 				loadScenesByThemeId : _loadScenesByThemeId,
 				deleteQuestion : _deleteQuestion,
 				deleteScene : _deleteScene,
@@ -58,17 +58,24 @@
 				validateProfile : _validateProfile
 			};
 
-			function getFullRestApi(uri) {
-				var url = "/admin".concat(uri);
-				return HelperService.getFullRestApi(url);
-			}
-
 			function _getObjectCurrent() {
 				return objectCurrent;
 			}
 
 			function _setObjectCurrent(object) {
 				objectCurrent = object;
+			}
+
+			function getRestContext(object, URL_BASE) {
+				var restContext = {method: null, url: null};
+				if (object.id) {
+					restContext.method = "PUT";
+					restContext.url = URL_BASE.UPDATE.replace("{id}", object.id);
+				} else {
+					restContext.method = "POST";
+					restContext.url = URL_BASE.SAVE;
+				}
+				return restContext;
 			}
 /** auxilia para recuperar objeto skill, para exibir no editar da question*/
 			function _getSkillById(id) {
@@ -83,7 +90,7 @@
 
 			function _getInstitutionDetails(institutionId) {
 				var deferred = $q.defer();
-				var uri = API_SERVER.INSTITUTION.INSTITUTION.replace("{id}", institutionId);
+				var uri = API_SERVER.INSTITUTION.BY_ID.replace("{id}", institutionId);
 				$http.get(uri).then(function(response) {
 					objectCurrent = response.data;
 					deferred.resolve(response.data);
@@ -92,15 +99,18 @@
 			}
 
 			function _saveInstitution(institution) {
-				var jsonData = angular.toJson(institution);
 				var deferred = $q.defer();
-        $http({
-            method: "POST", url: getFullRestApi("/institution"),
+				var restContext = getRestContext(institution, API_SERVER.INSTITUTION);
+
+				var jsonData = angular.toJson(institution);
+				$http({method: restContext.method, url: restContext.url,
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
-         then(function (response) {
-             deferred.resolve(response);
-         });
+         then(function success(response) {
+					 deferred.resolve(response);
+         }, function error(response) {
+					 deferred.resolve(response);
+				 });
         return deferred.promise;
 			}
 
@@ -108,7 +118,7 @@
 				var jsonData = angular.toJson(file);
 				var deferred = $q.defer();
         $http({
-            method: "POST", url: getFullRestApi("/upload/institutions"),
+            method: "POST", url: API_SERVER.INSTITUTION.UPLOAD,
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function(response) {
@@ -117,12 +127,13 @@
         return deferred.promise;
 			}
 
-			function _saveScene(scene, method) {
+			function _saveScene(scene) {
 				$log.log(scene);
 				var deferred = $q.defer();
+				var restContext = getRestContext(scene, API_SERVER.THEME);
 				var jsonData = angular.toJson(scene);
         $http({
-            method: method, url: getFullRestApi("/game/scene"),
+            method: restContext.method, url: restContext.url,
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function (response) {
@@ -133,10 +144,11 @@
 
 			function _saveSkill(skill) {
 				$log.log(skill);
-				var jsonData = angular.toJson(skill);
 				var deferred = $q.defer();
-        $http({
-            method: "POST", url: getFullRestApi("/skill"),
+				var restContext = getRestContext(skill, API_SERVER.SKILL);
+				var jsonData = angular.toJson(skill);
+				$http({
+            method: restContext.method, url: restContext.url,
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function (response) {
@@ -145,15 +157,11 @@
         return deferred.promise;
 			}
 			/** método que realiza a reordenação dos index das cenas */
-			function _updateIndexScenes(allScenes) {
-				angular.forEach(allScenes, function(value, key) {
-					value.index = key;
-					$log.log(key + " : " + value.index);
-				});
+			function _updateIndexScenes(themeId, allScenes) {
 				var jsonData = angular.toJson(allScenes);
 				var deferred = $q.defer();
         $http({
-            method: "PUT", url: getFullRestApi("/game/scenes"),
+            method: "PUT", url: API_SERVER.THEME.UPDATE_SCENES.replace("{themeId}", themeId),
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function (response) {
@@ -162,23 +170,23 @@
         return deferred.promise;
 			}
 			/** excluir uma questão de uma cena */
-			function _deleteQuestion(sceneId) {
+			function _deleteQuestion(themeId, sceneId) {
 				var deferred = $q.defer();
 				$http({
 					method: "DELETE",
-						url: getFullRestApi("/scene/question/".concat(sceneId))
-					})
+					url: API_SERVER.THEME.DELETE_QUESTION.replace("{themeId}", themeId).replace("{sceneId}", sceneId)
+				})
 				.then(function (response) {
 					deferred.resolve(response.status);
 				});
 				return deferred.promise;
 			}
 /* função que chama requisição para remoção de uma questão de uma cena */
-			function _deleteScene(sceneId) {
+			function _deleteScene(themeId, sceneId) {
 				var deferred = $q.defer();
         $http({
             method: "DELETE",
-						url: getFullRestApi("/scene/".concat(sceneId))
+						url: API_SERVER.THEME.DELETE_SCENE.replace("{themeId}", themeId).replace("{sceneId}", sceneId)
         })
 				.then(function (response) {
 					deferred.resolve(response.status);
@@ -214,7 +222,7 @@
 				var jsonData = angular.toJson(theme);
 				var deferred = $q.defer();
         $http({
-            method: "POST", url: getFullRestApi("/game/theme"),
+            method: "POST", url: API_SERVER.THEME.SAVE,
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function (response) {
@@ -223,13 +231,10 @@
         return deferred.promise;
 			}
 
-			function _updateThemes(themes) {
-				var jsonData = angular.toJson(themes);
+			function _updateThemeStatus(themeId, newStatus) {
 				var deferred = $q.defer();
-        $http({
-            method: "PUT", url: getFullRestApi("/game/themes"),
-            data: jsonData,	headers: {"Content-Type": "application/json"}
-        }).
+				var uri = API_SERVER.THEME.UPDATE_STATUS.replace("{id}", themeId);
+				$http.put(uri, null, {params: {status: newStatus}}).
          then(function (response) {
            deferred.resolve(response.status);
          });

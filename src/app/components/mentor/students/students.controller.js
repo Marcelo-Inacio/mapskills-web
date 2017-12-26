@@ -7,13 +7,16 @@
 
 	/** @ngInject */
 	function MentorStudentController($log, toastrService, mentorService, modalService, downloadService, Session, HelperService) {
-
 		var vm = this;
-		vm.allStudents = null;
+		var page = {nextPage: 0, size: 20, isLast: false};
+		vm.students = null;
 		vm.isTechnical;
-		vm.headerTable = [{label: "Nome", model: "name"},
-			{label: "RA", model: "ra"}, {label: "Curso", model: "course"},
-			{label: "Concluído", model: "completed"}, {label: "Ação", model: "action"}];
+		vm.filter = {name: null, ra: null, course: {}};
+		vm.tableHeader = [{label: "Nome", model: "name", width: {'width': '30%'}},
+			{label: "RA", model: "ra", width: {'width': '15%'}},
+			{label: "Curso", model: "course", width: {'width': '30%'}},
+			{label: "Concluído", model: "completed", width: {'width': '10%'}},
+			{label: "Ação", model: "action", width: {'width': '15%'}}];
 
     init();
 
@@ -21,16 +24,18 @@
 			mentorService.validateProfile();
 			vm.isTechnical = Session.refreshUserSession().institutionLevel === "TECHNICAL";
 			if(!mentorService.getObjectCurrent()) {
-				loadAllStudents(true);
+				loadStudents(true, false);
 				loadAllCourses();
 			}
       vm.student = mentorService.getObjectCurrent();
 			mentorService.setObjectCurrent(null);
     }
 
-		function loadAllStudents(loadFromServer) {
-			mentorService.loadAllStudents(loadFromServer).then(function(response) {
-				vm.allStudents = response;
+		function loadStudents(loadFromServer, clearCache) {
+			mentorService.loadStudents(loadFromServer, vm.filter, clearCache, page).then(function(response) {
+				page.nextPage++;
+				page.isLast = response.remainingPages <= 0;
+				vm.students = response.students;
 			});
 		}
 
@@ -69,14 +74,14 @@
 			}
       mentorService.saveStudent(student).then(function(response) {
 				postVerify(response.status);
-				loadAllStudents(true);
+				loadStudents(true, true);
 			});
     }
 
 		vm.sendFile = function(file) {
       mentorService.sendFile(file).then(function(response) {
-				vm.allStudents = response.data;
 				postVerify(response.status);
+				loadStudents(true, true);
 			});
     }
 /** verifica o status da requisição para o retorno
@@ -102,20 +107,19 @@ dos funções saveStudent e sendFile */
 			return raFormatted;
 		}
 
-		vm.orderBy = function(field) {
-			$log.log(field);
-			vm.orderList = field.model;
-			vm.orderDirection = !vm.orderDirection;
-		}
-
 		vm.closeModal = function() {
 			modalService.closeModal();
 		}
 
-		vm.loadMore = function() {
-			loadAllStudents(true);
+		vm.loadMoreStudents = function() {
+			loadStudents(true, false);
 		}
 
+		vm.search = function() {
+			page.nextPage = 0;
+			page.isLast = false;
+			vm.filter.course = HelperService.isUndefinedOrNull(vm.filter.course) ? {} : vm.filter.course;
+			loadStudents(true, true);
+		}
 	}
-
 })();

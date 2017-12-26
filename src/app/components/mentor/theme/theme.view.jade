@@ -11,7 +11,7 @@ section
         td {{::theme.name}}
         td
           md-switch.md-primary.botton-switch(ng-model='theme.active', ng-click="theCtrl.setThemeCurrent(theme)",
-            aria-label="Atualizar")
+            aria-label="Status")
       tr(ng-show="theCtrl.allThemes.length == 0")
         td NENHUM TEMA ATIVO
         td

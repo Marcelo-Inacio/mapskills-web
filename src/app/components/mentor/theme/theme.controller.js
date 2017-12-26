@@ -37,7 +37,7 @@ o que está habilitado para o instituição */
 		}
 
 		vm.updateThemeIdCurrent = function() {
-			var institutionCode = loginService.getUserLogged().institutionCode;
+			var institutionCode = loginService.getUserLogged().institution.code;
 			mentorService.updateThemeIdCurrent(institutionCode, themeIdCurrent).then(function(status) {
 				toastrService.showToastr(status);
 			});

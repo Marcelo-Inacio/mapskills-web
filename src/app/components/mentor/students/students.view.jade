@@ -1,13 +1,6 @@
 section
   .row.aligner
-    .col-xs-6.col-md-4.aligner-item
-      input.form-control(type='text', ng-model="stuCtrl.filter.name", placeholder="Nome do aluno"
-                        ,ng-model-options="{updateOn: 'default blur', debounce:{default: 500, blur: 0}}")
-    .col-xs-6.col-md-4.aligner-item
-      select.form-control(ng-model="stuCtrl.filter.course"
-                          ,ng-options="course.name for course in stuCtrl.allCourses track by course.id")
-        option(value='') -- Selecione um curso --
-    .col-xs-6.col-md-2.aligner-item
+    .col-xs-6.col-md-2.col-md-offset-8.aligner-item
       label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="stuCtrl.openStudentModal()")
         i.fa.fa-user-plus.ico-sidebar
         | novo
@@ -15,21 +8,44 @@ section
       label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="stuCtrl.openFileModal()")
         i.fa.fa-file-excel-o.ico-sidebar
         | importar excel
-  table.table.table-hover.table-striped
-    thead
-      tr.table-thead
-        th(ng-repeat="header in stuCtrl.headerTable") {{::header.label}}
-          i(ng-hide="header.model === 'action'", style="margin-left: 20px", ng-click="stuCtrl.orderBy(header)").fa.fa-arrows-v
-    tbody
-      div(infinite-scroll='stuCtrl.loadMore()', infinite-scroll-distance='2')
-        tr(ng-repeat="student in stuCtrl.allStudents | filter:{name :stuCtrl.filter.name} | filter:{course:{name:stuCtrl.filter.course.name}} | orderBy:stuCtrl.orderList : stuCtrl.orderDirection  track by student.id")
-          td {{student.name}}
-          td {{student.ra}}
-          td {{student.course.name.replace('Tecnologia em', '')}}
-          td.check-ok(ng-if="student.completed")
-            i.fa.fa-check-circle
-          td.check-not-ok(ng-if="!student.completed")
-            i.fa.fa-minus-circle
-          td
-            label#btn-todo.btn.btn-info.btn-xs(ng-click="stuCtrl.openDetailsModal(student)", ) detalhes
-            label#btn-todo.btn.btn-info.btn-xs(ng-click="stuCtrl.openStudentModal(student)") editar
+  table.table.table-hover.table-striped.table-scroll
+    thead.table-thead
+      tr
+        th
+          input.form-control(type='text', ng-model="stuCtrl.filter.name", placeholder="Nome")
+        th
+          input.form-control(type='number', ng-model="stuCtrl.filter.ra", placeholder="RA")
+        th
+          select.form-control(ng-model="stuCtrl.filter.course"
+                              ,ng-options="course.name for course in stuCtrl.allCourses track by course.id")
+            option(value='') -- Selecione um curso --
+        th
+        th
+          label#btn-todo.btn.btn-default.btn-md.botton-new(ng-click="stuCtrl.search()")
+            i.fa.fa-search.ico-sidebar
+            | pesquisar
+        th
+      tr
+        th(ng-style="stuCtrl.tableHeader[0].width")
+          label(for="stuCtrl.tableHeader[0].label") {{::stuCtrl.tableHeader[0].label}}
+        th(ng-style="stuCtrl.tableHeader[1].width")
+          label(for="stuCtrl.tableHeader[1].label") {{::stuCtrl.tableHeader[1].label}}
+        th(ng-style="stuCtrl.tableHeader[2].width")
+          label(for="stuCtrl.tableHeader[2].label") {{::stuCtrl.tableHeader[2].label}}
+        th(ng-style="stuCtrl.tableHeader[3].width")
+          label(for="stuCtrl.tableHeader[3].label") {{::stuCtrl.tableHeader[3].label}}
+        th(ng-style="stuCtrl.tableHeader[4].width")
+          label(for="stuCtrl.tableHeader[4].label") {{::stuCtrl.tableHeader[4].label}}
+        th(style="width: 15px")
+    tbody.tbody-scroll(lazy-load="stuCtrl.loadMoreStudents()")
+      tr.tr-scroll(ng-repeat="student in stuCtrl.students track by student.id")
+        td(style="width: 30%") {{student.name}}
+        td(style="width: 15%") {{student.ra}}
+        td(style="width: 30%") {{student.course.name.replace('Tecnologia em', '')}}
+        td(style="width: 10%").check-ok(ng-if="student.completed")
+          i.fa.fa-check-circle
+        td(style="width: 10%").check-not-ok(ng-if="!student.completed")
+          i.fa.fa-minus-circle
+        td(style="width: 15%")
+          label#btn-todo.btn.btn-info.btn-xs(ng-click="stuCtrl.openDetailsModal(student)", ) detalhes
+          label#btn-todo.btn.btn-info.btn-xs(ng-click="stuCtrl.openStudentModal(student)") editar

@@ -6,18 +6,13 @@
 		.factory('studentService', studentService);
 
 		/** @ngInject */
-		function studentService($log, $http, $q, HelperService, loginService) {
+		function studentService($log, $http, $q, HelperService, loginService, API_SERVER) {
 			return {
 				sendAnswer : _sendAnswer,
-				sendEmail : _sendEmail,
 				getHistory : _getHistory,
 				getRadarResults : _getRadarResults,
 				validateProfile : _validateProfile
 			};
-/** retorna url default do server  */
-		function getFullRestApi(uri) {
-			return HelperService.getFullRestApi("/student").concat(uri);
-		}
 
 		function _validateProfile() {
 			loginService.validateProfile("STUDENT");
@@ -25,7 +20,7 @@
 
 		function _getRadarResults(studentId) {
 			var deferred = $q.defer();
-			var uri = getFullRestApi("/game/result/").concat(studentId);
+			var uri = API_SERVER.STUDENT.RESULT.replace("{studentId}", studentId);
 			$http.get(uri).success(function(response) {
 				deferred.resolve(response);
 			});
@@ -34,7 +29,7 @@
 
 		function _getHistory(studentId) {
 			var deferred = $q.defer();
-			var uri = getFullRestApi("/game/").concat(studentId);
+			var uri = API_SERVER.STUDENT.SCENE.replace("{id}", studentId);
 			$http.get(uri).success(function(response) {
 				deferred.resolve(response);
 			});
@@ -46,7 +41,7 @@
 				$log.log(answerContext);
 				var deferred = $q.defer();
 				$http({
-					method: 'POST',	url: getFullRestApi("/game/answer"),
+					method: 'POST',	url: API_SERVER.STUDENT.ANSWER,
 					headers: {'Content-Type': 'application/json'},
 					data: answerContext
 				}).then(function success(response) {
@@ -54,9 +49,5 @@
 				});
 				return deferred.promise;
 			}
-			/** realiza o envio de email ao fim do game */
-			function _sendEmail() {
-			}
-
 		}
 })();

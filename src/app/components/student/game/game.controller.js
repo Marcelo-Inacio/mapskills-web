@@ -6,10 +6,11 @@
 		.controller('GameController', GameController);
 
 	/** @ngInject */
-	function GameController($log, $state, studentService, Session) {
+	function GameController($log, $state, studentService, toastrService, HelperService, Session) {
 		var vm = this;
 		var student;
 		var sizeScenes;
+		var remainingQuestions = 0;
 		vm.history;
 		vm.index = 0;
 		vm.active = "activated";
@@ -27,7 +28,16 @@
 				vm.history = response;
 				sizeScenes = vm.history.length;
 				verifyGameIsActived();
+				calculateRemainingQuestions(vm.history);
 			});
+		}
+
+		function calculateRemainingQuestions(scenes) {
+			angular.forEach(scenes, function(scene, key) {
+				if (!HelperService.isUndefinedOrNull(scene.question)) {
+					remainingQuestions++;
+				}
+			})
 		}
 
 		/** função que envia um resposta do aluno ao back-end */
@@ -38,11 +48,14 @@
 			answerContext.studentId = student.id;
 			answerContext.skillId = vm.history[vm.index].question.skillId;
 			answerContext.skillValue = alternative.skillValue;
+			answerContext.remainingQuestions = --remainingQuestions;
 
 			studentService.sendAnswer(answerContext).then(function(status) {
-				if(status == 201) {
+				if(status === 200) {
 					vm.nextScene();
+					return;
 				}
+				toastrService.showToastr(status);
 			});
 		}
 

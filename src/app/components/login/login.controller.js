@@ -8,15 +8,14 @@
 	/** @ngInject */
 	function LoginController(toastr, toastrService, cfpLoadingBar, loginService) {
 		var vm = this;
-		vm.userLogin = {username: null, password: null};
 
 		/** realiza login na aplicação */
-		vm.login = function (loginObj) {
-			if(loginObj.username == null || loginObj.password == null) {
+		vm.login = function (login) {
+			if(login.username == null || login.password == null) {
 				messageError();
 				return;
 			}
-			loginService.login(loginObj).then(function(response) {
+			loginService.login(login).then(function(response) {
 				if(response.status !== 200) {
 					cfpLoadingBar.complete();
 					toastrService.showToastr(response.status);
@@ -26,7 +25,7 @@
 				if(response.status !== 200) {
 					return;
 				}
-				loginService.setUserContext(loginObj.username);
+				loginService.setUserContext(login.username);
 			});
 		}
 		/** realiza logout na aplicação, limpando os registros do usuario*/
@@ -39,5 +38,4 @@
 		}
 
 	}
-
 })();

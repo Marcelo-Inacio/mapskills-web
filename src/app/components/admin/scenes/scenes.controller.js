@@ -71,20 +71,20 @@
 		}
 /** NOVA CENA -> SALVAR (POST), ADD QUESTAO OU EDITAR -> UPDATE (PUT)*/
 		vm.saveScene = function(scene, skillId) {
-			if(!HelperService.isUndefinedOrNull(scene.question)) {
+			if (!HelperService.isUndefinedOrNull(scene.question)) {
 				$log.log(scene.question);
-				if(HelperService.isUndefinedOrNull(skillId)) {
+				if (HelperService.isUndefinedOrNull(skillId)) {
 					toastrService.showToastr(400);
 					return;
 				}
-				if(angular.isObject(skillId)) {
+				if (angular.isObject(skillId)) {
 					scene.question.skillId = skillId.id;
 				} else {
 					scene.question.skillId = skillId;
 				}
 			}
 			scene.gameThemeId = themeId;
-			adminService.saveScene(scene, "POST").then(function(status) {
+			adminService.saveScene(scene).then(function(status) {
 				$log.log(status);
 				toastrService.showToastr(status);
 				loadScenesByThemeId(themeId, true);
@@ -93,24 +93,27 @@
 		}
 
 		vm.updateIndexScenes = function(allScenes) {
-			adminService.updateIndexScenes(allScenes).then(function(status) {
+			angular.forEach(allScenes, function(value, key) {
+				value.index = key;
+				$log.log(key + " : " + value.index);
+			});
+			adminService.updateIndexScenes(themeId, allScenes).then(function(status) {
 				toastrService.showToastr(status);
 			});
 		}
 
 		vm.deleteQuestion = function(sceneId) {
-			adminService.deleteQuestion(sceneId).then(function(status) {
+			adminService.deleteQuestion(themeId, sceneId).then(function(status) {
 				loadScenesByThemeId(themeId, true);
 				toastrService.showToastr(status);
 			});
 		}
 
 		vm.deleteScene = function(sceneId) {
-			adminService.deleteScene(sceneId).then(function(status) {
+			adminService.deleteScene(themeId, sceneId).then(function(status) {
 				loadScenesByThemeId(themeId, true);
 				toastrService.showToastr(status);
 			});
 		}
 	}
-
 })();

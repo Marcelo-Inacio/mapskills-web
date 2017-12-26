@@ -14,5 +14,4 @@ section
         td
           label#btn-todo.btn.btn-info.btn-xs(ui-sref="admin.scenes({themeId: theme.id})") editar
         td
-          md-switch.md-primary.botton-switch(ng-model='theme.active', aria-label="Atualizar")
-  label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="gthCtrl.updateThemes(gthCtrl.allThemes)") salvar alterações
+          md-switch.md-primary.botton-switch(ng-model='theme.active', aria-label="Status" ng-change="gthCtrl.updateStatus(theme.id, theme.active)")

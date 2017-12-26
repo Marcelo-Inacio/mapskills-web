@@ -34,8 +34,8 @@
       modalService.openModal('app/components/admin/game_theme/gameTheme.modal.html', 'GameThemeController');
 		}
 
-		vm.updateThemes = function(themes) {
-			adminService.updateThemes(themes).then(function(status) {
+		vm.updateStatus = function(id, status) {
+			adminService.updateThemeStatus(id, status).then(function(status) {
 				toastrService.showToastr(status);
 			})
 		}

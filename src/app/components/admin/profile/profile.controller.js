@@ -9,15 +9,9 @@
 	function AdminProfileController($log, studentService, toastrService, adminService, loginService) {
 		var vm = this;
 
-		//init();
-
 		function init() {
 			adminService.validateProfile();
-      var user = loginService.getUserLogged();
-			loginService.getUserDetails("/admin/details/".concat(user.id)).then(function(response) {
-				$log.log(response);
-        vm.user = response;
-			});
+      vm.user = loginService.getUserLogged();
 		}
 
     vm.updatePassword = function(user) {
@@ -27,6 +21,7 @@
       });
     }
 
-	}
+		init();
 
+	}
 })();
