@@ -32,7 +32,7 @@
       .state('student.profile', {
         url: '/student/profile',
         templateUrl: 'app/components/student/profile/profile.view.html',
-        controller: 'StudentProfileController',
+        controller: 'ProfileController',
         controllerAs: 'studentProfileCtrl'
       })
       .state('student.noGame', {
@@ -57,7 +57,7 @@
       .state('admin.profile', {
         url: '/admin/profile',
         templateUrl: 'app/components/admin/profile/profile.view.html',
-        controller: 'AdminProfileController',
+        controller: 'ProfileController',
         controllerAs: 'adminProfileCtrl'
       })
       .state('admin.fatec', {
@@ -114,7 +114,7 @@
       .state('mentor.profile', {
         url: '/mentor/profile',
         templateUrl: 'app/components/mentor/profile/profile.view.html',
-        controller: 'MentorProfileController',
+        controller: 'ProfileController',
         controllerAs: 'mentorProfileCtrl'
       })
       .state('mentor.courses', {

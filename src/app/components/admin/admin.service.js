@@ -30,7 +30,7 @@
 				}
 			};
 
-			var allSkillsCached = null;
+			var allSkillsCached = [];
 			var allScenesCached = null;
 			var allInstitutionsCached = null;
 			var objectCurrent = null;
@@ -130,7 +130,7 @@
 			function _saveScene(scene) {
 				$log.log(scene);
 				var deferred = $q.defer();
-				var restContext = getRestContext(scene, API_SERVER.THEME);
+				var restContext = API_SERVER.SCENE.getRestContext(scene);
 				var jsonData = angular.toJson(scene);
         $http({
             method: restContext.method, url: restContext.url,
@@ -197,7 +197,7 @@
 			para em caso de reload não sofra com requisição ao server */
 			function _loadScenesByThemeId(themeId, fromServer) {
 				var deferred = $q.defer();
-				if(sceneCachedVerify(themeId) && !fromServer) {
+				if(containsSceneCached(themeId) && !fromServer) {
 					deferred.resolve(allScenesCached);
 				} else {
 					var uri = API_SERVER.THEME.BY_ID.replace("{id}", themeId);
@@ -209,11 +209,13 @@
 				return deferred.promise;
 			}
 
-			function sceneCachedVerify(themeId) {
-				if(allScenesCached != null) {
+			function containsSceneCached(themeId) {
+				return allScenesCached != null
+								&& (allScenesCached[0].gameThemeId == themeId);
+				/*if(allScenesCached != null && ) {
 					if (allScenesCached[0].gameThemeId == themeId) return true;
 				}
-				return false;
+				return false;*/
 			}
 
 			/** cadastra um tema */
@@ -255,19 +257,13 @@
 				return deferred.promise;
 			}
 			/** recupera todos as competencias cadastadas e simula um cache */
-			function _loadAllSkills(loadFromServer) {
+			function _loadAllSkills() {
 				var deferred = $q.defer();
-				if(allSkillsCached != null && !loadFromServer) {
-					deferred.resolve(allSkillsCached);
-					$log.log("== SKILL CACHED ==");
-				} else {
-					$log.log("== SKILL FROM SERVER ==");
-					var uri = API_SERVER.SKILL.ALL;
-					$http.get(uri).then(function(response) {
-						allSkillsCached = response.data;
-						deferred.resolve(response.data);
-					});
-				}
+				var uri = API_SERVER.SKILL.ALL;
+				$http.get(uri).then(function(response) {
+					allSkillsCached = response.data;
+					deferred.resolve(response.data);
+				});
 				return deferred.promise;
 			}
 			/** recupera todos temas cadastrados */

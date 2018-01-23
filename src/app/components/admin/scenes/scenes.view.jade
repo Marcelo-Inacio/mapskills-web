@@ -3,8 +3,8 @@ section
     .col-md-1.aligner-item
       i.fa.fa-info-circle.ico-large(uib-tooltip="{{scnCtrl.info_tooltip}}", tooltip-placement="bottom-right")
     .col-md-11
-      label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="scnCtrl.openSceneModal()") novo
-      label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="scnCtrl.updateIndexScenes(scnCtrl.allScenes)") salvar alterações
+      label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="scnCtrl.openSceneModal()") novo
+      label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="scnCtrl.updateIndexScenes(scnCtrl.allScenes)") salvar alterações
   table.table.table-hover
     thead
       tr.table-thead
@@ -15,7 +15,7 @@ section
       tr(ng-repeat="scene in scnCtrl.allScenes track by scene.id")
         td {{scene.text}}
         td 
-          label#btn-todo.btn.btn-success.btn-xs(ng-show="!scene.question", ng-click="scnCtrl.openQuestionModal(scene)") adiconar
+          label#btn-todo.btn.btn-primary.btn-xs(ng-show="!scene.question", ng-click="scnCtrl.openQuestionModal(scene)") adiconar
           label#btn-todo.btn.btn-info.btn-xs(ng-show="scene.question", ng-click="scnCtrl.openQuestionModal(scene)") editar
           label#btn-todo.btn.btn-danger.btn-xs(ng-show="scene.question", ng-click="scnCtrl.deleteQuestion(scene.id)") excluir
         td

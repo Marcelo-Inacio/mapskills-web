@@ -1,17 +1,12 @@
 section
-  label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="gthCtrl.openModal()") novo
-  table.table.table-hover
-    thead
-      tr.table-thead
-        th Id
-        th Nome
-        th Cenas
-        th Ativo
-    tbody
-      tr(ng-repeat="theme in gthCtrl.allThemes track by theme.id")
-        td(style="text-align: center") {{::theme.id}}
-        td {{::theme.name}}
-        td
-          label#btn-todo.btn.btn-info.btn-xs(ui-sref="admin.scenes({themeId: theme.id})") editar
-        td
+  .row
+    label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="gthCtrl.openModal()") novo
+  .row
+    .col-md-3(ng-repeat="theme in gthCtrl.allThemes track by theme.id")
+      .panel.panel-default
+        .panel-heading {{::theme.name}}
+        .panel-body.panel-auto.aligner
           md-switch.md-primary.botton-switch(ng-model='theme.active', aria-label="Status" ng-change="gthCtrl.updateStatus(theme.id, theme.active)")
+        .panel-footer
+          label#btn-todo.btn.btn-info.btn-xs(ui-sref="admin.scenes({themeId: theme.id})") cenas
+           span(style="padding: 0 5px 0 5px").fa.fa-share-square-o(aria-hidden='true')

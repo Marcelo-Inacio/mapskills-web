@@ -63,6 +63,11 @@
       DELETE_QUESTION: HOST.SERVER + 'game/{themeId}/scene/{sceneId}/question',
       DELETE_SCENE: HOST.SERVER + 'game/{themeId}/scene/{sceneId}'
     },
+    SCENE: {
+      SAVE: HOST.SERVER + 'game/{themeId}/scene',
+      UPDATE: HOST.SERVER + 'game/{themeId}/scene/{sceneId}',
+      getRestContext: _sceneRestContext
+    },
     SKILL: {
       ALL: HOST.SERVER + 'skills',
       SAVE: HOST.SERVER + 'skill',
@@ -72,7 +77,8 @@
       SHOW: HOST.REPORT + 'report/student',
       DOWNLOAD: HOST.REPORT + 'report/download',
       GLOBAL: HOST.REPORT + 'report/institution-level',
-      LOCAL: HOST.REPORT + 'report/institution'
+      LOCAL: HOST.REPORT + 'report/institution',
+      COURSE: HOST.REPORT + 'report/institution-courses'
     },
     STUDENT: {
       SCENE: HOST.SERVER + 'student/{id}/scene',
@@ -84,6 +90,18 @@
     },
     USER: HOST.SERVER + 'user'
   };
+
+  function _sceneRestContext (scene) {
+    var restContext = {method: null, url: null};
+    if (scene.id) {
+      restContext.method = "PUT";
+      restContext.url = API_SERVER.SCENE.UPDATE.replace("{themeId}", scene.gameThemeId).replace("{sceneId}", scene.id);
+    } else {
+      restContext.method = "POST";
+      restContext.url = API_SERVER.SCENE.SAVE.replace("{themeId}", scene.gameThemeId);
+    }
+    return restContext;
+  }
 
   angular
     .module('mapskillsWeb')

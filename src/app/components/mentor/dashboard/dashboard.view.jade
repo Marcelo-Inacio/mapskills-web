@@ -1,11 +1,28 @@
 section
+  .row.center-align
+    .col-md-9
+      .col-md-6.center-align
+        .col-md-2
+          label De
+        .col-md-10
+          input.form-control(type="month", ng-model="mentorDashCtrl.filter.startDate")
+      .col-md-6.center-align
+        .col-md-2
+          label Até
+        .col-md-10
+          input.form-control(type="month", ng-model="mentorDashCtrl.filter.endDate")
+    .col-md-3
+      label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="mentorDashCtrl.search()")
+        i.fa.fa-search.ico-sidebar
+        | pesquisar
   .row
     .col-lg-8
-      .col-lg-3.col-md-2.col-xs-6(ng-repeat="obj in mentorDashCtrl.array")
-        .panel.panel-default
-          .panel-body.panel-radar
-            canvas#doughnut.chart.chart-doughnut(chart-data="obj.values", chart-labels="mentorDashCtrl.labels")
-          .panel-footer(style="text-align: center") {{obj.curso}}
+      .row
+        .col-lg-3.col-md-4.col-xs-6(ng-repeat="course in mentorDashCtrl.courses")
+          .panel.panel-default
+            .panel-body.panel-radar
+              canvas#meu-chart.chart.chart-pie(width="400", height="400", chart-data="course.values", chart-labels="mentorDashCtrl.labels", chart-options="mentorDashCtrl.options")
+            .panel-footer(style="text-align: center") {{course.code}}
     .col-lg-4
       .panel.panel-default
         .panel-heading Legenda

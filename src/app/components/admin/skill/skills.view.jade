@@ -1,14 +1,13 @@
 section
-  label#btn-todo.btn.btn-success.btn-md.botton-new(ng-click="skiCtrl.openModal()") novo
-  table.table.table-hover
-    thead
-      tr.table-thead
-        th Id
-        th Nome
-        th Ação
-    tbody
-      tr(ng-repeat="skill in skiCtrl.allSkills track by skill.id")
-        td {{::skill.id}}
-        td {{::skill.name}}
-        td
+  .row
+    label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="skiCtrl.openModal()") novo
+  .row
+    .col-md-3(ng-repeat="skill in skiCtrl.allSkills track by skill.id")
+      .panel.panel-default
+        .panel-heading {{skill.name}}
+        .panel-body.panel-auto(style="min-height: 150px", ng-show="skill.description.length > 150")
+          {{skill.description | limitTo:150}} ...
+        .panel-body.panel-auto(style="min-height: 150px", ng-show="skill.description.length <= 150")
+          {{skill.description}}
+        .panel-footer
           label#btn-todo.btn.btn-info.btn-xs(ng-click="skiCtrl.openModal(skill)") editar

@@ -11,8 +11,7 @@
     var directive = {
       restrict: 'E',
       templateUrl: function(element, attrs) {
-        //return "app/shared/sidebar/sidebar." + attrs.profile + ".html";
-        return "app/shared/sidebar/"+attrs.profile+".html";
+        return "app/shared/sidebar/" + attrs.profile + ".html";
       },
       controller: SidebarController,
       controllerAs: 'sbCtrl',
@@ -51,7 +50,7 @@
 
      function init() {
        var url = $location.path();
-       if(url.indexOf("/admin/theme/") !== -1){
+       if(url.indexOf("/admin/theme/") !== -1) {
          $state.go("admin.themes");
          return;
        }

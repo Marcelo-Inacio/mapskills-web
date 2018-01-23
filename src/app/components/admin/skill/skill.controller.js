@@ -13,36 +13,24 @@
 
     function init() {
 			adminService.validateProfile();
-			loadAllSkills(false);
-      vm.skill = adminService.getObjectCurrent();
-			adminService.setObjectCurrent(null);
+			loadAllSkills();
     }
 
-		function loadAllSkills(loadFromServer) {
-			adminService.loadAllSkills(loadFromServer).then(function(response) {
+		function loadAllSkills() {
+			adminService.loadAllSkills().then(function(response) {
 				vm.allSkills = response;
 			});
 		}
 
 		vm.openModal = function(skill) {
       adminService.setObjectCurrent(skill);
-      modalService.openModal('app/components/admin/skill/skill.modal.html', 'SkillController');
-		}
-
-    vm.saveSkill = function(skill) {
-      adminService.saveSkill(skill).then(function(status) {
-				if(status === 200) {
-					loadAllSkills(true);
-				}
-				toastrService.showToastr(status);
-				vm.closeModal();
+      var modalInstance = modalService.openModal('app/components/admin/skill/modal/skill.modal.html', 'AdminSkillModalController');
+			modalInstance.result.then(function () {
+				loadAllSkills();
+			}, function () {
+				 $log.info('modal-component dismissed at: ' + new Date());
 			});
-    }
-
-		vm.closeModal = function() {
-			modalService.closeModal();
 		}
-
 	}
 
 })();

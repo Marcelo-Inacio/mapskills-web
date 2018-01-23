@@ -3,16 +3,14 @@
 
 	angular
 		.module('mapskillsWeb')
-		.controller('StudentProfileController', StudentProfileController);
+		.controller('ProfileController', ProfileController);
 
 	/** @ngInject */
-	function StudentProfileController($log, studentService, toastrService, loginService) {
+	function ProfileController($log, studentService, toastrService, adminService, loginService) {
 		var vm = this;
 
-		init();
-
 		function init() {
-			studentService.validateProfile();
+			//adminService.validateProfile();
       vm.user = loginService.getUserLogged();
 		}
 
@@ -22,6 +20,8 @@
         toastrService.showToastr(status);
       });
     }
+
+		init();
 
 	}
 })();

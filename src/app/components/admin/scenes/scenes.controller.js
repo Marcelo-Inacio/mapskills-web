@@ -8,11 +8,9 @@
 	/** @ngInject */
 	function ScenesController($log, $stateParams, toastrService, modalService, adminService, HelperService) {
 		var vm = this;
-		var themeId;
-		vm.allScenes = null;
+		var themeId = $stateParams.themeId;;
+		vm.allScenes = [];
 		vm.allSkills = null;
-		vm.skillSelected = null;
-		vm.scene = {"question":{"alternatives":[]}};
 
 		vm.info_tooltip = "Arraste as linhas da tabela para reordenar a exibição das cenas do jogo";
 
@@ -20,75 +18,35 @@
 		/** faz requisição ao backend de todas as cenas de um tema */
 		function init() {
 			adminService.validateProfile();
-			themeId = $stateParams.themeId;
 			loadScenesByThemeId(themeId, false);
-			loadAllSkills(false);
 			vm.scene = adminService.getObjectCurrent();
-			sceneVerify();
 			adminService.setObjectCurrent(null);
-		}
-
-		function sceneVerify() {
-			if(vm.scene != null) {
-				if(vm.scene.question === null) return;
-				var id = vm.scene.question.skillId;
-				vm.skillSelected = adminService.getSkillById(id);
-			}
 		}
 
 		vm.openSceneModal = function(scene) {
 			adminService.setObjectCurrent(scene);
-			modalService.openModal('app/components/admin/scenes/scene.modal.html', 'ScenesController');
+			var modalInstance = modalService.openModal('app/components/admin/scenes/modal/scene.modal.html', 'AdminSceneModalController');
+			modalResult(modalInstance);
 		}
 
 		vm.openQuestionModal = function(scene) {
-			prepareScene(scene);
 			adminService.setObjectCurrent(scene);
-			modalService.openModal('app/components/admin/scenes/question.modal.html', 'ScenesController');
+			var modalInstance = modalService.openModal('app/components/admin/scenes/modal/question.modal.html', 'AdminSceneModalController');
+			modalResult(modalInstance);
 		}
 
-		function prepareScene(scene) {
-			if(HelperService.isUndefinedOrNull(scene.question)) {
-				scene.question = {"alternatives": new Array(4)};
-			}
+		function modalResult(modalInstance) {
+			modalInstance.result.then(function () {
+				loadScenesByThemeId(themeId, true);
+			}, function () {
+				 $log.info('modal-component dismissed at: ' + new Date());
+			});
 		}
+
 		/** carrega todas cenas de um tema */
 		function loadScenesByThemeId(themeId, fromServer) {
 			adminService.loadScenesByThemeId(themeId, fromServer).then(function(data) {
 				vm.allScenes = data;
-			});
-		}
-
-		/** carrega todas competencias cadastadas */
-		function loadAllSkills(loadFromServer) {
-			adminService.loadAllSkills(loadFromServer).then(function(data) {
-				vm.allSkills =  data;
-			});
-		}
-
-		vm.closeModal = function() {
-			modalService.closeModal();
-		}
-/** NOVA CENA -> SALVAR (POST), ADD QUESTAO OU EDITAR -> UPDATE (PUT)*/
-		vm.saveScene = function(scene, skillId) {
-			if (!HelperService.isUndefinedOrNull(scene.question)) {
-				$log.log(scene.question);
-				if (HelperService.isUndefinedOrNull(skillId)) {
-					toastrService.showToastr(400);
-					return;
-				}
-				if (angular.isObject(skillId)) {
-					scene.question.skillId = skillId.id;
-				} else {
-					scene.question.skillId = skillId;
-				}
-			}
-			scene.gameThemeId = themeId;
-			adminService.saveScene(scene).then(function(status) {
-				$log.log(status);
-				toastrService.showToastr(status);
-				loadScenesByThemeId(themeId, true);
-				vm.closeModal();
 			});
 		}
 

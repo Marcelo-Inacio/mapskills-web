@@ -1,0 +1,10 @@
+section
+  .panel.panel-default(style="margin: 50px;")
+    .panel-heading {{adminProfileCtrl.user.profile}}
+    .panel-body.panel-auto(style="display: flex;")
+      .col-md-3.aligner
+        i.fa.fa-address-card(aria-hidden='true', style="font-size: 3em;")
+      .col-md-9
+        h3 {{adminProfileCtrl.user.name}}
+        h4 {{adminProfileCtrl.user.username}}
+    .panel-footer 

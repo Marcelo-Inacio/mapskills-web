@@ -33,8 +33,8 @@
         vm.user = loginService.getUserLogged();
       }
 
-      vm.details = function() {
-        $state.go("^.profile");
+      vm.goPage = function(page) {
+        $state.go("^." + page);
       }
 
       vm.logout = function() {

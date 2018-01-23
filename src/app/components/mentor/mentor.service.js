@@ -13,6 +13,7 @@
 
 			return {
 				loadStudents : _loadStudents,
+				loadCourseIndicators : _loadCourseIndicators,
 				loadAllCourses : _loadAllCourses,
 				loadAllThemesActivated : _loadAllThemesActivated,
 				saveStudent : _saveStudent,
@@ -151,6 +152,15 @@
            deferred.resolve(response.status);
          });
         return deferred.promise;
+			}
+
+			function _loadCourseIndicators(institutionCode) {
+				var deferred = $q.defer();
+				var uri = API_SERVER.REPORT.COURSE;
+				$http.get(uri, {params: {institutionCode: institutionCode}}).then(function (response) {
+           deferred.resolve(response.data);
+         });
+				return deferred.promise;
 			}
 		}
 })();

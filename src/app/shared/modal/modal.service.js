@@ -11,7 +11,8 @@
 				openModal : _openModal,
 				closeModal : _closeModal,
         setResult : _setResult,
-        getResult : _getResult
+        getResult : _getResult,
+				okModal : _okModal
 			};
 
 			var modalInstance;
@@ -26,7 +27,12 @@
           controller: controller,
           controllerAs: 'modalCtrl'
         });
+				return modalInstance;
       }
+
+			function _okModal() {
+				modalInstance.close();
+			}
 
 			function _closeModal() {
 				modalInstance.dismiss('cancel');
@@ -39,6 +45,5 @@
       function _getResult() {
         return tmpContextResult;
       }
-
 		}
 })();
