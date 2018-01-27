@@ -1,0 +1,64 @@
+
+<section>
+  <div class="row aligner">
+    <div class="col-xs-6 col-md-2 col-md-offset-8 aligner-item">
+      <label id="btn-todo" ng-click="stuCtrl.openStudentModal()" class="btn btn-primary btn-md botton-new"><i class="fa fa-user-plus ico-sidebar"></i>novo</label>
+    </div>
+    <div class="col-xs-6 col-md-2 aligner-item">
+      <label id="btn-todo" ng-click="stuCtrl.openFileModal()" class="btn btn-primary btn-md botton-new"><i class="fa fa-file-excel-o ico-sidebar"></i>importar excel</label>
+    </div>
+  </div>
+  <table class="table table-hover table-striped table-scroll">
+    <thead class="table-thead">
+      <tr>
+        <th>
+          <input type="text" ng-model="stuCtrl.filter.name" placeholder="Nome" class="form-control">
+        </th>
+        <th>
+          <input type="number" ng-model="stuCtrl.filter.ra" placeholder="RA" class="form-control">
+        </th>
+        <th>
+          <select ng-model="stuCtrl.filter.course" ng-options="course.name for course in stuCtrl.allCourses track by course.id" class="form-control">
+            <option value="">-- Selecione um curso --</option>
+          </select>
+        </th>
+        <th></th>
+        <th>
+          <label id="btn-todo" ng-click="stuCtrl.search()" class="btn btn-default btn-md botton-new"><i class="fa fa-search ico-sidebar"></i>pesquisar</label>
+        </th>
+        <th></th>
+      </tr>
+      <tr>
+        <th ng-style="stuCtrl.tableHeader[0].width">
+          <label for="stuCtrl.tableHeader[0].label">{{::stuCtrl.tableHeader[0].label}}</label>
+        </th>
+        <th ng-style="stuCtrl.tableHeader[1].width">
+          <label for="stuCtrl.tableHeader[1].label">{{::stuCtrl.tableHeader[1].label}}</label>
+        </th>
+        <th ng-style="stuCtrl.tableHeader[2].width">
+          <label for="stuCtrl.tableHeader[2].label">{{::stuCtrl.tableHeader[2].label}}</label>
+        </th>
+        <th ng-style="stuCtrl.tableHeader[3].width">
+          <label for="stuCtrl.tableHeader[3].label">{{::stuCtrl.tableHeader[3].label}}</label>
+        </th>
+        <th ng-style="stuCtrl.tableHeader[4].width">
+          <label for="stuCtrl.tableHeader[4].label">{{::stuCtrl.tableHeader[4].label}}</label>
+        </th>
+        <th style="width: 15px"></th>
+      </tr>
+    </thead>
+    <tbody lazy-load="stuCtrl.loadMoreStudents()" class="tbody-scroll">
+      <tr ng-repeat="student in stuCtrl.students track by student.id" class="tr-scroll">
+        <td style="width: 30%">{{student.name}}</td>
+        <td style="width: 15%">{{student.ra}}</td>
+        <td style="width: 30%">{{student.course.name.replace('Tecnologia em', '')}}</td>
+        <td style="width: 10%" ng-if="student.completed" class="check-ok"><i class="fa fa-check-circle"></i></td>
+        <td style="width: 10%" ng-if="!student.completed" class="check-not-ok"><i class="fa fa-minus-circle"></i></td>
+        <td style="width: 15%">
+          <label id="btn-todo" ng-click="stuCtrl.openDetailsModal(student)" class="btn btn-info btn-xs">detalhes</label>
+          <label id="btn-todo" ng-click="stuCtrl.openStudentModal(student)" class="btn btn-info btn-xs">editar</label>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

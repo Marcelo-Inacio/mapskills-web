@@ -1,0 +1,63 @@
+
+<div class="section">
+  <div class="modal-header"></div>
+  <div class="modal-body">
+    <div class="form-group row">
+      <div class="col-md-12">
+        <label>Código:</label>
+        <input type="text" ng-model="modalCtrl.institutionDetails.code" maxlength="3" class="form-control">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <label>CNPJ:</label>
+        <input type="text" ng-model="modalCtrl.institutionDetails.cnpj" maxlength="14" class="form-control">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <label>Razão Social:</label>
+        <input type="text" ng-model="modalCtrl.institutionDetails.company" class="form-control">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <label>Nível:</label>
+        <select ng-model="modalCtrl.institutionDetails.level" ng-options="level  | translate for level in modalCtrl.allLevels" class="form-control">
+          <option value="">-- selecione um nível --</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <label>Cidade:</label>
+        <input type="text" ng-model="modalCtrl.institutionDetails.city" class="form-control">
+      </div>
+    </div>
+    <div ng-repeat="mentor in modalCtrl.institutionDetails.mentors track by mentor.id" class="form-group">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <label>Mentor - Nome:</label>
+          <input type="text" ng-model="mentor.name" class="form-control">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-12">
+          <label>Mentor - E-mail:</label>
+          <input type="text" ng-model="mentor.username" class="form-control">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-12">
+          <label>Mentor - Senha:</label>
+          <md-checkbox md-no-ink="" aria-label="Checkbox No Ink" ng-model="modalCtrl.checkboxPassword" class="md-primary">mostrar senha</md-checkbox>
+          <input type="{{modalCtrl.showPassword[modalCtrl.checkboxPassword]}}" ng-model="mentor.password" placeholder="senha" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button id="btn-todo" ng-click="modalCtrl.saveInstitution(modalCtrl.institutionDetails)" class="btn btn-primary btn-md">salvar</button>
+    <button id="btn-todo" ng-click="modalCtrl.closeModal()" class="btn btn-default btn-md">cancelar</button>
+  </div>
+</div>

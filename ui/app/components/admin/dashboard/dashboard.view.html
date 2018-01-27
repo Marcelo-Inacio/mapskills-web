@@ -1,0 +1,27 @@
+
+<section>
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-lg-offset-2">
+      <div ng-if="admDashCtrl.hasResult.etecs" class="panel panel-default">
+        <div class="panel-heading">Etecs</div>
+        <div class="panel-body panel-radar">
+          <canvas id="pie" chart-data="admDashCtrl.indicator.etecs.values" chart-labels="admDashCtrl.labels" chart-options="admDashCtrl.options" class="chart chart-pie"></canvas>
+        </div>
+      </div>
+      <div ng-if="!admDashCtrl.hasResult.etecs" class="panel panel-default">
+        <div style="text-align: center" class="panel-heading">Nenhum resultado</div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-lg-offset-1">
+      <div ng-if="admDashCtrl.hasResult.fatecs" class="panel panel-default">
+        <div class="panel-heading">Fatecs</div>
+        <div class="panel-body panel-radar">
+          <canvas id="pie" chart-data="admDashCtrl.indicator.fatecs.values" chart-labels="admDashCtrl.labels" chart-options="admDashCtrl.options" class="chart chart-pie"></canvas>
+        </div>
+      </div>
+      <div ng-if="!admDashCtrl.hasResult.fatecs" class="panel panel-default">
+        <div style="text-align: center" class="panel-heading">Nenhum resultado</div>
+      </div>
+    </div>
+  </div>
+</section>

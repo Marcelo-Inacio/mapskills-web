@@ -1,0 +1,58 @@
+
+<div class="section">
+  <div class="modal-header"></div>
+  <div class="modal-body">
+    <div class="form-group row">
+      <div class="col-md-12">
+        <label>Competência</label>
+        <select ng-model="modalCtrl.skillSelected" ng-options="skill.id as skill.name for skill in modalCtrl.allSkills track by skill.id" class="form-control">
+          <option value="">-- selecione uma competência --</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-8">
+        <label>Alternativa A:</label>
+        <input type="text" ng-model="modalCtrl.scene.question.alternatives[0].description" class="form-control">
+      </div>
+      <div class="col-md-4">
+        <label>Peso</label>
+        <input type="number" ng-model="modalCtrl.scene.question.alternatives[0].skillValue" class="form-control">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-8">
+        <label>Alternativa B:</label>
+        <input type="text" ng-model="modalCtrl.scene.question.alternatives[1].description" class="form-control">
+      </div>
+      <div class="col-md-4">
+        <label>Peso</label>
+        <input type="number" ng-model="modalCtrl.scene.question.alternatives[1].skillValue" class="form-control">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-8">
+        <label>Alternativa C:</label>
+        <input type="text" ng-model="modalCtrl.scene.question.alternatives[2].description" class="form-control">
+      </div>
+      <div class="col-md-4">
+        <label>Peso</label>
+        <input type="number" ng-model="modalCtrl.scene.question.alternatives[2].skillValue" class="form-control">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-8">
+        <label>Alternativa D:</label>
+        <input type="text" ng-model="modalCtrl.scene.question.alternatives[3].description" class="form-control">
+      </div>
+      <div class="col-md-4">
+        <label>Peso</label>
+        <input type="number" ng-model="modalCtrl.scene.question.alternatives[3].skillValue" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">       
+    <button id="btn-todo" ng-click="modalCtrl.saveScene(modalCtrl.scene, modalCtrl.skillSelected)" class="btn btn-primary btn-md">salvar</button>
+    <button id="btn-todo" ng-click="modalCtrl.closeModal()" class="btn btn-default btn-md">cancelar</button>
+  </div>
+</div>
