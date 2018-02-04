@@ -28,8 +28,7 @@
 					params: {username: login.username, password: login.password}
 				})
 				.then(function success(response) {
-						var token = response.headers("Authorization");
-						Session.createToken(token);
+						Session.createToken("Basic bWFwc2tpbGxzOm1hcHNraWxscw==");
 						deferred.resolve(response);
 				}, function error(response) {
 						deferred.resolve(response);

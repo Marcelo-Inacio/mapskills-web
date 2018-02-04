@@ -6,7 +6,7 @@
     .factory('Session', Session);
 
   /** @ngInject */
-  function Session($cookies, application, $rootScope){
+  function Session($cookies, application, $rootScope) {
     var createToken = function(tokenInfo) {
         var sessionObj = {
             token: tokenInfo

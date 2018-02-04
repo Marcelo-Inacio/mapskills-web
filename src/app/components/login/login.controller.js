@@ -6,7 +6,7 @@
 		.controller('LoginController', LoginController);
 
 	/** @ngInject */
-	function LoginController(toastr, toastrService, cfpLoadingBar, loginService) {
+	function LoginController(toastr, toastrService, loginService) {
 		var vm = this;
 
 		/** realiza login na aplicação */
@@ -17,7 +17,6 @@
 			}
 			loginService.login(login).then(function(response) {
 				if(response.status !== 200) {
-					cfpLoadingBar.complete();
 					toastrService.showToastr(response.status);
 				}
 				return response;

@@ -6,16 +6,17 @@
     .factory('HttpInterceptor', HttpInterceptor);
 
     /** @ngInject */
-    function HttpInterceptor($log, $rootScope, $q, Session, HTTP_STATUS, AUTH_EVENTS) {
+    function HttpInterceptor($log, $rootScope, $q, Session, cfpLoadingBar, HTTP_STATUS, AUTH_EVENTS) {
       var numLoadings = 0;
       return {
         request: function (config) {
           numLoadings++;
           $rootScope.$broadcast("loader_show");
           config.headers = config.headers || {};
+          config.withCredentials = config.withCredentials || true;
           if (Session.hasSession() && (!$rootScope.currentState || !$rootScope.currentState.data || !$rootScope.currentState.data.allowAnonymous)) {
-              var tokenInfo = Session.token();
-              config.headers["Authorization"] = tokenInfo;
+              /*var tokenInfo = Session.token();
+              config.headers["Authorization"] = tokenInfo;*/
           }
           return config || $q.when(config);
         },
@@ -35,7 +36,9 @@
           }
           if (response.status === 401 || response.status === 403) {
             return $q.reject(response);
+            cfpLoadingBar.complete();
           }
+          cfpLoadingBar.complete();
           return response || $q.when(response);
         },
         responseError: function (response) {
@@ -52,6 +55,7 @@
               401: AUTH_EVENTS.notAuthenticated,
               403: AUTH_EVENTS.notAuthorized
           }[response.status], response);
+          cfpLoadingBar.complete();
           return $q.reject(response);
         }
       }
