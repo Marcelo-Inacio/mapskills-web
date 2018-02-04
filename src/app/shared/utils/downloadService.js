@@ -9,7 +9,6 @@
 		function downloadService($log, $q, $http, HelperService, $document, API_SERVER) {
       return {
 				template : _template,
-				image : _image,
 				download : _download
 			};
 
@@ -63,22 +62,6 @@
         }).error(function (status) {
             $log.error(status);
         });
-			}
-
-			function _image(sceneNumber) {
-				var deferred = $q.defer();
-        $http({
-            url: "http://localhost:8585/image/".concat(sceneNumber), method: "GET",
-            headers: {'Content-type': 'application/json'},
-            responseType: 'arraybuffer'
-        }).success(function (data) {
-            var blob = new Blob([data], {type: "image/jpeg"});
-            var objectUrl = URL.createObjectURL(blob);
-						deferred.resolve(objectUrl);
-        }).error(function (status) {
-            $log.error(status);
-        });
-				return deferred.promise;
 			}
 		}
 })();

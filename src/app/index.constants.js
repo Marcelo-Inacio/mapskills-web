@@ -34,44 +34,44 @@
   };
 
   var HOST = {
-    SERVER: 'http://104.41.26.21:8081/',
+    ENGINE: 'http://104.41.26.21:8081/',
     REPORT: 'http://104.41.26.21:8083/'
   };
 
 
   var API_SERVER = {
-    HOST: HOST.SERVER,
-    LOGIN: HOST.SERVER + 'login',
+    HOST: HOST.ENGINE,
+    LOGIN: HOST.ENGINE + 'login',
     INSTITUTION: {
-      STUDENTS: HOST.SERVER + 'institution/students',
-      COURSES: HOST.SERVER + 'institution/{code}/courses',
-      BY_ID: HOST.SERVER + 'institution/{id}',
-      ALL: HOST.SERVER + 'institutions',
-      UPDATE: HOST.SERVER + 'institution/{id}',
-      UPDATE_THEME: HOST.SERVER + 'institution/{code}/theme',
-      SAVE: HOST.SERVER + 'institution',
-      UPLOAD: HOST.SERVER + 'institution/upload',
-      COURSE: HOST.SERVER + 'institution/course'
+      STUDENTS: HOST.ENGINE + 'institution/students',
+      COURSES: HOST.ENGINE + 'institution/{code}/courses',
+      BY_ID: HOST.ENGINE + 'institution/{id}',
+      ALL: HOST.ENGINE + 'institutions',
+      UPDATE: HOST.ENGINE + 'institution/{id}',
+      UPDATE_THEME: HOST.ENGINE + 'institution/{code}/theme',
+      SAVE: HOST.ENGINE + 'institution',
+      UPLOAD: HOST.ENGINE + 'institution/upload',
+      COURSE: HOST.ENGINE + 'institution/course'
     },
     THEME: {
-      ALL: HOST.SERVER + 'game/themes',
-      BY_ID: HOST.SERVER + 'game/theme/{id}',
-      UPDATE: HOST.SERVER + 'game/theme/{id}',
-      SAVE: HOST.SERVER + 'game/theme',
-      UPDATE_STATUS: HOST.SERVER + 'game/{id}',
-      UPDATE_SCENES: HOST.SERVER + 'game/{themeId}/scenes',
-      DELETE_QUESTION: HOST.SERVER + 'game/{themeId}/scene/{sceneId}/question',
-      DELETE_SCENE: HOST.SERVER + 'game/{themeId}/scene/{sceneId}'
+      ALL: HOST.ENGINE + 'game/themes',
+      BY_ID: HOST.ENGINE + 'game/theme/{id}',
+      UPDATE: HOST.ENGINE + 'game/theme/{id}',
+      SAVE: HOST.ENGINE + 'game/theme',
+      UPDATE_STATUS: HOST.ENGINE + 'game/{id}',
+      UPDATE_SCENES: HOST.ENGINE + 'game/{themeId}/scenes',
+      DELETE_QUESTION: HOST.ENGINE + 'game/{themeId}/scene/{sceneId}/question',
+      DELETE_SCENE: HOST.ENGINE + 'game/{themeId}/scene/{sceneId}'
     },
     SCENE: {
-      SAVE: HOST.SERVER + 'game/{themeId}/scene',
-      UPDATE: HOST.SERVER + 'game/{themeId}/scene/{sceneId}',
+      SAVE: HOST.ENGINE + 'game/{themeId}/scene',
+      UPDATE: HOST.ENGINE + 'game/{themeId}/scene/{sceneId}',
       getRestContext: _sceneRestContext
     },
     SKILL: {
-      ALL: HOST.SERVER + 'skills',
-      SAVE: HOST.SERVER + 'skill',
-      UPDATE: HOST.SERVER + 'skill/{id}'
+      ALL: HOST.ENGINE + 'skills',
+      SAVE: HOST.ENGINE + 'skill',
+      UPDATE: HOST.ENGINE + 'skill/{id}'
     },
     REPORT: {
       SHOW: HOST.REPORT + 'report/student',
@@ -81,14 +81,14 @@
       COURSE: HOST.REPORT + 'report/institution-courses'
     },
     STUDENT: {
-      SCENE: HOST.SERVER + 'student/{id}/scene',
-      ANSWER: HOST.SERVER + 'student/game/answer',
+      SCENE: HOST.ENGINE + 'student/{id}/scene',
+      ANSWER: HOST.ENGINE + 'student/game/answer',
       RESULT: HOST.REPORT + 'report/student/{studentId}',
-      UPLOAD: HOST.REPORT + 'students',
-      POST: HOST.REPORT + 'student',
-      PUT: HOST.REPORT + 'student/{id}',
+      UPLOAD: HOST.ENGINE + 'students',
+      POST: HOST.ENGINE + 'student',
+      PUT: HOST.ENGINE + 'student/{id}',
     },
-    USER: HOST.SERVER + 'user'
+    USER: HOST.ENGINE + 'user'
   };
 
   function _sceneRestContext (scene) {

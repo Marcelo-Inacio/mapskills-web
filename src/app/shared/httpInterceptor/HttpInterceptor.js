@@ -35,8 +35,8 @@
             $rootScope.$broadcast("loader_hide");
           }
           if (response.status === 401 || response.status === 403) {
-            return $q.reject(response);
             cfpLoadingBar.complete();
+            return $q.reject(response);
           }
           cfpLoadingBar.complete();
           return response || $q.when(response);
