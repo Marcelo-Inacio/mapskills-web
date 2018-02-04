@@ -34,8 +34,8 @@
   };
 
   var HOST = {
-    SERVER: 'http://localhost:8081/',
-    REPORT: 'http://localhost:8083/'
+    SERVER: 'http://104.41.26.21:8081/',
+    REPORT: 'http://104.41.26.21:8083/'
   };
 
 
