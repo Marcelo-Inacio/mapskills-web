@@ -1,0 +1,16 @@
+.row.center-align
+  .col-md-9
+    .col-md-6.center-align
+      .col-md-2
+        label De
+      .col-md-10
+        input.form-control(type="month", ng-model="startDate")
+    .col-md-6.center-align
+      .col-md-2
+        label Até
+      .col-md-10
+        input.form-control(type="month", ng-model="endDate")
+  .col-md-3
+    label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="search()")
+      i.fa.fa-search.ico-sidebar
+      | pesquisar

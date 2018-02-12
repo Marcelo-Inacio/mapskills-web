@@ -1,23 +1,25 @@
 section
   .row.aligner
     .col-md-1.aligner-item
-      i.fa.fa-info-circle.ico-large(uib-tooltip="{{scnCtrl.info_tooltip}}", tooltip-placement="bottom-right")
+      i.fa.fa-info-circle.ico-large(uib-tooltip="{{'SCENE_MESSAGE' | translate}}", tooltip-placement="bottom-right")
     .col-md-11
       label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="scnCtrl.openSceneModal()") novo
       label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="scnCtrl.updateIndexScenes(scnCtrl.allScenes)") salvar alterações
-  table.table.table-hover
-    thead
-      tr.table-thead
-        th.txt-thead Texto
-        th Questão
-        th Ação
-    tbody(ui-sortable ng-model="scnCtrl.allScenes")
-      tr(ng-repeat="scene in scnCtrl.allScenes track by scene.id")
-        td {{scene.text}}
-        td 
-          label#btn-todo.btn.btn-primary.btn-xs(ng-show="!scene.question", ng-click="scnCtrl.openQuestionModal(scene)") adiconar
-          label#btn-todo.btn.btn-info.btn-xs(ng-show="scene.question", ng-click="scnCtrl.openQuestionModal(scene)") editar
-          label#btn-todo.btn.btn-danger.btn-xs(ng-show="scene.question", ng-click="scnCtrl.deleteQuestion(scene.id)") excluir
-        td
-          button#btn-todo.btn.btn-info.btn-xs(ng-click="scnCtrl.openSceneModal(scene)") editar
-          button#btn-todo.btn.btn-danger.btn-xs(ng-click="scnCtrl.deleteScene(scene.id)") excluir
+  .row(ui-sortable ng-model="scnCtrl.allScenes")
+    .col-sm-6.col-md-3(ng-repeat="scene in scnCtrl.allScenes track by scene.id")
+      .thumbnail.card
+        img(ng-src="{{scene.background.filename}}", onerror="this.src='assets/images/image_unavailable.png'", alt="{{scene.background.filename}}")
+        .text
+          p(ng-if="scene.text.length > 80") {{scene.text | limitTo:80}} ...
+          p(ng-if="scene.text.length <= 80") {{scene.text}}
+        div(style="padding: 5px;")
+          div.space-between.align-center.border-top-bottom
+            i Questão
+            div(ng-show="!scene.question")
+              a.btn.btn-primary.btn-xs(ng-click="scnCtrl.openQuestionModal(scene)") adicionar
+            div(ng-show="scene.question")
+              a.btn.btn-primary.btn-xs(ng-click="scnCtrl.openQuestionModal(scene)") editar
+              a.btn.btn-danger.btn-xs(style="margin-left: 5px;", ng-click="scnCtrl.deleteQuestion(scene.id)") excluir
+          div.space-between
+            a.btn.btn-primary.btn-xs(ng-click="scnCtrl.openSceneModal(scene)") editar
+            a.btn.btn-danger.btn-xs(ng-click="scnCtrl.deleteScene(scene.id)") excluir

@@ -5,9 +5,9 @@ section
     .col-md-3(ng-repeat="skill in skiCtrl.allSkills track by skill.id")
       .panel.panel-default
         .panel-heading {{skill.name}}
-        .panel-body.panel-auto(style="min-height: 150px", ng-show="skill.description.length > 150")
+        .panel-body.panel-auto(style="min-height: 150px", ng-if="skill.description.length > 150")
           {{skill.description | limitTo:150}} ...
-        .panel-body.panel-auto(style="min-height: 150px", ng-show="skill.description.length <= 150")
+        .panel-body.panel-auto(style="min-height: 150px", ng-if="skill.description.length <= 150")
           {{skill.description}}
         .panel-footer
           label#btn-todo.btn.btn-info.btn-xs(ng-click="skiCtrl.openModal(skill)") editar

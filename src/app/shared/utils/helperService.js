@@ -8,11 +8,27 @@
 		/** @ngInject */
 		function HelperService() {
 			return {
-				isUndefinedOrNull: _isUndefinedOrNull
+				isUndefinedOrNull: _isUndefinedOrNull,
+				getSemester: _getSemester,
+				getFullYear: _getFullYear
 			};
 
 			function _isUndefinedOrNull(arg) {
 				return angular.isUndefined(arg) || arg === null;
+			}
+
+			function _getSemester(date) {
+				if (_isUndefinedOrNull(date)) {
+					return _getSemester(new Date());
+				}
+				return date.getMonth() <= 5 ? 1 : 2;
+			}
+
+			function _getFullYear(date) {
+				if (_isUndefinedOrNull(date)) {
+					return _getFullYear(new Date());
+				}
+				return date.getFullYear();
 			}
 		}
 })();

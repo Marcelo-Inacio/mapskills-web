@@ -34,9 +34,9 @@
       fillFilter();
 			reportService.download(vm.filter);
     }
-	/*
-	* Realiza chamada para busca do relatório.
-	*/
+		/*
+		* Realiza chamada para busca do relatório.
+		*/
     vm.search = function() {
       fillFilter();
 			$log.log(vm.filter);

@@ -6,19 +6,26 @@
   @media (max-width: 568px)
     width: 100%
 
-  @media (mix-width: 640px)
-    width: 60%
-
   width: 40%
   padding: 10px
   margin-left: auto
   margin-right: auto
 
 .login-header
-  padding: 20px
+  padding: 20px 10px
+  display: flex;
+  justify-content: center;
 
 .login-body
   padding: 15px 25px
 
-img
-  width: 100%
+.logo-cps
+    background: url(../assets/images/cps_450x84.png) no-repeat;
+    width: 450px;
+    height: 84px;
+    cursor: pointer;
+
+    @media (max-width: 1024px)
+      background: url(../assets/images/cps_270x50.png) no-repeat;
+      width: 270px;
+      height: 50px;

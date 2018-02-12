@@ -12,8 +12,6 @@
 		vm.allScenes = [];
 		vm.allSkills = null;
 
-		vm.info_tooltip = "Arraste as linhas da tabela para reordenar a exibição das cenas do jogo";
-
 		init();
 		/** faz requisição ao backend de todas as cenas de um tema */
 		function init() {

@@ -154,10 +154,10 @@
         return deferred.promise;
 			}
 
-			function _loadCourseIndicators(institutionCode) {
+			function _loadCourseIndicators(filter) {
 				var deferred = $q.defer();
 				var uri = API_SERVER.REPORT.COURSE;
-				$http.get(uri, {params: {institutionCode: institutionCode}}).then(function (response) {
+				$http.get(uri, {params: filter}).then(function (response) {
            deferred.resolve(response.data);
          });
 				return deferred.promise;

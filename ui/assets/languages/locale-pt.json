@@ -1,10 +1,9 @@
 {
-  "OBSOLESCENCE_TITLE": "Obsolescência Web",
-  "OBSOLESCENCE_DESCRIPTION": "Este é o projeto WEB para a solução Obsolescência de peças de estoque.",
   "BUTTON_NOTIFY": "Notificar",
   "MORNING": "Manhã",
   "NIGHTLY": "Noturno",
   "AFTERNOON": "Vespertino",
   "SUPERIOR": "Superior",
-  "TECHNICAL": "Técnico"
+  "TECHNICAL": "Técnico",
+  "SCENE_MESSAGE": "Arraste as figuras para reordenar a exibição das cenas do jogo"
 }

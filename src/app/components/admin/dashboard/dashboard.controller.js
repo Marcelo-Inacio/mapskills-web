@@ -6,7 +6,7 @@
 		.controller('AdminDashboardController', AdminDashboardController);
 
 	/** @ngInject */
-	function AdminDashboardController(toastr, adminService) {
+	function AdminDashboardController(toastr, adminService, HelperService) {
 		var vm = this;
 		vm.labels = ["Finalizados", "Não Finalizados"];
 		vm.indicator = {
@@ -14,11 +14,22 @@
 			etecs: {values: null}
 		};
 		vm.hasResult = {etecs: false, fatecs: false};
-		init();
+		vm.filter = {startDate: new Date(), endDate: new Date()};
 
 		function init() {
 			adminService.validateProfile();
-			adminService.dashboard.global().then(function(response) {
+			vm.search();
+		}
+
+		vm.search = function() {
+			var filterParameter = {
+				startYear: HelperService.getFullYear(vm.filter.startDate),
+				startSemester: HelperService.getSemester(vm.filter.startDate),
+				endYear: HelperService.getFullYear(vm.filter.endDate),
+				endSemester: HelperService.getSemester(vm.filter.endDate)
+			}
+			console.log(filterParameter);
+			adminService.dashboard.global(filterParameter).then(function(response) {
 				loadResults(response);
 			});
 		}
@@ -30,6 +41,8 @@
 				vm.hasResult[institution] = true;
 			});
 		}
+
+		init();
 	}
 
 })();

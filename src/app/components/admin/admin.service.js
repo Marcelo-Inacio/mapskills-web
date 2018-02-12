@@ -8,22 +8,18 @@
 		/** @ngInject */
 		function adminService($log, $http, $q, HelperService, loginService, API_SERVER) {
 			var _dashboard = {
-				level : function(level) {
+				level : function(filter) {
 					var deferred = $q.defer();
 					var uri = API_SERVER.REPORT.LOCAL;
-					$http.get(uri, {
-						params: {
-							institutionLevel: level
-						}
-					}).then(function(response) {
+					$http.get(uri, {params: filter}).then(function(response) {
 						deferred.resolve(response.data);
 					});
 					return deferred.promise;
 				},
-				global : function() {
+				global : function(filter) {
 					var deferred = $q.defer();
 					var uri = API_SERVER.REPORT.GLOBAL;
-					$http.get(uri).then(function(response) {
+					$http.get(uri, {params: filter}).then(function(response) {
 						deferred.resolve(response.data);
 					});
 					return deferred.promise;

@@ -38,7 +38,6 @@
     REPORT: 'http://104.41.26.21:8083/'
   };
 
-
   var API_SERVER = {
     HOST: HOST.ENGINE,
     LOGIN: HOST.ENGINE + 'login',
