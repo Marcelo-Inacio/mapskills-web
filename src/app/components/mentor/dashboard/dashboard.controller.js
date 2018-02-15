@@ -24,7 +24,7 @@
 		vm.search = function() {
 			var institutionCode = loginService.getUserLogged().institution.code;
 			var params = getFilterParameter(institutionCode, vm.filter.startDate, vm.filter.endDate);
-			console.log(params);
+			$log.log(params);
 			mentorService.loadCourseIndicators(params).then(function(response) {
 				vm.courses = response;
 			});

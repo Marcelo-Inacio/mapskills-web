@@ -7,9 +7,9 @@ section
         th Ativo
     tbody
       tr(ng-repeat="theme in theCtrl.allThemes track by theme.id", ng-show="theCtrl.allThemes.length != 0")
-        td {{::theme.id}}
+        td # {{::theme.id}}
         td {{::theme.name}}
-        td
+        td.aligner
           md-switch.md-primary.botton-switch(ng-model='theme.active', ng-click="theCtrl.setThemeCurrent(theme)",
             aria-label="Status")
       tr(ng-show="theCtrl.allThemes.length == 0")

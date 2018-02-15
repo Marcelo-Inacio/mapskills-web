@@ -6,14 +6,13 @@
 		.factory('downloadService',  downloadService);
 
 		/** @ngInject */
-		function downloadService($log, $q, $http, HelperService, $document, API_SERVER) {
+		function downloadService($log, $q, $http, HelperService, API_SERVER) {
       return {
 				template : _template,
 				download : _download
 			};
 
       function _template(fileName) {
-				$log.log($document);
         var a = document.createElement("a");
         document.body.appendChild(a);
         a.style = "display: none";

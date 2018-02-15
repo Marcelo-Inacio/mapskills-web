@@ -6,15 +6,15 @@
 		.controller('GameThemeController', GameThemeController);
 
 	/** @ngInject */
-	function GameThemeController($log, toastrService, adminService, modalService) {
+	function GameThemeController(toastrService, adminService, modalService) {
 		var vm = this;
 
-		var init = function() {
+		init();
+
+		function init() {
 			adminService.validateProfile();
 			loadAllThemes();
 		}
-
-		init();
 
 		function loadAllThemes() {
 			adminService.loadAllThemes().then(function(response) {
@@ -22,16 +22,14 @@
 			});
 		}
 
-		vm.saveTheme = function(theme) {
-			adminService.saveTheme(theme).then(function(status) {
-				loadAllThemes();
-				toastrService.showToastr(status);
-				vm.closeModal();
-			})
-		}
-
 		vm.openModal = function() {
-      modalService.openModal('app/components/admin/game_theme/gameTheme.modal.html', 'GameThemeController');
+      var modalInstance = modalService.openModal('app/components/admin/game_theme/modal/gameTheme.modal.html', 'GameThemeModalController');
+			modalInstance.result.then(function (theme) {
+				adminService.saveTheme(theme).then(function(status) {
+					loadAllThemes();
+					toastrService.showToastr(status);
+				})
+			});
 		}
 
 		vm.updateStatus = function(id, status) {
@@ -39,11 +37,5 @@
 				toastrService.showToastr(status);
 			})
 		}
-
-		vm.closeModal = function() {
-			modalService.closeModal();
-		}
-
 	}
-
 })();

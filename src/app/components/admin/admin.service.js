@@ -6,7 +6,7 @@
 		.factory("adminService", adminService);
 
 		/** @ngInject */
-		function adminService($log, $http, $q, HelperService, loginService, API_SERVER) {
+		function adminService($http, $q, HelperService, loginService, API_SERVER) {
 			var _dashboard = {
 				level : function(filter) {
 					var deferred = $q.defer();
@@ -26,11 +26,6 @@
 				}
 			};
 
-			var allSkillsCached = [];
-			var allScenesCached = null;
-			var allInstitutionsCached = null;
-			var objectCurrent = null;
-
 			return {
 				loadAllSkills : _loadAllSkills,
 				loadAllThemes : _loadAllThemes,
@@ -47,20 +42,9 @@
 				deleteScene : _deleteScene,
 				getInstitutionDetails : _getInstitutionDetails,
 				dashboard : _dashboard,
-				/** auxiliares */
-				getObjectCurrent : _getObjectCurrent,
-				setObjectCurrent : _setObjectCurrent,
-				getSkillById : _getSkillById,
+
 				validateProfile : _validateProfile
 			};
-
-			function _getObjectCurrent() {
-				return objectCurrent;
-			}
-
-			function _setObjectCurrent(object) {
-				objectCurrent = object;
-			}
 
 			function getRestContext(object, URL_BASE) {
 				var restContext = {method: null, url: null};
@@ -73,22 +57,11 @@
 				}
 				return restContext;
 			}
-/** auxilia para recuperar objeto skill, para exibir no editar da question*/
-			function _getSkillById(id) {
-				var size = allSkillsCached.length;
-				for(var i = 0; i < size; i++) {
-					if(allSkillsCached[i].id == id) {
-						return allSkillsCached[i];
-					}
-				}
-				return null;
-			}
 
 			function _getInstitutionDetails(institutionId) {
 				var deferred = $q.defer();
 				var uri = API_SERVER.INSTITUTION.BY_ID.replace("{id}", institutionId);
 				$http.get(uri).then(function(response) {
-					objectCurrent = response.data;
 					deferred.resolve(response.data);
 				});
 				return deferred.promise;
@@ -104,7 +77,7 @@
         }).
          then(function success(response) {
 					 deferred.resolve(response);
-         }, function error(response) {
+				 }, function error(response) {
 					 deferred.resolve(response);
 				 });
         return deferred.promise;
@@ -124,7 +97,6 @@
 			}
 
 			function _saveScene(scene) {
-				$log.log(scene);
 				var deferred = $q.defer();
 				var restContext = API_SERVER.SCENE.getRestContext(scene);
 				var jsonData = angular.toJson(scene);
@@ -139,7 +111,6 @@
 			}
 
 			function _saveSkill(skill) {
-				$log.log(skill);
 				var deferred = $q.defer();
 				var restContext = getRestContext(skill, API_SERVER.SKILL);
 				var jsonData = angular.toJson(skill);
@@ -152,7 +123,10 @@
          });
         return deferred.promise;
 			}
-			/** método que realiza a reordenação dos index das cenas */
+
+			/**
+			* Realiza a reordenação dos index das cenas
+			*/
 			function _updateIndexScenes(themeId, allScenes) {
 				var jsonData = angular.toJson(allScenes);
 				var deferred = $q.defer();
@@ -165,7 +139,10 @@
          });
         return deferred.promise;
 			}
-			/** excluir uma questão de uma cena */
+
+			/**
+			* Remove uma questão de uma cena
+			*/
 			function _deleteQuestion(themeId, sceneId) {
 				var deferred = $q.defer();
 				$http({
@@ -177,7 +154,10 @@
 				});
 				return deferred.promise;
 			}
-/* função que chama requisição para remoção de uma questão de uma cena */
+
+			/**
+			* Requisição para remoção de uma questão de uma cena
+			*/
 			function _deleteScene(themeId, sceneId) {
 				var deferred = $q.defer();
         $http({
@@ -189,34 +169,23 @@
 				});
 				return deferred.promise;
 			}
-			/** traz todas cenas de um determinado tema pelo id e simula um cache
-			para em caso de reload não sofra com requisição ao server */
-			function _loadScenesByThemeId(themeId, fromServer) {
+
+			/**
+			* Traz todas cenas de um determinado tema pelo id
+			*/
+			function _loadScenesByThemeId(themeId) {
 				var deferred = $q.defer();
-				if(containsSceneCached(themeId) && !fromServer) {
-					deferred.resolve(allScenesCached);
-				} else {
-					var uri = API_SERVER.THEME.BY_ID.replace("{id}", themeId);
-					$http.get(uri).then(function(response) {
-						if(response.data.length != 0) allScenesCached = response.data;
-						deferred.resolve(response.data);
-					});
-				}
+				var uri = API_SERVER.THEME.BY_ID.replace("{id}", themeId);
+				$http.get(uri).then(function(response) {
+					deferred.resolve(response.data);
+				});
 				return deferred.promise;
 			}
 
-			function containsSceneCached(themeId) {
-				return allScenesCached != null
-								&& (allScenesCached[0].gameThemeId == themeId);
-				/*if(allScenesCached != null && ) {
-					if (allScenesCached[0].gameThemeId == themeId) return true;
-				}
-				return false;*/
-			}
-
-			/** cadastra um tema */
+			/**
+			* Cadastra um tema
+			*/
 			function _saveTheme(theme) {
-				$log.log(theme);
 				var jsonData = angular.toJson(theme);
 				var deferred = $q.defer();
         $http({
@@ -238,31 +207,34 @@
          });
         return deferred.promise;
 			}
-			/** recupera todos as instituições cadastadas */
-			function _loadAllInstitutions(loadFromServer) {
+
+			/**
+			* Recupera todos as instituições cadastadas
+			*/
+			function _loadAllInstitutions() {
 				var deferred = $q.defer();
-				if(allInstitutionsCached != null && !loadFromServer) {
-					deferred.resolve(allInstitutionsCached);
-				} else {
-					var uri = API_SERVER.INSTITUTION.ALL;
-					$http.get(uri).then(function(response) {
-						allInstitutionsCached = response.data;
-						deferred.resolve(response.data);
-					});
-				}
-				return deferred.promise;
-			}
-			/** recupera todos as competencias cadastadas e simula um cache */
-			function _loadAllSkills() {
-				var deferred = $q.defer();
-				var uri = API_SERVER.SKILL.ALL;
+				var uri = API_SERVER.INSTITUTION.ALL;
 				$http.get(uri).then(function(response) {
-					allSkillsCached = response.data;
 					deferred.resolve(response.data);
 				});
 				return deferred.promise;
 			}
-			/** recupera todos temas cadastrados */
+
+			/**
+			* Recupera todos as competencias cadastadas e simula um cache
+			*/
+			function _loadAllSkills() {
+				var deferred = $q.defer();
+				var uri = API_SERVER.SKILL.ALL;
+				$http.get(uri).then(function(response) {
+					deferred.resolve(response.data);
+				});
+				return deferred.promise;
+			}
+
+			/**
+			* Recupera todos temas cadastrados
+			*/
 			function _loadAllThemes() {
 				var deferred = $q.defer();
 				var uri = API_SERVER.THEME.ALL;

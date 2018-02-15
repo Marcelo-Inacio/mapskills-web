@@ -28,14 +28,13 @@
 				endYear: HelperService.getFullYear(vm.filter.endDate),
 				endSemester: HelperService.getSemester(vm.filter.endDate)
 			}
-			console.log(filterParameter);
 			adminService.dashboard.global(filterParameter).then(function(response) {
 				loadResults(response);
 			});
 		}
 
 		function loadResults(response) {
-			angular.forEach(response, function(value, key) {
+			angular.forEach(response, function(value) {
 				var institution = value.level.toLowerCase();
 				vm.indicator[institution].values = value.values;
 				vm.hasResult[institution] = true;

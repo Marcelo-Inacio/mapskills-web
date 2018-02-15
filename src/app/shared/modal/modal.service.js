@@ -30,8 +30,8 @@
 				return modalInstance;
       }
 
-			function _okModal() {
-				modalInstance.close();
+			function _okModal(object) {
+				modalInstance.close(object);
 			}
 
 			function _closeModal() {

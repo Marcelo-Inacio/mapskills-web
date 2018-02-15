@@ -6,88 +6,71 @@
 		.controller('InstitutionController', InstitutionController);
 
 	/** @ngInject */
-	function InstitutionController($log, toastrService, adminService, modalService, downloadService, HelperService) {
+	function InstitutionController($log, toastrService, adminService, modalService, downloadService) {
 		var vm = this;
-		vm.institutionDetails = null;
-		vm.checkboxPassword = false;
-    vm.showPassword = {"true" : "text", "false" : "password"};
-		vm.allLevels = ["TECHNICAL", "SUPERIOR"];
 		vm.tableHead = ["Código", "CNPJ", "Razão", "Cidade", "Ação"];
 
     init();
 
     function init() {
 			adminService.validateProfile();
-			loadAllInstitutions(false);
-      vm.institutionDetails = adminService.getObjectCurrent();
-			adminService.setObjectCurrent(null);
+			loadAllInstitutions();
     }
 
-		function loadAllInstitutions(loadFromServer) {
-			adminService.loadAllInstitutions(loadFromServer).then(function(response) {
+		function loadAllInstitutions() {
+			adminService.loadAllInstitutions().then(function(response) {
 				vm.allInstitutions = response;
 			});
 		}
 
 		vm.openDetailsModal = function(institution) {
-			adminService.getInstitutionDetails(institution.id).then(function() {
-				modalService.openModal('app/components/admin/institution/details.modal.html', 'InstitutionController');
+			adminService.getInstitutionDetails(institution.id).then(function(data) {
+				modalService.setResult(data);
+				modalService.openModal('app/components/admin/institution/modal/details.modal.html', 'InstitutionModalController');
 			});
-		}
-
-    vm.openEditModal = function(institution) {
-			if(institution !== null) {
-				adminService.getInstitutionDetails(institution.id).then(function() {
-					modalService.openModal('app/components/admin/institution/edit.modal.html', 'InstitutionController');
-				});
-			} else {
-				institution = {"mentors": [{"id": null, "name": null, "username": null}]};
-				adminService.setObjectCurrent(institution);
-				modalService.openModal('app/components/admin/institution/edit.modal.html', 'InstitutionController');
-			}
 		}
 
 		vm.openFileModal = function() {
-      modalService.openModal('app/shared/modal/file.modal.html', 'InstitutionController');
+			modalService.setResult(downloadTemplate);
+      var modalInstance = modalService.openModal('app/shared/modal/file.modal.html', 'FileController');
+			modalInstance.result.then(function (file) {
+				sendFile(file);
+			});
 		}
 
-    vm.saveInstitution = function(institution) {
-			if(validateInstitution(institution)) {
-				toastrService.showToastr(400);
-				return;
-			}
-      adminService.saveInstitution(institution).then(function(response) {
-				if(response.status == 200) {
-					vm.allInstitutions.push(response.data);
-					loadAllInstitutions(true);
-				}
-				toastrService.showToastr(response.status);
-				vm.closeModal();
+		vm.newInstitution = function () {
+			var institution = {"mentors": [{"id": null, "name": null, "username": null}]};
+			modalService.setResult(institution);
+			var modalInstance = modalService.openModal('app/components/admin/institution/modal/edit.modal.html', 'InstitutionModalController');
+			modalInstanceResult(modalInstance, institution);
+		}
+
+		vm.updateInstitution = function(institution) {
+			adminService.getInstitutionDetails(institution.id).then(function(data) {
+				modalService.setResult(data);
+				var modalInstance = modalService.openModal('app/components/admin/institution/modal/edit.modal.html', 'InstitutionModalController');
+				modalInstanceResult(modalInstance, institution);
+			});
+		}
+
+		function modalInstanceResult(modalInstance) {
+			modalInstance.result.then(function (institution) {
+				adminService.saveInstitution(institution).then(function(response) {
+					loadAllInstitutions();
+					toastrService.showToastr(response.status);
+				});
+			});
+		}
+
+		function sendFile(file) {
+      adminService.sendFile(file).then(function(status) {
+				loadAllInstitutions();
+				toastrService.showToastr(status);
 			});
     }
 
-		vm.sendFile = function(file) {
-      adminService.sendFile(file).then(function() {
-				vm.closeModal();
-			});
-    }
-
-		vm.closeModal = function() {
-			modalService.closeModal();
-		}
-
-		vm.downloadTemplate = function() {
+		function downloadTemplate() {
 			downloadService.template("institution.xlsx");
 		}
-
-		function validateInstitution(institution) {
-			return (HelperService.isUndefinedOrNull(institution) || HelperService.isUndefinedOrNull(institution.code) ||
-							HelperService.isUndefinedOrNull(institution.cnpj) || HelperService.isUndefinedOrNull(institution.company) ||
-							HelperService.isUndefinedOrNull(institution.level) || HelperService.isUndefinedOrNull(institution.city) ||
-							HelperService.isUndefinedOrNull(institution.mentors) || HelperService.isUndefinedOrNull(institution.mentors[0].name) ||
-							HelperService.isUndefinedOrNull(institution.mentors[0].username));
-		}
-
 	}
-
 })();

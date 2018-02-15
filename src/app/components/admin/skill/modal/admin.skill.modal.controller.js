@@ -8,7 +8,7 @@
 	/** @ngInject */
 	function AdminSkillModalController(toastrService, modalService, adminService, HelperService) {
 		var vm = this;
-		vm.skill = adminService.getObjectCurrent();
+		vm.skill = modalService.getResult();
 
 		vm.saveSkill = function(skill) {
 			if (skillIsInvalid(skill)) {

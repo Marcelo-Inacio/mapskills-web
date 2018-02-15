@@ -3,12 +3,12 @@
 
 	angular
 		.module('mapskillsWeb')
-		.controller('AdminSceneModalController', AdminSceneModalController);
+		.controller('SceneModalController', SceneModalController);
 
 	/** @ngInject */
-	function AdminSceneModalController($log, $stateParams, toastrService, modalService, adminService, HelperService) {
+	function SceneModalController($stateParams, toastrService, modalService, adminService, HelperService) {
 		var vm = this;
-		vm.scene = adminService.getObjectCurrent();
+		vm.scene = modalService.getResult();
 		vm.question = {alternatives: new Array(4)};
 		vm.allSkills = [];
 		vm.skillSelected = null;
@@ -17,7 +17,10 @@
 		init();
 
 		function init() {
-			loadSkills(true);
+			loadSkills();
+			if (vm.scene && vm.scene.question) {
+				vm.question = vm.scene.question;
+			}
 		}
 
 		vm.saveScene = function(scene) {
@@ -41,21 +44,29 @@
 			vm.saveScene(scene);
 		}
 
-		/** carrega todas competencias cadastadas */
-		function loadSkills(loadFromServer) {
-			adminService.loadAllSkills(loadFromServer).then(function(data) {
+		/**
+		* Carrega todas competencias cadastadas
+		*/
+		function loadSkills() {
+			adminService.loadAllSkills().then(function(data) {
 				vm.allSkills = data;
 				loadSkillSelected();
 			});
 		}
 
-		/** carrega a selecao da competencia no select */
+		/**
+		* Carrega a selecao da competencia no select
+		*/
 		function loadSkillSelected() {
 			if(HelperService.isUndefinedOrNull(vm.scene) || HelperService.isUndefinedOrNull(vm.scene.question)) {
 				return;
 			}
 			var skillId = vm.scene.question.skillId;
-			vm.skillSelected = adminService.getSkillById(skillId);
+			angular.forEach(vm.allSkills, function(skill) {
+				if (skill.id == skillId) {
+					vm.skillSelected = skill;
+				}
+			});
 		}
 
 		function questionIsValid(question) {

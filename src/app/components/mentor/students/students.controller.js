@@ -23,16 +23,16 @@
     function init() {
 			mentorService.validateProfile();
 			vm.isTechnical = Session.refreshUserSession().institutionLevel === "TECHNICAL";
-			if(!mentorService.getObjectCurrent()) {
-				loadStudents(true, false);
-				loadAllCourses();
-			}
-      vm.student = mentorService.getObjectCurrent();
-			mentorService.setObjectCurrent(null);
+			loadAllCourses();
+			loadStudents(true);
+
     }
 
-		function loadStudents(loadFromServer, clearCache) {
-			mentorService.loadStudents(loadFromServer, vm.filter, clearCache, page).then(function(response) {
+		function loadStudents(clearCache) {
+			if (clearCache) {
+				page.nextPage = 0;
+			}
+			mentorService.loadStudents(vm.filter, clearCache, page).then(function(response) {
 				page.nextPage++;
 				page.isLast = response.remainingPages <= 0;
 				vm.students = response.students;
@@ -46,80 +46,47 @@
 		}
 
     vm.openStudentModal = function(student) {
-      mentorService.setObjectCurrent(student);
-      modalService.openModal('app/components/mentor/students/student.modal.html', 'MentorStudentController');
+      modalService.setResult(student);
+      var modalInstance = modalService.openModal('app/components/mentor/students/modal/student.modal.html', 'MentorStudentModalController');
+			modalInstance.result.then(function () {
+				loadStudents(true);
+			});
 		}
 
 		vm.openDetailsModal = function(student) {
-      mentorService.setObjectCurrent(student);
-      modalService.openModal('app/components/mentor/students/details.modal.html', 'MentorStudentController');
+      modalService.setResult(student);
+      modalService.openModal('app/components/mentor/students/modal/details.modal.html', 'MentorStudentModalController');
 		}
 
 		vm.openFileModal = function() {
-      modalService.openModal('app/shared/modal/file.modal.html', 'MentorStudentController');
+			modalService.setResult(downloadTemplate);
+      var modalInstance = modalService.openModal('app/shared/modal/file.modal.html', 'FileController');
+			modalInstance.result.then(function (file) {
+				sendFile(file);
+			});
 		}
 
-		vm.downloadTemplate = function() {
+		function downloadTemplate() {
 			downloadService.template("student.xlsx");
 		}
 
-    vm.saveStudent = function(student) {
-			if(vm.isTechnical && !HelperService.isUndefinedOrNull(student)) {
-				student.ra = angular.copy(formatterRA(student));
-			}
-			if(validateStudent(student)) {
-				toastrService.showToastr(400);
-				student.ra = "";
-				return;
-			}
-      mentorService.saveStudent(student).then(function(response) {
-				postVerify(response.status);
-				loadStudents(true, true);
-			});
-    }
-
-		vm.sendFile = function(file) {
+		function sendFile(file) {
       mentorService.sendFile(file).then(function(response) {
-				postVerify(response.status);
-				loadStudents(true, true);
+				toastrService.showToastr(response.status);
+				loadStudents(true);
+				modalService.okModal();
 			});
     }
-/** verifica o status da requisição para o retorno
-dos funções saveStudent e sendFile */
-		function postVerify(status) {
-			toastrService.showToastr(status);
-			vm.closeModal();
-		}
-
-		function validateStudent(student) {
-			return (HelperService.isUndefinedOrNull(student) || HelperService.isUndefinedOrNull(student.name) ||
-				HelperService.isUndefinedOrNull(student.ra) || HelperService.isUndefinedOrNull(student.username) ||
-				HelperService.isUndefinedOrNull(student.phone) || student.ra.length < 13);
-		}
-//função responsavel por preparar o RA caso seja um aluno da ETEC
-		function formatterRA(student) {
-			if(HelperService.isUndefinedOrNull(student) || HelperService.isUndefinedOrNull(vm.courseSelected)) {
-				return "";
-			}
-			var year = new Date().getFullYear().toString().substring(2);
-			var semester = new Date().getMonth() < 7 ? 1 : 2;
-			var raFormatted = vm.courseSelected.institutionCode + vm.courseSelected.code + year + semester + student.ra;
-			return raFormatted;
-		}
-
-		vm.closeModal = function() {
-			modalService.closeModal();
-		}
 
 		vm.loadMoreStudents = function() {
-			loadStudents(true, false);
+			loadStudents(false);
 		}
 
 		vm.search = function() {
 			page.nextPage = 0;
 			page.isLast = false;
 			vm.filter.course = HelperService.isUndefinedOrNull(vm.filter.course) ? {} : vm.filter.course;
-			loadStudents(true, true);
+			loadStudents(true);
 		}
 	}
 })();

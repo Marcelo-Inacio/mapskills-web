@@ -14,7 +14,7 @@
 			};
 
 			function _isUndefinedOrNull(arg) {
-				return angular.isUndefined(arg) || arg === null;
+				return angular.isUndefined(arg) || arg == null || arg === "";
 			}
 
 			function _getSemester(date) {

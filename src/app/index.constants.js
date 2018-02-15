@@ -34,8 +34,8 @@
   };
 
   var HOST = {
-    ENGINE: 'http://104.41.26.21:8081/',
-    REPORT: 'http://104.41.26.21:8083/'
+    ENGINE: 'http://127.0.0.1:8081/',
+    REPORT: 'http://127.0.0.1:8083/'
   };
 
   var API_SERVER = {
@@ -85,7 +85,7 @@
       RESULT: HOST.REPORT + 'report/student/{studentId}',
       UPLOAD: HOST.ENGINE + 'students',
       POST: HOST.ENGINE + 'student',
-      PUT: HOST.ENGINE + 'student/{id}',
+      PUT: HOST.ENGINE + 'student/{id}'
     },
     USER: HOST.ENGINE + 'user'
   };

@@ -4,18 +4,18 @@
     .form-group.row
       .col-md-5
         label Código:
-        label {{modalCtrl.institutionDetails.code}}
+        label {{modalCtrl.institution.code}}
       .col-md-7
         label CNPJ:
-        label {{modalCtrl.institutionDetails.cnpj}}
+        label {{modalCtrl.institution.cnpj}}
     .form-group.row
       .col-md-5
         label Razão Social:
-        label {{modalCtrl.institutionDetails.company}}
+        label {{modalCtrl.institution.company}}
       .col-md-7
         label Cidade:
-        label {{modalCtrl.institutionDetails.city}}
-    .form-group.row(ng-repeat="mentor in modalCtrl.institutionDetails.mentors track by mentor.id")
+        label {{modalCtrl.institution.city}}
+    .form-group.row(ng-repeat="mentor in modalCtrl.institution.mentors track by mentor.id")
       .col-md-5
         label Mentor:
         label {{mentor.name}}
@@ -29,7 +29,7 @@
           th Curso
           th Periodo
       tbody
-        tr(ng-repeat="course in modalCtrl.institutionDetails.courses track by course.id")
+        tr(ng-repeat="course in modalCtrl.institution.courses track by course.id")
           td {{course.code}}
           td {{course.name}}
           td {{course.period | translate}}    

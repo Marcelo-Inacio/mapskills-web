@@ -23,12 +23,10 @@
 		}
 
 		vm.openModal = function(skill) {
-      adminService.setObjectCurrent(skill);
+      modalService.setResult(skill);
       var modalInstance = modalService.openModal('app/components/admin/skill/modal/skill.modal.html', 'AdminSkillModalController');
 			modalInstance.result.then(function () {
 				loadAllSkills();
-			}, function () {
-				 $log.info('modal-component dismissed at: ' + new Date());
 			});
 		}
 	}

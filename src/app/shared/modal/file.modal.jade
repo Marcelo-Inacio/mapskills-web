@@ -3,12 +3,12 @@
   .modal-body
     .form-group.row.file-border
       .col-md-8
-        span(ng-bind='modalCtrl.file.filename')
+        span(ng-bind="modalCtrl.file.filename")
       .col-md-4.btn-excel
         label#btn-todo.btn.btn-primary.btn-md
-          input(type='file', ng-model='modalCtrl.file', name='file', base-sixty-four-input='', required='', maxsize='5000', accept='.xlsx')
+          input(type="file", ng-model="modalCtrl.file", name="file", base-sixty-four-input="", required="", maxsize="5000", accept=".xlsx")
           i.fa.fa-cloud-upload
-          |   Escolher excel
+          |   selecionar excel
   .modal-footer
     button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.downloadTemplate()", style="float: left") baixar modelo
     button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.sendFile(modalCtrl.file)") salvar

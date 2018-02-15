@@ -1,5 +1,5 @@
 section
-  label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="insCtrl.openEditModal(null)") novo
+  label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="insCtrl.newInstitution()") novo
   label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="insCtrl.openFileModal()")
     i.fa.fa-file-excel-o.ico-sidebar
     | importar excel
@@ -15,4 +15,4 @@ section
         td {{institution.city}}
         td
           label#btn-todo.btn.btn-info.btn-xs(ng-click="insCtrl.openDetailsModal(institution)") detalhes
-          label#btn-todo.btn.btn-info.btn-xs(ng-click="insCtrl.openEditModal(institution)") editar
+          label#btn-todo.btn.btn-info.btn-xs(ng-click="insCtrl.updateInstitution(institution)") editar

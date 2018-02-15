@@ -16,7 +16,10 @@
 		vm.active = "activated";
 
 		init();
-		/** função principal que recupera todas questoes ainda não jogadas pelo aluno */
+
+		/**
+		* Eecupera todas questoes ainda não jogadas pelo aluno
+		*/
 		function init() {
 			studentService.validateProfile();
 			student = Session.refreshUserSession();
@@ -33,14 +36,16 @@
 		}
 
 		function calculateRemainingQuestions(scenes) {
-			angular.forEach(scenes, function(scene, key) {
+			angular.forEach(scenes, function(scene) {
 				if (!HelperService.isUndefinedOrNull(scene.question)) {
 					remainingQuestions++;
 				}
 			})
 		}
 
-		/** função que envia um resposta do aluno ao back-end */
+		/**
+		* Envia um resposta do aluno ao back-end
+		*/
 		vm.sendAnswer = function(alternative) {
 			var answerContext = {};
 			answerContext.sceneIndex = vm.history[vm.index].index;
@@ -59,7 +64,9 @@
 			});
 		}
 
-		/** função que realiza a mudança de cena na tela */
+		/**
+		* Realiza a mudança de cena na tela
+		*/
 		vm.nextScene = function() {
 			$log.log(vm.index);
 			/** caso chege ao fim das cenas, deve levar aos resultados */
@@ -76,7 +83,10 @@
 			}
 			vm.active = "active";
 		}
-		/** funcção que ativa o som do mouse hover */
+
+		/**
+		* Ativa o som do mouse hover
+		*/
 		vm.playhover = function () {
 			var hover = document.getElementById("over");
 			hover.currentTime = 0;
@@ -98,7 +108,5 @@
 				vm.background = {"background-image" : "url(" + vm.history[vm.index].background.filename +")"};
 			}
 		}
-
 	}
-
 })();

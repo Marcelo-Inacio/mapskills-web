@@ -7,9 +7,7 @@
 
 		/** @ngInject */
 		function mentorService($log, $http, $q, loginService, HelperService, API_SERVER) {
-			var allCoursesCached = null;
 			var studentsPageCached = {students: [], remainingPages: 0};
-			var objectCurrent;
 
 			return {
 				loadStudents : _loadStudents,
@@ -20,10 +18,7 @@
 				saveCourse : _saveCourse,
 				sendFile : _sendFile,
 				updateThemeIdCurrent : _updateThemeIdCurrent,
-				validateProfile : _validateProfile,
-
-				getObjectCurrent : _getObjectCurrent,
-				setObjectCurrent : _setObjectCurrent
+				validateProfile : _validateProfile
 			};
 
 			function getStudentParams(user, page, search) {
@@ -38,25 +33,17 @@
 				};
 			}
 
-			function _getObjectCurrent() {
-				return objectCurrent;
-			}
-
-			function _setObjectCurrent(object) {
-				objectCurrent = object;
-			}
-
 			function _validateProfile() {
 				loginService.validateProfile("MENTOR");
 			}
 
-			function _loadStudents(loadFromServer, search, clearCache, page) {
+			function _loadStudents(search, clearCache, page) {
 				var deferred = $q.defer();
 				if (clearCache) {
 					studentsPageCached.students = [];
 					studentsPageCached.remainingPages = 0;
 				}
-				if (studentsPageCached.students.length != 0 && !loadFromServer || page.isLast) {
+				if (page.isLast) {
 					deferred.resolve(studentsPageCached);
 				} else {
 					var user = loginService.getUserLogged();
@@ -70,19 +57,13 @@
 				return deferred.promise;
       }
 
-			function _loadAllCourses(loadFromServer) {
+			function _loadAllCourses() {
 				var deferred = $q.defer();
-				if(allCoursesCached != null && !loadFromServer) {
-					deferred.resolve(allCoursesCached);
-				} else {
-					var user = loginService.getUserLogged();
-					var uri = API_SERVER.INSTITUTION.COURSES.replace("{code}", user.institution.code);
-					$log.info(uri);
-					$http.get(uri).then(function(response) {
-						allCoursesCached = response.data;
-						deferred.resolve(response.data);
-					});
-				}
+				var user = loginService.getUserLogged();
+				var uri = API_SERVER.INSTITUTION.COURSES.replace("{code}", user.institution.code);
+				$http.get(uri).then(function(response) {
+					deferred.resolve(response.data);
+				});
 				return deferred.promise;
       }
 
@@ -103,7 +84,6 @@
 				} else {
 					context = {uri : API_SERVER.STUDENT.POST, method : "POST"};
 				}
-				$log.info(context);
 				var jsonData = angular.toJson(student);
         $http({
             method: context.method, url: context.uri,
@@ -120,8 +100,14 @@
 			function _saveCourse(course) {
 				var deferred = $q.defer();
 				var jsonData = angular.toJson(course);
+				var context;
+				if (course.id) {
+					context = {uri : API_SERVER.INSTITUTION.COURSE + "/" + course.id, method : "PUT"};
+				} else {
+					context = {uri : API_SERVER.INSTITUTION.COURSE, method : "POST"};
+				}
         $http({
-            method: "POST", url: API_SERVER.INSTITUTION.COURSE,
+            method: context.method, url: context.uri,
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).
          then(function (response) {
