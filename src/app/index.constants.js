@@ -34,8 +34,8 @@
   };
 
   var HOST = {
-    ENGINE: 'http://127.0.0.1:8081/',
-    REPORT: 'http://127.0.0.1:8083/'
+    ENGINE: 'https://mapskills-engine.herokuapp.com/',
+    REPORT: 'http://104.41.26.21:8083/'
   };
 
   var API_SERVER = {

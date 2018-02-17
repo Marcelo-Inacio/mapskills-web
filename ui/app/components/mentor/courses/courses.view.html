@@ -9,9 +9,9 @@
     </thead>
     <tbody>
       <tr ng-repeat="course in crsCtrl.allCourses track by $index">
-        <td>{{::course.code}}</td>
-        <td>{{::course.name}}</td>
-        <td>{{::course.period | translate}}</td>
+        <td>{{course.code}}</td>
+        <td>{{course.name}}</td>
+        <td>{{course.period | translate}}</td>
         <td>
           <label id="btn-todo" ng-click="crsCtrl.openCourseModal(course)" class="btn btn-info btn-xs">editar</label>
         </td>

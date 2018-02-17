@@ -10,9 +10,9 @@
     </thead>
     <tbody>
       <tr ng-repeat="theme in theCtrl.allThemes track by theme.id" ng-show="theCtrl.allThemes.length != 0">
-        <td>{{::theme.id}}</td>
+        <td># {{::theme.id}}</td>
         <td>{{::theme.name}}</td>
-        <td>
+        <td class="aligner">
           <md-switch ng-model="theme.active" ng-click="theCtrl.setThemeCurrent(theme)" aria-label="Status" class="md-primary botton-switch"></md-switch>
         </td>
       </tr>
