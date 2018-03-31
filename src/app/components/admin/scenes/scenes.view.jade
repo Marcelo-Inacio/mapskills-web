@@ -1,11 +1,11 @@
 section
-  .row.aligner
-    .col-md-1.aligner-item
+  .row(style="display: flex; justify-content: space-between")
+    .col-lg-6.button-new(style="justify-content: flex-start;")
       i.fa.fa-info-circle.ico-large(uib-tooltip="{{'SCENE_MESSAGE' | translate}}", tooltip-placement="bottom-right")
-    .col-md-11
-      label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="scnCtrl.openSceneModal()") novo
-      label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="scnCtrl.updateIndexScenes(scnCtrl.allScenes)") salvar alterações
-  .row(ui-sortable ng-model="scnCtrl.allScenes")
+    .col-lg-6.button-new
+      label.btn.btn-primary.btn-md(ng-click="scnCtrl.openSceneModal()") novo
+      label.btn.btn-primary.btn-md(ng-click="scnCtrl.updateIndexScenes(scnCtrl.allScenes)") salvar alterações
+  .row.card-list-content(ui-sortable ng-model="scnCtrl.allScenes")
     .col-sm-6.col-md-3(ng-repeat="scene in scnCtrl.allScenes track by scene.id")
       .thumbnail.card
         img(ng-src="{{scene.background.filename}}", onerror="this.src='assets/images/image_unavailable.png'", alt="{{scene.background.filename}}")

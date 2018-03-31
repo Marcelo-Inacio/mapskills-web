@@ -2,53 +2,63 @@
 <div class="section form-group">
   <div class="modal-header"></div>
   <div class="modal-body">
-    <div class="form-group row">
-      <div class="col-md-12">
-        <label>Nome:</label>
-        <input type="text" ng-model="modalCtrl.student.name" class="form-control">
+    <form name="studentForm" autocomplete="off">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <div class="input-group"><span class="input-group-addon">Nome</span>
+            <input type="text" ng-model="modalCtrl.student.name" name="name" required class="form-control">
+          </div>
+        </div>
       </div>
-    </div>
-    <div ng-if="!modalCtrl.isTechnical" class="form-group row">
-      <div class="col-md-12">
-        <label>RA:</label>
-        <input type="text" ng-model="modalCtrl.student.ra" minlength="13" maxlength="13" class="form-control">
+      <div ng-if="!modalCtrl.isTechnical" class="form-group row">
+        <div class="col-md-12">
+          <div class="input-group"><span class="input-group-addon">RA</span>
+            <input type="text" ng-model="modalCtrl.student.ra" ui-mask="9999999999999" name="ra" required class="form-control">
+          </div>
+        </div>
       </div>
-    </div>
-    <div ng-if="modalCtrl.isTechnical" class="form-group row">
-      <div class="col-md-12">
-        <label>RM:</label>
-        <input type="text" ng-model="modalCtrl.student.ra" minlength="5" maxlength="5" class="form-control">
+      <div ng-if="modalCtrl.isTechnical" class="form-group row">
+        <div class="col-md-12">
+          <div class="input-group"><span class="input-group-addon">RM</span>
+            <input type="text" ng-model="modalCtrl.student.ra" ui-mask="99999" name="rm" required class="form-control">
+          </div>
+        </div>
       </div>
-    </div>
-    <div ng-if="modalCtrl.isTechnical" class="form-group row">
-      <div class="col-md-12">
-        <label>Curso:</label>
-        <select ng-model="modalCtrl.courseSelected" ng-change="" ng-options="course.name for course in modalCtrl.allCourses track by course.code" class="form-control">
-          <option value="">--- Selecione um curso ---</option>
-        </select>
+      <div ng-if="modalCtrl.isTechnical" class="form-group row">
+        <div class="col-md-12">
+          <div class="input-group"><span class="input-group-addon">Curso</span>
+            <select ng-model="modalCtrl.courseSelected" ng-change="" ng-options="course.name for course in modalCtrl.allCourses track by course.code" name="course" required class="form-control">
+              <option value="">--- Selecione um curso ---</option>
+            </select>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-md-12">
-        <label>Telefone:</label>
-        <input type="text" ng-model="modalCtrl.student.phone" maxlength="11" class="form-control">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <div class="input-group"><span class="input-group-addon">Telefone</span>
+            <input type="text" ng-model="modalCtrl.student.phone" ui-mask="(99) 9999-9999" name="phone" required class="form-control">
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-md-12">
-        <label>E-mail:</label>
-        <input type="email" ng-model="modalCtrl.student.username" class="form-control">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <div class="input-group"><span class="input-group-addon">E-mail</span>
+            <input type="email" ng-model="modalCtrl.student.username" name="username" required class="form-control">
+          </div>
+        </div>
       </div>
-    </div>
-    <div ng-show="modalCtrl.student.password != null" class="form-group row">
-      <div class="col-md-12">
-        <label>Senha:</label>
-        <input type="password" ng-model="modalCtrl.student.password" placeholder="nova senha" class="form-control">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <div class="input-group"><span class="input-group-addon">Senha</span>
+            <input type="{{ modalCtrl.typePassword[modalCtrl.showPassword] }}" ng-model="modalCtrl.student.password" placeholder="nova senha" name="password" required class="form-control"><span class="input-group-btn">
+              <button ng-click="modalCtrl.showPassword = !modalCtrl.showPassword" class="btn btn-default"><i class="fa fa-eye"></i></button></span>
+          </div>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
   <div class="modal-footer">
-    <button id="btn-todo" ng-click="modalCtrl.saveStudent(modalCtrl.student)" class="btn btn-primary btn-md">salvar</button>
-    <button id="btn-todo" ng-click="modalCtrl.closeModal()" class="btn btn-default btn-md">cancelar</button>
+    <button ng-disabled="!studentForm.$valid" ng-click="modalCtrl.saveStudent(modalCtrl.student)" class="btn btn-primary btn-md">salvar</button>
+    <button ng-click="modalCtrl.closeModal()" class="btn btn-default btn-md">cancelar</button>
   </div>
 </div>

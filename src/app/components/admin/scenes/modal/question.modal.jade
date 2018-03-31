@@ -1,44 +1,55 @@
 .section
   .modal-header
   .modal-body
-    .form-group.row
-      .col-md-12
-        label Competência
-        select.form-control(ng-model="modalCtrl.skillSelected"
-                            ,ng-options="skill as skill.name for skill in modalCtrl.allSkills track by skill.id")
-          option(value='') -- selecione uma competência --
-          
-    .form-group.row
-      .col-md-8
-        label Alternativa A:
-        input.form-control(type="text", ng-model="modalCtrl.question.alternatives[0].description")
-      .col-md-4
-        label Peso
-        input.form-control(type='number', ng-model="modalCtrl.question.alternatives[0].skillValue")
+    form(name="questionForm")
+      .form-group.row
+        .col-md-12
+          .input-group
+            span.input-group-addon Competência
+            select.form-control(ng-model="modalCtrl.skillSelected"
+                                , ng-options="skill as skill.name for skill in modalCtrl.allSkills track by skill.id"
+                                , name="skill", required)
+              option(value='') -- selecione uma competência --
+            
+      .form-group.row
+        .col-md-9
+          .input-group
+            span.input-group-addon Alternativa A
+            input.form-control(type="text", ng-model="modalCtrl.question.alternatives[0].description", name="alternativeA", required)
+        .col-md-3
+          .input-group
+            span.input-group-addon Peso
+            input.form-control(type='number', ng-model="modalCtrl.question.alternatives[0].skillValue", name="skillValueA", required)
 
-    .form-group.row
-      .col-md-8
-        label Alternativa B:
-        input.form-control(type='text', ng-model="modalCtrl.question.alternatives[1].description") 
-      .col-md-4
-        label Peso
-        input.form-control(type='number', ng-model="modalCtrl.question.alternatives[1].skillValue")
-          
-    .form-group.row
-      .col-md-8
-        label Alternativa C:
-        input.form-control(type='text', ng-model="modalCtrl.question.alternatives[2].description") 
-      .col-md-4
-        label Peso
-        input.form-control(type='number', ng-model="modalCtrl.question.alternatives[2].skillValue")
-          
-    .form-group.row
-      .col-md-8
-        label Alternativa D:
-        input.form-control(type='text', ng-model="modalCtrl.question.alternatives[3].description") 
-      .col-md-4
-        label Peso
-        input.form-control(type='number', ng-model="modalCtrl.question.alternatives[3].skillValue")
+      .form-group.row
+        .col-md-9
+          .input-group
+            span.input-group-addon Alternativa B
+            input.form-control(type='text', ng-model="modalCtrl.question.alternatives[1].description", name="alternativeB", required) 
+        .col-md-3
+          .input-group
+            span.input-group-addon Peso
+            input.form-control(type='number', ng-model="modalCtrl.question.alternatives[1].skillValue", name="skillValueB", required)
+            
+      .form-group.row
+        .col-md-9
+          .input-group
+            span.input-group-addon Alternativa C
+            input.form-control(type='text', ng-model="modalCtrl.question.alternatives[2].description", name="alternativeC", required) 
+        .col-md-3
+          .input-group
+            span.input-group-addon Peso
+            input.form-control(type='number', ng-model="modalCtrl.question.alternatives[2].skillValue", name="skillValueC", required)
+            
+      .form-group.row
+        .col-md-9
+          .input-group
+            span.input-group-addon Alternativa D
+            input.form-control(type='text', ng-model="modalCtrl.question.alternatives[3].description", name="alternativeD", required) 
+        .col-md-3
+          .input-group
+            span.input-group-addon Peso
+            input.form-control(type='number', ng-model="modalCtrl.question.alternatives[3].skillValue", name="skillValueD", required)
   .modal-footer        
-    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveSceneWithQuestion(modalCtrl.scene, modalCtrl.question)") salvar
-    button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar
+    button.btn.btn-primary.btn-md(ng-disabled="!questionForm.$valid", ng-click="modalCtrl.saveSceneWithQuestion(modalCtrl.scene, modalCtrl.question)") salvar
+    button.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

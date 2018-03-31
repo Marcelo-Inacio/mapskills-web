@@ -2,26 +2,29 @@
 <div class="section">
   <div class="modal-header"></div>
   <div class="modal-body">
-    <div class="form-group row">
-      <div class="col-md-12">
-        <label>Texto:</label>
-        <textarea style="width: 100%" rows="5" placeholder="Descreva aqui..." ng-model="modalCtrl.scene.text"></textarea>
+    <form name="sceneForm">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <label>Texto:</label>
+          <textarea style="width: 100%" rows="5" placeholder="Descreva aqui..." ng-model="modalCtrl.scene.text" name="text" required></textarea>
+        </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-md-12">
-        <label>Imagem:</label>
-        <label id="btn-todo" class="btn btn-primary btn-xs">
-          <input type="file" ng-model="modalCtrl.scene.background" name="file" base-sixty-four-input="" required="" maxsize="500" accept="image/*"><i class="fa fa-cloud-upload"></i>  Escolher imagem
-        </label>
+      <div class="form-group row">
+        <div class="col-md-12">
+          <div class="input-group">
+            <label class="btn btn-primary btn-xs">
+              <input type="file" ng-model="modalCtrl.scene.background" name="file" base-sixty-four-input="" maxsize="500" accept="image/*"><i class="fa fa-cloud-upload"> </i> Escolher imagem
+            </label>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-md-12"><span ng-bind="modalCtrl.scene.background.filename"></span></div>
-    </div>
+      <div class="form-group row">
+        <div class="col-md-12"><span ng-bind="modalCtrl.scene.background.filename"></span></div>
+      </div>
+    </form>
   </div>
   <div class="modal-footer">
-    <button id="btn-todo" ng-click="modalCtrl.saveScene(modalCtrl.scene)" class="btn btn-primary btn-md">salvar</button>
-    <button id="btn-todo" ng-click="modalCtrl.closeModal()" class="btn btn-default btn-md">cancelar</button>
+    <button ng-disabled="!sceneForm.$valid" ng-click="modalCtrl.saveScene(modalCtrl.scene)" class="btn btn-primary btn-md">salvar</button>
+    <button ng-click="modalCtrl.closeModal()" class="btn btn-default btn-md">cancelar</button>
   </div>
 </div>

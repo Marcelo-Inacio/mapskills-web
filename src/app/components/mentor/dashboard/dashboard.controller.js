@@ -6,7 +6,7 @@
 		.controller('MentorDashboardController', MentorDashboardController);
 
 	/** @ngInject */
-	function MentorDashboardController($log, mentorService, loginService, HelperService) {
+	function MentorDashboardController($log, mentorService, loginService, HelperService, toastr) {
 		var vm = this;
     vm.courses;
 		vm.filter = {startDate: new Date(), endDate: new Date()};
@@ -25,8 +25,10 @@
 			var institutionCode = loginService.getUserLogged().institution.code;
 			var params = getFilterParameter(institutionCode, vm.filter.startDate, vm.filter.endDate);
 			$log.log(params);
-			mentorService.loadCourseIndicators(params).then(function(response) {
+			mentorService.loadCourseIndicators(params).then(function success(response) {
 				vm.courses = response;
+			}, function error(response) {
+				toastr.error("Falha ao recuperar resultados");
 			});
 		}
 

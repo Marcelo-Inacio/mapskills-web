@@ -1,0 +1,18 @@
+section
+  date-range-filter(start-date="institutionCtrl.filter.startDate", end-date="institutionCtrl.filter.endDate", search="institutionCtrl.search()")
+  .row(ng-if="institutionCtrl.institutions.length > 0")
+    .col-lg-8.col-md-8.col-sm-12.col-xs-12
+      .panel.panel-default
+        .panel-heading {{ institutionCtrl.institution.label }}
+        .panel-body.panel-radar
+          canvas#base.chart-horizontal-bar(chart-data='institutionCtrl.data', chart-labels='institutionCtrl.codes', chart-series="institutionCtrl.series", chart-options="institutionCtrl.options")
+    .col-lg-4.col-md-4.col-sm-12.col-xs-12
+      .panel.panel-default
+        .panel-heading Legenda
+        .panel-body.panel-radar
+          h5(ng-repeat="institution in institutionCtrl.institutions") {{institution.code}} - {{institution.company}}
+          
+  .row(ng-if="institutionCtrl.institutions.length == 0")
+    .col-xs-12.col-sm-12.col-md-12
+      .alert.alert-info
+        h4 Nenhum resultado encontrado.

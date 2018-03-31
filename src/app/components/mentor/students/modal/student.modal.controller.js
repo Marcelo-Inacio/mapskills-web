@@ -6,19 +6,20 @@
 		.controller('MentorStudentModalController', MentorStudentModalController);
 
 	/** @ngInject */
-	function MentorStudentModalController(modalService, mentorService, toastrService, HelperService) {
+	function MentorStudentModalController(modalService, mentorService, toastrService, HelperService, $filter, Session) {
 		var vm = this;
-		vm.student = modalService.getResult();
+		vm.isTechnical = Session.refreshUserSession().institution.level === "TECHNICAL";
+		vm.student = angular.copy(modalService.getResult());
+		loadAllCourses();
+		vm.courseSelected = null;
+		vm.showPassword = false;
+		vm.typePassword = {"true" : "text", "false" : "password"};
 
 		vm.saveStudent = function(student) {
-			if(vm.isTechnical && !HelperService.isUndefinedOrNull(student)) {
+			if (vm.isTechnical) {
 				student.ra = angular.copy(formatRA(student));
 			}
-			if(validateStudent(student)) {
-				toastrService.showToastr(400);
-				student.ra = "";
-				return;
-			}
+
 			mentorService.saveStudent(student).then(function(response) {
 				toastrService.showToastr(response.status);
 				modalService.okModal();
@@ -29,11 +30,18 @@
 			modalService.closeModal();
 		}
 
+		function loadAllCourses() {
+			mentorService.loadAllCourses().then(function(response) {
+				vm.allCourses = response;
+				prepareStudent();
+			});
+		}
+
 		/*
-		* Formata o RA do aluno caso seja um aluno ETEC
-		*/
+		 * Formata o RA do aluno caso seja um aluno ETEC
+		 */
 		function formatRA(student) {
-			if(HelperService.isUndefinedOrNull(student) || HelperService.isUndefinedOrNull(vm.courseSelected)) {
+			if (HelperService.isUndefinedOrNull(student) || HelperService.isUndefinedOrNull(vm.courseSelected)) {
 				return "";
 			}
 			var year = new Date().getFullYear().toString().substring(2);
@@ -42,13 +50,18 @@
 			return raFormatted;
 		}
 
-		/*
-		*
-		*/
-		function validateStudent(student) {
-			return (HelperService.isUndefinedOrNull(student) || HelperService.isUndefinedOrNull(student.name) ||
-				HelperService.isUndefinedOrNull(student.ra) || HelperService.isUndefinedOrNull(student.username) ||
-				HelperService.isUndefinedOrNull(student.phone) || student.ra.length < 13);
+		function prepareStudent() {
+			if (vm.student != null) {
+				vm.student.course.period = $filter('translate')(vm.student.course.period);
+			}
+			if (vm.isTechnical) {
+				vm.student.ra = modalService.getResult().ra.substring(9);
+			}
+			angular.forEach(vm.allCourses, function(course) {
+				if (vm.student != null && vm.student.course.code == course.code) {
+					vm.courseSelected = course;
+				}
+			});
 		}
 	}
 })();

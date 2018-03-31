@@ -3,33 +3,47 @@
   <div class="modal-header"></div>
   <div class="modal-body">
     <div class="form-group row">
-      <div class="col-md-5">
-        <label>Código:</label>
-        <label>{{modalCtrl.institution.code}}</label>
+      <div class="col-md-3">
+        <div class="input-group"><span class="input-group-addon">Código</span>
+          <input ng-model="::modalCtrl.institution.code" readonly class="form-control">
+        </div>
       </div>
-      <div class="col-md-7">
-        <label>CNPJ:</label>
-        <label>{{modalCtrl.institution.cnpj}}</label>
+      <div class="col-md-9">
+        <div class="input-group"><span class="input-group-addon">Razão Social</span>
+          <input ng-model="::modalCtrl.institution.company" readonly class="form-control">
+        </div>
       </div>
     </div>
     <div class="form-group row">
       <div class="col-md-5">
-        <label>Razão Social:</label>
-        <label>{{modalCtrl.institution.company}}</label>
+        <div class="input-group"><span class="input-group-addon">CNPJ</span>
+          <input ng-model="::modalCtrl.institution.cnpj" ui-mask="99.999.999/9999-99" readonly class="form-control">
+        </div>
       </div>
       <div class="col-md-7">
-        <label>Cidade:</label>
-        <label>{{modalCtrl.institution.city}}</label>
+        <div class="input-group"><span class="input-group-addon">Cidade</span>
+          <input ng-model="::modalCtrl.institution.city" readonly class="form-control">
+        </div>
       </div>
     </div>
-    <div ng-repeat="mentor in modalCtrl.institution.mentors track by mentor.id" class="form-group row">
-      <div class="col-md-5">
-        <label>Mentor:</label>
-        <label>{{mentor.name}}</label>
+    <div class="form-group row">
+      <hr>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <label>Mentores:</label>
       </div>
-      <div class="col-md-7">
-        <label>E-mail:</label>
-        <label>{{mentor.username}}</label>
+    </div>
+    <div ng-repeat="mentor in modalCtrl.institution.mentors track by mentor.id" class="form-group">
+      <div class="form-group row">
+        <div class="col-xs-12 col-md-12 col-lg-6">
+          <div class="input-group"><span class="input-group-addon">Nome:</span>
+            <input ng-model="::mentor.name" readonly class="form-control">
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-12 col-lg-6">
+          <div class="input-group"><span class="input-group-addon">E-mail:</span>
+            <input ng-model="::mentor.username" readonly class="form-control">
+          </div>
+        </div>
       </div>
     </div>
     <table class="table table-striped">
@@ -42,14 +56,14 @@
       </thead>
       <tbody>
         <tr ng-repeat="course in modalCtrl.institution.courses track by course.id">
-          <td>{{course.code}}</td>
-          <td>{{course.name}}</td>
-          <td>{{course.period | translate}}    </td>
+          <td>{{::course.code}}</td>
+          <td style="text-align: left">{{::course.name}}</td>
+          <td>{{::course.period | translate}}    </td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="modal-footer">
-    <button id="btn-todo" ng-click="modalCtrl.closeModal()" class="btn btn-default btn-md">fechar</button>
+    <button ng-click="modalCtrl.closeModal()" class="btn btn-default btn-md">fechar</button>
   </div>
 </div>

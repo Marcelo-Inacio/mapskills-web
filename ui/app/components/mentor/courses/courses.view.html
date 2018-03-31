@@ -1,21 +1,18 @@
 
 <section>
-  <label id="btn-todo" ng-click="crsCtrl.openCourseModal()" class="btn btn-primary btn-md botton-new">novo</label>
-  <table class="table table-hover table-striped">
-    <thead>
-      <tr class="table-thead">
-        <th ng-repeat="head in crsCtrl.tableHead track by $index">{{head}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="course in crsCtrl.allCourses track by $index">
-        <td>{{course.code}}</td>
-        <td>{{course.name}}</td>
-        <td>{{course.period | translate}}</td>
-        <td>
-          <label id="btn-todo" ng-click="crsCtrl.openCourseModal(course)" class="btn btn-info btn-xs">editar</label>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="row button-new">
+    <label ng-click="crsCtrl.openCourseModal()" class="btn btn-primary btn-md">novo</label>
+  </div>
+  <div class="row card-list-content">
+    <div ng-repeat="course in crsCtrl.allCourses track by $index" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="thumbnail card"><img ng-src="{{crsCtrl.image}}" onerror="this.src='assets/images/image_unavailable.png'" alt="{{crsCtrl.image}}" style="max-height: 218px">
+        <div> 
+          <div style="height: 63px; margin-top: 0;" class="text align-center border-top-bottom">
+            <h5 ng-bind="course.name"></h5>
+          </div>
+          <div style="padding: 5px;"><a ng-click="crsCtrl.openCourseModal(course)" class="btn btn-info btn-xs">editar</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

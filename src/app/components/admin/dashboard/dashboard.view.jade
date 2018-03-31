@@ -1,14 +1,14 @@
 section
   date-range-filter(start-date="admDashCtrl.filter.startDate", end-date="admDashCtrl.filter.endDate", search="admDashCtrl.search()")
   .row
-    .col-lg-3.col-md-3.col-sm-6.col-xs-6.col-lg-offset-2
+    .col-xs-12.col-sm-6.col-md-4.col-lg-3.col-lg-offset-2
       .panel.panel-default(ng-if="admDashCtrl.hasResult.etecs")
         .panel-heading Etecs
         .panel-body.panel-radar
           canvas#pie.chart.chart-pie(chart-data='admDashCtrl.indicator.etecs.values', chart-labels='admDashCtrl.labels', chart-options='admDashCtrl.options')
       .panel.panel-default(ng-if="!admDashCtrl.hasResult.etecs")
         .panel-heading(style="text-align: center") Nenhum resultado
-    .col-lg-3.col-md-3.col-sm-6.col-xs-6.col-lg-offset-1
+    .col-lg-3.col-md-3.col-sm-6.col-xs-12.col-lg-offset-1
       .panel.panel-default(ng-if="admDashCtrl.hasResult.fatecs")
         .panel-heading Fatecs
         .panel-body.panel-radar

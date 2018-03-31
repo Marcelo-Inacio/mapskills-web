@@ -34,8 +34,8 @@
   };
 
   var HOST = {
-    ENGINE: 'https://mapskills-engine.herokuapp.com/',
-    REPORT: 'http://104.41.26.21:8083/'
+    ENGINE: 'http://localhost:8081/',
+    REPORT: 'http://localhost:8083/'
   };
 
   var API_SERVER = {
@@ -49,7 +49,7 @@
       UPDATE: HOST.ENGINE + 'institution/{id}',
       UPDATE_THEME: HOST.ENGINE + 'institution/{code}/theme',
       SAVE: HOST.ENGINE + 'institution',
-      UPLOAD: HOST.ENGINE + 'institution/upload',
+      UPLOAD: HOST.ENGINE + 'institutions',
       COURSE: HOST.ENGINE + 'institution/course'
     },
     THEME: {

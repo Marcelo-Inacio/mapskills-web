@@ -5,28 +5,36 @@
       <div class="panel-heading">Meus Dados</div>
       <div class="panel-body panel-radar">
         <div class="row aligner">
-          <div class="col-md-4">
-            <label>Nome : {{studentProfileCtrl.user.name}}</label>
-          </div>
-          <div class="col-md-4">
-            <label>RA : {{studentProfileCtrl.user.ra}}</label>
-          </div>
-          <div class="col-md-4">
-            <label>Telefone : {{studentProfileCtrl.user.phone}}</label>
-          </div>
-        </div>
-        <div class="row aligner">
-          <div class="col-md-4">
-            <label>E-mail : {{studentProfileCtrl.user.username}}</label>
-          </div>
-          <div class="col-md-4">
-            <div style="justify-content: flex-start" class="row aligner">
-              <label style="margin-right: 10px">Senha:</label>
-              <input id="password" type="password" ng-model="studentProfileCtrl.user.password" placeholder="nova senha" class="form-control">
+          <div class="col-md-6">
+            <div class="input-group"><span class="input-group-addon">Nome</span>
+              <input type="text" ng-model="::studentProfileCtrl.user.name" readonly class="form-control">
             </div>
           </div>
-          <div class="col-md-4">
-            <label id="btn-todo" ng-click="studentProfileCtrl.updatePassword(studentProfileCtrl.user)" class="btn btn-info btn-md">salvar</label>
+          <div class="col-md-3">
+            <div class="input-group"><span class="input-group-addon">RA</span>
+              <input type="text" ng-model="::studentProfileCtrl.user.ra" readonly class="form-control">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group"><span class="input-group-addon">Telefone</span>
+              <input type="text" ng-model="::studentProfileCtrl.user.phone" ui-mask="(99) 9999-9999" readonly class="form-control">
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 10px" class="row aligner">
+          <div class="col-md-6">
+            <div class="input-group"><span class="input-group-addon">E-mail</span>
+              <input type="text" ng-model="::studentProfileCtrl.user.username" readonly class="form-control">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group"><span class="input-group-addon">Senha</span>
+              <input type="{{ studentProfileCtrl.showPassword[studentProfileCtrl.checkboxPassword] }}" ng-model="studentProfileCtrl.user.password" placeholder="senha" class="form-control"><span class="input-group-btn">
+                <button ng-click="studentProfileCtrl.checkboxPassword = !studentProfileCtrl.checkboxPassword" class="btn btn-default"><i class="fa fa-eye">         </i></button></span>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label ng-click="studentProfileCtrl.updatePassword(studentProfileCtrl.user)" class="btn btn-info btn-md">salvar</label>
           </div>
         </div>
       </div>
@@ -37,14 +45,20 @@
       <div class="panel-heading">Meu Curso</div>
       <div class="panel-body panel-radar">
         <div class="row aligner">
-          <div class="col-md-4">
-            <label>Código : {{studentProfileCtrl.user.course.code}}</label>
+          <div class="col-md-2">
+            <div class="input-group"><span class="input-group-addon">Código</span>
+              <input type="text" ng-model="::studentProfileCtrl.user.course.code" readonly class="form-control">
+            </div>
           </div>
-          <div class="col-md-4">
-            <label>Nome: {{studentProfileCtrl.user.course.name}}</label>
+          <div class="col-md-7">
+            <div class="input-group"><span class="input-group-addon">Curso</span>
+              <input type="text" ng-model="::studentProfileCtrl.user.course.name" readonly class="form-control">
+            </div>
           </div>
-          <div class="col-md-4">
-            <label>Período: {{studentProfileCtrl.user.course.period | translate}}</label>
+          <div class="col-md-3">
+            <div class="input-group"><span class="input-group-addon">Período</span>
+              <input type="text" ng-model="::studentProfileCtrl.user.course.period | translate" readonly class="form-control">
+            </div>
           </div>
         </div>
       </div>
@@ -56,23 +70,33 @@
       <div class="panel-body panel-radar">
         <div class="row aligner">
           <div class="col-md-3">
-            <label>Código : {{studentProfileCtrl.user.institution.code}}</label>
+            <div class="input-group"><span class="input-group-addon">Código</span>
+              <input type="text" ng-model="::studentProfileCtrl.user.institution.code" readonly class="form-control">
+            </div>
           </div>
-          <div class="col-md-3">
-            <label>Razão Social : {{studentProfileCtrl.user.institution.company}}</label>
+          <div class="col-md-9">
+            <div class="input-group"><span class="input-group-addon">Razão Social</span>
+              <input type="text" ng-model="::studentProfileCtrl.user.institution.company" readonly class="form-control">
+            </div>
           </div>
+        </div>
+        <div style="margin-top: 10px" class="row aligner">
           <div class="col-md-3">
-            <label>CNPJ : {{studentProfileCtrl.user.institution.cnpj}}</label>
+            <div class="input-group"><span class="input-group-addon">CNPJ</span>
+              <input type="text" ng-model="::studentProfileCtrl.user.institution.cnpj" ui-mask="99.999.999/9999-99" readonly class="form-control">
+            </div>
           </div>
-          <div class="col-md-3">
-            <label>Cidade : {{studentProfileCtrl.user.institution.city}}</label>
+          <div class="col-md-9">
+            <div class="input-group"><span class="input-group-addon">Cidade</span>
+              <input type="text" ng-model="::studentProfileCtrl.user.institution.city" readonly class="form-control">
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <label id="btn-todo" ui-sref="^.result" ng-if="studentProfileCtrl.user.completed" class="btn btn-primary btn-md botton-new"><i class="fa fa-gamepad ico-sidebar"></i>Meu Resultado</label>
-    <label id="btn-todo" ui-sref="^.game" class="btn btn-primary btn-md botton-new"><i class="fa fa-gamepad ico-sidebar"></i>Jogo</label>
+  <div class="row button-new">
+    <label ui-sref="^.result" ng-if="studentProfileCtrl.user.completed" class="btn btn-primary btn-md"><i class="fa fa-gamepad ico-sidebar"></i>Meu Resultado</label>
+    <label ui-sref="^.game" class="btn btn-primary btn-md"><i class="fa fa-gamepad ico-sidebar"></i>Jogo</label>
   </div>
 </div>

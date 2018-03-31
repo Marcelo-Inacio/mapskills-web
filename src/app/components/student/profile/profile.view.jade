@@ -4,32 +4,49 @@
       .panel-heading Meus Dados
       .panel-body.panel-radar
         .row.aligner
-          .col-md-4
-            label Nome : {{studentProfileCtrl.user.name}}
-          .col-md-4
-            label RA : {{studentProfileCtrl.user.ra}}
-          .col-md-4
-            label Telefone : {{studentProfileCtrl.user.phone}}
-        .row.aligner
-          .col-md-4
-            label E-mail : {{studentProfileCtrl.user.username}}
-          .col-md-4
-            .row.aligner(style="justify-content: flex-start")
-              label(style = "margin-right: 10px") Senha:
-              input.form-control#password(type='password', ng-model="studentProfileCtrl.user.password", placeholder="nova senha")
-          .col-md-4
-            label#btn-todo.btn.btn-info.btn-md(ng-click="studentProfileCtrl.updatePassword(studentProfileCtrl.user)") salvar
+          .col-md-6
+            .input-group
+              span.input-group-addon Nome
+              input.form-control(type='text', ng-model="::studentProfileCtrl.user.name", readonly)
+          .col-md-3
+            .input-group
+              span.input-group-addon RA
+              input.form-control(type='text', ng-model="::studentProfileCtrl.user.ra", readonly)
+          .col-md-3
+            .input-group
+              span.input-group-addon Telefone
+              input.form-control(type='text', ng-model="::studentProfileCtrl.user.phone", ui-mask="(99) 9999-9999",readonly)
+        .row.aligner(style="margin-top: 10px")
+          .col-md-6
+            .input-group
+              span.input-group-addon E-mail
+              input.form-control(type='text', ng-model="::studentProfileCtrl.user.username", readonly)
+          .col-md-3
+            .input-group
+              span.input-group-addon Senha
+              input.form-control(type='{{ studentProfileCtrl.showPassword[studentProfileCtrl.checkboxPassword] }}', ng-model="studentProfileCtrl.user.password", placeholder="senha")
+              span.input-group-btn
+                button.btn.btn-default(ng-click='studentProfileCtrl.checkboxPassword = !studentProfileCtrl.checkboxPassword')
+                  i.fa.fa-eye          
+          .col-md-3
+            label.btn.btn-info.btn-md(ng-click="studentProfileCtrl.updatePassword(studentProfileCtrl.user)") salvar
   .row
     .panel.panel-primary
       .panel-heading Meu Curso
       .panel-body.panel-radar
         .row.aligner
-          .col-md-4
-            label Código : {{studentProfileCtrl.user.course.code}}
-          .col-md-4
-            label Nome: {{studentProfileCtrl.user.course.name}}
-          .col-md-4
-            label Período: {{studentProfileCtrl.user.course.period | translate}}
+          .col-md-2
+            .input-group
+              span.input-group-addon Código
+              input.form-control(type='text', ng-model="::studentProfileCtrl.user.course.code", readonly)
+          .col-md-7
+            .input-group
+              span.input-group-addon Curso
+              input.form-control(type='text', ng-model="::studentProfileCtrl.user.course.name", readonly)
+          .col-md-3
+            .input-group
+              span.input-group-addon Período
+              input.form-control(type='text', ng-model="::studentProfileCtrl.user.course.period | translate", readonly)
             
   .row
       .panel.panel-primary
@@ -37,18 +54,27 @@
         .panel-body.panel-radar
           .row.aligner
             .col-md-3
-              label Código : {{studentProfileCtrl.user.institution.code}}
+              .input-group
+                span.input-group-addon Código
+                input.form-control(type='text', ng-model="::studentProfileCtrl.user.institution.code", readonly)
+            .col-md-9
+              .input-group
+                span.input-group-addon Razão Social
+                input.form-control(type='text', ng-model="::studentProfileCtrl.user.institution.company", readonly)
+          .row.aligner(style="margin-top: 10px")
             .col-md-3
-              label Razão Social : {{studentProfileCtrl.user.institution.company}}
-            .col-md-3
-              label CNPJ : {{studentProfileCtrl.user.institution.cnpj}}
-            .col-md-3
-              label Cidade : {{studentProfileCtrl.user.institution.city}}
+              .input-group
+                span.input-group-addon CNPJ
+                input.form-control(type='text', ng-model="::studentProfileCtrl.user.institution.cnpj", ui-mask="99.999.999/9999-99", readonly)
+            .col-md-9
+              .input-group
+                span.input-group-addon Cidade
+                input.form-control(type='text', ng-model="::studentProfileCtrl.user.institution.city", readonly)
   
-  .row
-    label#btn-todo.btn.btn-primary.btn-md.botton-new(ui-sref="^.result", ng-if="studentProfileCtrl.user.completed")
+  .row.button-new
+    label.btn.btn-primary.btn-md(ui-sref="^.result", ng-if="studentProfileCtrl.user.completed")
       i.fa.fa-gamepad.ico-sidebar
       | Meu Resultado
-    label#btn-todo.btn.btn-primary.btn-md.botton-new(ui-sref="^.game")
+    label.btn.btn-primary.btn-md(ui-sref="^.game")
       i.fa.fa-gamepad.ico-sidebar
       | Jogo

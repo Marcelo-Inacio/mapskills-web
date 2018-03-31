@@ -7,32 +7,21 @@
 
 		/** @ngInject */
 		function toastrService(toastr) {
+
+			var httpMessages = {
+				200: function() { toastr.success('Salvo com sucesso.', 'Feito!'); },
+				400: function() { toastr.error('Verifique as informações de envio.', 'Falha!'); },
+				401: function() { toastr.error('Parece que você não tem autorização.', 'Ops!'); },
+				403: function() { toastr.error('Acesso Proibido.', 'Ops!'); },
+				500: function() { toastr.error('Parece que houve um problema no servidor.', 'Falha!'); }
+			}
+
 			return {
         showToastr : _showToastr
 			};
 
       function _showToastr(status) {
-        switch (status) {
-          case 200:
-          case 201:
-            toastr.success('Salvo com sucesso.', 'Feito!');
-            break;
-					case 400:
-						toastr.error('Verifique as informações de envio.', 'Falha!');
-						break;
-          case 401:
-						toastr.error('Parece que você não tem autorização.', 'Ops!');
-						break;
-          case 403:
-						toastr.error('Acesso Proibido.', 'Ops!');
-						break;
-          case 500:
-            toastr.error('Parece que houve um problema no servidor.', 'Falha!');
-            break;
-          default:
-            toastr.error('Parece que houve um problema no servidor.', 'Falha!');
-            break;
-        }
+        httpMessages[status]();
       }
 		}
 })();

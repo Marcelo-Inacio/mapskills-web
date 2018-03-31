@@ -42,20 +42,22 @@
           return response || $q.when(response);
         },
         responseError: function (response) {
-          $log.info("DESCRIÇÃO DO PROBLEMA \n "
-                      + "status : " + response.status + "\n "
-                      + "message : " + response.data.message);
+          cfpLoadingBar.complete();
+          if (response.status > 0) {
+            $log.info("DESCRIÇÃO DO PROBLEMA \n "
+            + "status : " + response.status + "\n "
+            + "message : " + response.data.message);
+          }
           if (!(--numLoadings)) {
             $rootScope.$broadcast("loader_hide");
           }
-          if(response.status == HTTP_STATUS.UNAUTHENTICATED) {
+          if (response.status == HTTP_STATUS.UNAUTHENTICATED) {
             // toastr.error($filter('translate')('USER_NOT_AUTHENTICATED'));
           }
           $rootScope.$broadcast({
               401: AUTH_EVENTS.notAuthenticated,
               403: AUTH_EVENTS.notAuthorized
           }[response.status], response);
-          cfpLoadingBar.complete();
           return $q.reject(response);
         }
       }

@@ -1,0 +1,12 @@
+.section
+  .modal-header
+  .modal-body
+    form(name="gameThemeForm")
+      .form-group.row
+        .col-md-12
+          .input-group
+            span.input-group-addon Nome
+            input.form-control(type='text', ng-model="modalCtrl.theme.name", name="name", required)
+  .modal-footer
+    button.btn.btn-primary.btn-md(ng-disabled="!gameThemeForm.$valid", ng-click="modalCtrl.saveTheme(modalCtrl.theme)") salvar
+    button.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

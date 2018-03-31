@@ -10,7 +10,6 @@
 		var vm = this;
 		var page = {nextPage: 0, size: 20, isLast: false};
 		vm.students = null;
-		vm.isTechnical;
 		vm.filter = {name: null, ra: null, course: {}};
 		vm.tableHeader = [{label: "Nome", model: "name", width: {'width': '30%'}},
 			{label: "RA", model: "ra", width: {'width': '15%'}},
@@ -22,10 +21,7 @@
 
     function init() {
 			mentorService.validateProfile();
-			vm.isTechnical = Session.refreshUserSession().institutionLevel === "TECHNICAL";
-			loadAllCourses();
 			loadStudents(true);
-
     }
 
 		function loadStudents(clearCache) {
@@ -36,12 +32,6 @@
 				page.nextPage++;
 				page.isLast = response.remainingPages <= 0;
 				vm.students = response.students;
-			});
-		}
-
-		function loadAllCourses() {
-			mentorService.loadAllCourses().then(function(response) {
-				vm.allCourses = response;
 			});
 		}
 

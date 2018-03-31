@@ -2,57 +2,68 @@
 <div class="section">
   <div class="modal-header"></div>
   <div class="modal-body">
-    <div class="form-group row">
-      <div class="col-md-12">
-        <label>Competência</label>
-        <select ng-model="modalCtrl.skillSelected" ng-options="skill as skill.name for skill in modalCtrl.allSkills track by skill.id" class="form-control">
-          <option value="">-- selecione uma competência --</option>
-        </select>
+    <form name="questionForm">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <div class="input-group"><span class="input-group-addon">Competência</span>
+            <select ng-model="modalCtrl.skillSelected" ng-options="skill as skill.name for skill in modalCtrl.allSkills track by skill.id" name="skill" required class="form-control">
+              <option value="">-- selecione uma competência --</option>
+            </select>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-md-8">
-        <label>Alternativa A:</label>
-        <input type="text" ng-model="modalCtrl.question.alternatives[0].description" class="form-control">
+      <div class="form-group row">
+        <div class="col-md-9">
+          <div class="input-group"><span class="input-group-addon">Alternativa A</span>
+            <input type="text" ng-model="modalCtrl.question.alternatives[0].description" name="alternativeA" required class="form-control">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="input-group"><span class="input-group-addon">Peso</span>
+            <input type="number" ng-model="modalCtrl.question.alternatives[0].skillValue" name="skillValueA" required class="form-control">
+          </div>
+        </div>
       </div>
-      <div class="col-md-4">
-        <label>Peso</label>
-        <input type="number" ng-model="modalCtrl.question.alternatives[0].skillValue" class="form-control">
+      <div class="form-group row">
+        <div class="col-md-9">
+          <div class="input-group"><span class="input-group-addon">Alternativa B</span>
+            <input type="text" ng-model="modalCtrl.question.alternatives[1].description" name="alternativeB" required class="form-control">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="input-group"><span class="input-group-addon">Peso</span>
+            <input type="number" ng-model="modalCtrl.question.alternatives[1].skillValue" name="skillValueB" required class="form-control">
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-md-8">
-        <label>Alternativa B:</label>
-        <input type="text" ng-model="modalCtrl.question.alternatives[1].description" class="form-control">
+      <div class="form-group row">
+        <div class="col-md-9">
+          <div class="input-group"><span class="input-group-addon">Alternativa C</span>
+            <input type="text" ng-model="modalCtrl.question.alternatives[2].description" name="alternativeC" required class="form-control">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="input-group"><span class="input-group-addon">Peso</span>
+            <input type="number" ng-model="modalCtrl.question.alternatives[2].skillValue" name="skillValueC" required class="form-control">
+          </div>
+        </div>
       </div>
-      <div class="col-md-4">
-        <label>Peso</label>
-        <input type="number" ng-model="modalCtrl.question.alternatives[1].skillValue" class="form-control">
+      <div class="form-group row">
+        <div class="col-md-9">
+          <div class="input-group"><span class="input-group-addon">Alternativa D</span>
+            <input type="text" ng-model="modalCtrl.question.alternatives[3].description" name="alternativeD" required class="form-control">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="input-group"><span class="input-group-addon">Peso</span>
+            <input type="number" ng-model="modalCtrl.question.alternatives[3].skillValue" name="skillValueD" required class="form-control">
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-md-8">
-        <label>Alternativa C:</label>
-        <input type="text" ng-model="modalCtrl.question.alternatives[2].description" class="form-control">
-      </div>
-      <div class="col-md-4">
-        <label>Peso</label>
-        <input type="number" ng-model="modalCtrl.question.alternatives[2].skillValue" class="form-control">
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="col-md-8">
-        <label>Alternativa D:</label>
-        <input type="text" ng-model="modalCtrl.question.alternatives[3].description" class="form-control">
-      </div>
-      <div class="col-md-4">
-        <label>Peso</label>
-        <input type="number" ng-model="modalCtrl.question.alternatives[3].skillValue" class="form-control">
-      </div>
-    </div>
+    </form>
   </div>
   <div class="modal-footer">       
-    <button id="btn-todo" ng-click="modalCtrl.saveSceneWithQuestion(modalCtrl.scene, modalCtrl.question)" class="btn btn-primary btn-md">salvar</button>
-    <button id="btn-todo" ng-click="modalCtrl.closeModal()" class="btn btn-default btn-md">cancelar</button>
+    <button ng-disabled="!questionForm.$valid" ng-click="modalCtrl.saveSceneWithQuestion(modalCtrl.scene, modalCtrl.question)" class="btn btn-primary btn-md">salvar</button>
+    <button ng-click="modalCtrl.closeModal()" class="btn btn-default btn-md">cancelar</button>
   </div>
 </div>

@@ -1,14 +1,16 @@
 .section
   .modal-header
   .modal-body
-    .form-group.row
-      .col-md-12
-        label Tipo:
-        input.form-control(type='text', ng-model="modalCtrl.skill.name")
-    .form-group.row
-      .col-md-12
-        label Descrição:
-        textarea(style="width: 100%;", rows='5', placeholder='Descreva aqui...', ng-model="modalCtrl.skill.description")
+    form(name="skillForm")
+      .form-group.row
+        .col-md-12
+          .input-group
+            span.input-group-addon Tipo
+            input.form-control(type='text', ng-model="modalCtrl.skill.name", name="name", required)
+      .form-group.row
+        .col-md-12
+          label Descrição:
+          textarea(style="width: 100%;", rows='5', placeholder='Descreva aqui...', ng-model="modalCtrl.skill.description", name="description", required)
   .modal-footer
-    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveSkill(modalCtrl.skill)") salvar
-    button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar
+    button.btn.btn-primary.btn-md(ng-disabled="!skillForm.$valid", ng-click="modalCtrl.saveSkill(modalCtrl.skill)") salvar
+    button.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

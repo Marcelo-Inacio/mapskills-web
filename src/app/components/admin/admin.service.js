@@ -11,16 +11,20 @@
 				level : function(filter) {
 					var deferred = $q.defer();
 					var uri = API_SERVER.REPORT.LOCAL;
-					$http.get(uri, {params: filter}).then(function(response) {
+					$http.get(uri, {params: filter}).then(function success(response) {
 						deferred.resolve(response.data);
+					}, function error(response) {
+						deferred.reject(response);
 					});
 					return deferred.promise;
 				},
 				global : function(filter) {
 					var deferred = $q.defer();
 					var uri = API_SERVER.REPORT.GLOBAL;
-					$http.get(uri, {params: filter}).then(function(response) {
+					$http.get(uri, {params: filter}).then(function success(response) {
 						deferred.resolve(response.data);
+					}, function error(response) {
+						deferred.reject(response);
 					});
 					return deferred.promise;
 				}
@@ -74,8 +78,7 @@
 				var jsonData = angular.toJson(institution);
 				$http({method: restContext.method, url: restContext.url,
             data: jsonData,	headers: {"Content-Type": "application/json"}
-        }).
-         then(function success(response) {
+        }).then(function success(response) {
 					 deferred.resolve(response);
 				 }, function error(response) {
 					 deferred.resolve(response);

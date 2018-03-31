@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, toastr, $translate) {
+  function MainController(/*$timeout, toastr, $translate, $location*/) {
     var vm = this;
 
     vm.awesomeThings = [];

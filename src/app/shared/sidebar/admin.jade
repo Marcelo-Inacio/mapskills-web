@@ -6,11 +6,11 @@
         |  Dashboard
     div(uib-collapse='sbCtrl.isCollapsed')
       ul.nav.menu
-        li(ng-click="sbCtrl.goPage('fatec')")
+        li(ng-click="sbCtrl.goPage('dashboard-institution', {level: 'fatec'})")
           a.menu-chidren
             i.fa.fa-area-chart.ico-sidebar
             |  Fatecs
-        li(ng-click="sbCtrl.goPage('etec')")
+        li(ng-click="sbCtrl.goPage('dashboard-institution', {level: 'etec'})")
           a.menu-chidren
             i.fa.fa-bar-chart.ico-sidebar
             |  Etecs

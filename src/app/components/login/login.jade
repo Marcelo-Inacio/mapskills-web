@@ -5,13 +5,13 @@ section.main-login
         .login-header
           .logo-cps
         .login-body
-          form(role='form')
+          form(name="loginForm", role='form')
             fieldset
               .form-group
-                input.form-control(ng-model='loginCtrl.userLogin.username', placeholder='E-mail', name='email', type='email', autofocus='', required='')
+                input.form-control(type='email', ng-model='loginCtrl.userLogin.username', placeholder='E-mail', name='email', autofocus, required)
               .form-group
-                input.form-control(ng-model='loginCtrl.userLogin.password', placeholder='Password', name='password', type='password', value='', required='' ng-enter="loginCtrl.login(loginCtrl.userLogin)")
+                input.form-control(type='password', ng-model='loginCtrl.userLogin.password', placeholder='Password', name='password', ng-enter="loginCtrl.login(loginCtrl.userLogin)", required)
               
-              label#btn-todo.btn.btn-primary(ng-click="loginCtrl.login(loginCtrl.userLogin)")
+              span.btn.btn-primary(ng-click="loginCtrl.login(loginCtrl.userLogin)")
                 i.fa.fa-sign-in.ico-sidebar
                 | Entrar

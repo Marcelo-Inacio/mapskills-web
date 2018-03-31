@@ -1,13 +1,12 @@
 section
-  label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="crsCtrl.openCourseModal()") novo
-  table.table.table-hover.table-striped
-    thead
-      tr.table-thead
-        th(ng-repeat="head in crsCtrl.tableHead track by $index") {{head}}
-    tbody
-      tr(ng-repeat="course in crsCtrl.allCourses track by $index")
-        td {{course.code}}
-        td {{course.name}}
-        td {{course.period | translate}}
-        td
-          label#btn-todo.btn.btn-info.btn-xs(ng-click="crsCtrl.openCourseModal(course)") editar
+  .row.button-new
+    label.btn.btn-primary.btn-md(ng-click="crsCtrl.openCourseModal()") novo
+  .row.card-list-content
+    .col-xs-12.col-sm-6.col-md-4.col-lg-3(ng-repeat="course in crsCtrl.allCourses track by $index")
+      .thumbnail.card
+        img(ng-src="{{crsCtrl.image}}", onerror="this.src='assets/images/image_unavailable.png'", alt="{{crsCtrl.image}}", style="max-height: 218px")
+        div  
+          .text.align-center.border-top-bottom(style="height: 63px; margin-top: 0;")
+            h5(ng-bind="course.name")
+          div(style="padding: 5px;")
+            a.btn.btn-info.btn-xs(ng-click="crsCtrl.openCourseModal(course)") editar

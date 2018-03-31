@@ -1,18 +1,16 @@
 section
-  label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="insCtrl.newInstitution()") novo
-  label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="insCtrl.openFileModal()")
-    i.fa.fa-file-excel-o.ico-sidebar
-    | importar excel
-  table.table.table-hover.table-striped
-    thead
-      tr.table-thead
-        th(ng-repeat="head in insCtrl.tableHead") {{head}}
-    tbody
-      tr(ng-repeat="institution in insCtrl.allInstitutions track by institution.id")
-        td(style="text-align: center") {{institution.code}}
-        td {{institution.cnpj}}
-        td {{institution.company}}
-        td {{institution.city}}
-        td
-          label#btn-todo.btn.btn-info.btn-xs(ng-click="insCtrl.openDetailsModal(institution)") detalhes
-          label#btn-todo.btn.btn-info.btn-xs(ng-click="insCtrl.updateInstitution(institution)") editar
+  .row.button-new
+    label.btn.btn-primary.btn-md(ng-click="insCtrl.newInstitution()") novo
+    label.btn.btn-primary.btn-md(ng-click="insCtrl.openFileModal()")
+      i.fa.fa-file-excel-o.ico-sidebar
+      | importar excel
+  .row.card-list-content
+    .col-sm-6.col-md-3(ng-repeat="institution in insCtrl.allInstitutions track by institution.id")
+      .thumbnail.card(style="min-height: 100%; height: unset;")
+        .text
+          h5(ng-bind="institution.code")
+        .text.border-top-bottom(style="min-height: 61px")
+          h5(ng-bind="institution.company")
+        div.space-between(style="padding: 5px;")
+          label.btn.btn-info.btn-xs(ng-click="insCtrl.openDetailsModal(institution)") detalhes
+          label.btn.btn-info.btn-xs(ng-click="insCtrl.updateInstitution(institution)") editar

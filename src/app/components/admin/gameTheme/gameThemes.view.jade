@@ -1,0 +1,15 @@
+section
+  .row.button-new
+    label.btn.btn-primary.btn-md(ng-click="gthCtrl.openModal()") novo
+  .row.card-list-content
+    .col-xs-12.col-sm-6.col-md-3.col-lg-3(ng-repeat="theme in gthCtrl.allThemes track by theme.id")
+      .thumbnail.card
+        img(ng-src="{{gthCtrl.defaultImage}}", onerror="this.src='assets/images/image_unavailable.png'", alt="{{gthCtrl.defaultImage}}", style="max-height: 218px")
+        div  
+          .text.align-center.border-top-bottom(style="height: 63px; margin-top: 0;")
+            h5(ng-bind="theme.name")
+          div.space-between(style="padding: 5px;")
+            botton.btn.btn-info.btn-xs(ui-sref="admin.scenes({themeId: theme.id})") cenas
+              span.fa.fa-share-square-o(aria-hidden='true', style="padding: 0 5px 0 5px")
+            botton.btn.btn-info.btn-xs(ng-click="") editar
+            md-switch.md-primary.botton-switch(ng-model='theme.active', aria-label="Status" ng-change="gthCtrl.updateStatus(theme.id, theme.active)")

@@ -18,8 +18,8 @@
 		init();
 
 		/**
-		* Eecupera todas questoes ainda não jogadas pelo aluno
-		*/
+		 * Recupera todas questoes ainda não jogadas pelo aluno
+		 */
 		function init() {
 			studentService.validateProfile();
 			student = Session.refreshUserSession();
@@ -44,8 +44,8 @@
 		}
 
 		/**
-		* Envia um resposta do aluno ao back-end
-		*/
+		 * Envia um resposta do aluno ao back-end
+		 */
 		vm.sendAnswer = function(alternative) {
 			var answerContext = {};
 			answerContext.sceneIndex = vm.history[vm.index].index;
@@ -65,8 +65,8 @@
 		}
 
 		/**
-		* Realiza a mudança de cena na tela
-		*/
+		 * Realiza a mudança de cena na tela
+		 */
 		vm.nextScene = function() {
 			$log.log(vm.index);
 			/** caso chege ao fim das cenas, deve levar aos resultados */
@@ -85,8 +85,8 @@
 		}
 
 		/**
-		* Ativa o som do mouse hover
-		*/
+		 * Ativa o som do mouse hover
+		 */
 		vm.playhover = function () {
 			var hover = document.getElementById("over");
 			hover.currentTime = 0;
@@ -100,7 +100,7 @@
 		}
 
 		var verifyGameIsActived = function () {
-			if(student.isCompleted === true) {
+			if (student.completed === true) {
 				$state.go("^.result");
 			} else if (sizeScenes === 0) {
 				$state.go("^.noGame");

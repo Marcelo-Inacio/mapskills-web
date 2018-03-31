@@ -8,6 +8,7 @@
 	/** @ngInject */
 	function CourseController($log, toastrService, mentorService, modalService) {
 		var vm = this;
+		vm.image = "assets/images/image_unavailable.png"; //Recomendado 250x220
 		vm.periodSelected = null;
 		vm.allCourses = [];
 

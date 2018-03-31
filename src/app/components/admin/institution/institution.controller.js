@@ -42,14 +42,14 @@
 			var institution = {"mentors": [{"id": null, "name": null, "username": null}]};
 			modalService.setResult(institution);
 			var modalInstance = modalService.openModal('app/components/admin/institution/modal/edit.modal.html', 'InstitutionModalController');
-			modalInstanceResult(modalInstance, institution);
+			modalInstanceResult(modalInstance);
 		}
 
 		vm.updateInstitution = function(institution) {
 			adminService.getInstitutionDetails(institution.id).then(function(data) {
 				modalService.setResult(data);
 				var modalInstance = modalService.openModal('app/components/admin/institution/modal/edit.modal.html', 'InstitutionModalController');
-				modalInstanceResult(modalInstance, institution);
+				modalInstanceResult(modalInstance);
 			});
 		}
 

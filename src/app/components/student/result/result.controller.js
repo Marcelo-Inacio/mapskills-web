@@ -9,8 +9,13 @@
 	function StudentResultsController($log, studentService, loginService) {
 		var vm = this;
 		vm.data = [[0, 0, 0, 0, 0, 0], [16, 16, 16, 16, 16, 16]];
+		vm.series = ['Valor minimo', 'Valor máximo', 'Seu valor'];
+
 		init();
-		/** função principal que recupera os resultados do aluno */
+
+		/**
+		 * Função principal que recupera os resultados do aluno
+		 */
 		function init() {
 			studentService.validateProfile();
       var user = loginService.getUserLogged();
@@ -22,17 +27,7 @@
 		}
 
 		vm.options = {
-			legend: {	display: false }
+			legend: {	display: true }
 		};
-		vm.colors = [{pointBackgroundColor: "rgba(151, 187, 205, 0.5)"}];
-		vm.datasetOverride = [{
-				borderColor: 'rgba(220, 19, 19, 1)',
-				hoverBorderColor: 'rgba(0, 255, 0, 1)',
-				borderWidth: 3,
-				hoverBorderWidth: 3,
-				fillColor: "rgba(220,220,220,0.2)",
-				strokeColor: "rgba(220,220,220,1)",
-				pointColor: "rgba(220,220,220,1)"
-		}];
 	}
 })();

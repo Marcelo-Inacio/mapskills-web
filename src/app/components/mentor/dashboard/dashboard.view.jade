@@ -1,6 +1,6 @@
 section
   date-range-filter(start-date="mentorDashCtrl.filter.startDate", end-date="mentorDashCtrl.filter.endDate", search="mentorDashCtrl.search()")
-  .row
+  .row(ng-if="mentorDashCtrl.courses.length > 0")
     .col-lg-8
       .row
         .col-lg-3.col-md-4.col-xs-6(ng-repeat="course in mentorDashCtrl.courses")
@@ -14,3 +14,8 @@ section
         .panel-body.panel-radar
           h5(ng-repeat="course in mentorDashCtrl.courses")
             p {{course.code}} - {{course.name}}
+  
+  .row(ng-if="mentorDashCtrl.courses.length == 0")
+    .col-xs-12.col-sm-12.col-md-12
+      .alert.alert-info
+        h4 Nenhum resultado encontrado.

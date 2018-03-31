@@ -37,7 +37,7 @@
       })
       .state('student.noGame', {
         url: '/student/no_game',
-        templateUrl: 'app/components/student/game/no_game.view.html'
+        templateUrl: 'app/components/student/game/noGame.view.html'
       })
       .state('admin', {
         templateUrl: 'app/components/admin/admin.html'
@@ -60,21 +60,15 @@
         controller: 'ProfileController',
         controllerAs: 'adminProfileCtrl'
       })
-      .state('admin.fatec', {
-        url: '/admin/dashboard/fatec',
-        templateUrl: 'app/components/admin/dashboard/fatec/fatec.view.html',
-        controller: 'AdminFatecController',
-        controllerAs: 'fatecCtrl'
-      })
-      .state('admin.etec', {
-        url: '/admin/dashboard/etec',
-        templateUrl: 'app/components/admin/dashboard/etec/etec.view.html',
-        controller: 'AdminEtecController',
-        controllerAs: 'etecCtrl'
+      .state('admin.dashboard-institution', {
+        url: '/admin/dashboard-:level',
+        templateUrl: 'app/components/admin/dashboard/institution/institution.view.html',
+        controller: 'AdminInstitutionController',
+        controllerAs: 'institutionCtrl'
       })
       .state('admin.themes', {
         url: '/admin/themes',
-        templateUrl: 'app/components/admin/game_theme/gameThemes.view.html',
+        templateUrl: 'app/components/admin/gameTheme/gameThemes.view.html',
         controller: 'GameThemeController',
         controllerAs: 'gthCtrl'
       })

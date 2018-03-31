@@ -8,9 +8,10 @@
 	/** @ngInject */
 	function ProfileController($log, studentService, toastrService, adminService, loginService) {
 		var vm = this;
+		vm.checkboxPassword = false;
+		vm.showPassword = {"true" : "text", "false" : "password"};
 
 		function init() {
-			//adminService.validateProfile();
       vm.user = loginService.getUserLogged();
 		}
 

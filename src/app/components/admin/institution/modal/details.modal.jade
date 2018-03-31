@@ -2,26 +2,37 @@
   .modal-header
   .modal-body
     .form-group.row
-      .col-md-5
-        label Código:
-        label {{modalCtrl.institution.code}}
-      .col-md-7
-        label CNPJ:
-        label {{modalCtrl.institution.cnpj}}
+      .col-md-3
+        .input-group
+          span.input-group-addon Código
+          input.form-control(ng-model="::modalCtrl.institution.code", readonly)
+      .col-md-9
+        .input-group
+          span.input-group-addon Razão Social
+          input.form-control(ng-model="::modalCtrl.institution.company", readonly)
     .form-group.row
       .col-md-5
-        label Razão Social:
-        label {{modalCtrl.institution.company}}
+        .input-group
+          span.input-group-addon CNPJ
+          input.form-control(ng-model="::modalCtrl.institution.cnpj", ui-mask="99.999.999/9999-99", readonly)
       .col-md-7
-        label Cidade:
-        label {{modalCtrl.institution.city}}
-    .form-group.row(ng-repeat="mentor in modalCtrl.institution.mentors track by mentor.id")
-      .col-md-5
-        label Mentor:
-        label {{mentor.name}}
-      .col-md-7
-        label E-mail:
-        label {{mentor.username}}
+        .input-group
+          span.input-group-addon Cidade
+          input.form-control(ng-model="::modalCtrl.institution.city", readonly)
+    .form-group.row
+      hr
+      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+        label Mentores:
+    .form-group(ng-repeat="mentor in modalCtrl.institution.mentors track by mentor.id")
+      .form-group.row
+        .col-xs-12.col-md-12.col-lg-6
+          .input-group
+            span.input-group-addon Nome:
+            input.form-control(ng-model="::mentor.name", readonly)
+        .col-xs-12.col-md-12.col-lg-6
+          .input-group
+            span.input-group-addon E-mail:
+            input.form-control(ng-model="::mentor.username", readonly)
     table.table.table-striped
       thead
         tr.table-thead
@@ -30,8 +41,8 @@
           th Periodo
       tbody
         tr(ng-repeat="course in modalCtrl.institution.courses track by course.id")
-          td {{course.code}}
-          td {{course.name}}
-          td {{course.period | translate}}    
+          td {{::course.code}}
+          td(style="text-align: left") {{::course.name}}
+          td {{::course.period | translate}}    
   .modal-footer
-    button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") fechar
+    button.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") fechar

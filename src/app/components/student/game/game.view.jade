@@ -1,7 +1,7 @@
 audio#over
   source(src="assets/audio/button-40.wav")
   source(src="assets/audio/button-40.mp3")
-#tela(ng-style="gameCtrl.background")
+.screen-background#tela(ng-style="gameCtrl.background")
 
   #options.option-close(ng-show="gameCtrl.history[gameCtrl.index].question != null")
     .alternative(ng-repeat="alternative in gameCtrl.history[gameCtrl.index].question.alternatives track by $index",

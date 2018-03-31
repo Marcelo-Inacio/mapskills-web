@@ -1,19 +1,16 @@
 section
-  table.table.table-hover.table-top
-    thead
-      tr.table-thead
-        th Código
-        th Descrição
-        th Ativo
-    tbody
-      tr(ng-repeat="theme in theCtrl.allThemes track by theme.id", ng-show="theCtrl.allThemes.length != 0")
-        td # {{::theme.id}}
-        td {{::theme.name}}
-        td.aligner
-          md-switch.md-primary.botton-switch(ng-model='theme.active', ng-click="theCtrl.setThemeCurrent(theme)",
-            aria-label="Status")
-      tr(ng-show="theCtrl.allThemes.length == 0")
-        td NENHUM TEMA ATIVO
-        td
-        td
-  label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="theCtrl.updateThemeIdCurrent()") salvar alterações
+  .row.button-new
+    label.btn.btn-primary.btn-md(ng-click="theCtrl.updateThemeIdCurrent()") salvar alterações
+  .row.card-list-content(ng-if="theCtrl.allThemes.length > 0")
+    .col-xs-12.col-sm-6.col-md-3.col-lg-3(ng-repeat="theme in theCtrl.allThemes track by theme.id")
+      .thumbnail.card
+        img(ng-src="{{theCtrl.defaultImage}}", onerror="this.src='assets/images/image_unavailable.png'", alt="{{theCtrl.defaultImage}}", style="max-height: 218px")
+        div  
+          .text.align-center.border-top-bottom(style="height: 63px; margin-top: 0;")
+            h5(ng-bind="theme.name")
+          div(style="padding: 5px;")
+            md-switch.md-primary.botton-switch(ng-model='theme.active', ng-click="theCtrl.setThemeCurrent(theme)", aria-label="status")
+  .row(ng-if="theCtrl.allThemes.length == 0")
+    .col-xs-12.col-sm-12.col-md-12
+      .alert.alert-info
+        h4 Nenhum tema habilitado.

@@ -2,37 +2,46 @@
   .modal-header
   .modal-body
     .form-group.row
-      .col-md-5
-        label Nome:
-        label {{modalCtrl.student.name}}
-      .col-md-7
-        label RA:
-        label {{modalCtrl.student.ra}}
-    .form-group.row
-      .col-md-5
-        label Telefone:
-        label {{modalCtrl.student.phone}}
-      .col-md-7
-        label Jogo Concluido:
-        label {{modalCtrl.student.completed | translate}}
-    .form-group.row
       .col-md-12
-        label E-mail:
-        label {{modalCtrl.student.username}}
+        .input-group
+          span.input-group-addon Nome
+          input.form-control(ng-model="::modalCtrl.student.name", readonly)
     .form-group.row
-      hr
-      .col-md-12
-        label Curso
+      .col-md-6
+        .input-group
+          span.input-group-addon RA
+          input.form-control(ng-model="::modalCtrl.student.ra", readonly)
+      .col-md-6
+        .input-group
+          span.input-group-addon Telefone
+          input.form-control(ng-model="::modalCtrl.student.phone", ui-mask="(99) 9999-9999", readonly)
     .form-group.row
-      .col-md-3
-        label Código:
-        label {{modalCtrl.student.course.code}}
-      .col-md-5
-        label Nome:
-        label {{modalCtrl.student.course.name}}
+      .col-md-8
+        .input-group
+          span.input-group-addon E-mail
+          input.form-control(ng-model="::modalCtrl.student.username", readonly)
       .col-md-4
-        label Período:
-        label {{modalCtrl.student.course.period | translate}}
+        .input-group
+          span.input-group-addon Jogo Concluido
+          span.input-group-addon.check-ok(ng-if="modalCtrl.student.completed", type="text")
+            i.fa.fa-check-circle
+          span.input-group-addon.check-not-ok(ng-if="!modalCtrl.student.completed")
+            i.fa.fa-minus-circle
+    hr
+    .form-group.row
+      .col-md-12
+        .input-group
+          span.input-group-addon Curso
+          input.form-control(ng-model="::modalCtrl.student.course.name", readonly)
+    .form-group.row
+      .col-md-6
+        .input-group
+          span.input-group-addon Código
+          input.form-control(ng-model="::modalCtrl.student.course.code", readonly)
+      .col-md-6
+        .input-group
+          span.input-group-addon Período
+          input.form-control(ng-model="::modalCtrl.student.course.period", readonly)
 
   .modal-footer
-    button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") fechar
+    button.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") fechar

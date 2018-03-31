@@ -1,38 +1,49 @@
 .section.form-group
   .modal-header
   .modal-body
-    .form-group.row
+    form(name="studentForm", autocomplete="off")
+      .form-group.row
+          .col-md-12
+            .input-group
+              span.input-group-addon Nome
+              input.form-control(type="text", ng-model="modalCtrl.student.name", name="name", required)
+      .form-group.row(ng-if="!modalCtrl.isTechnical")
         .col-md-12
-          label Nome:
-          input.form-control(type="text", ng-model="modalCtrl.student.name")
-    .form-group.row(ng-if="!modalCtrl.isTechnical")
-      .col-md-12
-        label RA:
-        input.form-control(type="text", ng-model="modalCtrl.student.ra", minlength="13", maxlength="13")
-    .form-group.row(ng-if="modalCtrl.isTechnical")
-      .col-md-12
-        label RM:
-        input.form-control(type="text", ng-model="modalCtrl.student.ra", minlength="5", maxlength="5")
-    .form-group.row(ng-if="modalCtrl.isTechnical")
-      .col-md-12
-        label Curso:
-        //-select.form-control(ng-model="modalCtrl.student.ra")
-        select.form-control(ng-model="modalCtrl.courseSelected"
-                            , ng-change=""
-                            , ng-options="course.name for course in modalCtrl.allCourses track by course.code")
-          option(value='') --- Selecione um curso ---
-    .form-group.row
-      .col-md-12
-        label Telefone:
-        input.form-control(type="text", ng-model="modalCtrl.student.phone", maxlength="11")
-    .form-group.row
-      .col-md-12
-        label E-mail:
-        input.form-control(type="email", ng-model="modalCtrl.student.username")
-    .form-group.row(ng-show="modalCtrl.student.password != null")
-      .col-md-12
-        label Senha:
-        input.form-control(type="password", ng-model="modalCtrl.student.password", placeholder="nova senha")
+          .input-group
+            span.input-group-addon RA
+            input.form-control(type="text", ng-model="modalCtrl.student.ra", ui-mask="9999999999999", name="ra", required)
+      .form-group.row(ng-if="modalCtrl.isTechnical")
+        .col-md-12
+          .input-group
+            span.input-group-addon RM
+            input.form-control(type="text", ng-model="modalCtrl.student.ra", ui-mask="99999", name="rm", required)
+      .form-group.row(ng-if="modalCtrl.isTechnical")
+        .col-md-12
+          .input-group
+            span.input-group-addon Curso
+            select.form-control(ng-model="modalCtrl.courseSelected"
+                                , ng-change=""
+                                , ng-options="course.name for course in modalCtrl.allCourses track by course.code"
+                                , name="course", required)
+              option(value='') --- Selecione um curso ---
+      .form-group.row
+        .col-md-12
+          .input-group
+            span.input-group-addon Telefone
+            input.form-control(type="text", ng-model="modalCtrl.student.phone", ui-mask="(99) 9999-9999", name="phone", required)
+      .form-group.row
+        .col-md-12
+          .input-group
+            span.input-group-addon E-mail
+            input.form-control(type="email", ng-model="modalCtrl.student.username", name="username", required)
+      .form-group.row
+        .col-md-12
+          .input-group
+            span.input-group-addon Senha
+            input.form-control(type="{{ modalCtrl.typePassword[modalCtrl.showPassword] }}", ng-model="modalCtrl.student.password", placeholder="nova senha", name="password", required)
+            span.input-group-btn
+              button.btn.btn-default(ng-click='modalCtrl.showPassword = !modalCtrl.showPassword')
+                i.fa.fa-eye
   .modal-footer
-    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveStudent(modalCtrl.student)") salvar
-    button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar
+    button.btn.btn-primary.btn-md(ng-disabled="!studentForm.$valid", ng-click="modalCtrl.saveStudent(modalCtrl.student)") salvar
+    button.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

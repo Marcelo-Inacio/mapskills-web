@@ -10,6 +10,7 @@
 		var vm = this;
 		var themeIdCurrent;
 		vm.themeCurrent;
+		vm.defaultImage = "assets/images/image_unavailable.png";
 
 		var init = function() {
 			mentorService.validateProfile();
@@ -38,6 +39,9 @@ o que está habilitado para o instituição */
 
 		vm.updateThemeIdCurrent = function() {
 			var institutionCode = loginService.getUserLogged().institution.code;
+			if (themeIdCurrent == null) {
+				return;
+			}
 			mentorService.updateThemeIdCurrent(institutionCode, themeIdCurrent).then(function(status) {
 				toastrService.showToastr(status);
 			});
@@ -46,10 +50,9 @@ o que está habilitado para o instituição */
 /** manipula os switchs para que fique somente um ATIVO
 ou todos DESATIVADOS  */
 		vm.setThemeCurrent = function(theme) {
-			if(themeIdCurrent == theme.id) {
+			if (themeIdCurrent == theme.id) {
 				themeIdCurrent = 0;
-			}
-			else if(themeIdCurrent != 0) {
+			}	else if(themeIdCurrent) {
 				vm.allThemes[themeIdCurrent - 1].active = false;
 				themeIdCurrent = theme.id;
 			}	else {

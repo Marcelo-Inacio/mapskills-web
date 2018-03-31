@@ -28,8 +28,10 @@
 				endYear: HelperService.getFullYear(vm.filter.endDate),
 				endSemester: HelperService.getSemester(vm.filter.endDate)
 			}
-			adminService.dashboard.global(filterParameter).then(function(response) {
+			adminService.dashboard.global(filterParameter).then(function success(response) {
 				loadResults(response);
+			}, function error(response) {
+				toastr.error("Falha ao recuperar resultados");
 			});
 		}
 

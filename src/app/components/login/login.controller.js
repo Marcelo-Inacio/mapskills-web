@@ -15,18 +15,9 @@
 				messageError();
 				return;
 			}
-			loginService.login(login).then(function(response) {
-				if(response.status !== 200) {
-					toastrService.showToastr(response.status);
-				}
-				return response;
-			}).then(function(response) {
-				if(response.status !== 200) {
-					return;
-				}
-				loginService.setUserContext(login.username);
-			});
+			loginService.login(login);
 		}
+
 		/** realiza logout na aplicação, limpando os registros do usuario*/
 		vm.logout = function () {
 			loginService.logout();

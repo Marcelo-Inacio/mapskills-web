@@ -1,20 +1,25 @@
 .section
   .modal-header
   .modal-body
-    .form-group.row
-      .col-md-12
-        label Código:
-        input.form-control(type='text', ng-model="modalCtrl.course.code", maxlength="3")
-    .form-group.row
-      .col-md-12
-        label Nome:
-        input.form-control(type='text', ng-model="modalCtrl.course.name")
-    .form-group.row
-      .col-md-12
-        label Período:
-        select.form-control(ng-model="modalCtrl.course.period"
-                            ,ng-options="period | translate for period in modalCtrl.allPeriods")
-          option(value='') -- selecione um período --
+    form(name="courseForm")
+      .form-group.row
+        .col-md-12
+          .input-group
+            span.input-group-addon Código
+            input.form-control(name="code", type='text', ng-model="modalCtrl.course.code", maxlength="3", required)
+      .form-group.row
+        .col-md-12
+          .input-group
+            span.input-group-addon Nome
+            input.form-control(name="name", type='text', ng-model="modalCtrl.course.name", required)
+      .form-group.row
+        .col-md-12
+          .input-group
+            span.input-group-addon Período
+            select.form-control(ng-model="modalCtrl.course.period"
+                                , ng-options="period | translate for period in modalCtrl.allPeriods"
+                                , name="period", required)
+              option(value='') -- selecione um período --
   .modal-footer
-    button#btn-todo.btn.btn-primary.btn-md(ng-click="modalCtrl.saveCourse(modalCtrl.course)") salvar
-    button#btn-todo.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar
+    button.btn.btn-primary.btn-md(ng-disabled="!courseForm.$valid", ng-click="modalCtrl.saveCourse(modalCtrl.course)") salvar
+    button.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

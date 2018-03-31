@@ -1,11 +1,10 @@
 section
-  .row.aligner
-    .col-xs-6.col-md-2.col-md-offset-8.aligner-item
-      label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="stuCtrl.openStudentModal()")
+  .row.button-new
+      label.btn.btn-primary.btn-md(ng-click="stuCtrl.openStudentModal()")
         i.fa.fa-user-plus.ico-sidebar
         | novo
-    .col-xs-6.col-md-2.aligner-item
-      label#btn-todo.btn.btn-primary.btn-md.botton-new(ng-click="stuCtrl.openFileModal()")
+
+      label.btn.btn-primary.btn-md(ng-click="stuCtrl.openFileModal()")
         i.fa.fa-file-excel-o.ico-sidebar
         | importar excel
   table.table.table-hover.table-striped.table-scroll
@@ -17,11 +16,11 @@ section
           input.form-control(type='number', ng-model="stuCtrl.filter.ra", placeholder="RA")
         th
           select.form-control(ng-model="stuCtrl.filter.course"
-                              ,ng-options="course.name for course in stuCtrl.allCourses track by course.id")
+                              , ng-options="course.name for course in stuCtrl.allCourses track by course.id")
             option(value='') -- Selecione um curso --
         th
         th
-          label#btn-todo.btn.btn-default.btn-md.botton-new(ng-click="stuCtrl.search()")
+          label.btn.btn-default.btn-md(ng-click="stuCtrl.search()")
             i.fa.fa-search.ico-sidebar
             | pesquisar
         th
@@ -42,10 +41,10 @@ section
         td(style="width: 30%") {{student.name}}
         td(style="width: 15%") {{student.ra}}
         td(style="width: 30%") {{student.course.name.replace('Tecnologia em', '')}}
-        td(style="width: 10%").check-ok(ng-if="student.completed")
+        td(style="width: 10%", ng-if="student.completed").check-ok
           i.fa.fa-check-circle
-        td(style="width: 10%").check-not-ok(ng-if="!student.completed")
+        td(style="width: 10%", ng-if="!student.completed").check-not-ok
           i.fa.fa-minus-circle
         td(style="width: 15%")
-          label#btn-todo.btn.btn-info.btn-xs(ng-click="stuCtrl.openDetailsModal(student)", ) detalhes
-          label#btn-todo.btn.btn-info.btn-xs(ng-click="stuCtrl.openStudentModal(student)") editar
+          label.btn.btn-info.btn-xs(ng-click="stuCtrl.openDetailsModal(student)", ) detalhes
+          label.btn.btn-info.btn-xs(ng-click="stuCtrl.openStudentModal(student)") editar

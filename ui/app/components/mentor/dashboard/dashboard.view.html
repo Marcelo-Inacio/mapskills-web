@@ -1,7 +1,7 @@
 
 <section>
   <date-range-filter start-date="mentorDashCtrl.filter.startDate" end-date="mentorDashCtrl.filter.endDate" search="mentorDashCtrl.search()"></date-range-filter>
-  <div class="row">
+  <div ng-if="mentorDashCtrl.courses.length &gt; 0" class="row">
     <div class="col-lg-8">
       <div class="row">
         <div ng-repeat="course in mentorDashCtrl.courses" class="col-lg-3 col-md-4 col-xs-6">
@@ -22,6 +22,13 @@
             <p>{{course.code}} - {{course.name}}</p>
           </h5>
         </div>
+      </div>
+    </div>
+  </div>
+  <div ng-if="mentorDashCtrl.courses.length == 0" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="alert alert-info">
+        <h4>Nenhum resultado encontrado.</h4>
       </div>
     </div>
   </div>

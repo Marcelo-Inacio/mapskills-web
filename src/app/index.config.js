@@ -6,7 +6,7 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig, moment, $translateProvider, $httpProvider) {
+  function config($logProvider, toastrConfig, moment, $translateProvider, $httpProvider, ChartJsProvider) {
     // Enable log
     $logProvider.debugEnabled(true);
     $httpProvider.defaults.useXDomain = true;
@@ -27,6 +27,11 @@
     });
     $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
     $translateProvider.preferredLanguage('pt');
+
+    ChartJsProvider.setOptions({
+      chartColors: ['#4D5360','#DCDCDC', '#00ADF9'],
+      responsive: true
+    });
   }
 
 })();

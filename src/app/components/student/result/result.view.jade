@@ -4,8 +4,7 @@
       .panel-heading Relatório
       .panel-body.panel-radar
         .col-lg-6
-          <!-- canvas(chart-labels="false")#radarChart -->
-          canvas#radar.chart.chart-radar(chart-data='resultCtrl.data', chart-options='resultCtrl.options', chart-labels='resultCtrl.labels', chart-colors="resultCtrl.colors", chart-dataset-override="resultCtrl.datasetOverride")
+          canvas#radar.chart.chart-radar(chart-data='resultCtrl.data', chart-options='resultCtrl.options', chart-labels='resultCtrl.labels', chart-series="resultCtrl.series")
         .col-lg-6
           .row
             .col-lg-4

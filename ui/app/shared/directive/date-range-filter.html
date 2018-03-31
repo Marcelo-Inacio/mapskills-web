@@ -1,24 +1,16 @@
 
-<div class="row center-align">
-  <div class="col-md-9">
-    <div class="col-md-6 center-align">
-      <div class="col-md-2">
-        <label>De</label>
-      </div>
-      <div class="col-md-10">
-        <input type="month" ng-model="startDate" class="form-control">
-      </div>
-    </div>
-    <div class="col-md-6 center-align">
-      <div class="col-md-2">
-        <label>Até</label>
-      </div>
-      <div class="col-md-10">
-        <input type="month" ng-model="endDate" class="form-control">
-      </div>
+<div class="row center-align date-range-direction button-new">
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+    <div class="input-group"><span class="input-group-addon">De</span>
+      <input type="month" ng-model="startDate" class="form-control">
     </div>
   </div>
-  <div class="col-md-3">
-    <label id="btn-todo" ng-click="search()" class="btn btn-primary btn-md botton-new"><i class="fa fa-search ico-sidebar"></i>pesquisar</label>
+  <div class="col-xs-12 col-sm-6 col-md-5">
+    <div class="input-group"><span class="input-group-addon">Até</span>
+      <input type="month" ng-model="endDate" class="form-control">
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-2 aligner">
+    <label ng-click="search()" class="btn btn-primary btn-md"><i class="fa fa-search ico-sidebar"></i>pesquisar</label>
   </div>
 </div>

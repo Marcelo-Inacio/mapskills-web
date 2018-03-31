@@ -6,49 +6,41 @@
 		.factory('loginService', loginService);
 
 		/** @ngInject */
-		function loginService($http, $q, $location, $state, $log, Session, HelperService, API_SERVER) {
+		function loginService($http, $q, $location, $state, $log, toastrService, Session, HelperService, API_SERVER) {
+
+			var redirections = {
+				'ADMINISTRATOR': function() { $state.go('admin.dashboard'); },
+				'MENTOR': function() { $state.go('mentor.dashboard'); },
+				'STUDENT': function() { $state.go('student.game'); }
+			}
+
 			return {
 				login : _login,
 				logout : _logout,
 				updatePassword : _updatePassword,
-				setUserContext : _setUserContext,
 				validateProfile : _validateProfile,
 				isLogged : _isLogged,
 				getUserLogged : _getUserLogged
 			};
 
-			/** Função que realiza uma chamada ao serviço back-end de login
-			para autenticação do usuário, em caso de sucesso é retornado
-			o Token JWT no header do response. */
+			/**
+			* Função que realiza uma chamada ao serviço back-end de login
+			* para autenticação do usuário, em caso de sucesso é retornado
+			* o Token JWT no header do response.
+			*/
 			function _login(login) {
-				var deferred = $q.defer();
 				$http({
 					method: 'POST', url: API_SERVER.LOGIN,
-					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+					headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
 					params: {username: login.username, password: login.password}
 				})
 				.then(function success(response) {
 						Session.createToken("Basic bWFwc2tpbGxzOm1hcHNraWxscw==");
-						deferred.resolve(response);
+						var userDetails = response.data;
+						Session.createUser(userDetails);
+						_redirect(userDetails.profile);
 				}, function error(response) {
-						deferred.resolve(response);
-				});
-				return deferred.promise;
-			}
-
-			function _setUserContext(username) {
-				$http({
-					method: 'GET', url: API_SERVER.USER,
-					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-					params: {username: username}
-				})
-				.then(function success(response) {
-					$log.info("== THEN SUCCESS ==");
-					var userDetails = response.data;
-					Session.createUser(userDetails);
-					_redirect(userDetails.profile);
-				}, function error(response) {
-						$log.info(response.status);
+						toastrService.showToastr(response.status);
 				});
 			}
 
@@ -91,21 +83,7 @@
 			}
 /** redireciona o usuário de acordo com perfil recebido como parâmetro */
 			function _redirect(profile) {
-				$log.info(profile);
-				switch(profile) {
-					case 'ADMINISTRATOR':
-						$state.go('admin.dashboard');
-						break;
-					case 'MENTOR':
-						$state.go('mentor.dashboard');
-						break;
-					case 'STUDENT':
-						$state.go('student.game');
-						break;
-					default:
-						$state.go('login');
-						break;
-				}
+				redirections[profile]();
 			}
 
 			function _getUserLogged() {

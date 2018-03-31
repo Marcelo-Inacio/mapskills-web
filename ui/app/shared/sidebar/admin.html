@@ -4,8 +4,8 @@
     <li ng-click="sbCtrl.isCollapsed = !sbCtrl.isCollapsed; sbCtrl.changeClass('dashboard')" ng-class="sbCtrl.ngClass.dashboard"><a><i class="fa fa-tachometer ico-sidebar"></i> Dashboard</a></li>
     <div uib-collapse="sbCtrl.isCollapsed">
       <ul class="nav menu">
-        <li ng-click="sbCtrl.goPage('fatec')"><a class="menu-chidren"><i class="fa fa-area-chart ico-sidebar"></i> Fatecs</a></li>
-        <li ng-click="sbCtrl.goPage('etec')"><a class="menu-chidren"><i class="fa fa-bar-chart ico-sidebar"></i> Etecs</a></li>
+        <li ng-click="sbCtrl.goPage('dashboard-institution', {level: 'fatec'})"><a class="menu-chidren"><i class="fa fa-area-chart ico-sidebar"></i> Fatecs</a></li>
+        <li ng-click="sbCtrl.goPage('dashboard-institution', {level: 'etec'})"><a class="menu-chidren"><i class="fa fa-bar-chart ico-sidebar"></i> Etecs</a></li>
       </ul>
     </div>
     <li ng-class="sbCtrl.ngClass.institutions" ng-click="sbCtrl.changeClass('institutions')"><a><i class="fa fa-university ico-sidebar"></i> Instituições</a></li>

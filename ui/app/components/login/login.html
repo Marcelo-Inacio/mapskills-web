@@ -7,15 +7,14 @@
           <div class="logo-cps"></div>
         </div>
         <div class="login-body">
-          <form role="form">
+          <form name="loginForm" role="form">
             <fieldset>
               <div class="form-group">
-                <input ng-model="loginCtrl.userLogin.username" placeholder="E-mail" name="email" type="email" autofocus="" required="" class="form-control">
+                <input type="email" ng-model="loginCtrl.userLogin.username" placeholder="E-mail" name="email" autofocus required class="form-control">
               </div>
               <div class="form-group">
-                <input ng-model="loginCtrl.userLogin.password" placeholder="Password" name="password" type="password" value="" required="" ng-enter="loginCtrl.login(loginCtrl.userLogin)" class="form-control">
-              </div>
-              <label id="btn-todo" ng-click="loginCtrl.login(loginCtrl.userLogin)" class="btn btn-primary"><i class="fa fa-sign-in ico-sidebar"></i>Entrar</label>
+                <input type="password" ng-model="loginCtrl.userLogin.password" placeholder="Password" name="password" ng-enter="loginCtrl.login(loginCtrl.userLogin)" required class="form-control">
+              </div><span ng-click="loginCtrl.login(loginCtrl.userLogin)" class="btn btn-primary"><i class="fa fa-sign-in ico-sidebar"></i>Entrar</span>
             </fieldset>
           </form>
         </div>

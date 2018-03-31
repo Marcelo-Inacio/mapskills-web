@@ -1,12 +1,8 @@
 
 <section>
-  <div class="row aligner">
-    <div class="col-xs-6 col-md-2 col-md-offset-8 aligner-item">
-      <label id="btn-todo" ng-click="stuCtrl.openStudentModal()" class="btn btn-primary btn-md botton-new"><i class="fa fa-user-plus ico-sidebar"></i>novo</label>
-    </div>
-    <div class="col-xs-6 col-md-2 aligner-item">
-      <label id="btn-todo" ng-click="stuCtrl.openFileModal()" class="btn btn-primary btn-md botton-new"><i class="fa fa-file-excel-o ico-sidebar"></i>importar excel</label>
-    </div>
+  <div class="row button-new">
+    <label ng-click="stuCtrl.openStudentModal()" class="btn btn-primary btn-md"><i class="fa fa-user-plus ico-sidebar"></i>novo</label>
+    <label ng-click="stuCtrl.openFileModal()" class="btn btn-primary btn-md"><i class="fa fa-file-excel-o ico-sidebar"></i>importar excel</label>
   </div>
   <table class="table table-hover table-striped table-scroll">
     <thead class="table-thead">
@@ -24,7 +20,7 @@
         </th>
         <th></th>
         <th>
-          <label id="btn-todo" ng-click="stuCtrl.search()" class="btn btn-default btn-md botton-new"><i class="fa fa-search ico-sidebar"></i>pesquisar</label>
+          <label ng-click="stuCtrl.search()" class="btn btn-default btn-md"><i class="fa fa-search ico-sidebar"></i>pesquisar</label>
         </th>
         <th></th>
       </tr>
@@ -55,8 +51,8 @@
         <td style="width: 10%" ng-if="student.completed" class="check-ok"><i class="fa fa-check-circle"></i></td>
         <td style="width: 10%" ng-if="!student.completed" class="check-not-ok"><i class="fa fa-minus-circle"></i></td>
         <td style="width: 15%">
-          <label id="btn-todo" ng-click="stuCtrl.openDetailsModal(student)" class="btn btn-info btn-xs">detalhes</label>
-          <label id="btn-todo" ng-click="stuCtrl.openStudentModal(student)" class="btn btn-info btn-xs">editar</label>
+          <label ng-click="stuCtrl.openDetailsModal(student)" class="btn btn-info btn-xs">detalhes</label>
+          <label ng-click="stuCtrl.openStudentModal(student)" class="btn btn-info btn-xs">editar</label>
         </td>
       </tr>
     </tbody>
