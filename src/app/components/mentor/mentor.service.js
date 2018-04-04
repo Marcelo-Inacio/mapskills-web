@@ -117,7 +117,6 @@
 			}
 
 			function _sendFile(file) {
-				$log.log(file);
 				var deferred = $q.defer();
 				var jsonData = angular.toJson(file);
 				var uri = API_SERVER.STUDENT.UPLOAD;

@@ -24,7 +24,7 @@
 		}
 
 		vm.openModal = function() {
-      var modalInstance = modalService.openModal('app/components/admin/game_theme/modal/gameTheme.modal.html', 'GameThemeModalController');
+      var modalInstance = modalService.openModal('app/components/admin/gameTheme/modal/gameTheme.modal.html', 'GameThemeModalController');
 			modalInstance.result.then(function (theme) {
 				adminService.saveTheme(theme).then(function(status) {
 					loadAllThemes();

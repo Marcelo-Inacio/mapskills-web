@@ -27,6 +27,7 @@
 		function loadStudents(clearCache) {
 			if (clearCache) {
 				page.nextPage = 0;
+				page.isLast = false;
 			}
 			mentorService.loadStudents(vm.filter, clearCache, page).then(function(response) {
 				page.nextPage++;
