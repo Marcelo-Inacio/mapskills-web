@@ -37,10 +37,8 @@
         <th ng-style="stuCtrl.tableHeader[3].width">
           <label for="stuCtrl.tableHeader[3].label">{{::stuCtrl.tableHeader[3].label}}</label>
         </th>
-        <th ng-style="stuCtrl.tableHeader[4].width">
-          <label for="stuCtrl.tableHeader[4].label">{{::stuCtrl.tableHeader[4].label}}</label>
-        </th>
-        <th style="width: 15px"></th>
+        <th>         </th>
+        <th></th>
       </tr>
     </thead>
     <tbody lazy-load="stuCtrl.loadMoreStudents()" class="tbody-scroll">
@@ -51,8 +49,8 @@
         <td style="width: 10%" ng-if="student.completed" class="check-ok"><i class="fa fa-check-circle"></i></td>
         <td style="width: 10%" ng-if="!student.completed" class="check-not-ok"><i class="fa fa-minus-circle"></i></td>
         <td style="width: 15%">
-          <label ng-click="stuCtrl.openDetailsModal(student)" class="btn btn-info btn-xs">detalhes</label>
-          <label ng-click="stuCtrl.openStudentModal(student)" class="btn btn-info btn-xs">editar</label>
+          <label ng-click="stuCtrl.openDetailsModal(student)" style="margin: 5px" class="btn btn-info btn-xs">detalhes</label>
+          <label ng-click="stuCtrl.openStudentModal(student)" style="margin: 5px" class="btn btn-info btn-xs">editar</label>
         </td>
       </tr>
     </tbody>

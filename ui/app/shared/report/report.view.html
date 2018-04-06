@@ -1,12 +1,12 @@
 
 <section>
-  <div class="row aligner border-bottom">
-    <div class="col-xs-12 col-md-6 col-lg-6 aligner-item">
+  <div class="row aligner border-bottom filter-direction">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 aligner-item">
       <select ng-if="reportCtrl.isAdmin" ng-model="reportCtrl.institutionSelected" ng-change="reportCtrl.getInstitutionCourses(reportCtrl.institutionSelected.id)" ng-options="institution.company for institution in reportCtrl.institutions track by institution.id" class="form-control">
         <option value="">--- Todos ---</option>
       </select>
       <select ng-if="!reportCtrl.isAdmin" class="form-control">
-        <option value="">{{reportCtrl.institutionSelected.company}}</option>
+        <option value="">{{::reportCtrl.institutionSelected.company}}</option>
       </select>
       <select ng-model="reportCtrl.courseSelected" ng-disabled="!reportCtrl.institutionSelected" ng-options="course.name for course in reportCtrl.institutionSelected.courses track by course.code" class="form-control">
         <option value="">--- Todos ---</option>
@@ -19,24 +19,23 @@
       </div>
     </div>
     <div class="col-xs-12 col-md-3 col-lg-3 aligner-item button-new">
-      <label ng-click="reportCtrl.search()" class="btn btn-primary btn-md"><i class="fa fa-search ico-sidebar"></i>buscar</label>
+      <label ng-click="reportCtrl.search(true)" class="btn btn-primary btn-md"><i class="fa fa-search ico-sidebar"></i>buscar</label>
       <label ng-click="reportCtrl.download()" class="btn btn-primary btn-md"><i class="fa fa-file-excel-o ico-sidebar"></i>download</label>
     </div>
   </div>
-  <main>
-    <div class="row aligner">
-      <table style="position: unset; width: 100%;" class="table table-hover table-scroll">
-        <thead>
-          <tr class="table-thead">
-            <th ng-repeat="head in reportCtrl.report.head" class="th-scroll">{{::head}}</th>
-          </tr>
-        </thead>
-        <tbody style="min-height: 72vh" class="tbody-scroll">
-          <tr ng-repeat="row in reportCtrl.report.data track by $index">
-            <td ng-repeat="cell in row track by $index" class="td-scroll filterable-cell">{{cell}}</td>
-          </tr>
-        </tbody>
-      </table>
+  <div lazy-load="reportCtrl.loadMoreStudents()" class="row card-list-content">
+    <div ng-repeat="student in reportCtrl.students track by $index" class="col-sm-6 col-md-3">
+      <div style="min-height: 100%; height: unset;" class="thumbnail card">
+        <div class="text">
+          <h5 ng-bind="student.ra"></h5>
+        </div>
+        <div style="min-height: 61px" class="text border-top-bottom">
+          <h5 ng-bind="student.name" class="max-text"></h5>
+        </div>
+        <div style="padding: 5px;" class="space-between">
+          <label ng-click="reportCtrl.studentResult(student)" class="btn btn-info btn-xs">resultado</label>
+        </div>
+      </div>
     </div>
-  </main>
+  </div>
 </section>

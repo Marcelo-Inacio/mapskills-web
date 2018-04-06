@@ -14,13 +14,13 @@
 		vm.tableHeader = [{label: "Nome", model: "name", width: {'width': '30%'}},
 			{label: "RA", model: "ra", width: {'width': '15%'}},
 			{label: "Curso", model: "course", width: {'width': '30%'}},
-			{label: "Concluído", model: "completed", width: {'width': '10%'}},
-			{label: "Ação", model: "action", width: {'width': '15%'}}];
+			{label: "Concluído", model: "completed", width: {'width': '10%'}}];
 
     init();
 
     function init() {
 			mentorService.validateProfile();
+			loadCourses();
 			loadStudents(true);
     }
 
@@ -33,6 +33,12 @@
 				page.nextPage++;
 				page.isLast = response.remainingPages <= 0;
 				vm.students = response.students;
+			});
+		}
+
+		function loadCourses() {
+			mentorService.loadAllCourses().then(function(response) {
+				vm.allCourses = response;
 			});
 		}
 

@@ -6,10 +6,11 @@
 		.controller('ReportController', ReportController);
 
 	/** @ngInject */
-	function ReportController($log, adminService, Session, HelperService, reportService, toastr) {
+	function ReportController(adminService, Session, HelperService, reportService, toastr, $uibModal) {
 		var vm = this;
+		var page = {nextPage: 0, size: 40, isLast: false};
     vm.isAdmin = true;
-    vm.filter = {level: null, institutionCode: null, courseCode: null, startDate: null, endDate: null};
+    vm.filter = {institutionLevel: null, institutionCode: null, courseCode: null, startDate: null, endDate: null};
     vm.institutions = [];
     vm.institutionSelected;
     vm.courseSelected;
@@ -18,7 +19,7 @@
 
 		function init() {
 			var userLogged = Session.refreshUserSession();
-			vm.isAdmin = verifyIsAdmin(userLogged);
+			vm.isAdmin = isAdmin(userLogged);
 			if (vm.isAdmin) {
 				adminService.loadAllInstitutions(true).then(function(response) {
 					angular.copy(response, vm.institutions);
@@ -27,22 +28,24 @@
 				vm.getInstitutionCourses(userLogged.institution.id);
 			}
 		}
-		/*
+		/**
 		 * Chama do serviço de download com condicionais do filtro.
 		 */
     vm.download = function() {
-      fillFilter();
-			reportService.download(vm.filter);
+			reportService.download(getFilter());
     }
-		/*
+		/**
 		 * Realiza chamada para busca do relatório.
 		 */
-    vm.search = function() {
-      fillFilter();
-			$log.log(vm.filter);
-			reportService.search(vm.filter).then(function success(response) {
-				vm.report = [];
-				vm.report = angular.copy(response);
+    vm.search = function(clearCache) {
+			if (clearCache) {
+				page.nextPage = 0;
+				page.isLast = false;
+			}
+			reportService.search(getFilter(), clearCache, page).then(function success(response) {
+				page.nextPage++;
+				page.isLast = response.remainingPages <= 0;
+				vm.students = angular.copy(response.students);
 			}, function error(response) {
 				toastr.error("Problema ao tentar buscar relatório.", ":\\");
 			});
@@ -56,31 +59,77 @@
 				vm.institutionSelected = angular.copy(response);
 			});
 		}
-    /*
-		 * Preenche o filtro para realização da pesquisa ou download do csv
+
+		vm.loadMoreStudents = function() {
+			vm.search(false);
+		}
+
+		vm.studentResult = function(student) {
+			$uibModal.open({
+	      animation: true,
+	      templateUrl: 'app/shared/report/modal/report.modal.html',
+	      controllerAs: 'vm',
+				controller: function($uibModalInstance) {
+					var vm = this;
+					vm.skills = [];
+					vm.data = [];
+					vm.series = ['Valor minímo', 'Valor máximo', 'Valor do aluno'];
+					vm.student = student;
+					vm.options = {
+						legend: {	display: true }
+					};
+
+					(function init() {
+						var values = [];
+						var minimumValues = [];
+						var maxValues = [];
+						angular.forEach(vm.student.skillResult, function(skill, key) {
+							minimumValues.push(0);
+							maxValues.push(16);
+							vm.skills.push(skill.skill);
+							values.push(skill.value);
+						});
+						vm.data.push(minimumValues);
+						vm.data.push(maxValues);
+						vm.data.push(values);
+					})();
+
+					vm.close = function () {
+				    $uibModalInstance.dismiss('cancel');
+				  };
+				},
+	      size: 'md'
+	    });
+		}
+    /**
+		 * Retorna filtro para realização da pesquisa ou download do csv
 		 */
-    var fillFilter = function() {
-      vm.filter["level"] = HelperService.isUndefinedOrNull(vm.institutionSelected) ? null : angular.copy(vm.institutionSelected.level);
-      vm.filter["institutionCode"] = HelperService.isUndefinedOrNull(vm.institutionSelected) ? null : angular.copy(vm.institutionSelected.code);
-      vm.filter["courseCode"] = HelperService.isUndefinedOrNull(vm.courseSelected) ? null : angular.copy(vm.courseSelected.code);
-			vm.filter["startYear"] = vm.filter.startDate === "" ? null : getYear(vm.filter.startDate);
-			vm.filter["startSemester"] = vm.filter.startDate === "" ? null : getSemester(vm.filter.startDate);
-			vm.filter["endYear"] = vm.filter.endDate === "" ? null : getYear(vm.filter.endDate);
-			vm.filter["endSemester"] = vm.filter.endDate === "" ? null : getSemester(vm.filter.endDate);
-			vm.filter["page"] = 0;
-			vm.filter["size"] = 50;
+    var getFilter = function() {
+			var filter = {
+				institutionLevel: vm.institutionSelected == null ? null : angular.copy(vm.institutionSelected.level),
+				institutionCode: vm.institutionSelected == null ? null : angular.copy(vm.institutionSelected.code),
+				courseCode: vm.courseSelected == null ? null : angular.copy(vm.courseSelected.code),
+				startYear: getYear(vm.filter.startDate),
+				startSemester: getSemester(vm.filter.startDate),
+				endYear: getYear(vm.filter.endDate),
+				endSemester: getSemester(vm.filter.endDate),
+				page: page.nextPage,
+				size: page.size
+			};
+
+			return filter;
     }
 
-		var verifyIsAdmin = function(user) {
+		var isAdmin = function(user) {
 			return user.profile === "ADMINISTRATOR";
 		}
 
 		var getYear = function(filterDate) {
-			return HelperService.isUndefinedOrNull(filterDate) || filterDate.length < 5 ? null : filterDate.substring(0, 4);
+			return filterDate == null || filterDate.length < 5 ? null : filterDate.substring(0, 4);
 		}
 
 		var getSemester = function(filterDate) {
-			return HelperService.isUndefinedOrNull(filterDate) || filterDate.length < 5 ? null : filterDate.substring(4);
+			return filterDate == null || filterDate.length < 5 ? null : filterDate.substring(4);
 		}
 
 		init();

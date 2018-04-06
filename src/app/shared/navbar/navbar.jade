@@ -1,29 +1,29 @@
 nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
   .container-fluid
-    .navbar-header().row
-      .col-xs-2(ng-if="vm.show_menu")
-        button.navbar-toggle.collapsed(type='button')
-          ul
-            span(uib-dropdown='', on-toggle='toggled(open)')
-              a#simple-dropdown(href='', uib-dropdown-toggle='')
-                i.fa.fa-bars.ico-sidebar
-              ul(uib-dropdown-menu='', aria-labelledby='simple-dropdown')
-                li
-                  a(href="")
-                    i.fa.fa-user-o.ico-sidebar
-                    | Competencias
+    .navbar-header.row
+      //.col-xs-2
+      //  button.navbar-toggle.collapsed(type='button')
+      //    ul
+      //      span(uib-dropdown='', on-toggle='toggled(open)')
+      //        a#simple-dropdown(href='', uib-dropdown-toggle='')
+      //          i.fa.fa-bars.ico-sidebar
+      //        ul(uib-dropdown-menu='', aria-labelledby='simple-dropdown')
+      //          li
+      //            a(href="")
+      //              i.fa.fa-user-o.ico-sidebar
+      //              | Competencias
       .col-md-7.col-lg-6.hidden-xs.hidden-sm
         a
           .logo-institution.navbar-brand
-            span(ng-bind="vm.label_cps")
+            span(ng-bind="::vm.labelCentroPaulaSouza")
       .col-xs-12.col-md-5.col-lg-6
         ul.user-menu.user-ico
-          span(uib-dropdown='', on-toggle='toggled(open)')
-            a#simple-dropdown(href='', uib-dropdown-toggle='')
+          span(uib-dropdown="", on-toggle="toggled(open)")
+            a#simple-dropdown(href="", uib-dropdown-toggle="")
               i.fa.fa-user-circle-o.ico-sidebar
-              | {{vm.user.name}}
+              | {{::vm.user.name}}
               .caret
-            ul.dropdown-menu.menu-options(uib-dropdown-menu='', aria-labelledby='simple-dropdown')
+            ul.dropdown-menu.menu-options(uib-dropdown-menu="", aria-labelledby="simple-dropdown")
               li
                 a(href="", ng-click="vm.goPage('about')")
                   i.fa.fa-info-circle.ico-sidebar

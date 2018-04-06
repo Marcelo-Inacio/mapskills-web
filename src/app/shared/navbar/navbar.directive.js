@@ -20,8 +20,7 @@
     /** @ngInject */
     function NavbarController($location, $state, $window, loginService) {
       var vm = this;
-      vm.show_menu;
-      vm.label_cps = "CENTRO PAULA SOUZA";
+      vm.labelCentroPaulaSouza = "CENTRO PAULA SOUZA";
 
       init();
 
@@ -29,7 +28,6 @@
       function init() {
         var widthBrowser = $window.innerWidth;
         var path = $location.path().toLowerCase();
-        vm.show_menu = (((path === "/login") || (path === "/student/result") || (path === "/student/game")) && widthBrowser < 768);
         vm.user = loginService.getUserLogged();
       }
 

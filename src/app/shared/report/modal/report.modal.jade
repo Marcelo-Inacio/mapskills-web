@@ -1,0 +1,9 @@
+.section
+  .modal-header
+    span(ng-bind="::vm.student.name")
+  .modal-body
+    .row.aligner-item
+      .col-xs-12.col-sm-12.col-md-12.col-lg-9
+        canvas#radar.chart.chart-radar(chart-data="vm.data", chart-options="vm.options", chart-labels="vm.skills", chart-series="vm.series")
+  .modal-footer
+    button.btn.btn-default.btn-md(ng-click="vm.close()") fechar

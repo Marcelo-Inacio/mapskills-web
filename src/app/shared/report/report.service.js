@@ -7,32 +7,33 @@
 
 		/** @ngInject */
 		function reportService($http, $q, $log, HelperService, downloadService, API_SERVER) {
+			var studentsPageCached = {students: [], remainingPages: 0};
+
 			return {
 				search : _search,
         download : _download
 			};
 
-      function _search(filter) {
+      function _search(filter, clearCache, page) {
         var deferred = $q.defer();
-        var uri = API_SERVER.REPORT.SHOW
-        $http.get(uri, {
-					params: {
-							institutionLevel: filter.level,
-							institutionCode: filter.institutionCode,
-							courseCode: filter.courseCode,
-							startYear: filter.startYear,
-							startSemester: filter.startSemester,
-							endYear: filter.endYear,
-							endSemester: filter.endSemester,
-							page: filter.page,
-							size: filter.size
-						}
-					}).then(function success(response) {
-						deferred.resolve(response.data);
-        }, function error(response) {
-          $log.error(response);
-					deferred.reject(response);
-        });
+				if (clearCache) {
+					studentsPageCached.students = [];
+					studentsPageCached.remainingPages = 0;
+				}
+				if (page.isLast) {
+					deferred.resolve(studentsPageCached);
+				} else {
+					var uri = API_SERVER.REPORT.SHOW;
+	        $http.get(uri, {params: filter}).then(function success(response) {
+						studentsPageCached.students = studentsPageCached.students.concat(response.data.students);
+						studentsPageCached.remainingPages = response.data.remainingPages;
+						deferred.resolve(studentsPageCached);
+	        }, function error(response) {
+	          $log.error(response);
+						deferred.reject(response);
+	        });
+				}
+
         return deferred.promise;
       }
 

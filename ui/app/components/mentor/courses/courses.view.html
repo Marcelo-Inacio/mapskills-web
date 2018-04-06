@@ -8,7 +8,7 @@
       <div class="thumbnail card"><img ng-src="{{crsCtrl.image}}" onerror="this.src='assets/images/image_unavailable.png'" alt="{{crsCtrl.image}}" style="max-height: 218px">
         <div> 
           <div style="height: 63px; margin-top: 0;" class="text align-center border-top-bottom">
-            <h5 ng-bind="course.name"></h5>
+            <h5 ng-bind="course.name" class="max-text"></h5>
           </div>
           <div style="padding: 5px;"><a ng-click="crsCtrl.openCourseModal(course)" class="btn btn-info btn-xs">editar</a></div>
         </div>

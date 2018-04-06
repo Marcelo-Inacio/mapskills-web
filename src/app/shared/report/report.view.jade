@@ -1,19 +1,19 @@
 section
-  .row.aligner.border-bottom
-    .col-xs-12.col-md-6.col-lg-6.aligner-item
+  .row.aligner.border-bottom.filter-direction
+    .col-xs-12.col-sm-12.col-md-6.col-lg-6.aligner-item
       //-TODO fazer filtro de input - bootstrap chosen
       select.form-control(ng-if="reportCtrl.isAdmin"
                         , ng-model="reportCtrl.institutionSelected"
                         , ng-change="reportCtrl.getInstitutionCourses(reportCtrl.institutionSelected.id)"
                         , ng-options="institution.company for institution in reportCtrl.institutions track by institution.id")
-        option(value='') --- Todos ---
+        option(value="") --- Todos ---
       
       select.form-control(ng-if="!reportCtrl.isAdmin")
-        option(value="") {{reportCtrl.institutionSelected.company}}
+        option(value="") {{::reportCtrl.institutionSelected.company}}
 
       select.form-control(ng-model="reportCtrl.courseSelected", ng-disabled="!reportCtrl.institutionSelected"
                           , ng-options="course.name for course in reportCtrl.institutionSelected.courses track by course.code")
-        option(value='') --- Todos ---
+        option(value="") --- Todos ---
       
     .col-xs-12.col-md-3.col-lg-3.aligner-item
       .input-group
@@ -23,19 +23,19 @@ section
         input.form-control(type="text", ng-model="reportCtrl.filter.endDate", ui-mask="9999/9")
         
     .col-xs-12.col-md-3.col-lg-3.aligner-item.button-new
-      label.btn.btn-primary.btn-md(ng-click="reportCtrl.search()")
+      label.btn.btn-primary.btn-md(ng-click="reportCtrl.search(true)")
         i.fa.fa-search.ico-sidebar
         | buscar
       label.btn.btn-primary.btn-md(ng-click="reportCtrl.download()")
         i.fa.fa-file-excel-o.ico-sidebar
         | download
 
-  main
-    .row.aligner
-      table.table.table-hover.table-scroll(style="position: unset; width: 100%;")
-        thead
-          tr.table-thead
-            th.th-scroll(ng-repeat="head in reportCtrl.report.head") {{::head}}
-        tbody.tbody-scroll(style="min-height: 72vh")
-          tr(ng-repeat="row in reportCtrl.report.data track by $index")
-            td.td-scroll.filterable-cell(ng-repeat="cell in row track by $index") {{cell}}
+  .row.card-list-content(lazy-load="reportCtrl.loadMoreStudents()")
+    .col-sm-6.col-md-3(ng-repeat="student in reportCtrl.students track by $index")
+      .thumbnail.card(style="min-height: 100%; height: unset;")
+        .text
+          h5(ng-bind="student.ra")
+        .text.border-top-bottom(style="min-height: 61px")
+          h5.max-text(ng-bind="student.name")
+        div.space-between(style="padding: 5px;")
+          label.btn.btn-info.btn-xs(ng-click="reportCtrl.studentResult(student)") resultado

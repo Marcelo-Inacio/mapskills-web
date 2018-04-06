@@ -33,9 +33,8 @@ section
           label(for="stuCtrl.tableHeader[2].label") {{::stuCtrl.tableHeader[2].label}}
         th(ng-style="stuCtrl.tableHeader[3].width")
           label(for="stuCtrl.tableHeader[3].label") {{::stuCtrl.tableHeader[3].label}}
-        th(ng-style="stuCtrl.tableHeader[4].width")
-          label(for="stuCtrl.tableHeader[4].label") {{::stuCtrl.tableHeader[4].label}}
-        th(style="width: 15px")
+        th          
+        th
     tbody.tbody-scroll(lazy-load="stuCtrl.loadMoreStudents()")
       tr.tr-scroll(ng-repeat="student in stuCtrl.students track by student.id")
         td(style="width: 30%") {{student.name}}
@@ -46,5 +45,5 @@ section
         td(style="width: 10%", ng-if="!student.completed").check-not-ok
           i.fa.fa-minus-circle
         td(style="width: 15%")
-          label.btn.btn-info.btn-xs(ng-click="stuCtrl.openDetailsModal(student)", ) detalhes
-          label.btn.btn-info.btn-xs(ng-click="stuCtrl.openStudentModal(student)") editar
+          label.btn.btn-info.btn-xs(ng-click="stuCtrl.openDetailsModal(student)", style="margin: 5px") detalhes
+          label.btn.btn-info.btn-xs(ng-click="stuCtrl.openStudentModal(student)", style="margin: 5px") editar

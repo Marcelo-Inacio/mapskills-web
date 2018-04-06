@@ -3,21 +3,21 @@
     .panel.panel-default
       .panel-heading Relatório
       .panel-body.panel-radar
-        .col-lg-6
-          canvas#radar.chart.chart-radar(chart-data='resultCtrl.data', chart-options='resultCtrl.options', chart-labels='resultCtrl.labels', chart-series="resultCtrl.series")
-        .col-lg-6
+        .col-xs-12.col-sm-12.col-md-12.col-lg-6
+          canvas#radar.chart.chart-radar(chart-data="resultCtrl.data", chart-options="resultCtrl.options", chart-labels="resultCtrl.labels", chart-series="resultCtrl.series")
+        .col-xs-12.col-sm-12.col-md-12.col-lg-6
           .row
-            .col-lg-4
+            .col-xs-6.col-lg-4
               label Competência
-            .col-lg-8
+            .col-xs-6.col-lg-8
               label Descrição
           .row(ng-repeat="skill in resultCtrl.skills").border-report
-            .col-lg-4
-              p {{::skill.name}}
-            .col-lg-8
-              p {{::skill.description}}
+            .col-xs-12.col-lg-4
+              p(ng-bind="::skill.name")
+            .col-xs-12.col-lg-8
+              p(ng-bind="::skill.description")
       .panel-footer
         br
-        h5 Este é um trabalho acadêmico desenvolvido pelo Centro Paula Souza em fase de validação
-        h5 Os resultados não substituem o trabalho de um profissional especializado na área
-        h5 O objetivo do resultado é proporcionar uma reflexão sobre as competências comportamentais avaliadas
+        h5 Este é um trabalho acadêmico desenvolvido pelo Centro Paula Souza em fase de validação.
+        h5 Os resultados não substituem o trabalho de um profissional especializado na área.
+        h5 O objetivo do resultado é proporcionar uma reflexão sobre as competências comportamentais avaliadas.

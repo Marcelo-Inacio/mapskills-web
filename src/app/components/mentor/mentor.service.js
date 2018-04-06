@@ -54,6 +54,7 @@
 						deferred.resolve(studentsPageCached);
 					});
 				}
+
 				return deferred.promise;
       }
 

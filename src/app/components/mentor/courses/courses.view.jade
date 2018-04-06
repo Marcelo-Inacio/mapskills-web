@@ -7,6 +7,6 @@ section
         img(ng-src="{{crsCtrl.image}}", onerror="this.src='assets/images/image_unavailable.png'", alt="{{crsCtrl.image}}", style="max-height: 218px")
         div  
           .text.align-center.border-top-bottom(style="height: 63px; margin-top: 0;")
-            h5(ng-bind="course.name")
+            h5.max-text(ng-bind="course.name")
           div(style="padding: 5px;")
             a.btn.btn-info.btn-xs(ng-click="crsCtrl.openCourseModal(course)") editar

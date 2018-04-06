@@ -17,7 +17,6 @@
   justify-content: center;
 
 .aligner-item
-  max-width: 50%;
   display: flex;
   justify-content: center;
 
@@ -73,10 +72,19 @@
 .date-range-direction
   justify-content: space-between;
   flex-direction: row;
-  @media (max-width: 768px)
+  @media (max-width: 812px)
     flex-direction: column;
 
 .card-list-content
   height: 100%;
   max-height: 83vh;
   overflow-x: auto;
+  @media (max-width: 812px)
+    max-height: 77vh;
+
+.card-list-content
+  & .card
+    & .text
+      & > .max-text
+        height: 30px;
+        overflow: hidden;
