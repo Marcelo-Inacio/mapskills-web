@@ -36,7 +36,7 @@
         controllerAs: 'studentProfileCtrl'
       })
       .state('student.noGame', {
-        url: '/student/no_game',
+        url: '/student/no-game',
         templateUrl: 'app/components/student/game/noGame.view.html'
       })
       .state('admin', {

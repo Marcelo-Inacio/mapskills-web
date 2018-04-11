@@ -1,0 +1,44 @@
+section
+  .panel.panel-default
+    .panel-heading
+    .panel-body.panel-auto
+      .row.aligner
+        .col-md-3.aligner-item
+          i.fa.fa-address-card(aria-hidden='true', style="font-size: 3em;")
+        .col-md-9
+          .row
+            .col-md-12
+              h4 Meus Dados
+          .row.aligner
+            .col-xs-12.col-md-12
+              .input-group
+                span.input-group-addon Nome
+                input.form-control(type='text', ng-model="::mentorProfileCtrl.user.name", readonly)
+          .row.aligner
+            .col-xs-12.col-md-12
+              .input-group
+                span.input-group-addon Email
+                input.form-control(type='text', ng-model="::mentorProfileCtrl.user.username", readonly)
+    .panel-body.panel-auto.border-top
+      .row
+        .col-md-12
+          h4 Instituição de Ensino
+      .row
+        .col-xs-12.col-md-3
+          .input-group
+            span.input-group-addon Código
+            input.form-control(type='text', ng-model="::mentorProfileCtrl.user.institution.code", readonly)
+        .col-xs-12.col-md-9
+          .input-group
+            span.input-group-addon Razão Social
+            input.form-control(type='text', ng-model="::mentorProfileCtrl.user.institution.company", readonly)
+      .row
+        .col-xs-12.col-md-3
+          .input-group
+            span.input-group-addon CNPJ
+            input.form-control(type='text', ng-model="::mentorProfileCtrl.user.institution.cnpj", ui-mask="99.999.999/9999-99", readonly)
+        .col-xs-12.col-md-9
+          .input-group
+            span.input-group-addon Cidade
+            input.form-control(type='text', ng-model="::mentorProfileCtrl.user.institution.city", readonly)
+    .panel-footer 

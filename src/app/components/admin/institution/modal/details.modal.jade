@@ -2,20 +2,20 @@
   .modal-header
   .modal-body
     .form-group.row
-      .col-md-3
+      .col-xs-12.col-md-3
         .input-group
           span.input-group-addon Código
           input.form-control(ng-model="::modalCtrl.institution.code", readonly)
-      .col-md-9
+      .col-xs-12.col-md-9
         .input-group
           span.input-group-addon Razão Social
           input.form-control(ng-model="::modalCtrl.institution.company", readonly)
     .form-group.row
-      .col-md-5
+      .col-xs-12.col-md-5
         .input-group
           span.input-group-addon CNPJ
           input.form-control(ng-model="::modalCtrl.institution.cnpj", ui-mask="99.999.999/9999-99", readonly)
-      .col-md-7
+      .col-xs-12.col-md-7
         .input-group
           span.input-group-addon Cidade
           input.form-control(ng-model="::modalCtrl.institution.city", readonly)

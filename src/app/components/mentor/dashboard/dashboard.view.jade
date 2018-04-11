@@ -1,21 +1,24 @@
 section
   date-range-filter(start-date="mentorDashCtrl.filter.startDate", end-date="mentorDashCtrl.filter.endDate", search="mentorDashCtrl.search()")
-  .row(ng-if="mentorDashCtrl.courses.length > 0")
-    .col-lg-8
-      .row
-        .col-lg-3.col-md-4.col-xs-6(ng-repeat="course in mentorDashCtrl.courses")
-          .panel.panel-default
-            .panel-body.panel-radar
-              canvas#meu-chart.chart.chart-pie(width="400", height="400", chart-data="course.values", chart-labels="mentorDashCtrl.labels", chart-options="mentorDashCtrl.options")
-            .panel-footer(style="text-align: center") {{course.code}}
-    .col-lg-4
-      .panel.panel-default
-        .panel-heading Legenda
-        .panel-body.panel-radar
-          h5(ng-repeat="course in mentorDashCtrl.courses")
-            p {{course.code}} - {{course.name}}
-  
-  .row(ng-if="mentorDashCtrl.courses.length == 0")
-    .col-xs-12.col-sm-12.col-md-12
-      .alert.alert-info
-        h4 Nenhum resultado encontrado.
+  .container-fluid.main-area
+    .row(ng-if="mentorDashCtrl.courses.length > 0")
+      .col-md-12
+        .panel
+          .panel-body.full-height
+            .row
+              .col-md-3(ng-repeat="course in mentorDashCtrl.courses")
+                canvas#meu-chart.chart.chart-pie(width="900", height="450", chart-data="course.values", chart-labels="mentorDashCtrl.labels", chart-options="mentorDashCtrl.options")
+                div
+                  h5(style="text-align: center") {{::course.code}}
+    .row(ng-if="mentorDashCtrl.courses.length > 0")
+      .col-md-12
+        .panel.panel-default
+          .panel-heading Legenda
+          .panel-body.full-height
+            h5(ng-repeat="course in mentorDashCtrl.courses")
+              span {{::course.code}} - {{::course.name}}
+    
+    .row(ng-if="mentorDashCtrl.courses.length == 0")
+      .col-xs-12.col-sm-12.col-md-12
+        .alert.alert-info
+          h4 Nenhum resultado encontrado.
