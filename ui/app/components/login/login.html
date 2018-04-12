@@ -1,0 +1,24 @@
+
+<section class="main-login">
+  <div class="col-lg-12 col-md-12 col-xs-12">
+    <article class="login-panel">
+      <div class="panel panel-default">
+        <div class="login-header">
+          <div class="logo-cps"></div>
+        </div>
+        <div class="login-body">
+          <form name="loginForm" role="form">
+            <fieldset>
+              <div class="form-group">
+                <input type="email" ng-model="loginCtrl.userLogin.username" placeholder="E-mail" name="email" autofocus required class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="password" ng-model="loginCtrl.userLogin.password" placeholder="Password" name="password" ng-enter="loginCtrl.login(loginCtrl.userLogin)" required class="form-control">
+              </div><span ng-click="loginCtrl.login(loginCtrl.userLogin)" class="btn btn-primary"><i class="fa fa-sign-in ico-sidebar"></i>Entrar</span>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

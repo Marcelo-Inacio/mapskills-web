@@ -1,0 +1,23 @@
+
+<section>
+  <div class="row button-new">
+    <label ng-click="insCtrl.newInstitution()" class="btn btn-primary btn-md">novo</label>
+    <label ng-click="insCtrl.openFileModal()" class="btn btn-primary btn-md"><i class="fa fa-file-excel-o ico-sidebar"></i>importar excel</label>
+  </div>
+  <div class="row main-area">
+    <div ng-repeat="institution in insCtrl.allInstitutions track by institution.id" class="col-sm-6 col-md-3">
+      <div style="min-height: 100%; height: unset;" class="thumbnail card">
+        <div class="text">
+          <h5 ng-bind="institution.code"></h5>
+        </div>
+        <div style="min-height: 61px" class="text border-top-bottom">
+          <h5 ng-bind="institution.company"></h5>
+        </div>
+        <div style="padding: 5px;" class="space-between">
+          <label ng-click="insCtrl.openDetailsModal(institution)" class="btn btn-info btn-xs">detalhes</label>
+          <label ng-click="insCtrl.updateInstitution(institution)" class="btn btn-info btn-xs">editar</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

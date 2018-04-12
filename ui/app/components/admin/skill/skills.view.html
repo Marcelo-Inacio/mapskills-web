@@ -1,0 +1,18 @@
+
+<section>
+  <div class="row button-new">
+    <label ng-click="skiCtrl.openModal()" class="btn btn-primary btn-md">novo</label>
+  </div>
+  <div class="row main-area">
+    <div ng-repeat="skill in skiCtrl.allSkills track by skill.id" class="col-xs-12 col-sm-6 col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">{{skill.name}}</div>
+        <div style="min-height: 150px" ng-if="skill.description.length &gt; 150" class="panel-body panel-auto">{{skill.description | limitTo:150}} ...</div>
+        <div style="min-height: 150px" ng-if="skill.description.length &lt;= 150" class="panel-body panel-auto">{{skill.description}}</div>
+        <div class="panel-footer">
+          <label ng-click="skiCtrl.openModal(skill)" class="btn btn-info btn-xs">editar</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+
+<div class="container">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">Relatório</div>
+      <div class="panel-body full-height">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+          <canvas id="radar" chart-data="resultCtrl.data" chart-options="resultCtrl.options" chart-labels="resultCtrl.labels" chart-series="resultCtrl.series" class="chart chart-radar"></canvas>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+          <div class="row">
+            <div class="col-xs-6 col-lg-4">
+              <label>Competência</label>
+            </div>
+            <div class="col-xs-6 col-lg-8">
+              <label>Descrição</label>
+            </div>
+          </div>
+          <div ng-repeat="skill in resultCtrl.skills" class="row border-report">
+            <div class="col-xs-12 col-lg-4">
+              <p ng-bind="::skill.name"></p>
+            </div>
+            <div class="col-xs-12 col-lg-8">
+              <p ng-bind="::skill.description"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer"><br>
+        <h5>Este é um trabalho acadêmico desenvolvido pelo Centro Paula Souza em fase de validação.</h5>
+        <h5>Os resultados não substituem o trabalho de um profissional especializado na área.</h5>
+        <h5>O objetivo do resultado é proporcionar uma reflexão sobre as competências comportamentais avaliadas.</h5>
+      </div>
+    </div>
+  </div>
+</div>

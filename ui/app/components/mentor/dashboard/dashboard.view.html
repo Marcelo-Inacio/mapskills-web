@@ -1,0 +1,39 @@
+
+<section>
+  <date-range-filter start-date="mentorDashCtrl.filter.startDate" end-date="mentorDashCtrl.filter.endDate" search="mentorDashCtrl.search()"></date-range-filter>
+  <div class="container-fluid main-area">
+    <div ng-if="mentorDashCtrl.courses.length &gt; 0" class="row">
+      <div class="col-md-12">
+        <div class="panel">
+          <div class="panel-body full-height">
+            <div class="row">
+              <div ng-repeat="course in mentorDashCtrl.courses" class="col-md-3">
+                <canvas id="meu-chart" width="900" height="450" chart-data="course.values" chart-labels="mentorDashCtrl.labels" chart-options="mentorDashCtrl.options" class="chart chart-pie"></canvas>
+                <div>
+                  <h5 style="text-align: center">{{::course.code}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-if="mentorDashCtrl.courses.length &gt; 0" class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">Legenda</div>
+          <div class="panel-body full-height">
+            <h5 ng-repeat="course in mentorDashCtrl.courses"><span>{{::course.code}} - {{::course.name}}</span></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-if="mentorDashCtrl.courses.length == 0" class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="alert alert-info">
+          <h4>Nenhum resultado encontrado.</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

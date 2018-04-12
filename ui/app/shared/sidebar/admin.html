@@ -1,0 +1,16 @@
+
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+  <ul class="nav menu">
+    <li ng-click="sbCtrl.isCollapsed = !sbCtrl.isCollapsed; sbCtrl.changeClass('dashboard')" ng-class="sbCtrl.ngClass.dashboard"><a><i class="fa fa-tachometer ico-sidebar"></i> Dashboard</a></li>
+    <div uib-collapse="sbCtrl.isCollapsed">
+      <ul class="nav menu">
+        <li ng-click="sbCtrl.goPage('dashboard-institution', {level: 'fatec'})"><a class="menu-chidren"><i class="fa fa-area-chart ico-sidebar"></i> Fatecs</a></li>
+        <li ng-click="sbCtrl.goPage('dashboard-institution', {level: 'etec'})"><a class="menu-chidren"><i class="fa fa-bar-chart ico-sidebar"></i> Etecs</a></li>
+      </ul>
+    </div>
+    <li ng-class="sbCtrl.ngClass.institutions" ng-click="sbCtrl.changeClass('institutions')"><a><i class="fa fa-university ico-sidebar"></i> Instituições</a></li>
+    <li ng-class="sbCtrl.ngClass.themes" ng-click="sbCtrl.changeClass('themes')"><a><i class="fa fa-eyedropper ico-sidebar"></i> Temas</a></li>
+    <li ng-class="sbCtrl.ngClass.skills" ng-click="sbCtrl.changeClass('skills')"><a><i class="fa fa-shield ico-sidebar"></i> Competências</a></li>
+    <li ng-class="sbCtrl.ngClass.report" ng-click="sbCtrl.changeClass('report')"><a><i class="fa fa-history ico-sidebar"></i> Relatório</a></li>
+  </ul>
+</div>

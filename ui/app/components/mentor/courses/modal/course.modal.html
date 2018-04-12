@@ -1,0 +1,35 @@
+
+<div class="section">
+  <div class="modal-header"></div>
+  <div class="modal-body">
+    <form name="courseForm">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <div class="input-group"><span class="input-group-addon">Código</span>
+            <input name="code" type="text" ng-model="modalCtrl.course.code" maxlength="3" required class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-12">
+          <div class="input-group"><span class="input-group-addon">Nome</span>
+            <input name="name" type="text" ng-model="modalCtrl.course.name" required class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-12">
+          <div class="input-group"><span class="input-group-addon">Período</span>
+            <select ng-model="modalCtrl.course.period" ng-options="period | translate for period in modalCtrl.allPeriods" name="period" required class="form-control">
+              <option value="">-- selecione um período --</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button ng-disabled="!courseForm.$valid" ng-click="modalCtrl.saveCourse(modalCtrl.course)" class="btn btn-primary btn-md">salvar</button>
+    <button ng-click="modalCtrl.closeModal()" class="btn btn-default btn-md">cancelar</button>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+
+<div class="section">
+  <div class="modal-header"><span ng-bind="::vm.student.name"></span></div>
+  <div class="modal-body">
+    <div class="row aligner-item">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
+        <canvas id="radar" chart-data="vm.data" chart-options="vm.options" chart-labels="vm.skills" chart-series="vm.series" class="chart chart-radar"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button ng-click="vm.close()" class="btn btn-default btn-md">fechar</button>
+  </div>
+</div>

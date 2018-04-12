@@ -1,0 +1,15 @@
+
+<audio id="over">
+  <source src="assets/audio/button-40.wav">
+  <source src="assets/audio/button-40.mp3">
+</audio>
+<div id="tela" ng-style="gameCtrl.background" class="screen-background">
+  <div id="options" ng-show="gameCtrl.history[gameCtrl.index].question != null" class="option-close">
+    <div ng-repeat="alternative in gameCtrl.history[gameCtrl.index].question.alternatives track by $index" ng-click="gameCtrl.sendAnswer(alternative)" ng-mouseover="gameCtrl.playhover()" class="alternative"><span ng-bind="alternative.description"></span></div>
+  </div>
+  <div class="textbox">
+    <div class="whotalks"></div>
+    <div id="texto">{{gameCtrl.history[gameCtrl.index].text}}</div>
+  </div>
+  <div id="prosseguir" ng-class="gameCtrl.active" ng-click="gameCtrl.nextScene()"></div>
+</div>
