@@ -5,7 +5,7 @@
     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
       <div class="panel panel-default">
         <div class="panel-heading">{{ institutionCtrl.institution.label }}</div>
-        <div class="panel-body panel-radar">
+        <div class="panel-body full-height">
           <canvas id="base" chart-data="institutionCtrl.data" chart-labels="institutionCtrl.codes" chart-series="institutionCtrl.series" chart-options="institutionCtrl.options" class="chart-horizontal-bar"></canvas>
         </div>
       </div>
@@ -13,7 +13,7 @@
     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
       <div class="panel panel-default">
         <div class="panel-heading">Legenda</div>
-        <div class="panel-body panel-radar">
+        <div class="panel-body full-height">
           <h5 ng-repeat="institution in institutionCtrl.institutions">{{institution.code}} - {{institution.company}}</h5>
         </div>
       </div>

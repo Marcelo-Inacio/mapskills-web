@@ -8,10 +8,13 @@
 	/** @ngInject */
 	function AdminDashboardController(toastr, adminService, HelperService) {
 		var vm = this;
-		vm.labels = ["Finalizados", "Não Finalizados"];
 		vm.indicator = {
+			labels: ["Finalizados", "Não Finalizados"],
 			fatecs : {values: null},
-			etecs: {values: null}
+			etecs: {values: null},
+			options : {
+				legend: {display: true}
+			}
 		};
 		vm.hasResult = {etecs: false, fatecs: false};
 		vm.filter = {startDate: new Date(), endDate: new Date()};
@@ -36,6 +39,8 @@
 		}
 
 		function loadResults(response) {
+			vm.hasResult.etecs = false;
+			vm.hasResult.fatecs = false;
 			angular.forEach(response, function(value) {
 				var institution = value.level.toLowerCase();
 				vm.indicator[institution].values = value.values;

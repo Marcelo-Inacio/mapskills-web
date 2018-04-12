@@ -30,7 +30,7 @@ section
         i.fa.fa-file-excel-o.ico-sidebar
         | download
 
-  .row.card-list-content(lazy-load="reportCtrl.loadMoreStudents()")
+  .row.main-area(lazy-load="reportCtrl.loadMoreStudents()")
     .col-sm-6.col-md-3(ng-repeat="student in reportCtrl.students track by $index")
       .thumbnail.card(style="min-height: 100%; height: unset;")
         .text

@@ -7,7 +7,7 @@
       <label ng-click="scnCtrl.updateIndexScenes(scnCtrl.allScenes)" class="btn btn-primary btn-md">salvar alterações</label>
     </div>
   </div>
-  <div ui-sortable ng-model="scnCtrl.allScenes" class="row card-list-content">
+  <div ui-sortable ng-model="scnCtrl.allScenes" class="row main-area">
     <div ng-repeat="scene in scnCtrl.allScenes track by scene.id" class="col-sm-6 col-md-3">
       <div class="thumbnail card"><img ng-src="{{scene.background.filename}}" onerror="this.src='assets/images/image_unavailable.png'" alt="{{scene.background.filename}}">
         <div class="text">

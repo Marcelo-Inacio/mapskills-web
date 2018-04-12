@@ -23,7 +23,7 @@
       <label ng-click="reportCtrl.download()" class="btn btn-primary btn-md"><i class="fa fa-file-excel-o ico-sidebar"></i>download</label>
     </div>
   </div>
-  <div lazy-load="reportCtrl.loadMoreStudents()" class="row card-list-content">
+  <div lazy-load="reportCtrl.loadMoreStudents()" class="row main-area">
     <div ng-repeat="student in reportCtrl.students track by $index" class="col-sm-6 col-md-3">
       <div style="min-height: 100%; height: unset;" class="thumbnail card">
         <div class="text">

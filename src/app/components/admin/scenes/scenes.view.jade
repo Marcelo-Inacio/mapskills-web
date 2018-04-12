@@ -5,7 +5,7 @@ section
     .col-lg-6.button-new
       label.btn.btn-primary.btn-md(ng-click="scnCtrl.openSceneModal()") novo
       label.btn.btn-primary.btn-md(ng-click="scnCtrl.updateIndexScenes(scnCtrl.allScenes)") salvar alterações
-  .row.card-list-content(ui-sortable ng-model="scnCtrl.allScenes")
+  .row.main-area(ui-sortable ng-model="scnCtrl.allScenes")
     .col-sm-6.col-md-3(ng-repeat="scene in scnCtrl.allScenes track by scene.id")
       .thumbnail.card
         img(ng-src="{{scene.background.filename}}", onerror="this.src='assets/images/image_unavailable.png'", alt="{{scene.background.filename}}")

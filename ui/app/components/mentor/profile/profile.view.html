@@ -1,0 +1,64 @@
+
+<section>
+  <div class="panel panel-default">
+    <div class="panel-heading"></div>
+    <div class="panel-body panel-auto">
+      <div class="row aligner">
+        <div class="col-md-3 aligner-item"><i aria-hidden="true" style="font-size: 3em;" class="fa fa-address-card"></i></div>
+        <div class="col-md-9">
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Meus Dados</h4>
+            </div>
+          </div>
+          <div class="row aligner">
+            <div class="col-xs-12 col-md-12">
+              <div class="input-group"><span class="input-group-addon">Nome</span>
+                <input type="text" ng-model="::mentorProfileCtrl.user.name" readonly class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="row aligner">
+            <div class="col-xs-12 col-md-12">
+              <div class="input-group"><span class="input-group-addon">Email</span>
+                <input type="text" ng-model="::mentorProfileCtrl.user.username" readonly class="form-control">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body panel-auto border-top">
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Instituição de Ensino</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-md-3">
+          <div class="input-group"><span class="input-group-addon">Código</span>
+            <input type="text" ng-model="::mentorProfileCtrl.user.institution.code" readonly class="form-control">
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-9">
+          <div class="input-group"><span class="input-group-addon">Razão Social</span>
+            <input type="text" ng-model="::mentorProfileCtrl.user.institution.company" readonly class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-md-3">
+          <div class="input-group"><span class="input-group-addon">CNPJ</span>
+            <input type="text" ng-model="::mentorProfileCtrl.user.institution.cnpj" ui-mask="99.999.999/9999-99" readonly class="form-control">
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-9">
+          <div class="input-group"><span class="input-group-addon">Cidade</span>
+            <input type="text" ng-model="::mentorProfileCtrl.user.institution.city" readonly class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer"> </div>
+  </div>
+</section>
