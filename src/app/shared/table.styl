@@ -1,5 +1,5 @@
 .table-thead
-  background-color: cadetblue;
+  background-color: #3782c4;
   color: #fff;
 
 .table-top
@@ -8,15 +8,18 @@
 .txt-thead
   width: 75%;
 
-.table-scroll
-  position: absolute;
-  width: 97%;
-
 .tbody-scroll
   overflow-y: auto;
   position: absolute;
   height: 100%;
-  min-height: 65vh;
+
+#students-table
+  & > .tbody-scroll
+    min-height: 67vh;
+
+#report-table
+  & > .tbody-scroll
+    min-height: 74vh;
 
 .tr-scroll
   width: 100%;
@@ -55,7 +58,7 @@ main
   background-color: rgba(0, 0, 0, 0.12);
 
 .border-bottom
-  border-bottom: solid;
+  border-bottom: 1px solid;
   border-bottom-color: #30a5ff;
   border-bottom-style: groove;
 

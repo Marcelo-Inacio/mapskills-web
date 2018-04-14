@@ -1,7 +1,7 @@
 
 <section>
   <div style="display: flex; justify-content: space-between" class="row">
-    <div style="justify-content: flex-start;" class="col-lg-6 button-new"><i uib-tooltip="{{'SCENE_MESSAGE' | translate}}" tooltip-placement="bottom-right" class="fa fa-info-circle ico-large"></i></div>
+    <div style="justify-content: flex-start;" class="col-lg-6 button-new"><i uib-popover="{{'SCENE_MESSAGE' | translate}}" popover-placement="bottom-left" popover-trigger="'mouseenter'" class="fa fa-info-circle ico-large"></i></div>
     <div class="col-lg-6 button-new">
       <label ng-click="scnCtrl.openSceneModal()" class="btn btn-primary btn-md">novo</label>
       <label ng-click="scnCtrl.updateIndexScenes(scnCtrl.allScenes)" class="btn btn-primary btn-md">salvar alterações</label>

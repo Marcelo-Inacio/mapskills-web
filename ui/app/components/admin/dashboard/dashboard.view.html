@@ -1,13 +1,13 @@
 
 <section>
   <date-range-filter start-date="admDashCtrl.filter.startDate" end-date="admDashCtrl.filter.endDate" search="admDashCtrl.search()"></date-range-filter>
-  <div class="row">
+  <div id="dashboard" class="row main-area">
     <div class="col-sm-12 col-lg-6">
       <div ng-if="admDashCtrl.hasResult.etecs" class="panel panel-default">
         <div class="panel-heading">Etecs</div>
         <div class="panel-body">
           <div class="row aligner-item">
-            <div class="col-lg-6">
+            <div class="col-xs-10 col-lg-6">
               <canvas id="pie" chart-data="admDashCtrl.indicator.etecs.values" chart-labels="admDashCtrl.indicator.labels" chart-options="admDashCtrl.indicator.options" class="chart chart-pie"></canvas>
             </div>
           </div>
@@ -22,7 +22,7 @@
         <div class="panel-heading">Fatecs</div>
         <div class="panel-body">
           <div class="row aligner-item">
-            <div class="col-lg-6">
+            <div class="col-xs-10 col-lg-6">
               <canvas id="pie" chart-data="admDashCtrl.indicator.fatecs.values" chart-labels="admDashCtrl.indicator.labels" chart-options="admDashCtrl.indicator.options" class="chart chart-pie"></canvas>
             </div>
           </div>

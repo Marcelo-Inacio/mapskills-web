@@ -1,0 +1,32 @@
+div(uib-dropdown='', on-toggle='toggled(open)')
+  a#simple-dropdown(href='', uib-dropdown-toggle='')
+    i.fa.fa-bars.bars-menu
+  ul(uib-dropdown-menu="", aria-labelledby="simple-dropdown")
+    li
+      a(ui-sref="admin.dashboard")
+        i.fa.fa-tachometer.ico-sidebar
+        |  Dashboard - Geral
+    li
+      a(ui-sref="admin.dashboard-institution({level:'fatec'})")
+        i.fa.fa-tachometer.ico-sidebar
+        |  Dashboard - Fatecs
+    li
+      a(ui-sref="admin.dashboard-institution({level:'etec'})")
+        i.fa.fa-tachometer.ico-sidebar
+        |  Dashboard - Etecs
+    li
+      a(ui-sref="admin.institutions")
+        i.fa.fa-university.ico-sidebar
+        |  Instituições
+    li
+      a(ui-sref="admin.themes")
+        i.fa.fa-eyedropper.ico-sidebar
+        |  Temas
+    li
+      a(ui-sref="admin.skills")
+        i.fa.fa-shield.ico-sidebar
+        |  Competências
+    li
+      a(ui-sref="admin.report")
+        i.fa.fa-history.ico-sidebar
+        |  Relatório

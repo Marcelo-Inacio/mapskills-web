@@ -1,0 +1,16 @@
+
+<div id="report" lazy-load="reportCtrl.loadMoreStudents()" class="row main-area">
+  <div ng-repeat="student in reportCtrl.students track by $index" class="col-sm-6 col-md-3">
+    <div style="min-height: 100%; height: unset;" class="thumbnail card">
+      <div class="text">
+        <h5 ng-bind="student.ra"></h5>
+      </div>
+      <div style="min-height: 61px" class="text border-top-bottom">
+        <h5 ng-bind="student.name" class="max-text"></h5>
+      </div>
+      <div style="padding: 5px;" class="space-between">
+        <label ng-click="reportCtrl.studentResult(student)" class="btn btn-info btn-xs">resultado</label>
+      </div>
+    </div>
+  </div>
+</div>

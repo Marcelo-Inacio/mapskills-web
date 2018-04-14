@@ -12,3 +12,21 @@
   right: 0
   margin-top: 10px
   left: initial
+
+.bars-menu
+  font-size: xx-large;
+  color: white;
+
+.user-menu
+  & > span
+    & > a
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+.text-ellipsis
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media (max-width: 812px)
+    max-width: 230px;

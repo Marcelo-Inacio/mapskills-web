@@ -1,27 +1,18 @@
 nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
   .container-fluid
-    .navbar-header.row
-      //.col-xs-2
-      //  button.navbar-toggle.collapsed(type='button')
-      //    ul
-      //      span(uib-dropdown='', on-toggle='toggled(open)')
-      //        a#simple-dropdown(href='', uib-dropdown-toggle='')
-      //          i.fa.fa-bars.ico-sidebar
-      //        ul(uib-dropdown-menu='', aria-labelledby='simple-dropdown')
-      //          li
-      //            a(href="")
-      //              i.fa.fa-user-o.ico-sidebar
-      //              | Competencias
-      .col-md-7.col-lg-6.hidden-xs.hidden-sm
+    .navbar-header.row.aligner
+      .col-xs-2.hidden-sm.hidden-md.hidden-lg(ng-if="vm.showMenu")
+        menu-navbar
+      .col-sm-5.col-md-7.col-lg-6.hidden-xs
         a
           .logo-institution.navbar-brand
             span(ng-bind="::vm.labelCentroPaulaSouza")
-      .col-xs-12.col-md-5.col-lg-6
+      .col-xs-10.col-sm-7.col-md-5.col-lg-6
         ul.user-menu.user-ico
           span(uib-dropdown="", on-toggle="toggled(open)")
             a#simple-dropdown(href="", uib-dropdown-toggle="")
               i.fa.fa-user-circle-o.ico-sidebar
-              | {{::vm.user.name}}
+              .text-ellipsis(ng-bind="::vm.user.name")
               .caret
             ul.dropdown-menu.menu-options(uib-dropdown-menu="", aria-labelledby="simple-dropdown")
               li

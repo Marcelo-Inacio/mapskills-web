@@ -1,0 +1,9 @@
+#report.row.main-area(lazy-load="reportCtrl.loadMoreStudents()")
+  .col-sm-6.col-md-3(ng-repeat="student in reportCtrl.students track by $index")
+    .thumbnail.card(style="min-height: 100%; height: unset;")
+      .text
+        h5(ng-bind="student.ra")
+      .text.border-top-bottom(style="min-height: 61px")
+        h5.max-text(ng-bind="student.name")
+      div.space-between(style="padding: 5px;")
+        label.btn.btn-info.btn-xs(ng-click="reportCtrl.studentResult(student)") resultado

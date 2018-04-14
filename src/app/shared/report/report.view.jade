@@ -1,6 +1,6 @@
 section
   .row.aligner.border-bottom.filter-direction
-    .col-xs-12.col-sm-12.col-md-6.col-lg-6.aligner-item
+    .col-xs-12.col-sm-12.col-md-6.col-lg-7.aligner-item
       //-TODO fazer filtro de input - bootstrap chosen
       select.form-control(ng-if="reportCtrl.isAdmin"
                         , ng-model="reportCtrl.institutionSelected"
@@ -17,25 +17,22 @@ section
       
     .col-xs-12.col-md-3.col-lg-3.aligner-item
       .input-group
-        span.input-group-addon De
+        span.input-group-addon(uib-popover="{{'REPORT_POPOVER' | translate}}", popover-placement="bottom-left", popover-trigger="'mouseenter'") De
         input.form-control(type="text", ng-model="reportCtrl.filter.startDate", ui-mask="9999/9")
-        span.input-group-addon Até
+        span.input-group-addon(uib-popover="{{'REPORT_POPOVER' | translate}}", popover-placement="bottom", popover-trigger="'mouseenter'") Até
         input.form-control(type="text", ng-model="reportCtrl.filter.endDate", ui-mask="9999/9")
         
-    .col-xs-12.col-md-3.col-lg-3.aligner-item.button-new
-      label.btn.btn-primary.btn-md(ng-click="reportCtrl.search(true)")
-        i.fa.fa-search.ico-sidebar
-        | buscar
-      label.btn.btn-primary.btn-md(ng-click="reportCtrl.download()")
-        i.fa.fa-file-excel-o.ico-sidebar
-        | download
+    .col-xs-12.col-md-3.col-lg-2.aligner-item.button-new.space-around
+      .btn-group.visible-lg-block(role="group", aria-label="content-show")
+        button.btn.btn-primary(type="button", ng-click="reportCtrl.template = 'app/shared/report/template/table.view.html'")
+          i.fa.fa-list-ul
+        button.btn.btn-primary(type="button", ng-click="reportCtrl.template = 'app/shared/report/template/card.view.html'")
+          i.fa.fa-th
 
-  .row.main-area(lazy-load="reportCtrl.loadMoreStudents()")
-    .col-sm-6.col-md-3(ng-repeat="student in reportCtrl.students track by $index")
-      .thumbnail.card(style="min-height: 100%; height: unset;")
-        .text
-          h5(ng-bind="student.ra")
-        .text.border-top-bottom(style="min-height: 61px")
-          h5.max-text(ng-bind="student.name")
-        div.space-between(style="padding: 5px;")
-          label.btn.btn-info.btn-xs(ng-click="reportCtrl.studentResult(student)") resultado
+      .btn-group(role="group", aria-label="report-option")
+        button.btn.btn-primary(type="button", ng-click="reportCtrl.search(true)")
+          i.fa.fa-search
+        button.btn.btn-primary(type="button", ng-click="reportCtrl.download()")
+          i.fa.fa-download
+
+  ng-include(src="reportCtrl.template") 

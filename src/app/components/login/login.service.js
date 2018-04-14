@@ -24,10 +24,10 @@
 			};
 
 			/**
-			* Função que realiza uma chamada ao serviço back-end de login
-			* para autenticação do usuário, em caso de sucesso é retornado
-			* o Token JWT no header do response.
-			*/
+			 * Função que realiza uma chamada ao serviço back-end de login
+			 * para autenticação do usuário, em caso de sucesso é retornado
+			 * o Token JWT no header do response.
+			 */
 			function _login(login) {
 				$http({
 					method: 'POST', url: API_SERVER.LOGIN,
@@ -60,28 +60,40 @@
 				});
 				return deferred.promise;
 			}
-/** ao realizar logout limpa todas informações contidas no storage */
+			/**
+			 * Ao realizar logout limpa todas informações contidas no storage
+			 */
 			function _logout() {
 				_validateProfile(null);
 			}
-/** retorna se ha um usuario logado */
+			/**
+			 * Retorna se ha um usuario logado
+			 */
 			function _isLogged() {
 				return Session.hasSession();
 			}
-/** identifica o usuario logado, para ver as permissoes de acesso */
+			/**
+			 * Identifica o usuario logado, para ver as permissoes de acesso
+			 */
 			function _validateProfile(profile) {
 				var user = Session.refreshUserSession();
-/** resolve um chain de verificação */
+				/**
+				 * Resolve um chain de verificação
+				 */
 				if(user == null || profile == null || profile !== user.profile) {
 					toLogin();
 				}
 			}
-/** limpa storage e redireciona para login */
+			/**
+			 * Limpa storage e redireciona para login
+			 */
 			function toLogin() {
 				Session.destroy();
 				$state.go("login");
 			}
-/** redireciona o usuário de acordo com perfil recebido como parâmetro */
+			/**
+			 * Redireciona o usuário de acordo com perfil recebido como parâmetro
+			 */
 			function _redirect(profile) {
 				redirections[profile]();
 			}

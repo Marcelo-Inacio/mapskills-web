@@ -11,10 +11,11 @@
 		var page = {nextPage: 0, size: 20, isLast: false};
 		vm.students = null;
 		vm.filter = {name: null, ra: null, course: {}};
-		vm.tableHeader = [{label: "Nome", model: "name", width: {'width': '30%'}},
+		vm.tableHeader = [{label: "Nome", model: "name", width: {'width': '28%'}},
 			{label: "RA", model: "ra", width: {'width': '15%'}},
-			{label: "Curso", model: "course", width: {'width': '30%'}},
-			{label: "Concluído", model: "completed", width: {'width': '10%'}}];
+			{label: "Curso", model: "course", width: {'width': '32%'}},
+			{label: "Concluído", model: "completed", width: {'width': '10%'}}
+		];
 
     init();
 
