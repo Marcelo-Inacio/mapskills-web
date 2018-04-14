@@ -71,10 +71,10 @@ section
               input.form-control(type='text', ng-model="::studentProfileCtrl.user.institution.city", readonly)
     
     .row
-      .col-md-12.button-new
-        label.btn.btn-primary.btn-md(ui-sref="^.result", ng-if="studentProfileCtrl.user.completed")
+      .col-xs-12
+        label.btn.btn-primary(ui-sref="^.result", ng-if="studentProfileCtrl.user.completed")
           i.fa.fa-gamepad.ico-sidebar
           | Meu Resultado
-        label.btn.btn-primary.btn-md(ui-sref="^.game")
+        label.btn.btn-primary(ui-sref="^.game")
           i.fa.fa-gamepad.ico-sidebar
           | Jogo

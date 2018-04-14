@@ -1,10 +1,11 @@
 section
-  .row.button-new
-      label.btn.btn-primary.btn-md(ng-click="stuCtrl.openStudentModal()")
+  .row
+    .col-xs-12
+      label.btn.btn-primary(ng-click="stuCtrl.openStudentModal()")
         i.fa.fa-user-plus.ico-sidebar
         | novo
 
-      label.btn.btn-primary.btn-md(ng-click="stuCtrl.openFileModal()")
+      label.btn.btn-primary(ng-click="stuCtrl.openFileModal()")
         i.fa.fa-file-excel-o.ico-sidebar
         | importar excel
 
