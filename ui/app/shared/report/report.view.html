@@ -1,7 +1,7 @@
 
 <section>
   <div class="row aligner border-bottom filter-direction">
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-7 aligner-item">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 aligner-item">
       <select ng-if="reportCtrl.isAdmin" ng-model="reportCtrl.institutionSelected" ng-change="reportCtrl.getInstitutionCourses(reportCtrl.institutionSelected.id)" ng-options="institution.company for institution in reportCtrl.institutions track by institution.id" class="form-control">
         <option value="">--- Todos ---</option>
       </select>
@@ -18,8 +18,8 @@
         <input type="text" ng-model="reportCtrl.filter.endDate" ui-mask="9999/9" class="form-control">
       </div>
     </div>
-    <div class="col-xs-12 col-md-3 col-lg-2 aligner-item button-new space-around">
-      <div role="group" aria-label="content-show" class="btn-group visible-lg-block">
+    <div class="col-xs-12 col-md-3 col-lg-3 aligner-item button-new space-around">
+      <div role="group" aria-label="content-show" class="btn-group hidden-xs">
         <button type="button" ng-click="reportCtrl.template = 'app/shared/report/template/table.view.html'" class="btn btn-primary"><i class="fa fa-list-ul"></i></button>
         <button type="button" ng-click="reportCtrl.template = 'app/shared/report/template/card.view.html'" class="btn btn-primary"><i class="fa fa-th"></i></button>
       </div>

@@ -1,13 +1,25 @@
-.row.center-align.flex-direction.button-new
-  .col-xs-12.col-sm-6.col-md-6.col-lg-6
-    .input-group
-      span.input-group-addon De
-      input.form-control(type="month", ng-model="startDate")
-  .col-xs-12.col-sm-6.col-md-5
-    .input-group
-      span.input-group-addon Até
-      input.form-control(type="month", ng-model="endDate")
-  .col-xs-12.col-sm-6.col-md-2.aligner
-    label.btn.btn-primary.btn-md(ng-click="search()")
-      i.fa.fa-search.ico-sidebar
-      | pesquisar
+.row.flex-direction
+  .visible-xs-block
+    .col-xs-12
+      .input-group
+        span.input-group-addon De
+        input.form-control(type="month", ng-model="startDate")
+    .col-xs-12
+      .input-group
+        span.input-group-addon Até
+        input.form-control(type="month", ng-model="endDate")
+    .col-xs-12
+      label.btn.btn-primary(ng-click="search()")
+        i.fa.fa-search.ico-sidebar
+        | pesquisar
+  
+  .hidden-xs
+    .col-sm-12(style="margin-top: 10px")
+      .input-group
+        span.input-group-addon De
+        input.form-control(type="month", ng-model="startDate")
+        span.input-group-addon Até
+        input.form-control(type="month", ng-model="endDate")
+        span.input-group-btn(ng-click="search()")
+          button.btn.btn-primary(type='button')
+            i.fa.fa-search.ico-sidebar

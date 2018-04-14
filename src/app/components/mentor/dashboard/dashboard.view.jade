@@ -2,7 +2,7 @@ section
   date-range-filter(start-date="mentorDashCtrl.filter.startDate", end-date="mentorDashCtrl.filter.endDate", search="mentorDashCtrl.search()")
   #dashboard.container-fluid.main-area
     .row(ng-if="mentorDashCtrl.courses.length > 0")
-      .col-md-12
+      .col-xs-12
         .panel
           .panel-body.full-height
             .row
@@ -11,7 +11,7 @@ section
                 div
                   h5(style="text-align: center") {{::course.code}}
     .row(ng-if="mentorDashCtrl.courses.length > 0")
-      .col-md-12
+      .col-xs-12
         .panel.panel-default
           .panel-heading Legenda
           .panel-body.full-height
@@ -19,6 +19,6 @@ section
               span {{::course.code}} - {{::course.name}}
     
     .row(ng-if="mentorDashCtrl.courses.length == 0")
-      .col-xs-12.col-sm-12.col-md-12
+      .col-xs-12
         .alert.alert-info
           h4 Nenhum resultado encontrado.

@@ -1,17 +1,15 @@
 section
-  .row(style="display: flex; justify-content: space-between")
-    .col-lg-6.button-new(style="justify-content: flex-start;")
+  .row
+    .col-xs-12
       i.fa.fa-info-circle.ico-large(uib-popover="{{'SCENE_MESSAGE' | translate}}", popover-placement="bottom-left", popover-trigger="'mouseenter'")
-    .col-lg-6.button-new
-      label.btn.btn-primary.btn-md(ng-click="scnCtrl.openSceneModal()") novo
-      label.btn.btn-primary.btn-md(ng-click="scnCtrl.updateIndexScenes(scnCtrl.allScenes)") salvar alterações
-  .row.main-area(ui-sortable ng-model="scnCtrl.allScenes")
-    .col-sm-6.col-md-3(ng-repeat="scene in scnCtrl.allScenes track by scene.id")
+      label.btn.btn-primary(ng-click="scnCtrl.openSceneModal()") novo
+      label.btn.btn-primary(ng-click="scnCtrl.updateIndexScenes(scnCtrl.allScenes)") salvar alterações
+  #scenes.row.main-area(ui-sortable ng-model="scnCtrl.allScenes")
+    .col-sm-6.col-md-4.col-lg-3(ng-repeat="scene in scnCtrl.allScenes track by scene.id")
       .thumbnail.card
         img(ng-src="{{scene.background.filename}}", onerror="this.src='assets/images/image_unavailable.png'", alt="{{scene.background.filename}}")
         .text
-          p(ng-if="scene.text.length > 80") {{scene.text | limitTo:80}} ...
-          p(ng-if="scene.text.length <= 80") {{scene.text}}
+          p.text-ellipsis(ng-bind="scene.text")
         div(style="padding: 5px;")
           div.space-between.align-center.border-top-bottom
             i Questão

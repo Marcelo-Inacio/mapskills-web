@@ -1,21 +1,21 @@
 section
   date-range-filter(start-date="admDashCtrl.filter.startDate", end-date="admDashCtrl.filter.endDate", search="admDashCtrl.search()")
   #dashboard.row.main-area
-    .col-sm-12.col-lg-6
+    .col-xs-12.col-lg-6
       .panel.panel-default(ng-if="admDashCtrl.hasResult.etecs")
         .panel-heading Etecs
         .panel-body
           .row.aligner-item
-            .col-xs-10.col-lg-6
+            .col-xs-9.col-sm-6.col-md-4.col-lg-6
               canvas#pie.chart.chart-pie(chart-data='admDashCtrl.indicator.etecs.values', chart-labels='admDashCtrl.indicator.labels', chart-options='admDashCtrl.indicator.options')
       .panel.panel-default(ng-if="!admDashCtrl.hasResult.etecs")
         .panel-heading(style="text-align: center") Nenhum resultado
-    .col-sm-12.col-lg-6
+    .col-xs-12.col-lg-6
       .panel.panel-default(ng-if="admDashCtrl.hasResult.fatecs")
         .panel-heading Fatecs
         .panel-body
           .row.aligner-item
-            .col-xs-10.col-lg-6
+            .col-xs-9.col-sm-6.col-md-4.col-lg-6
               canvas#pie.chart.chart-pie(chart-data='admDashCtrl.indicator.fatecs.values', chart-labels='admDashCtrl.indicator.labels', chart-options='admDashCtrl.indicator.options')
       .panel.panel-default(ng-if="!admDashCtrl.hasResult.fatecs")
         .panel-heading(style="text-align: center") Nenhum resultado

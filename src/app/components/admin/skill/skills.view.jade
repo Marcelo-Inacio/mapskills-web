@@ -1,8 +1,9 @@
 section
-  .row.button-new
-    label.btn.btn-primary.btn-md(ng-click="skiCtrl.openModal()") novo
+  .row
+    .col-xs-12
+      label.btn.btn-primary(ng-click="skiCtrl.openModal()") novo
   #skills.row.main-area
-    .col-xs-12.col-sm-6.col-md-3(ng-repeat="skill in skiCtrl.allSkills track by skill.id")
+    .col-xs-12.col-sm-6.col-md-4.col-lg-3(ng-repeat="skill in skiCtrl.allSkills track by skill.id")
       .panel.panel-default
         .panel-heading {{skill.name}}
         .panel-body.panel-auto(style="min-height: 150px", ng-if="skill.description.length > 150") {{skill.description | limitTo:150}} ...
