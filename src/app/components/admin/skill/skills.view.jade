@@ -1,7 +1,7 @@
 section
   .row.button-new
     label.btn.btn-primary.btn-md(ng-click="skiCtrl.openModal()") novo
-  .row.main-area
+  #skills.row.main-area
     .col-xs-12.col-sm-6.col-md-3(ng-repeat="skill in skiCtrl.allSkills track by skill.id")
       .panel.panel-default
         .panel-heading {{skill.name}}

@@ -1,7 +1,7 @@
 section
   .row.button-new
     label.btn.btn-primary.btn-md(ng-click="crsCtrl.openCourseModal()") novo
-  .row.main-area
+  #courses.row.main-area
     .col-xs-12.col-sm-6.col-md-4.col-lg-3(ng-repeat="course in crsCtrl.allCourses track by $index")
       .thumbnail.card
         img(ng-src="{{crsCtrl.image}}", onerror="this.src='assets/images/image_unavailable.png'", alt="{{crsCtrl.image}}", style="max-height: 218px")

@@ -1,0 +1,24 @@
+div(uib-dropdown='', on-toggle='toggled(open)')
+  a#simple-dropdown(href='', uib-dropdown-toggle='')
+    i.fa.fa-bars.bars-menu
+  ul(uib-dropdown-menu="", aria-labelledby="simple-dropdown")
+    li
+      a(ui-sref="mentor.dashboard")
+        i.fa.fa-tachometer.ico-sidebar
+        |  Dashboard
+    li
+      a(ui-sref="mentor.students")
+        i.fa.fa-users.ico-sidebar
+        |  Alunos
+    li
+      a(ui-sref="mentor.courses")
+        i.fa.fa-graduation-cap.ico-sidebar
+        |  Cursos
+    li
+      a(ui-sref="mentor.themes")
+        i.fa.fa-paint-brush.ico-sidebar
+        |  Tema do Jogo
+    li
+      a(ui-sref="mentor.report")
+        i.fa.fa-history.ico-sidebar
+        |  Relatório

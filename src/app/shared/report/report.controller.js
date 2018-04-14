@@ -9,6 +9,7 @@
 	function ReportController(adminService, Session, HelperService, reportService, toastr, $uibModal) {
 		var vm = this;
 		var page = {nextPage: 0, size: 40, isLast: false};
+		vm.template = 'app/shared/report/template/card.view.html';
     vm.isAdmin = true;
     vm.filter = {institutionLevel: null, institutionCode: null, courseCode: null, startDate: null, endDate: null};
     vm.institutions = [];
@@ -64,6 +65,9 @@
 			vm.search(false);
 		}
 
+		/**
+		 * Responsavel por manipular o modal com os resultados do aluno selecionado.
+		 */
 		vm.studentResult = function(student) {
 			$uibModal.open({
 	      animation: true,
@@ -96,7 +100,7 @@
 
 					vm.close = function () {
 				    $uibModalInstance.dismiss('cancel');
-				  };
+				  }
 				},
 	      size: 'md'
 	    });

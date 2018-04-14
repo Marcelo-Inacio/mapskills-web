@@ -7,7 +7,8 @@ section
       label.btn.btn-primary.btn-md(ng-click="stuCtrl.openFileModal()")
         i.fa.fa-file-excel-o.ico-sidebar
         | importar excel
-  table.table.table-hover.table-striped.table-scroll
+
+  table#students-table.table.table-hover.table-striped
     thead.table-thead
       tr
         th
@@ -25,25 +26,19 @@ section
             | pesquisar
         th
       tr
-        th(ng-style="stuCtrl.tableHeader[0].width")
-          label(for="stuCtrl.tableHeader[0].label") {{::stuCtrl.tableHeader[0].label}}
-        th(ng-style="stuCtrl.tableHeader[1].width")
-          label(for="stuCtrl.tableHeader[1].label") {{::stuCtrl.tableHeader[1].label}}
-        th(ng-style="stuCtrl.tableHeader[2].width")
-          label(for="stuCtrl.tableHeader[2].label") {{::stuCtrl.tableHeader[2].label}}
-        th(ng-style="stuCtrl.tableHeader[3].width")
-          label(for="stuCtrl.tableHeader[3].label") {{::stuCtrl.tableHeader[3].label}}
-        th          
+        th(ng-style="header.width", ng-repeat="header in stuCtrl.tableHeader")
+          label(ng-bind="::header.label")
+        th
         th
     tbody.tbody-scroll(lazy-load="stuCtrl.loadMoreStudents()")
       tr.tr-scroll(ng-repeat="student in stuCtrl.students track by student.id")
-        td(style="width: 30%") {{student.name}}
+        td.text-ellipsis(style="width: 30%") {{student.name}}
         td(style="width: 15%") {{student.ra}}
-        td(style="width: 30%") {{student.course.name.replace('Tecnologia em', '')}}
+        td(style="width: 35%") {{student.course.name}}
         td(style="width: 10%", ng-if="student.completed").check-ok
           i.fa.fa-check-circle
         td(style="width: 10%", ng-if="!student.completed").check-not-ok
           i.fa.fa-minus-circle
         td(style="width: 15%")
-          label.btn.btn-info.btn-xs(ng-click="stuCtrl.openDetailsModal(student)", style="margin: 5px") detalhes
-          label.btn.btn-info.btn-xs(ng-click="stuCtrl.openStudentModal(student)", style="margin: 5px") editar
+          label.btn.btn-info.btn-xs(ng-click="stuCtrl.openDetailsModal(student)", style="margin: 2.5px") detalhes
+          label.btn.btn-info.btn-xs(ng-click="stuCtrl.openStudentModal(student)", style="margin: 2.5px") editar

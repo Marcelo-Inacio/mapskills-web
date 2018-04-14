@@ -1,0 +1,25 @@
+
+<table id="report-table" class="table table-hover table-striped hidden-xs">
+  <thead class="table-thead">
+    <tr>
+      <th>
+        <label>Nome</label>
+      </th>
+      <th style="width: 20%">
+        <label>RA</label>
+      </th>
+      <th style="width: 20%">
+        <label>Resultado</label>
+      </th>
+    </tr>
+  </thead>
+  <tbody lazy-load="reportCtrl.loadMoreStudents()" class="tbody-scroll">
+    <tr ng-repeat="student in reportCtrl.students track by $index" class="tr-scroll">
+      <td ng-bind="::student.name"></td>
+      <td style="width: 20%" ng-bind="::student.ra"></td>
+      <td style="width: 20%">
+        <label ng-click="reportCtrl.studentResult(student)" class="btn btn-info btn-xs">resultado</label>
+      </td>
+    </tr>
+  </tbody>
+</table>

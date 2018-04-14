@@ -7,5 +7,6 @@
   "TECHNICAL": "Técnico",
   "SCENE_MESSAGE": "Arraste as figuras para reordenar a exibição das cenas do jogo",
   "true": "sim",
-  "false": "não"
+  "false": "não",
+  "REPORT_POPOVER": "Entre com ano/semestre. Ex.: 2018/1"
 }

@@ -9,7 +9,7 @@
   & > .btn
     margin-left: 5px;
     margin-right: 5px;
-    @media (max-width: 768px)
+    @media (max-width: 812px)
       width: 100%;
 
 .botton-switch
@@ -34,6 +34,10 @@
 .space-between
   display: flex;
   justify-content: space-between;
+
+.space-around
+  display: flex;
+  justify-content: space-around;
 
 .border-top
   border-top: 1px solid #eeeeee
@@ -83,10 +87,23 @@
     flex-direction: column;
 
 .main-area
-  max-height: 82vh;
+  max-height: 81vh;
   overflow-x: auto;
   @media (max-width: 812px)
     max-height: 77vh;
+
+#dashboard
+#report
+  @media (max-width: 812px)
+    max-height: 75vh;
+
+#courses
+#themes
+#institutions
+#skills
+  max-height: 83vh;
+  @media (max-width: 812px)
+    max-height: 87vh;
 
 .main-area
   & .card

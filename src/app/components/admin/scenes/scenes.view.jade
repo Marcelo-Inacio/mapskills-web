@@ -1,7 +1,7 @@
 section
   .row(style="display: flex; justify-content: space-between")
     .col-lg-6.button-new(style="justify-content: flex-start;")
-      i.fa.fa-info-circle.ico-large(uib-tooltip="{{'SCENE_MESSAGE' | translate}}", tooltip-placement="bottom-right")
+      i.fa.fa-info-circle.ico-large(uib-popover="{{'SCENE_MESSAGE' | translate}}", popover-placement="bottom-left", popover-trigger="'mouseenter'")
     .col-lg-6.button-new
       label.btn.btn-primary.btn-md(ng-click="scnCtrl.openSceneModal()") novo
       label.btn.btn-primary.btn-md(ng-click="scnCtrl.updateIndexScenes(scnCtrl.allScenes)") salvar alterações
