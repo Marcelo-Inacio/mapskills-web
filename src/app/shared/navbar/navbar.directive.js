@@ -25,8 +25,6 @@
       init();
 
       function init() {
-        var widthBrowser = $window.innerWidth;
-        var path = $location.path().toLowerCase();
         vm.user = loginService.getUserLogged();
         vm.showMenu = vm.user.profile != 'STUDENT';
       }

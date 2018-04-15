@@ -47,7 +47,7 @@
 				page.nextPage++;
 				page.isLast = response.remainingPages <= 0;
 				vm.students = angular.copy(response.students);
-			}, function error(response) {
+			}, function error() {
 				toastr.error("Problema ao tentar buscar relatório.", ":\\");
 			});
     }
@@ -70,9 +70,9 @@
 		 */
 		vm.studentResult = function(student) {
 			$uibModal.open({
-	      animation: true,
-	      templateUrl: 'app/shared/report/modal/report.modal.html',
-	      controllerAs: 'vm',
+				animation: true,
+				templateUrl: 'app/shared/report/modal/report.modal.html',
+				controllerAs: 'vm',
 				controller: function($uibModalInstance) {
 					var vm = this;
 					vm.skills = [];
@@ -87,7 +87,7 @@
 						var values = [];
 						var minimumValues = [];
 						var maxValues = [];
-						angular.forEach(vm.student.skillResult, function(skill, key) {
+						angular.forEach(vm.student.skillResult, function(skill) {
 							minimumValues.push(0);
 							maxValues.push(16);
 							vm.skills.push(skill.skill);
@@ -99,11 +99,11 @@
 					})();
 
 					vm.close = function () {
-				    $uibModalInstance.dismiss('cancel');
-				  }
+						$uibModalInstance.dismiss('cancel');
+					}
 				},
-	      size: 'md'
-	    });
+				size: 'md'
+			});
 		}
     /**
 		 * Retorna filtro para realização da pesquisa ou download do csv

@@ -33,7 +33,7 @@
 			}
 			adminService.dashboard.global(filterParameter).then(function success(response) {
 				loadResults(response);
-			}, function error(response) {
+			}, function error() {
 				toastr.error("Falha ao recuperar resultados");
 			});
 		}
