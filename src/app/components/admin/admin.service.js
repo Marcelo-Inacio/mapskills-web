@@ -79,10 +79,10 @@
 				$http({method: restContext.method, url: restContext.url,
             data: jsonData,	headers: {"Content-Type": "application/json"}
         }).then(function success(response) {
-					 deferred.resolve(response);
-				 }, function error(response) {
-					 deferred.resolve(response);
-				 });
+					deferred.resolve(response);
+				}, function error(response) {
+					deferred.resolve(response);
+				});
         return deferred.promise;
 			}
 

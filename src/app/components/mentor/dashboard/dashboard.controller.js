@@ -27,7 +27,7 @@
 			$log.log(params);
 			mentorService.loadCourseIndicators(params).then(function success(response) {
 				vm.courses = response;
-			}, function error(response) {
+			}, function error() {
 				toastr.error("Falha ao recuperar resultados");
 			});
 		}

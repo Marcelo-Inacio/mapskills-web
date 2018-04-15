@@ -33,7 +33,7 @@
 				angular.forEach(vm.institutions, function(institution) {
 					vm.codes.push(institution.code);
 				});
-			}, function error(response) {
+			}, function error() {
 				toastr.error("Falha ao recuperar resultados");
 			});
 		}

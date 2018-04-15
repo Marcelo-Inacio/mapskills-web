@@ -144,7 +144,7 @@
 				var deferred = $q.defer();
 				var uri = API_SERVER.REPORT.COURSE;
 				$http.get(uri, {params: filter}).then(function success(response) {
-           deferred.resolve(response.data);
+					deferred.resolve(response.data);
          }, function error(response) {
 					 deferred.reject(response);
 				 });

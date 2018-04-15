@@ -24,14 +24,14 @@
 					deferred.resolve(studentsPageCached);
 				} else {
 					var uri = API_SERVER.REPORT.SHOW;
-	        $http.get(uri, {params: filter}).then(function success(response) {
+					$http.get(uri, {params: filter}).then(function success(response) {
 						studentsPageCached.students = studentsPageCached.students.concat(response.data.students);
 						studentsPageCached.remainingPages = response.data.remainingPages;
 						deferred.resolve(studentsPageCached);
-	        }, function error(response) {
-	          $log.error(response);
+					}, function error(response) {
+						$log.error(response);
 						deferred.reject(response);
-	        });
+					});
 				}
 
         return deferred.promise;
