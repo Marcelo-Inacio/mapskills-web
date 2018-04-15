@@ -1,9 +1,9 @@
 
 <section>
   <div class="row">
-    <div class="col-xs-12">
-      <label ng-click="stuCtrl.openStudentModal()" class="btn btn-primary"><i class="fa fa-user-plus ico-sidebar"></i>novo</label>
-      <label ng-click="stuCtrl.openFileModal()" class="btn btn-primary"><i class="fa fa-file-excel-o ico-sidebar"></i>importar excel</label>
+    <div class="col-xs-12 xs-space-between">
+      <button ng-click="stuCtrl.openStudentModal()" class="btn btn-primary"><i class="fa fa-user-plus ico-sidebar"></i>novo</button>
+      <button ng-click="stuCtrl.openFileModal()" class="btn btn-primary"><i class="fa fa-file-excel-o ico-sidebar"></i>importar excel</button>
     </div>
   </div>
   <table id="students-table" class="table table-hover table-striped">
@@ -22,7 +22,7 @@
         </th>
         <th></th>
         <th>
-          <label ng-click="stuCtrl.search()" class="btn btn-default btn-md"><i class="fa fa-search ico-sidebar"></i>pesquisar</label>
+          <label ng-click="stuCtrl.search()" class="btn btn-info"><i class="fa fa-search ico-sidebar"></i>pesquisar</label>
         </th>
         <th></th>
       </tr>

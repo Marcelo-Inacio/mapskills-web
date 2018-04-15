@@ -1,12 +1,14 @@
 
 <section>
   <div class="row">
-    <div class="col-xs-12"><i uib-popover="{{'SCENE_MESSAGE' | translate}}" popover-placement="bottom-left" popover-trigger="'mouseenter'" class="fa fa-info-circle ico-large"></i>
-      <label ng-click="scnCtrl.openSceneModal()" class="btn btn-primary">novo</label>
-      <label ng-click="scnCtrl.updateIndexScenes(scnCtrl.allScenes)" class="btn btn-primary">salvar alterações</label>
+    <div class="col-xs-12 space-between"><i uib-popover="{{'SCENE_MESSAGE' | translate}}" popover-placement="bottom-left" popover-trigger="'mouseenter'" class="fa fa-info-circle ico-large"></i>
+      <div class="btn-group">
+        <button ng-click="scnCtrl.openSceneModal()" class="btn btn-primary">novo</button>
+        <button ng-click="scnCtrl.updateIndexScenes(scnCtrl.allScenes)" class="btn btn-primary">salvar alterações</button>
+      </div>
     </div>
   </div>
-  <div id="scenes" ui-sortable ng-model="scnCtrl.allScenes" class="row main-area">
+  <div id="main-area" ui-sortable ng-model="scnCtrl.allScenes" class="row main-area">
     <div ng-repeat="scene in scnCtrl.allScenes track by scene.id" class="col-sm-6 col-md-4 col-lg-3">
       <div class="thumbnail card"><img ng-src="{{scene.background.filename}}" onerror="this.src='assets/images/image_unavailable.png'" alt="{{scene.background.filename}}">
         <div class="text">

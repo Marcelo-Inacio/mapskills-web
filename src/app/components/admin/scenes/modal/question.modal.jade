@@ -1,4 +1,4 @@
-.section
+section
   .modal-header
   .modal-body
     form(name="questionForm")
@@ -19,7 +19,7 @@
         .col-md-3
           .input-group
             span.input-group-addon Peso
-            input.form-control(type='number', ng-model="modalCtrl.question.alternatives[0].skillValue", name="skillValueA", required)
+            input.form-control(type='number', ng-model="modalCtrl.question.alternatives[0].skillValue", name="skillValueA", max="10", required)
 
       .form-group.row
         .col-md-9
@@ -29,7 +29,7 @@
         .col-md-3
           .input-group
             span.input-group-addon Peso
-            input.form-control(type='number', ng-model="modalCtrl.question.alternatives[1].skillValue", name="skillValueB", required)
+            input.form-control(type='number', ng-model="modalCtrl.question.alternatives[1].skillValue", name="skillValueB", max="10", required)
             
       .form-group.row
         .col-md-9
@@ -39,7 +39,7 @@
         .col-md-3
           .input-group
             span.input-group-addon Peso
-            input.form-control(type='number', ng-model="modalCtrl.question.alternatives[2].skillValue", name="skillValueC", required)
+            input.form-control(type='number', ng-model="modalCtrl.question.alternatives[2].skillValue", name="skillValueC", max="10", required)
             
       .form-group.row
         .col-md-9
@@ -49,7 +49,7 @@
         .col-md-3
           .input-group
             span.input-group-addon Peso
-            input.form-control(type='number', ng-model="modalCtrl.question.alternatives[3].skillValue", name="skillValueD", required)
+            input.form-control(type='number', ng-model="modalCtrl.question.alternatives[3].skillValue", name="skillValueD", max="10", required)
   .modal-footer        
     button.btn.btn-primary.btn-md(ng-disabled="!questionForm.$valid", ng-click="modalCtrl.saveSceneWithQuestion(modalCtrl.scene, modalCtrl.question)") salvar
     button.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

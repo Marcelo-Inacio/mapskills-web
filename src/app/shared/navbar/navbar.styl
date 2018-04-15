@@ -1,17 +1,21 @@
 .acme-navbar-text
-  color: white
+  color: white;
 
 .user-ico
-  margin-right 10px
-  text-align end
+  margin-right: 10px;
+  text-align: end;
 
 .logo-institution
-  letter-spacing 1px
+  letter-spacing: 1px;
 
 .menu-options
-  right: 0
-  margin-top: 10px
-  left: initial
+  right: 0;
+  margin-top: 10px;
+  left: initial;
+  @media (max-width: 425px)
+    font-size: 20px;
+    & li
+      margin: 10px 0px;
 
 .bars-menu
   font-size: xx-large;
@@ -30,3 +34,19 @@
   text-overflow: ellipsis;
   @media (max-width: 812px)
     max-width: 230px;
+
+menu-navbar
+  & div
+    & ul
+      & li
+        margin: 10px 0px;
+
+.large-font
+  font-size: 20px;
+
+.sublist
+  & li
+    height: 25px;
+    list-style: none;
+    & a
+      color: black;

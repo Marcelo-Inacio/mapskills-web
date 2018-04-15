@@ -1,12 +1,12 @@
 
 <section>
   <div class="row">
-    <div class="col-xs-12">
-      <label ng-click="insCtrl.newInstitution()" class="btn btn-primary">novo</label>
-      <label ng-click="insCtrl.openFileModal()" class="btn btn-primary"><i class="fa fa-file-excel-o ico-sidebar"></i>importar excel</label>
+    <div class="col-xs-12 xs-space-between">
+      <button ng-click="insCtrl.newInstitution()" class="btn btn-primary">novo</button>
+      <button ng-click="insCtrl.openFileModal()" class="btn btn-primary"><i class="fa fa-file-excel-o ico-sidebar"></i>importar excel</button>
     </div>
   </div>
-  <div id="institutions" class="row main-area">
+  <div id="main-area" class="row main-area">
     <div ng-repeat="institution in insCtrl.allInstitutions track by institution.id" class="col-sm-6 col-md-3">
       <div style="min-height: 100%; height: unset;" class="thumbnail card">
         <div class="text">

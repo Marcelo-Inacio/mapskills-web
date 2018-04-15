@@ -1,11 +1,11 @@
 section
   .row
-    .col-xs-12
-      label.btn.btn-primary(ng-click="insCtrl.newInstitution()") novo
-      label.btn.btn-primary(ng-click="insCtrl.openFileModal()")
+    .col-xs-12.xs-space-between
+      button.btn.btn-primary(ng-click="insCtrl.newInstitution()") novo
+      button.btn.btn-primary(ng-click="insCtrl.openFileModal()")
         i.fa.fa-file-excel-o.ico-sidebar
         | importar excel
-  #institutions.row.main-area
+  #main-area.row.main-area
     .col-sm-6.col-md-3(ng-repeat="institution in insCtrl.allInstitutions track by institution.id")
       .thumbnail.card(style="min-height: 100%; height: unset;")
         .text

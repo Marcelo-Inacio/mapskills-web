@@ -1,5 +1,5 @@
 
-<div class="section">
+<section>
   <div class="modal-header"></div>
   <div class="modal-body">
     <form name="institutionForm">
@@ -14,15 +14,11 @@
             <input type="text" ng-model="modalCtrl.institution.cnpj" ui-mask="99.999.999/9999-99" ui-mask-placeholder name="cnpj" required class="form-control">
           </div>
         </div>
-      </div>
-      <div class="form-group row aligner">
-        <div class="col-xs-12 col-md-12 col-lg-12">
+        <div class="col-xs-12">
           <div class="input-group"><span class="input-group-addon">Razão Social</span>
             <input type="text" ng-model="modalCtrl.institution.company" name="company" required class="form-control">
           </div>
         </div>
-      </div>
-      <div class="form-group row">
         <div class="col-xs-12 col-md-12 col-lg-6">
           <div class="input-group"><span class="input-group-addon">Nível</span>
             <select ng-model="modalCtrl.institution.level" ng-options="level | translate for level in modalCtrl.allLevels" name="level" required class="form-control">
@@ -36,27 +32,28 @@
           </div>
         </div>
       </div>
-      <div class="institution-mentors">
-        <label>Mentores</label>
-        <div ng-repeat="mentor in modalCtrl.institution.mentors track by mentor.id" class="form-group">
-          <div class="form-group row">
-            <div class="col-xs-12 col-md-12 col-lg-6">
-              <div class="input-group"><span class="input-group-addon">Nome</span>
-                <input type="text" ng-model="mentor.name" name="name" required class="form-control">
-              </div>
-            </div>
-            <div class="col-xs-12 col-md-12 col-lg-6">
-              <div class="input-group"><span class="input-group-addon">E-mail</span>
-                <input type="email" ng-model="mentor.username" name="username" required class="form-control">
-              </div>
+      <div class="row">
+        <hr>
+        <div class="col-xs-12">
+          <label>Mentores</label>
+        </div>
+      </div>
+      <div ng-repeat="mentor in modalCtrl.institution.mentors track by mentor.id" class="form-group">
+        <div class="row">
+          <div class="col-xs-12 col-md-12 col-lg-6">
+            <div class="input-group"><span class="input-group-addon">Nome</span>
+              <input type="text" ng-model="mentor.name" name="name" required class="form-control">
             </div>
           </div>
-          <div class="form-group row">
-            <div class="col-xs-12 col-md-12 col-lg-12">
-              <div class="input-group"><span class="input-group-addon">Senha</span>
-                <input type="{{ modalCtrl.showPassword[modalCtrl.checkboxPassword] }}" ng-model="mentor.password" placeholder="senha" name="password" required class="form-control"><span class="input-group-btn">
-                  <button ng-click="modalCtrl.checkboxPassword = !modalCtrl.checkboxPassword" class="btn btn-default"><i class="fa fa-eye"></i></button></span>
-              </div>
+          <div class="col-xs-12 col-md-12 col-lg-6">
+            <div class="input-group"><span class="input-group-addon">E-mail</span>
+              <input type="email" ng-model="mentor.username" name="username" required class="form-control">
+            </div>
+          </div>
+          <div class="col-xs-12">
+            <div class="input-group"><span class="input-group-addon">Senha</span>
+              <input type="{{ modalCtrl.showPassword[modalCtrl.checkboxPassword] }}" ng-model="mentor.password" placeholder="senha" name="password" required class="form-control"><span class="input-group-btn">
+                <button type="button" ng-click="modalCtrl.checkboxPassword = !modalCtrl.checkboxPassword" class="btn btn-default"><i class="fa fa-eye"></i></button></span>
             </div>
           </div>
         </div>
@@ -64,7 +61,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button ng-disabled="!institutionForm.$valid" ng-click="modalCtrl.saveInstitution(modalCtrl.institution)" class="btn btn-primary btn-md">salvar</button>
-    <button ng-click="modalCtrl.closeModal()" class="btn btn-default btn-md">cancelar</button>
+    <button ng-disabled="!institutionForm.$valid" ng-click="modalCtrl.saveInstitution(modalCtrl.institution)" class="btn btn-primary">salvar</button>
+    <button ng-click="modalCtrl.closeModal()" class="btn btn-default">cancelar</button>
   </div>
-</div>
+</section>

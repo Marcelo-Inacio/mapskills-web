@@ -1,5 +1,5 @@
 
-<div class="section">
+<section>
   <div class="modal-header"></div>
   <div class="modal-body">
     <form name="questionForm">
@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-3">
           <div class="input-group"><span class="input-group-addon">Peso</span>
-            <input type="number" ng-model="modalCtrl.question.alternatives[0].skillValue" name="skillValueA" required class="form-control">
+            <input type="number" ng-model="modalCtrl.question.alternatives[0].skillValue" name="skillValueA" max="10" required class="form-control">
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="col-md-3">
           <div class="input-group"><span class="input-group-addon">Peso</span>
-            <input type="number" ng-model="modalCtrl.question.alternatives[1].skillValue" name="skillValueB" required class="form-control">
+            <input type="number" ng-model="modalCtrl.question.alternatives[1].skillValue" name="skillValueB" max="10" required class="form-control">
           </div>
         </div>
       </div>
@@ -44,7 +44,7 @@
         </div>
         <div class="col-md-3">
           <div class="input-group"><span class="input-group-addon">Peso</span>
-            <input type="number" ng-model="modalCtrl.question.alternatives[2].skillValue" name="skillValueC" required class="form-control">
+            <input type="number" ng-model="modalCtrl.question.alternatives[2].skillValue" name="skillValueC" max="10" required class="form-control">
           </div>
         </div>
       </div>
@@ -56,7 +56,7 @@
         </div>
         <div class="col-md-3">
           <div class="input-group"><span class="input-group-addon">Peso</span>
-            <input type="number" ng-model="modalCtrl.question.alternatives[3].skillValue" name="skillValueD" required class="form-control">
+            <input type="number" ng-model="modalCtrl.question.alternatives[3].skillValue" name="skillValueD" max="10" required class="form-control">
           </div>
         </div>
       </div>
@@ -66,4 +66,4 @@
     <button ng-disabled="!questionForm.$valid" ng-click="modalCtrl.saveSceneWithQuestion(modalCtrl.scene, modalCtrl.question)" class="btn btn-primary btn-md">salvar</button>
     <button ng-click="modalCtrl.closeModal()" class="btn btn-default btn-md">cancelar</button>
   </div>
-</div>
+</section>

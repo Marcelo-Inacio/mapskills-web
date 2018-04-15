@@ -1,9 +1,13 @@
 
 <div uib-dropdown="" on-toggle="toggled(open)"><a id="simple-dropdown" href="" uib-dropdown-toggle=""><i class="fa fa-bars bars-menu"></i></a>
-  <ul uib-dropdown-menu="" aria-labelledby="simple-dropdown">
+  <ul uib-dropdown-menu="" aria-labelledby="simple-dropdown" class="large-font">
     <li><a ui-sref="admin.dashboard"><i class="fa fa-tachometer ico-sidebar"></i> Dashboard - Geral</a></li>
-    <li><a ui-sref="admin.dashboard-institution({level:'fatec'})"><i class="fa fa-tachometer ico-sidebar"></i> Dashboard - Fatecs</a></li>
-    <li><a ui-sref="admin.dashboard-institution({level:'etec'})"><i class="fa fa-tachometer ico-sidebar"></i> Dashboard - Etecs</a></li>
+    <li>
+      <ul class="sublist">
+        <li><a ui-sref="admin.dashboard-institution({level:'fatec'})"><i class="fa fa-area-chart ico-sidebar"></i> Fatecs</a></li>
+        <li><a ui-sref="admin.dashboard-institution({level:'etec'})"><i class="fa fa-bar-chart ico-sidebar"></i> Etecs</a></li>
+      </ul>
+    </li>
     <li><a ui-sref="admin.institutions"><i class="fa fa-university ico-sidebar"></i> Instituições</a></li>
     <li><a ui-sref="admin.themes"><i class="fa fa-eyedropper ico-sidebar"></i> Temas</a></li>
     <li><a ui-sref="admin.skills"><i class="fa fa-shield ico-sidebar"></i> Competências</a></li>

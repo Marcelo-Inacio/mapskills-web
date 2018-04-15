@@ -1,6 +1,8 @@
 .row
   & .col-xs-12
     margin: 5px 0px;
+    & button
+      margin: 0px 2.5px;
 
 .botton-switch
   margin: auto;
@@ -24,6 +26,11 @@
 .space-between
   display: flex;
   justify-content: space-between;
+
+.xs-space-between
+  @media (max-width: 425px)
+    display: flex;
+    justify-content: space-between;
 
 .space-around
   display: flex;
@@ -60,24 +67,25 @@
   @media (max-width: 1024px)
     height: 100%;
 
-.institution-mentors
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: rgba(0,0,0,0.12);
-
 .input-group
   & > .input-group-addon
     border-right: 1px solid #ccc;
     background-color: rgb(250,250,250);
 
 .flex-direction
-  justify-content: space-between;
   flex-direction: row;
   @media (max-width: 425px)
     flex-direction: column;
 
 .main-area
   overflow-x: auto;
+
+.main-area
+  & .card
+    & .text
+      & > .max-text
+        height: 30px;
+        overflow: hidden;
 
 #dashboard
 #report
@@ -93,11 +101,7 @@
   @media (max-width: 320px)
     max-height: 67vh;
 
-#courses
-#themes
-#scenes
-#institutions
-#skills
+#main-area
   max-height: 84vh;
   @media (max-width: 1024px)
     max-height: 92vh;
@@ -109,10 +113,3 @@
     max-height: 75vh;
   @media (max-width: 320px)
     max-height: 81vh;
-
-.main-area
-  & .card
-    & .text
-      & > .max-text
-        height: 30px;
-        overflow: hidden;
