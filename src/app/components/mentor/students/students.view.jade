@@ -1,11 +1,11 @@
 section
   .row
-    .col-xs-12
-      label.btn.btn-primary(ng-click="stuCtrl.openStudentModal()")
+    .col-xs-12.xs-space-between
+      button.btn.btn-primary(ng-click="stuCtrl.openStudentModal()")
         i.fa.fa-user-plus.ico-sidebar
         | novo
 
-      label.btn.btn-primary(ng-click="stuCtrl.openFileModal()")
+      button.btn.btn-primary(ng-click="stuCtrl.openFileModal()")
         i.fa.fa-file-excel-o.ico-sidebar
         | importar excel
 
@@ -22,7 +22,7 @@ section
             option(value='') -- Selecione um curso --
         th
         th
-          label.btn.btn-default.btn-md(ng-click="stuCtrl.search()")
+          label.btn.btn-info(ng-click="stuCtrl.search()")
             i.fa.fa-search.ico-sidebar
             | pesquisar
         th

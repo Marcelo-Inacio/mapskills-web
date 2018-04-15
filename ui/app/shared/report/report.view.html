@@ -1,6 +1,6 @@
 
 <section>
-  <div class="row aligner border-bottom filter-direction">
+  <div class="row aligner border-bottom flex-direction space-between">
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 aligner-item">
       <select ng-if="reportCtrl.isAdmin" ng-model="reportCtrl.institutionSelected" ng-change="reportCtrl.getInstitutionCourses(reportCtrl.institutionSelected.id)" ng-options="institution.company for institution in reportCtrl.institutions track by institution.id" class="form-control">
         <option value="">--- Todos ---</option>

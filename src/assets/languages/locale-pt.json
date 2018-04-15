@@ -8,5 +8,6 @@
   "SCENE_MESSAGE": "Arraste as figuras para reordenar a exibição das cenas do jogo",
   "true": "sim",
   "false": "não",
-  "REPORT_POPOVER": "Entre com ano/semestre. Ex.: 2018/1"
+  "REPORT_POPOVER": "Entre com ano/semestre. Ex.: 2018/1",
+  "UPLOAD_IMAGE_MESSAGE": "Somente são aceitos imagens de até 500 KB"
 }

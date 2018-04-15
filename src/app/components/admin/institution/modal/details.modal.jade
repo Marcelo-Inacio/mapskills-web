@@ -1,4 +1,4 @@
-.section
+section
   .modal-header
   .modal-body
     .form-group.row
@@ -10,7 +10,6 @@
         .input-group
           span.input-group-addon Razão Social
           input.form-control(ng-model="::modalCtrl.institution.company", readonly)
-    .form-group.row
       .col-xs-12.col-md-5
         .input-group
           span.input-group-addon CNPJ
@@ -19,12 +18,12 @@
         .input-group
           span.input-group-addon Cidade
           input.form-control(ng-model="::modalCtrl.institution.city", readonly)
-    .form-group.row
+    .row
       hr
-      .col-xs-12.col-sm-12.col-md-12.col-lg-12
-        label Mentores:
+      .col-xs-12
+        label Mentores
     .form-group(ng-repeat="mentor in modalCtrl.institution.mentors track by mentor.id")
-      .form-group.row
+      .row
         .col-xs-12.col-md-12.col-lg-6
           .input-group
             span.input-group-addon Nome:

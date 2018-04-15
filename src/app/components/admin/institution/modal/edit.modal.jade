@@ -1,4 +1,4 @@
-.section
+section
   .modal-header
   .modal-body
     form(name="institutionForm")
@@ -11,12 +11,10 @@
           .input-group
             span.input-group-addon CNPJ
             input.form-control(type='text', ng-model="modalCtrl.institution.cnpj", ui-mask="99.999.999/9999-99", ui-mask-placeholder, name="cnpj", required)
-      .form-group.row.aligner
-        .col-xs-12.col-md-12.col-lg-12
+        .col-xs-12
           .input-group
             span.input-group-addon Razão Social
             input.form-control(type='text', ng-model="modalCtrl.institution.company", name="company", required)
-      .form-group.row
         .col-xs-12.col-md-12.col-lg-6
           .input-group
             span.input-group-addon Nível
@@ -29,27 +27,28 @@
           .input-group
             span.input-group-addon Cidade
             input.form-control(type='text', ng-model="modalCtrl.institution.city", name="city", required)
-      .institution-mentors
-        label Mentores
-        .form-group(ng-repeat="mentor in modalCtrl.institution.mentors track by mentor.id")
-          .form-group.row
-            .col-xs-12.col-md-12.col-lg-6
-              .input-group
-                span.input-group-addon Nome
-                input.form-control(type='text', ng-model="mentor.name", name="name", required)
-            .col-xs-12.col-md-12.col-lg-6
-              .input-group
-                span.input-group-addon E-mail
-                input.form-control(type='email', ng-model="mentor.username", name="username", required)
-          .form-group.row
-            .col-xs-12.col-md-12.col-lg-12
-              .input-group
-                span.input-group-addon Senha
-                input.form-control(type='{{ modalCtrl.showPassword[modalCtrl.checkboxPassword] }}', ng-model="mentor.password", placeholder="senha", name="password", required)
-                span.input-group-btn
-                  button.btn.btn-default(ng-click='modalCtrl.checkboxPassword = !modalCtrl.checkboxPassword')
-                    i.fa.fa-eye
+      .row
+        hr
+        .col-xs-12
+          label Mentores
+      .form-group(ng-repeat="mentor in modalCtrl.institution.mentors track by mentor.id")
+        .row
+          .col-xs-12.col-md-12.col-lg-6
+            .input-group
+              span.input-group-addon Nome
+              input.form-control(type='text', ng-model="mentor.name", name="name", required)
+          .col-xs-12.col-md-12.col-lg-6
+            .input-group
+              span.input-group-addon E-mail
+              input.form-control(type='email', ng-model="mentor.username", name="username", required)
+          .col-xs-12
+            .input-group
+              span.input-group-addon Senha
+              input.form-control(type='{{ modalCtrl.showPassword[modalCtrl.checkboxPassword] }}', ng-model="mentor.password", placeholder="senha", name="password", required)
+              span.input-group-btn
+                button.btn.btn-default(type='button', ng-click='modalCtrl.checkboxPassword = !modalCtrl.checkboxPassword')
+                  i.fa.fa-eye
           
   .modal-footer
-    button.btn.btn-primary.btn-md(ng-disabled="!institutionForm.$valid", ng-click="modalCtrl.saveInstitution(modalCtrl.institution)") salvar
-    button.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar
+    button.btn.btn-primary(ng-disabled="!institutionForm.$valid", ng-click="modalCtrl.saveInstitution(modalCtrl.institution)") salvar
+    button.btn.btn-default(ng-click="modalCtrl.closeModal()") cancelar
