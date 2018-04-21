@@ -50,8 +50,9 @@
       <div class="form-group row">
         <div class="col-md-12">
           <div class="input-group"><span class="input-group-addon">Senha</span>
-            <input type="{{ modalCtrl.typePassword[modalCtrl.showPassword] }}" ng-model="modalCtrl.student.password" placeholder="nova senha" name="password" required class="form-control"><span class="input-group-btn">
-              <button ng-click="modalCtrl.showPassword = !modalCtrl.showPassword" class="btn btn-default"><i class="fa fa-eye"></i></button></span>
+            <input type="{{ modalCtrl.typePassword[modalCtrl.showPassword] }}" ng-model="modalCtrl.student.password" placeholder="nova senha" name="password" class="form-control"><span class="input-group-btn">
+              <button ng-click="modalCtrl.showPassword = !modalCtrl.showPassword" class="btn btn-default"><i class="fa fa-eye"></i></button>
+              <button ng-disabled="modalCtrl.student.password == null" ng-click="modalCtrl.updatePassword(modalCtrl.student)" class="btn btn-primary">salvar</button></span>
           </div>
         </div>
       </div>

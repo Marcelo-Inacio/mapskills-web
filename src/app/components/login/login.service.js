@@ -6,7 +6,7 @@
 		.factory('loginService', loginService);
 
 		/** @ngInject */
-		function loginService($http, $q, $location, $state, $log, toastrService, Session, HelperService, API_SERVER) {
+		function loginService($http, $q, $location, $state, toastrService, Session, HelperService, API_SERVER) {
 
 			var redirections = {
 				'ADMINISTRATOR': function() { $state.go('admin.dashboard'); },
@@ -30,13 +30,13 @@
 			 */
 			function _login(login) {
 				$http({
-					method: 'POST', url: API_SERVER.LOGIN,
-					headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+					method: "POST", url: API_SERVER.LOGIN,
+					headers: {"Content-Type": "application/x-www-form-urlencoded"},
 					params: {username: login.username, password: login.password}
 				})
 				.then(function success(response) {
 						Session.createToken("Basic bWFwc2tpbGxzOm1hcHNraWxscw==");
-						var userDetails = response.data;
+						var userDetails = angular.fromJson(decodeURIComponent(response.data.replace(/\+/g, ' ')));
 						Session.createUser(userDetails);
 						_redirect(userDetails.profile);
 				}, function error(response) {
@@ -47,16 +47,14 @@
 			function _updatePassword(loginUsername, newPassword) {
 				var deferred = $q.defer();
 				$http({
-					method: 'PUT', url: API_SERVER.USER,
-					headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+					method: "PUT", url: API_SERVER.USER,
+					headers: {"Content-Type": "application/x-www-form-urlencoded"},
 					params: {username: loginUsername, newPassword: newPassword}
 				})
 				.then(function success(response) {
-						$log.info("== THEN SUCCESS ==");
 						deferred.resolve(response.status);
 				}, function error(response) {
-						$log.info(response.status);
-						deferred.resolve(response.status);
+						deferred.reject(response.status);
 				});
 				return deferred.promise;
 			}

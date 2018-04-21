@@ -50,10 +50,11 @@
               <input type="email" ng-model="mentor.username" name="username" required class="form-control">
             </div>
           </div>
-          <div class="col-xs-12">
+          <div class="col-sm-12">
             <div class="input-group"><span class="input-group-addon">Senha</span>
-              <input type="{{ modalCtrl.showPassword[modalCtrl.checkboxPassword] }}" ng-model="mentor.password" placeholder="senha" name="password" required class="form-control"><span class="input-group-btn">
-                <button type="button" ng-click="modalCtrl.checkboxPassword = !modalCtrl.checkboxPassword" class="btn btn-default"><i class="fa fa-eye"></i></button></span>
+              <input type="{{ modalCtrl.showPassword[modalCtrl.checkboxPassword] }}" ng-model="mentor.password" placeholder="nova senha" name="password" class="form-control"><span class="input-group-btn">
+                <button ng-click="modalCtrl.checkboxPassword = !modalCtrl.checkboxPassword" class="btn btn-default"><i class="fa fa-eye"></i></button>
+                <button ng-disabled="mentor.password == null" ng-click="modalCtrl.updatePassword(mentor)" class="btn btn-primary">salvar</button></span>
             </div>
           </div>
         </div>

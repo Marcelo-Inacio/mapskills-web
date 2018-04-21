@@ -11,7 +11,7 @@
 
 		/** realiza login na aplicação */
 		vm.login = function (login) {
-			if(login.username == null || login.password == null) {
+			if (login.username == null || login.password == null) {
 				messageError();
 				return;
 			}

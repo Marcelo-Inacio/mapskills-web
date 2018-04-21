@@ -9,7 +9,7 @@ table#report-table.table.table-hover.table-striped.hidden-xs
         label Resultado
   tbody.tbody-scroll(lazy-load="reportCtrl.loadMoreStudents()")
     tr.tr-scroll(ng-repeat="student in reportCtrl.students track by $index")
-      td(ng-bind="::student.name")
-      td(style="width: 20%")(ng-bind="::student.ra")
+      td(ng-bind="student.name")
+      td(style="width: 20%")(ng-bind="student.ra")
       td(style="width: 20%")
         label.btn.btn-info.btn-xs(ng-click="reportCtrl.studentResult(student)") resultado

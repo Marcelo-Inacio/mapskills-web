@@ -89,7 +89,7 @@
 						var maxValues = [];
 						angular.forEach(vm.student.skillResult, function(skill) {
 							minimumValues.push(0);
-							maxValues.push(16);
+							maxValues.push(20);
 							vm.skills.push(skill.skill);
 							values.push(skill.value);
 						});

@@ -15,8 +15,8 @@
   </thead>
   <tbody lazy-load="reportCtrl.loadMoreStudents()" class="tbody-scroll">
     <tr ng-repeat="student in reportCtrl.students track by $index" class="tr-scroll">
-      <td ng-bind="::student.name"></td>
-      <td style="width: 20%" ng-bind="::student.ra"></td>
+      <td ng-bind="student.name"></td>
+      <td style="width: 20%" ng-bind="student.ra"></td>
       <td style="width: 20%">
         <label ng-click="reportCtrl.studentResult(student)" class="btn btn-info btn-xs">resultado</label>
       </td>

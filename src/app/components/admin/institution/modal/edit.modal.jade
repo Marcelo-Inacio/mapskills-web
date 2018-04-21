@@ -41,13 +41,14 @@ section
             .input-group
               span.input-group-addon E-mail
               input.form-control(type='email', ng-model="mentor.username", name="username", required)
-          .col-xs-12
+          .col-sm-12
             .input-group
               span.input-group-addon Senha
-              input.form-control(type='{{ modalCtrl.showPassword[modalCtrl.checkboxPassword] }}', ng-model="mentor.password", placeholder="senha", name="password", required)
+              input.form-control(type='{{ modalCtrl.showPassword[modalCtrl.checkboxPassword] }}', ng-model="mentor.password", placeholder="nova senha", name="password")
               span.input-group-btn
-                button.btn.btn-default(type='button', ng-click='modalCtrl.checkboxPassword = !modalCtrl.checkboxPassword')
+                button.btn.btn-default(ng-click='modalCtrl.checkboxPassword = !modalCtrl.checkboxPassword')
                   i.fa.fa-eye
+                button.btn.btn-primary(ng-disabled="mentor.password == null", ng-click="modalCtrl.updatePassword(mentor)") salvar
           
   .modal-footer
     button.btn.btn-primary(ng-disabled="!institutionForm.$valid", ng-click="modalCtrl.saveInstitution(modalCtrl.institution)") salvar

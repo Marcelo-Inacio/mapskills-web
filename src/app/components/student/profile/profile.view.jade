@@ -21,15 +21,14 @@ section
             .input-group
               span.input-group-addon E-mail
               input.form-control(type='text', ng-model="::studentProfileCtrl.user.username", readonly)
-          .col-xs-12.col-md-3
+          .col-xs-12.col-md-6
             .input-group
               span.input-group-addon Senha
-              input.form-control(type='{{ studentProfileCtrl.showPassword[studentProfileCtrl.checkboxPassword] }}', ng-model="studentProfileCtrl.user.password", placeholder="senha")
+              input.form-control(type='{{ studentProfileCtrl.showPassword[studentProfileCtrl.checkboxPassword] }}', ng-model="studentProfileCtrl.user.password", placeholder="nova senha")
               span.input-group-btn
                 button.btn.btn-default(ng-click='studentProfileCtrl.checkboxPassword = !studentProfileCtrl.checkboxPassword')
-                  i.fa.fa-eye          
-          .col-xs-12.col-md-3
-            label.btn.btn-info.btn-md(ng-click="studentProfileCtrl.updatePassword(studentProfileCtrl.user)") salvar
+                  i.fa.fa-eye
+                button.btn.btn-primary(ng-disabled="!studentProfileCtrl.user.password", ng-click="studentProfileCtrl.updatePassword(studentProfileCtrl.user)") salvar
 
     .panel.panel-primary
       .panel-heading Meu Curso

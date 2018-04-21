@@ -6,7 +6,7 @@
 		.controller('MentorStudentModalController', MentorStudentModalController);
 
 	/** @ngInject */
-	function MentorStudentModalController(modalService, mentorService, toastrService, HelperService, $filter, Session) {
+	function MentorStudentModalController(modalService, mentorService, toastrService, HelperService, $filter, Session, loginService) {
 		var vm = this;
 		vm.isTechnical = Session.refreshUserSession().institution.level === "TECHNICAL";
 		vm.student = angular.copy(modalService.getResult());
@@ -25,6 +25,12 @@
 				modalService.okModal();
 			});
 		}
+
+		vm.updatePassword = function(user) {
+      loginService.updatePassword(user.username, user.password).then(function(status) {
+        toastrService.showToastr(status);
+      });
+    }
 
 		vm.closeModal = function() {
 			modalService.closeModal();

@@ -10,7 +10,7 @@
 		var vm = this;
     vm.courses;
 		vm.filter = {startDate: new Date(), endDate: new Date()};
-		vm.labels = ["Finalizados", "Não Finalizados"];
+		vm.labels = ["Não Finalizados", "Finalizados"];
 		vm.options = {
 			tooltipCaretSize: 0,
 			responsive: true

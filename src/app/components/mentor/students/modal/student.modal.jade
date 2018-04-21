@@ -40,10 +40,11 @@
         .col-md-12
           .input-group
             span.input-group-addon Senha
-            input.form-control(type="{{ modalCtrl.typePassword[modalCtrl.showPassword] }}", ng-model="modalCtrl.student.password", placeholder="nova senha", name="password", required)
+            input.form-control(type="{{ modalCtrl.typePassword[modalCtrl.showPassword] }}", ng-model="modalCtrl.student.password", placeholder="nova senha", name="password")
             span.input-group-btn
               button.btn.btn-default(ng-click='modalCtrl.showPassword = !modalCtrl.showPassword')
                 i.fa.fa-eye
+              button.btn.btn-primary(ng-disabled="modalCtrl.student.password == null", ng-click="modalCtrl.updatePassword(modalCtrl.student)") salvar
   .modal-footer
     button.btn.btn-primary.btn-md(ng-disabled="!studentForm.$valid", ng-click="modalCtrl.saveStudent(modalCtrl.student)") salvar
     button.btn.btn-default.btn-md(ng-click="modalCtrl.closeModal()") cancelar

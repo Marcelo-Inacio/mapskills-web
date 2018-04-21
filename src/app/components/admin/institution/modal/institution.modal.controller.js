@@ -6,7 +6,7 @@
 		.controller('InstitutionModalController', InstitutionModalController);
 
 	/** @ngInject */
-	function InstitutionModalController(modalService, HelperService, toastrService) {
+	function InstitutionModalController(modalService, HelperService, toastrService, loginService) {
 		var vm = this;
 		vm.institution = modalService.getResult();
 		vm.allLevels = ["TECHNICAL", "SUPERIOR"];
@@ -20,6 +20,12 @@
 			}
 			modalService.okModal(institution);
 		}
+
+		vm.updatePassword = function(user) {
+      loginService.updatePassword(user.username, user.password).then(function(status) {
+        toastrService.showToastr(status);
+      });
+    }
 
 		vm.closeModal = function() {
 			modalService.closeModal();

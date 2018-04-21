@@ -27,14 +27,12 @@
               <input type="text" ng-model="::studentProfileCtrl.user.username" readonly class="form-control">
             </div>
           </div>
-          <div class="col-xs-12 col-md-3">
+          <div class="col-xs-12 col-md-6">
             <div class="input-group"><span class="input-group-addon">Senha</span>
-              <input type="{{ studentProfileCtrl.showPassword[studentProfileCtrl.checkboxPassword] }}" ng-model="studentProfileCtrl.user.password" placeholder="senha" class="form-control"><span class="input-group-btn">
-                <button ng-click="studentProfileCtrl.checkboxPassword = !studentProfileCtrl.checkboxPassword" class="btn btn-default"><i class="fa fa-eye">         </i></button></span>
+              <input type="{{ studentProfileCtrl.showPassword[studentProfileCtrl.checkboxPassword] }}" ng-model="studentProfileCtrl.user.password" placeholder="nova senha" class="form-control"><span class="input-group-btn">
+                <button ng-click="studentProfileCtrl.checkboxPassword = !studentProfileCtrl.checkboxPassword" class="btn btn-default"><i class="fa fa-eye"></i></button>
+                <button ng-disabled="!studentProfileCtrl.user.password" ng-click="studentProfileCtrl.updatePassword(studentProfileCtrl.user)" class="btn btn-primary">salvar</button></span>
             </div>
-          </div>
-          <div class="col-xs-12 col-md-3">
-            <label ng-click="studentProfileCtrl.updatePassword(studentProfileCtrl.user)" class="btn btn-info btn-md">salvar</label>
           </div>
         </div>
       </div>
